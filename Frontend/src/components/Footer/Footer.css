@@ -1,0 +1,132 @@
+.rasi-footer {
+  background-color: var(--bg-dark);
+  color: var(--secondary);
+  padding: 60px 0 0;
+  margin-top: 60px;
+}
+
+.rasi-footer-container {
+  max-width: 1244px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.rasi-footer-logo {
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.rasi-footer-logo .rasi-logo-main {
+  color: var(--white);
+}
+
+.rasi-footer-logo .rasi-logo-sub {
+  color: var(--accent);
+}
+
+.rasi-footer-desc {
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.rasi-social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.rasi-social-links a {
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--white);
+  transition: var(--transition);
+}
+
+.rasi-social-links a:hover {
+  background-color: var(--accent);
+  color: var(--primary);
+  transform: translateY(-3px);
+}
+
+.rasi-footer-section h3 {
+  color: var(--white);
+  font-size: 18px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.rasi-footer-section h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 40px;
+  height: 2px;
+  background-color: var(--accent);
+}
+
+.rasi-footer-section ul li {
+  margin-bottom: 12px;
+}
+
+.rasi-footer-section ul li a {
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.rasi-footer-section ul li a:hover {
+  color: var(--accent);
+  padding-left: 5px;
+}
+
+.rasi-contact-info p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.rasi-footer-bottom {
+  margin-top: 40px;
+}
+
+.rasi-footer-copyright-layer {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 15px 16px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.rasi-footer-dev-layer {
+  background-color: var(--highlight);
+  color: var(--white);
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.rasi-footer-dev-layer a {
+  color: var(--white);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+}
+
+.rasi-footer-dev-layer a:hover {
+  opacity: 0.8;
+  border-bottom-style: solid;
+}

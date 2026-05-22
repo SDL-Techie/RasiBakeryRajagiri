@@ -1,0 +1,1503 @@
+/* ══════════════════════════════════════════════════
+   CHECKOUT — FULLY RESPONSIVE STYLESHEET
+   Mobile First Approach
+   All class names prefixed with rasi- to avoid conflicts
+══════════════════════════════════════════════════ */
+
+:root {
+  --rasi-primary: #562F00;
+  --rasi-white: #fff;
+  --rasi-bg-subtle: #faf8f5;
+  --rasi-border: #ede5dc;
+  --rasi-text-main: #1a0f00;
+  --rasi-text-muted: #9b8c80;
+}
+
+/* ─── Root & Page ─── */
+.rasi-checkout-page-root {
+  background-color: var(--rasi-bg-subtle);
+  min-height: 100vh;
+  padding: 12px 10px 40px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ─── Loader ─── */
+.rasi-checkout-loader {
+  display: flex;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.rasi-loader-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--rasi-white);
+  box-shadow: 0 4px 20px rgba(86, 47, 0, 0.12);
+}
+
+/* ─── Spinner ─── */
+.rasi-spinner {
+  animation: rasi-spin 0.9s linear infinite;
+  color: var(--rasi-primary);
+}
+
+@keyframes rasi-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ══════════════════════════════════════════════════
+   HEADER / PROGRESS
+══════════════════════════════════════════════════ */
+.rasi-checkout-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto 24px;
+  padding: 8px 4px;
+  gap: 12px;
+}
+
+.rasi-back-to-cart {
+  background: var(--rasi-white);
+  border: 1.5px solid var(--rasi-border);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  flex-shrink: 0;
+}
+
+.rasi-back-to-cart:active {
+  background: #f5ede4;
+  transform: scale(1.05);
+}
+
+/* Step label row */
+.rasi-checkout-step-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--rasi-text-muted);
+  flex: 1;
+  justify-content: center;
+}
+
+.rasi-checkout-step-label .rasi-active-label {
+  color: var(--rasi-primary);
+  font-weight: 700;
+}
+
+.rasi-step-line-track {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rasi-step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rasi-border);
+  transition: background 0.3s;
+}
+
+.rasi-step-dot.rasi-filled {
+  background: var(--rasi-primary);
+}
+
+.rasi-step-connector {
+  width: 36px;
+  height: 3px;
+  background: var(--rasi-border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.rasi-step-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--rasi-primary);
+  transition: width 0.4s ease;
+  border-radius: 2px;
+}
+
+.rasi-step-fill.rasi-done {
+  width: 100%;
+}
+
+/* ══════════════════════════════════════════════════
+   MAIN GRID LAYOUT — Mobile First
+══════════════════════════════════════════════════ */
+.rasi-checkout-main-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Tablet: Two columns */
+@media (min-width: 768px) {
+  .rasi-checkout-main-grid {
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    align-items: start;
+  }
+}
+
+/* Desktop: Optimized two columns */
+@media (min-width: 1024px) {
+  .rasi-checkout-main-grid {
+    grid-template-columns: 1.55fr 1fr;
+    gap: 28px;
+  }
+}
+
+.rasi-checkout-sliding-container {
+  overflow: hidden;
+}
+
+.rasi-step-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ══════════════════════════════════════════════════
+   CARDS — Mobile First
+══════════════════════════════════════════════════ */
+.rasi-checkout-card {
+  background: var(--rasi-white);
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1.5px solid var(--rasi-border);
+  box-shadow: 0 2px 8px rgba(86, 47, 0, 0.04);
+  transition: box-shadow 0.2s;
+}
+
+@media (min-width: 768px) {
+  .rasi-checkout-card {
+    padding: 20px;
+    margin-bottom: 14px;
+    border-radius: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .rasi-checkout-card {
+    padding: 20px;
+  }
+}
+
+.rasi-checkout-card:active {
+  box-shadow: 0 4px 16px rgba(86, 47, 0, 0.08);
+}
+
+/* Card header row */
+.rasi-card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.rasi-card-icon-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rasi-card-icon-title h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--rasi-text-main);
+}
+
+.rasi-icon-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #fdf0e6 0%, #f5e0cc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rasi-primary);
+  flex-shrink: 0;
+}
+
+.rasi-edit-link-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: 1.5px solid var(--rasi-border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--rasi-primary);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.rasi-edit-link-btn:active {
+  background: #fdf0e6;
+  border-color: var(--rasi-primary);
+}
+
+/* ─── Customer Pill ─── */
+.rasi-customer-pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg, #fdf8f4 0%, #f5ece0 100%);
+  border-radius: 14px;
+  padding: 14px 16px;
+  border: 1px solid #f0e4d0;
+}
+
+.rasi-customer-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--rasi-primary);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: -0.5px;
+}
+
+.rasi-cust-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--rasi-text-main);
+  margin: 0;
+}
+
+.rasi-cust-phone {
+  font-size: 13px;
+  color: var(--rasi-text-muted);
+  margin: 3px 0 0;
+}
+
+/* ─── Address Display ─── */
+.rasi-default-address-display {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #fdf8f4;
+  border-radius: 14px;
+  padding: 14px 16px;
+  border: 1.5px solid #f0e4d0;
+}
+
+.rasi-addr-icon-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #f0e4d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rasi-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rasi-addr-text {
+  flex: 1;
+}
+
+.rasi-addr-street {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rasi-text-main);
+  margin: 0 0 3px;
+}
+
+.rasi-addr-sub {
+  font-size: 12px;
+  color: var(--rasi-text-muted);
+  margin: 0;
+}
+
+.rasi-pincode-err-inline {
+  font-size: 11px;
+  color: #dc2626;
+  margin: 4px 0 0;
+  font-weight: 500;
+}
+
+.rasi-free-delivery-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #16a34a;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.rasi-add-address-dashed-btn {
+  border: 2px dashed var(--rasi-border);
+  background: transparent;
+  padding: 18px;
+  border-radius: 14px;
+  color: var(--rasi-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.rasi-add-address-dashed-btn:active {
+  border-color: var(--rasi-primary);
+  color: var(--rasi-primary);
+  background: #fdf8f4;
+}
+
+/* ══════════════════════════════════════════════════
+   SCHEDULE — Mobile First
+══════════════════════════════════════════════════ */
+.rasi-schedule-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 640px) {
+  .rasi-schedule-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.rasi-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rasi-input-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--rasi-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rasi-input {
+  padding: 12px 14px;
+  border: 1.5px solid var(--rasi-border);
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  background: #faf8f5;
+  color: var(--rasi-text-main);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.rasi-input:focus {
+  border-color: var(--rasi-primary);
+  box-shadow: 0 0 0 3px rgba(86, 47, 0, 0.08);
+  background: #fff;
+}
+
+.rasi-select-wrapper {
+  position: relative;
+}
+
+.rasi-select-wrapper .rasi-input {
+  appearance: none;
+  padding-right: 36px;
+}
+
+.rasi-select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--rasi-text-muted);
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════
+   PAYMENT TILES — Mobile First
+══════════════════════════════════════════════════ */
+.rasi-payment-options-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rasi-pay-tile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 2px solid var(--rasi-border);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .rasi-pay-tile {
+    padding: 16px;
+    border-radius: 16px;
+  }
+}
+
+.rasi-pay-tile:active {
+  border-color: #c9a07a;
+  background: #fdf8f4;
+  transform: translateY(-1px);
+}
+
+.rasi-pay-tile.rasi-active {
+  border-color: var(--rasi-primary);
+  background: linear-gradient(135deg, #fdf8f4 0%, #f5ece0 100%);
+  box-shadow: 0 4px 12px rgba(86, 47, 0, 0.1);
+}
+
+.rasi-pay-tile-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rasi-cod-icon {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.rasi-upi-icon {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.rasi-pay-tile-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.rasi-pay-tile-text .rasi-bold {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--rasi-text-main);
+}
+
+.rasi-pay-tile-text .rasi-small {
+  font-size: 12px;
+  color: var(--rasi-text-muted);
+  margin: 2px 0 0;
+}
+
+.rasi-pay-radio {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--rasi-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+
+.rasi-pay-radio.rasi-selected {
+  background: var(--rasi-primary);
+  border-color: var(--rasi-primary);
+  color: #fff;
+}
+
+/* Selected payment badge */
+.rasi-selected-payment-badge {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--rasi-primary);
+  background: linear-gradient(135deg, #fdf0e6 0%, #f5e0cc 100%);
+  border: 1px solid #f0e4d0;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+/* ══════════════════════════════════════════════════
+   PRIMARY ACTION BUTTON — Mobile First
+══════════════════════════════════════════════════ */
+.rasi-btn-primary-large {
+  width: 100%;
+  background: linear-gradient(135deg, var(--rasi-primary) 0%, #7a4a1a 100%);
+  color: #fff;
+  border: none;
+  padding: 16px 20px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(86, 47, 0, 0.28);
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  margin-top: 8px;
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 768px) {
+  .rasi-btn-primary-large {
+    padding: 18px 24px;
+    font-size: 16px;
+    border-radius: 16px;
+  }
+}
+
+.rasi-btn-primary-large:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.rasi-btn-primary-large:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ══════════════════════════════════════════════════
+   ORDER SUMMARY SIDEBAR — Mobile First
+══════════════════════════════════════════════════ */
+.rasi-summary-sticky-card {
+  background: #562F00;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 12px 40px rgba(86, 47, 0, 0.22);
+  height: fit-content;
+  color: #fff;
+  order: -1;
+  margin-bottom: 20px;
+}
+
+/* Tablet: Show on right side */
+@media (min-width: 768px) {
+  .rasi-summary-sticky-card {
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 0;
+    order: initial;
+  }
+}
+
+/* Desktop: Sticky behavior */
+@media (min-width: 1024px) {
+  .rasi-summary-sticky-card {
+    position: sticky;
+    top: 20px;
+    border-radius: 22px;
+    padding: 24px;
+  }
+}
+
+.rasi-summary-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fffaf0;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+@media (min-width: 768px) {
+  .rasi-summary-title {
+    font-size: 17px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+  }
+}
+
+/* Items list */
+.rasi-summary-items-list.rasi-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 240px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  padding-right: 4px;
+}
+
+@media (min-width: 768px) {
+  .rasi-summary-items-list.rasi-mini {
+    max-height: 280px;
+    margin-bottom: 18px;
+  }
+}
+
+.rasi-summary-items-list.rasi-mini::-webkit-scrollbar {
+  width: 4px;
+}
+
+.rasi-summary-items-list.rasi-mini::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+}
+
+.rasi-summary-items-list.rasi-mini::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.28);
+  border-radius: 4px;
+}
+
+.rasi-summary-item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+@media (min-width: 768px) {
+  .rasi-summary-item-row {
+    gap: 12px;
+    margin-top: 10px;
+  }
+}
+
+.rasi-mini-img-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.rasi-mini-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+@media (min-width: 768px) {
+  .rasi-mini-img {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+  }
+}
+
+.rasi-item-qty-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #fff;
+  color: var(--rasi-primary);
+  font-size: 10px;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rasi-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.rasi-item-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+  .rasi-item-name {
+    font-size: 13px;
+  }
+}
+
+.rasi-item-price-each {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  margin: 2px 0 0;
+}
+
+.rasi-item-total-price {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffd89b;
+  margin: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .rasi-item-total-price {
+    font-size: 13px;
+  }
+}
+
+/* ─── Coupon Box ─── */
+.rasi-coupon-box {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .rasi-coupon-box {
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+  }
+}
+
+.rasi-coupon-label-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+@media (min-width: 768px) {
+  .rasi-coupon-label-row {
+    margin-bottom: 10px;
+  }
+}
+
+.rasi-coupon-input-wrapper {
+  display: flex;
+  gap: 6px;
+}
+
+@media (min-width: 768px) {
+  .rasi-coupon-input-wrapper {
+    gap: 8px;
+  }
+}
+
+.rasi-coupon-input-wrapper input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  font-size: 12px;
+  outline: none;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: border-color 0.2s;
+}
+
+@media (min-width: 768px) {
+  .rasi-coupon-input-wrapper input {
+    padding: 10px 12px;
+    font-size: 13px;
+    border-radius: 9px;
+  }
+}
+
+.rasi-coupon-input-wrapper input::placeholder {
+  color: rgba(255,255,255,0.35);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.rasi-coupon-input-wrapper input:focus {
+  border-color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.18);
+}
+
+.rasi-coupon-input-wrapper input:disabled {
+  opacity: 0.6;
+}
+
+.rasi-coupon-btn {
+  padding: 0 12px;
+  height: 36px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .rasi-coupon-btn {
+    padding: 0 16px;
+    height: 40px;
+    font-size: 13px;
+    border-radius: 9px;
+  }
+}
+
+.rasi-coupon-btn.rasi-apply {
+  background: #fff;
+  color: var(--rasi-primary);
+}
+
+.rasi-coupon-btn.rasi-apply:active:not(:disabled) {
+  background: #ffd89b;
+}
+
+.rasi-coupon-btn.rasi-apply:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.rasi-coupon-btn.rasi-remove {
+  background: rgba(220, 38, 38, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+.rasi-coupon-btn.rasi-remove:active {
+  background: rgba(220, 38, 38, 0.35);
+}
+
+.rasi-coupon-err-msg {
+  color: #fca5a5;
+  font-size: 10px;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .rasi-coupon-err-msg {
+    font-size: 11px;
+    margin-top: 8px;
+  }
+}
+
+.rasi-coupon-succ-msg {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #86efac;
+  font-size: 10px;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .rasi-coupon-succ-msg {
+    font-size: 11px;
+    margin-top: 8px;
+  }
+}
+
+/* ─── Price Calculations ─── */
+.rasi-summary-calculations {
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .rasi-summary-calculations {
+    padding-top: 16px;
+    gap: 10px;
+  }
+}
+
+.rasi-calc-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+}
+
+@media (min-width: 768px) {
+  .rasi-calc-line {
+    font-size: 13.5px;
+  }
+}
+
+.rasi-calc-line span:last-child {
+  color: #fff;
+  font-weight: 600;
+}
+
+.rasi-calc-line.rasi-discount-text span:first-child {
+  color: rgba(255,255,255,0.6);
+}
+
+.rasi-discount-val {
+  color: #86efac !important;
+}
+
+.rasi-free-text {
+  color: #86efac !important;
+  font-weight: 700 !important;
+}
+
+.rasi-calc-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+  margin: 2px 0;
+}
+
+@media (min-width: 768px) {
+  .rasi-calc-divider {
+    margin: 4px 0;
+  }
+}
+
+.rasi-calc-line.rasi-total-highlight {
+  font-size: 14px;
+  color: #fff;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .rasi-calc-line.rasi-total-highlight {
+    font-size: 16px;
+    margin-top: 2px;
+  }
+}
+
+.rasi-calc-line.rasi-total-highlight span {
+  font-weight: 700;
+  color: #fff;
+}
+
+.rasi-calc-line.rasi-total-highlight strong {
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffd89b;
+  letter-spacing: -0.03em;
+}
+
+@media (min-width: 768px) {
+  .rasi-calc-line.rasi-total-highlight strong {
+    font-size: 20px;
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   MODALS — Mobile First
+══════════════════════════════════════════════════ */
+.rasi-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.52);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .rasi-modal-overlay {
+    align-items: center;
+  }
+}
+
+.rasi-modal-sheet {
+  background: var(--rasi-white);
+  border-radius: 24px 24px 0 0;
+  width: 100%;
+  max-width: 520px;
+  padding: 14px 16px 24px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  /* overflow:scroll; */
+  overflow: hidden;
+ margin-bottom: 50px;
+}
+
+@media (min-width: 640px) {
+  .rasi-modal-sheet {
+    border-radius: 24px;
+    margin: 0 16px;
+    padding: 16px 20px 28px;
+  
+  }
+}
+
+@media (min-width: 768px) {
+  .rasi-modal-sheet {
+    padding: 20px;
+  }
+}
+
+.rasi-modal-drag-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--rasi-border);
+  border-radius: 2px;
+  margin: 0 auto 14px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .rasi-modal-drag-handle {
+    display: none;
+  }
+}
+
+.rasi-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .rasi-modal-header {
+    margin-bottom: 16px;
+  }
+}
+
+.rasi-modal-header h3 {
+  font-size: 15px;
+  font-weight: 800;
+  margin: 0;
+  flex: 1;
+  color: var(--rasi-text-main);
+}
+
+@media (min-width: 768px) {
+  .rasi-modal-header h3 {
+    font-size: 17px;
+  }
+}
+
+.rasi-modal-close-btn {
+  background: #f4f4f5;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--rasi-text-muted);
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.rasi-modal-close-btn:active {
+  background: #e4e4e7;
+}
+
+.rasi-modal-back-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  color: var(--rasi-text-muted);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Address list */
+.rasi-addr-list-scroll {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 2px;
+}
+
+@media (min-width: 768px) {
+  .rasi-addr-list-scroll {
+    gap: 10px;
+  }
+}
+
+.rasi-addr-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: var(--rasi-text-muted);
+  gap: 8px;
+  font-size: 14px;
+}
+
+.rasi-addr-list-tile {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--rasi-border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+@media (min-width: 768px) {
+  .rasi-addr-list-tile {
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 14px;
+  }
+}
+
+.rasi-addr-list-tile:active {
+  border-color: #c9a07a;
+  background: #fdf8f4;
+}
+
+.rasi-addr-list-tile.rasi-selected {
+  border-color: var(--rasi-primary);
+  background: linear-gradient(135deg, #fdf8f4 0%, #f5ece0 100%);
+}
+
+.rasi-addr-list-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--rasi-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.rasi-addr-list-tile.rasi-selected .rasi-addr-list-radio {
+  border-color: var(--rasi-primary);
+  background: var(--rasi-primary);
+}
+
+.rasi-radio-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.rasi-addr-list-text {
+  flex: 1;
+}
+
+.rasi-addr-list-text .rasi-addr-street {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--rasi-text-main);
+  margin: 0 0 2px;
+}
+
+@media (min-width: 768px) {
+  .rasi-addr-list-text .rasi-addr-street {
+    font-size: 14px;
+  }
+}
+
+.rasi-addr-list-text .rasi-addr-sub {
+  font-size: 11px;
+  color: var(--rasi-text-muted);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .rasi-addr-list-text .rasi-addr-sub {
+    font-size: 12px;
+  }
+}
+
+.rasi-default-tag {
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--rasi-primary);
+  color: #fff;
+  border-radius: 5px;
+  padding: 2px 7px;
+  white-space: nowrap;
+  align-self: flex-start;
+  margin-top: 1px;
+}
+
+/* Modal footer */
+.rasi-modal-footer {
+  padding-top: 12px;
+  border-top: 1px solid var(--rasi-border);
+  margin-top: 12px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .rasi-modal-footer {
+    padding-top: 16px;
+    margin-top: 16px;
+  }
+}
+
+.rasi-add-new-addr-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border: 2px dashed var(--rasi-border);
+  border-radius: 10px;
+  background: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--rasi-primary);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+@media (min-width: 768px) {
+  .rasi-add-new-addr-btn {
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+}
+
+.rasi-add-new-addr-btn:active {
+  border-color: var(--rasi-primary);
+  background: #fdf8f4;
+}
+
+/* New address form */
+.rasi-new-addr-form {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 2px;
+}
+
+@media (min-width: 768px) {
+  .rasi-new-addr-form {
+    gap: 14px;
+  }
+}
+
+.rasi-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rasi-form-field label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--rasi-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rasi-addr-input {
+  padding: 10px 12px;
+  border: 1.5px solid var(--rasi-border);
+  border-radius: 9px;
+  font-size: 13px;
+  outline: none;
+  color: var(--rasi-text-main);
+  background: #faf8f5;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .rasi-addr-input {
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+}
+
+.rasi-addr-input:focus {
+  border-color: var(--rasi-primary);
+  box-shadow: 0 0 0 3px rgba(86, 47, 0, 0.08);
+  background: #fff;
+}
+
+.rasi-form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .rasi-form-row-2 {
+    gap: 12px;
+  }
+}
+
+.rasi-default-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--rasi-text-main);
+  padding: 10px 12px;
+  background: #fdf8f4;
+  border-radius: 9px;
+  border: 1px solid #f0e4d0;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .rasi-default-checkbox-row {
+    gap: 10px;
+    font-size: 13px;
+    padding: 12px 14px;
+    border-radius: 10px;
+  }
+}
+
+.rasi-default-checkbox-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--rasi-primary);
+  cursor: pointer;
+}
+
+.rasi-save-addr-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--rasi-primary) 0%, #7a4a1a 100%);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+@media (min-width: 768px) {
+  .rasi-save-addr-btn {
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+}
+
+.rasi-save-addr-btn:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.rasi-save-addr-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ══════════════════════════════════════════════════
+   VERY SMALL MOBILE (< 360px)
+══════════════════════════════════════════════════ */
+@media (max-width: 360px) {
+  .rasi-checkout-page-root {
+    padding: 8px 8px 32px;
+  }
+
+  .rasi-checkout-nav-header {
+    margin: 0 auto 18px;
+    padding: 6px 2px;
+  }
+
+  .rasi-checkout-card {
+    padding: 12px;
+    border-radius: 16px;
+    margin-bottom: 10px;
+  }
+
+  .rasi-btn-primary-large {
+    padding: 14px 16px;
+    font-size: 14px;
+    margin-top: 6px;
+  }
+
+  .rasi-summary-sticky-card {
+    border-radius: 16px;
+    padding: 12px;
+  }
+
+  .rasi-summary-title {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+}

@@ -1,0 +1,306 @@
+:root {
+    --coffee: #4B2E2B;
+    --coffee-light: #6D4C41;
+    --studio-white: #ffffff;
+    --glass: rgba(255, 255, 255, 0.8);
+    --border: #e2e8f0;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ── Container ── */
+.add-product-container {
+    padding: 40px;
+    /* background: rgba(232, 209, 197, 0.5); */
+    min-height: 100vh;
+    animation: fadeIn 0.5s ease;
+    box-sizing: border-box;
+}
+
+/* ── Header ── */
+.ap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.ap-header h1 {
+    color: var(--coffee);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    font-size: 1.75rem;
+    line-height: 1.2;
+}
+
+.ap-header p { color: #64748b; margin: 5px 0 0; font-size: 0.9rem; }
+
+.excel-import-wrapper { flex-shrink: 0; }
+
+.excel-btn {
+    background: #107c41;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.excel-btn:hover { background: #0a5c30; }
+
+/* ── Alert ── */
+.ap-alert {
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.ap-alert svg { flex-shrink: 0; margin-top: 2px; }
+.ap-alert.success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.ap-alert.error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+/* ── Glass Form ── */
+.ap-glass-form {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--studio-white);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+/* ── Two-column Grid ── */
+.ap-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+}
+
+/* ── Section Card ── */
+.ap-section {
+    background: var(--studio-white);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #f1f5f9;
+}
+
+.ap-section:last-child { margin-bottom: 0; }
+
+.ap-section h3 {
+    margin: 0 0 15px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--coffee-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 10px;
+}
+
+/* ── Input Groups ── */
+.ap-input-group { margin-bottom: 15px; }
+.ap-input-group:last-child { margin-bottom: 0; }
+
+.ap-input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #475569;
+}
+
+.ap-input-group input,
+.ap-input-group select,
+.ap-input-group textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+    background: white;
+    color: #1e293b;
+}
+
+.ap-input-group input:focus,
+.ap-input-group select:focus,
+.ap-input-group textarea:focus {
+    border-color: var(--coffee);
+    box-shadow: 0 0 0 3px rgba(75, 46, 43, 0.08);
+}
+
+.ap-input-group textarea { resize: vertical; min-height: 80px; }
+
+/* ── Inline Row (pricing) ── */
+.ap-row { display: flex; gap: 15px; flex-wrap: wrap; }
+.ap-row > div { flex: 1; min-width: 100px; }
+
+/* ── Upload Zone ── */
+.ap-upload-zone {
+    height: 180px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: border-color 0.3s, background 0.3s;
+    cursor: pointer;
+}
+
+.ap-upload-zone:hover { border-color: var(--coffee); background: #fcfcfc; }
+
+.ap-upload-zone input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+}
+
+.ap-img-preview { width: 100%; height: 100%; object-fit: cover; }
+
+.ap-upload-placeholder {
+    text-align: center;
+    color: #94a3b8;
+    pointer-events: none;
+}
+
+.ap-upload-placeholder p { margin: 8px 0 0; font-size: 13px; }
+
+/* ── Submit Button ── */
+.ap-submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--coffee);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.ap-submit-btn:hover:not(:disabled) { background: #331e1c; transform: translateY(-2px); }
+.ap-submit-btn:disabled { opacity: 0.65; cursor: not-allowed; }
+
+.ap-spin { animation: spin 1s linear infinite; }
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* ── Large Tablet / Small Laptop (≤1024px) ── */
+@media (max-width: 1024px) {
+    .add-product-container { padding: 28px; }
+
+    .ap-grid { grid-template-columns: 1fr; gap: 0; }
+
+    /* Remove bottom margin from left column's last section since right follows */
+    .ap-column:first-child .ap-section:last-child { margin-bottom: 20px; }
+
+    .ap-header h1 { font-size: 1.5rem; }
+}
+
+/* ── Tablet (≤768px) ── */
+@media (max-width: 768px) {
+    .add-product-container { padding: 20px; }
+
+    .ap-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 22px;
+    }
+
+    .ap-header h1 { font-size: 1.35rem; gap: 10px; }
+
+    .excel-import-wrapper { width: 100%; }
+    .excel-btn { width: 100%; justify-content: center; }
+
+    .ap-glass-form { padding: 20px; border-radius: 16px; }
+
+    .ap-section { padding: 16px; }
+
+    /* Pricing row: 2-col on tablet */
+    .ap-row { gap: 12px; }
+    .ap-row > div { min-width: calc(50% - 6px); }
+
+    .ap-upload-zone { height: 160px; }
+
+    .ap-submit-btn { font-size: 15px; padding: 14px; margin-top: 16px; }
+}
+
+/* ── Mobile (≤480px) ── */
+@media (max-width: 480px) {
+    .add-product-container { padding: 14px; }
+
+    .ap-header h1 { font-size: 1.2rem; gap: 8px; }
+    .ap-header h1 svg { width: 22px; height: 22px; }
+
+    .ap-glass-form { padding: 14px; border-radius: 14px; }
+
+    .ap-section { padding: 14px; margin-bottom: 14px; border-radius: 10px; }
+
+    .ap-section h3 { font-size: 12px; }
+
+    .ap-input-group label { font-size: 12px; }
+
+    .ap-input-group input,
+    .ap-input-group select,
+    .ap-input-group textarea {
+        padding: 10px 11px;
+        font-size: 13px;
+    }
+
+    /* Stack pricing fields vertically on small mobile */
+    .ap-row { flex-direction: column; gap: 0; }
+    .ap-row > div { min-width: 100%; }
+
+    .ap-upload-zone { height: 140px; }
+    .ap-upload-placeholder svg { width: 26px; height: 26px; }
+    .ap-upload-placeholder p { font-size: 12px; }
+
+    .ap-submit-btn { font-size: 14px; padding: 13px; gap: 8px; border-radius: 10px; }
+
+    .ap-alert { font-size: 0.82rem; padding: 10px 14px; }
+}
+
+/* ── Very Small Mobile (≤360px) ── */
+@media (max-width: 360px) {
+    .add-product-container { padding: 10px; }
+    .ap-glass-form { padding: 12px; border-radius: 12px; }
+    .ap-header h1 { font-size: 1.1rem; }
+    .ap-section h3 { font-size: 11px; }
+}

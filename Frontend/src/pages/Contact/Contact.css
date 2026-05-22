@@ -1,0 +1,140 @@
+.rasi-contact-page {
+  padding-bottom: 60px;
+}
+
+.rasi-contact-hero {
+  background: linear-gradient(rgba(93, 46, 12, 0.8), rgba(93, 46, 12, 0.8)), url('https://picsum.photos/seed/bakery/1920/400');
+  background-size: cover;
+  background-position: center;
+  color: var(--white);
+  padding: 80px 0;
+  text-align: center;
+}
+
+.rasi-contact-hero h1 {
+  font-size: 48px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.rasi-contact-hero p {
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+.rasi-contact-content {
+  margin-top: -40px;
+  position: relative;
+  z-index: 10;
+}
+
+.rasi-contact-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.rasi-contact-card {
+  background-color: var(--white);
+  padding: 30px;
+  border-radius: 12px;
+  display: flex;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.rasi-contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.rasi-contact-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  border-color: var(--primary);
+}
+
+.rasi-contact-card:hover::before {
+  left: 0;
+}
+
+.rasi-contact-card:hover .rasi-card-icon {
+  background-color: var(--white);
+  color: var(--primary);
+  transform: rotate(10deg) scale(1.1);
+}
+
+.rasi-card-icon {
+  width: 50px;
+  height: 50px;
+  background-color: var(--secondary);
+  color: var(--primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.rasi-card-details h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+
+.rasi-card-details p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.rasi-card-details a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.rasi-card-details a:hover {
+  color: var(--highlight);
+}
+
+.rasi-map-section {
+  margin-top: 60px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 992px) {
+  .rasi-contact-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .rasi-contact-hero {
+    padding: 60px 0;
+  }
+  
+  .rasi-contact-hero h1 {
+    font-size: 32px;
+  }
+  
+  .rasi-contact-form-container {
+    padding: 25px;
+  }
+}

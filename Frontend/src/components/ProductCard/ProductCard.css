@@ -1,0 +1,231 @@
+.rasi-product-card {
+  background-color: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0,0,0,0.05);
+  z-index: 1;
+}
+
+.rasi-product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.rasi-product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  border-color: var(--primary);
+}
+
+.rasi-product-card:hover::before {
+  left: 0;
+}
+
+.rasi-product-image {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  background-color: #f9f9f9;
+}
+
+.rasi-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.rasi-product-card:hover .rasi-product-image img {
+  transform: scale(1.1);
+}
+
+.rasi-product-discount {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #ff4444;
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 2px;
+  z-index: 2;
+}
+
+.rasi-product-actions-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 1;
+  transition: var(--transition);
+  z-index: 2;
+}
+
+.rasi-product-card:hover .rasi-product-actions-overlay {
+  opacity: 1;
+}
+
+.rasi-action-icon {
+  width: 36px;
+  height: 36px;
+  background-color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: var(--transition);
+}
+
+.rasi-action-icon:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.rasi-action-icon.active {
+  color: #ff4444;
+}
+
+.rasi-action-icon.active:hover {
+  color: var(--white);
+}
+
+.rasi-product-info {
+  padding: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.rasi-product-card:hover .rasi-product-info h3,
+.rasi-product-card:hover .rasi-price {
+  color: var(--primary-dark);
+}
+
+.rasi-product-category {
+  font-size: 12px;
+  color: #878787;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.rasi-product-info h3 {
+  font-size: 16px;
+  color: var(--primary);
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+
+.rasi-product-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--primary);
+  color: white;
+  width: fit-content;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.rasi-product-price-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rasi-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.rasi-old-price {
+  font-size: 14px;
+  color: #878787;
+  text-decoration: line-through;
+}
+
+/* Fix for Icon Visibility */
+.rasi-action-icon {
+  width: 36px;
+  height: 36px;
+  background-color: var(--white); /* Solid white background */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary); /* Primary color icon by default */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Slightly stronger shadow for visibility */
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+/* Icon turns white, background turns primary on hover */
+.rasi-action-icon:hover {
+  background-color: var(--primary);
+  color: var(--white) !important;
+}
+
+/* Specific styling for the Wholesale Badge */
+.retailer-badge {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  border: 1px solid #2e7d32;
+}
+
+/* Ensure overlay is always reachable */
+.rasi-product-actions-overlay {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+.retailer-badge {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-left: 8px;
+  border: 1px solid #bbdefb;
+}
+
+.rasi-old-price {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 0.9rem;
+  margin-left: 8px;
+}

@@ -1,0 +1,694 @@
+/* ════════════════════════════════════════════════════════════════
+   USERS.CSS - FULLY RESPONSIVE
+   Mobile First Approach | Coffee Brown Theme
+════════════════════════════════════════════════════════════════ */
+
+/* Color Palette: 
+   Deep Coffee: #4B2E2B 
+   Terra Cotta: #8C5A3C 
+   Ochre: #C08552 
+   Cream: #FFF8F0 
+*/
+
+:root {
+  --deep-coffee: #4B2E2B;
+  --terra-cotta: #8C5A3C;
+  --ochre: #C08552;
+  --cream-bg: #FFF8F0;
+  --pure-white: #ffffff;
+  --light-bg: #f9f3ed;
+}
+
+.rasi-users-container {
+  padding: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: var(--cream-bg);
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   HEADER SECTION - MOBILE FIRST
+════════════════════════════════════════════════════════════════ */
+.rasi-users-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #f0e6da;
+  padding-bottom: 1.5rem;
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.header-info h1 {
+  color: var(--deep-coffee);
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.02em;
+  word-break: break-word;
+}
+
+.subtitle {
+  color: var(--terra-cotta);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+.header-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.count-pill {
+  background: var(--ochre);
+  color: white;
+  padding: 0.7rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SEARCH BOX - MOBILE FIRST
+════════════════════════════════════════════════════════════════ */
+.rasi-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--terra-cotta);
+  flex-shrink: 0;
+}
+
+.rasi-search-wrapper input {
+  padding: 0.7rem 1rem 0.7rem 2.5rem;
+  border: 1.5px solid var(--ochre);
+  border-radius: 10px;
+  background: white;
+  width: 100%;
+  color: var(--deep-coffee);
+  outline: none;
+  transition: 0.3s ease;
+  font-size: 0.85rem;
+  box-sizing: border-box;
+}
+
+.rasi-search-wrapper input:focus {
+  box-shadow: 0 0 0 3px rgba(192, 133, 82, 0.2);
+  border-color: var(--terra-cotta);
+}
+
+.rasi-search-wrapper input::placeholder {
+  color: #bbb;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   TABLE SECTION - MOBILE FIRST (CARD VIEW)
+════════════════════════════════════════════════════════════════ */
+.rasi-table-wrapper {
+  background: var(--pure-white);
+  border-radius: 16px;
+  border: 1px solid #f0e6da;
+  box-shadow: 0 10px 30px rgba(75, 46, 43, 0.05);
+  overflow: hidden;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.rasi-users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Mobile: Hide table header */
+.rasi-users-table thead {
+  display: none;
+}
+
+.rasi-users-table tbody {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.rasi-users-table tr {
+  display: block;
+  border: 1px solid #f0e6da;
+  margin-bottom: 0.75rem;
+  border-radius: 12px;
+  padding: 1rem;
+  background: var(--pure-white);
+  overflow: hidden;
+}
+
+.rasi-users-table tr:hover {
+  box-shadow: 0 4px 12px rgba(75, 46, 43, 0.1);
+}
+
+.rasi-users-table td {
+  display: block;
+  padding: 0.6rem 0;
+  border-bottom: none;
+  color: var(--deep-coffee);
+  font-size: 0.85rem;
+  vertical-align: middle;
+}
+
+.rasi-users-table td:last-child {
+  padding-bottom: 0;
+}
+
+.rasi-users-table td::before {
+  content: attr(data-label);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  color: var(--ochre);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+/* Remove data labels for header rows on mobile */
+.rasi-users-table th {
+  display: none;
+}
+
+.header-text {
+  display: none;
+}
+
+.id-cell {
+  padding-top: 0;
+}
+
+.id-badge {
+  background: var(--cream-bg);
+  color: var(--terra-cotta);
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  border: 1px solid #f0e6da;
+  display: inline-block;
+}
+
+.customer-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.customer-name {
+  font-weight: 700;
+  color: var(--deep-coffee);
+  word-break: break-word;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.email-row, .phone-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--terra-cotta);
+  word-break: break-word;
+}
+
+.contact-text {
+  display: inline;
+}
+
+.date-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--terra-cotta);
+  font-size: 0.8rem;
+}
+
+.date-text {
+  display: inline;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.status-badge {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.badge-text {
+  display: inline;
+}
+
+.no-data {
+  text-align: center;
+  padding: 2rem 1rem !important;
+  color: var(--terra-cotta);
+  font-style: italic;
+  display: block;
+  width: 100%;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   LOADING & EMPTY STATES
+════════════════════════════════════════════════════════════════ */
+.rasi-loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  color: var(--terra-cotta);
+  gap: 1rem;
+}
+
+.spinner {
+  animation: rotate 1.5s linear infinite;
+  color: var(--ochre);
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   TABLET RESPONSIVE (640px and up)
+════════════════════════════════════════════════════════════════ */
+@media (min-width: 640px) {
+  .rasi-users-container {
+    padding: 1.5rem;
+  }
+
+  .rasi-users-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .header-info {
+    gap: 0.35rem;
+  }
+
+  .header-info h1 {
+    font-size: 1.6rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .header-actions {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: auto;
+  }
+
+  .count-pill {
+    background: var(--ochre);
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    width: auto;
+    white-space: nowrap;
+  }
+
+  .rasi-search-wrapper {
+    width: 280px;
+  }
+
+  .rasi-search-wrapper input {
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Table shows headers on tablet */
+  .rasi-users-table thead {
+    display: table-header-group;
+  }
+
+  .rasi-users-table thead tr {
+    background: var(--deep-coffee);
+  }
+
+  .rasi-users-table th {
+    color: var(--cream-bg);
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: table-cell;
+  }
+
+  .rasi-users-table th svg {
+    vertical-align: middle;
+    margin-right: 0.4rem;
+    opacity: 0.8;
+  }
+
+  .header-text {
+    display: inline;
+  }
+
+  .rasi-users-table tbody {
+    display: table-row-group;
+  }
+
+  .rasi-users-table tr {
+    display: table-row;
+    border: none;
+    margin-bottom: 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--light-bg);
+    padding: 0;
+  }
+
+  .rasi-users-table tr:hover td {
+    background-color: #fffcf9;
+  }
+
+  .rasi-users-table td {
+    display: table-cell;
+    padding: 1rem;
+    border-bottom: 1px solid var(--light-bg);
+    color: var(--deep-coffee);
+    font-size: 0.9rem;
+    vertical-align: middle;
+  }
+
+  .rasi-users-table td::before {
+    display: none;
+  }
+
+  .id-cell {
+    padding: 1rem;
+  }
+
+  .id-badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .customer-profile {
+    gap: 0.75rem;
+  }
+
+  .customer-name {
+    font-weight: 700;
+  }
+
+  .contact-info {
+    gap: 0.35rem;
+  }
+
+  .email-row, .phone-row {
+    font-size: 0.85rem;
+    gap: 0.6rem;
+  }
+
+  .date-row {
+    gap: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .status-badge {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem;
+    gap: 0.5rem;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   DESKTOP RESPONSIVE (1024px and up)
+════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .rasi-users-container {
+    padding: 2rem;
+  }
+
+  .rasi-users-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .header-info h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    margin-top: 0.35rem;
+  }
+
+  .header-actions {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    width: auto;
+  }
+
+  .count-pill {
+    background: var(--ochre);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: auto;
+    white-space: nowrap;
+  }
+
+  .rasi-search-wrapper {
+    width: 300px;
+    position: relative;
+  }
+
+  .search-icon {
+    left: 15px;
+  }
+
+  .rasi-search-wrapper input {
+    padding: 0.75rem 1rem 0.75rem 2.7rem;
+    border: 1px solid var(--ochre);
+    border-radius: 12px;
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .rasi-search-wrapper input:focus {
+    box-shadow: 0 0 0 3px rgba(192, 133, 82, 0.2);
+    border-color: var(--terra-cotta);
+  }
+
+  .rasi-table-wrapper {
+    border-radius: 20px;
+  }
+
+  .rasi-users-table th {
+    background: var(--deep-coffee);
+    color: var(--cream-bg);
+    padding: 1.25rem;
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .rasi-users-table th svg {
+    vertical-align: middle;
+    margin-right: 0.6rem;
+    opacity: 0.85;
+  }
+
+  .rasi-users-table td {
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--light-bg);
+    color: var(--deep-coffee);
+    font-size: 0.95rem;
+    vertical-align: middle;
+  }
+
+  .rasi-users-table tr:hover td {
+    background-color: #fffcf9;
+  }
+
+  .customer-profile {
+    gap: 1rem;
+  }
+
+  .customer-name {
+    font-weight: 700;
+    color: var(--deep-coffee);
+  }
+
+  .contact-info {
+    gap: 0.4rem;
+  }
+
+  .email-row, .phone-row {
+    font-size: 0.9rem;
+    gap: 0.6rem;
+  }
+
+  .date-row {
+    gap: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .status-badge {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    gap: 0.6rem;
+  }
+
+  .no-data {
+    padding: 3rem 1rem !important;
+    font-size: 1rem;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   VERY SMALL SCREENS (under 400px)
+════════════════════════════════════════════════════════════════ */
+@media (max-width: 400px) {
+  .rasi-users-container {
+    padding: 0.75rem;
+  }
+
+  .header-info h1 {
+    font-size: 1.25rem;
+  }
+
+  .subtitle {
+    font-size: 0.75rem;
+  }
+
+  .header-actions {
+    gap: 0.5rem;
+  }
+
+  .count-pill {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .rasi-search-wrapper input {
+    padding: 0.6rem 0.9rem 0.6rem 2.2rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+  }
+
+  .search-icon {
+    left: 10px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .rasi-users-table tr {
+    margin-bottom: 0.6rem;
+    padding: 0.8rem;
+    border-radius: 10px;
+  }
+
+  .rasi-users-table td {
+    padding: 0.5rem 0;
+    font-size: 0.8rem;
+  }
+
+  .rasi-users-table td::before {
+    font-size: 0.6rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .id-badge {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.65rem;
+  }
+
+  .customer-name {
+    font-size: 0.9rem;
+  }
+
+  .email-row, .phone-row {
+    font-size: 0.75rem;
+    gap: 0.35rem;
+  }
+
+  .date-row {
+    font-size: 0.75rem;
+    gap: 0.35rem;
+  }
+
+  .status-badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.65rem;
+    gap: 0.3rem;
+  }
+
+  .rasi-loading-state {
+    height: 50vh;
+    gap: 0.75rem;
+  }
+
+  .spinner {
+    width: 36px;
+    height: 36px;
+  }
+}

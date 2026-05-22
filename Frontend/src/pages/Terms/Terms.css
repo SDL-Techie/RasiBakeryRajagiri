@@ -1,0 +1,38 @@
+.rasi-terms-page {
+  background-color: var(--bg-light);
+  padding: 60px 20px;
+}
+
+.rasi-terms-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--white);
+  padding: 60px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.rasi-terms-container h1 {
+  color: var(--primary);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.rasi-last-updated {
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+.rasi-terms-container h2 {
+  color: var(--primary);
+  font-size: 20px;
+  margin: 30px 0 15px;
+}
+
+.rasi-terms-container p {
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 15px;
+}

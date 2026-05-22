@@ -1,0 +1,1462 @@
+/* ─────────────────────────────────────────────────────────────────
+   Profile.css  —  Fully Responsive | Coffee Brown Theme
+   Mobile First Approach | DM Sans + Playfair Display
+───────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@600;700&display=swap');
+
+/* ── Design Tokens ─────────────────────────────────────────────── */
+:root {
+  --coffee-dark:    #3e2723;
+  --coffee-main:    #5d4037;
+  --coffee-medium:  #8d6e63;
+  --coffee-light:   #d7ccc8;
+  --coffee-accent:  #efebe9;
+  --coffee-surface: #faf8f6;
+
+  --danger:   #e53935;
+  --success:  #2e7d32;
+  --white:    #ffffff;
+
+  --text-primary: #2d2421;
+  --text-muted:   #7b6460;
+  --text-faint:   #a9908b;
+
+  --radius-sm:  10px;
+  --radius-md:  16px;
+  --radius-lg:  22px;
+  --radius-xl:  28px;
+
+  --shadow-sm:  0 2px 8px  rgba(62, 39, 35, 0.07);
+  --shadow-md:  0 8px 28px rgba(62, 39, 35, 0.09);
+  --shadow-lg:  0 16px 48px rgba(62, 39, 35, 0.13);
+  --shadow-hero:0 24px 64px rgba(62, 39, 35, 0.22);
+
+  --transition: 0.25s ease;
+}
+
+/* ── Page wrapper ──────────────────────────────────────────────── */
+.pf-page {
+  max-width: 1200px;
+  margin: 1rem auto;
+  padding: 0 1rem 8rem;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-primary);
+  /* background-color: var(--coffee-surface); */
+  min-height: 100vh;
+}
+
+/* ── Loading Screen ────────────────────────────────────────────── */
+.pf-loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 65vh;
+  gap: 1rem;
+  color: var(--coffee-main);
+}
+
+.pf-loading-screen p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+
+/* ── Hero Header ───────────────────────────────────────────────── */
+.pf-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 1.5rem 1.25rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  background: var(--coffee-dark);
+  box-shadow: var(--shadow-hero);
+  color: var(--white);
+  margin-top: 10px;
+}
+
+/* Radial blobs */
+.pf-hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.pf-hero-blob--1 {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(141,110,99,0.38) 0%, transparent 70%);
+  top: -80px;
+  right: 40px;
+}
+.pf-hero-blob--2 {
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(93,64,55,0.5) 0%, transparent 70%);
+  bottom: -60px;
+  left: 20px;
+}
+
+/* Decorative coffee emoji */
+.pf-hero-deco {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 5rem;
+  opacity: 0.055;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Avatar */
+.pf-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 70px;
+  height: 70px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.pf-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--coffee-medium);
+  display: block;
+}
+
+.pf-avatar-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px dashed rgba(215, 204, 200, 0.38);
+  animation: pf-spin-ring 14s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes pf-spin-ring {
+  to { transform: rotate(360deg); }
+}
+
+/* Hero text */
+.pf-hero-text {
+  flex: 1;
+  z-index: 1;
+  min-width: 0;
+}
+
+.pf-hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+  letter-spacing: -0.3px;
+  color: var(--white);
+  word-break: break-word;
+}
+
+.pf-hero-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--coffee-light);
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px);
+  letter-spacing: 0.3px;
+}
+
+/* Logout button */
+.pf-logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+  z-index: 1;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 200px;
+}
+
+.pf-logout-btn:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+.pf-logout-btn span {
+  display: none;
+}
+
+/* ── Main Grid ─────────────────────────────────────────────────── */
+.pf-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.pf-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+/* ── Tab Bar ───────────────────────────────────────────────────── */
+.pf-tab-bar {
+  display: flex;
+  gap: 5px;
+  background: var(--coffee-accent);
+  padding: 5px;
+  border-radius: 15px;
+  margin-bottom: 1.2rem;
+  width: 100%;
+}
+
+.pf-tab {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.6rem 0.8rem;
+  border: none;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: color var(--transition);
+  z-index: 0;
+  white-space: nowrap;
+}
+
+.pf-tab--active {
+  color: var(--coffee-dark);
+}
+
+.pf-tab-label {
+  display: none;
+}
+
+.pf-tab-pill {
+  position: absolute;
+  inset: 0;
+  background: var(--white);
+  border-radius: 11px;
+  box-shadow: var(--shadow-sm);
+  z-index: -1;
+}
+
+/* ── Card ──────────────────────────────────────────────────────── */
+.pf-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(215, 204, 200, 0.55);
+  margin-bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pf-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pf-card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--coffee-dark);
+  flex: 1;
+  min-width: 0;
+}
+
+.pf-card-title-text {
+  display: none;
+}
+
+.pf-card-icon-box {
+  width: 32px;
+  height: 32px;
+  background: var(--coffee-accent);
+  color: var(--coffee-main);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Edit profile button */
+.pf-edit-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--coffee-accent);
+  color: var(--coffee-main);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+
+.pf-edit-btn:hover {
+  background: var(--coffee-light);
+}
+
+.pf-edit-btn-text {
+  display: none;
+}
+
+/* ── Info Display ──────────────────────────────────────────────── */
+.pf-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.pf-info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--coffee-accent);
+  border: 1px solid rgba(215, 204, 200, 0.6);
+  transition: border-color var(--transition);
+}
+
+.pf-info-row:hover {
+  border-color: var(--coffee-light);
+}
+
+.pf-info-icon-box {
+  width: 36px;
+  height: 36px;
+  background: var(--white);
+  color: var(--coffee-main);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+.pf-info-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.pf-info-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-faint);
+  font-weight: 600;
+}
+
+.pf-info-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--coffee-dark);
+  word-break: break-word;
+}
+
+/* ── Edit Form ─────────────────────────────────────────────────── */
+.pf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.pf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pf-field-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+}
+
+.pf-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid var(--coffee-accent);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  padding: 0.15rem 0.85rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.pf-input-wrap:focus-within {
+  border-color: var(--coffee-medium);
+  box-shadow: 0 0 0 4px rgba(141, 110, 99, 0.12);
+}
+
+.pf-input-wrap--locked {
+  background: #fdfaf9;
+  border-style: dashed;
+}
+
+.pf-input-icon {
+  color: var(--coffee-medium);
+  flex-shrink: 0;
+  display: flex;
+}
+
+.pf-input {
+  flex: 1;
+  padding: 0.7rem 0;
+  border: none;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.pf-input::placeholder {
+  color: var(--text-faint);
+}
+
+.pf-input:disabled {
+  color: var(--text-faint);
+  cursor: not-allowed;
+}
+
+.pf-locked-tag {
+  font-size: 0.6rem;
+  background: var(--coffee-accent);
+  color: var(--text-faint);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pf-field-hint {
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  margin: 0;
+}
+
+/* ── Address Section ───────────────────────────────────────────── */
+.pf-add-addr-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--coffee-dark);
+  color: var(--white);
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+
+.pf-add-addr-btn:hover {
+  background: var(--coffee-main);
+}
+
+.pf-add-addr-text {
+  display: none;
+}
+
+/* Empty state */
+.pf-empty-state {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background: linear-gradient(145deg, #fdfcfb, var(--coffee-accent));
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--coffee-light);
+}
+
+.pf-empty-icon-box {
+  width: 56px;
+  height: 56px;
+  background: var(--white);
+  color: var(--coffee-main);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.pf-empty-state h4 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  color: var(--coffee-dark);
+  font-weight: 700;
+}
+
+.pf-empty-state p {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin: 0 0 1.3rem;
+  line-height: 1.5;
+}
+
+.pf-empty-cta {
+  background: var(--coffee-dark);
+  color: var(--white);
+  border: none;
+  padding: 0.7rem 1.6rem;
+  border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.pf-empty-cta:hover {
+  background: var(--coffee-main);
+}
+
+/* Address list */
+.pf-addr-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+.pf-addr-card {
+  background: var(--white);
+  border: 1px solid rgba(215, 204, 200, 0.55);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pf-addr-card:hover {
+  border-color: var(--coffee-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.pf-addr-card--default {
+  border-color: var(--coffee-medium);
+  background: #fdfaf9;
+}
+
+/* Display view */
+.pf-addr-display {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.pf-addr-home-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--coffee-accent);
+  color: var(--coffee-main);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pf-addr-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.pf-addr-text {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.pf-primary-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  background: var(--coffee-main);
+  color: var(--white);
+  padding: 3px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  margin-top: 0.4rem;
+}
+
+.pf-primary-pill-text {
+  display: inline;
+}
+
+.pf-set-default-btn {
+  background: transparent;
+  border: 1.5px solid var(--coffee-light);
+  color: var(--coffee-medium);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.pf-set-default-btn:hover {
+  border-color: var(--coffee-medium);
+  color: var(--coffee-dark);
+}
+
+/* Edit view */
+.pf-addr-edit-body {
+  padding: 0;
+}
+
+.pf-addr-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.pf-addr-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid var(--coffee-accent);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  background: #fdfcfb;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.pf-addr-input:focus {
+  border-color: var(--coffee-medium);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.1);
+}
+
+.pf-addr-input::placeholder {
+  color: var(--text-faint);
+}
+
+.pf-addr-edit-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.8rem;
+}
+
+.pf-default-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.6rem 1rem;
+  border-radius: 9px;
+  border: 1.5px solid var(--coffee-light);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-muted);
+  background: var(--white);
+  transition: all var(--transition);
+  width: 100%;
+}
+
+.pf-default-toggle--on {
+  background: var(--coffee-dark);
+  color: var(--white);
+  border-color: var(--coffee-dark);
+}
+
+.pf-default-toggle-text {
+  display: inline;
+}
+
+.pf-remove-btn {
+  width: 100%;
+  padding: 0.6rem;
+  background: #fff5f5;
+  color: #c62828;
+  border: none;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+
+.pf-remove-btn:hover {
+  background: #ffebee;
+}
+
+/* ── Sticky Action Bar ─────────────────────────────────────────── */
+.pf-action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 1rem;
+  padding-bottom: 1.5rem;
+  border-top: 1px solid var(--coffee-light);
+  box-shadow: 0 -8px 24px rgba(62, 39, 35, 0.15);
+  margin-top: 1rem;
+  z-index: 999;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 40px;
+}
+
+.pf-cancel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  border: 1.5px solid var(--coffee-light);
+  color: var(--text-muted);
+  padding: 0.6rem 1rem;
+  border-radius: 11px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--transition);
+  width: 100%;
+}
+
+.pf-cancel-btn:hover {
+  border-color: var(--coffee-medium);
+  color: var(--coffee-dark);
+}
+
+.pf-cancel-btn-text {
+  display: inline;
+}
+
+.pf-save-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--coffee-dark);
+  color: var(--white);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 11px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(62, 39, 35, 0.24);
+  transition: background var(--transition);
+  width: 100%;
+}
+
+.pf-save-btn:hover:not(:disabled) {
+  background: var(--coffee-main);
+}
+
+.pf-save-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.pf-save-btn-text {
+  display: inline;
+}
+
+/* ── Sidebar ───────────────────────────────────────────────────── */
+.pf-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Promo card */
+.pf-promo-card {
+  background: linear-gradient(140deg, var(--coffee-main) 0%, var(--coffee-dark) 100%);
+  color: var(--white);
+  border-radius: 18px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 12px 32px rgba(62, 39, 35, 0.2);
+}
+
+.pf-promo-emoji {
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.pf-promo-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+}
+
+.pf-promo-sub {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  margin: 0 0 1.1rem;
+  line-height: 1.5;
+}
+
+.pf-promo-cta {
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background var(--transition);
+  width: 100%;
+}
+
+.pf-promo-cta:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLET RESPONSIVE (640px and up)
+═══════════════════════════════════════════════════════════════ */
+@media (min-width: 640px) {
+  .pf-page {
+    padding: 0 1.2rem 5rem;
+  }
+
+  .pf-hero {
+    flex-direction: row;
+    text-align: left;
+    padding: 1.8rem 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .pf-hero-text h1 {
+    font-size: 1.6rem;
+  }
+
+  .pf-hero-badges {
+    justify-content: flex-start;
+  }
+
+  .pf-logout-btn {
+    width: auto;
+    max-width: none;
+  }
+
+  .pf-logout-btn span {
+    display: inline;
+  }
+
+  .pf-avatar-wrap {
+    width: 80px;
+    height: 80px;
+  }
+
+  .pf-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .pf-tab {
+    font-size: 0.85rem;
+    padding: 0.65rem 1rem;
+  }
+
+  .pf-tab-label {
+    display: inline;
+  }
+
+  .pf-card {
+    padding: 1.5rem;
+  }
+
+  .pf-card-title {
+    font-size: 1rem;
+  }
+
+  .pf-card-title-text {
+    display: inline;
+  }
+
+  .pf-edit-btn {
+    font-size: 0.8rem;
+    padding: 7px 14px;
+  }
+
+  .pf-edit-btn-text {
+    display: inline;
+  }
+
+  .pf-add-addr-btn {
+    font-size: 0.8rem;
+    padding: 7px 14px;
+  }
+
+  .pf-add-addr-text {
+    display: inline;
+  }
+
+  .pf-info-row {
+    padding: 1rem 1.2rem;
+  }
+
+  .pf-info-icon-box {
+    width: 40px;
+    height: 40px;
+  }
+
+  .pf-info-value {
+    font-size: 0.95rem;
+  }
+
+  .pf-addr-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .pf-addr-display {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .pf-set-default-btn {
+    width: auto;
+  }
+
+  .pf-addr-edit-footer {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pf-default-toggle {
+    width: auto;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .pf-remove-btn {
+    width: 40px;
+    padding: 0.6rem;
+  }
+
+  .pf-action-bar {
+    position: sticky;
+    bottom: 1.5rem;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 1rem 1.5rem;
+    border-radius: 18px;
+    margin-top: 1.2rem;
+    border-top: none;
+    box-shadow: 0 8px 32px rgba(62, 39, 35, 0.14);
+    border: 1px solid var(--coffee-light);
+    left: auto;
+    right: auto;
+    width: auto;
+  }
+
+  .pf-cancel-btn {
+    width: auto;
+  }
+
+  .pf-cancel-btn-text {
+    display: inline;
+  }
+
+  .pf-save-btn {
+    width: auto;
+  }
+
+  .pf-save-btn-text {
+    display: inline;
+  }
+
+  .pf-promo-card {
+    padding: 1.8rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LAPTOP RESPONSIVE (1024px and up)
+═══════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .pf-page {
+    padding: 0 1.5rem 5rem;
+    margin: 2.5rem auto;
+  }
+
+  .pf-hero {
+    flex-direction: row;
+    text-align: left;
+    padding: 2.4rem 2.8rem;
+    gap: 2rem;
+    border-radius: var(--radius-xl);
+    margin-bottom: 2.2rem;
+  }
+
+  .pf-hero-text h1 {
+    font-size: 1.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0 0.55rem;
+  }
+
+  .pf-hero-deco {
+    display: block;
+    font-size: 7.5rem;
+  }
+
+  .pf-avatar-wrap {
+    width: 92px;
+    height: 92px;
+  }
+
+  .pf-avatar {
+    width: 92px;
+    height: 92px;
+  }
+
+  .pf-hero-blob--1 {
+    width: 340px;
+    height: 340px;
+    top: -100px;
+    right: 80px;
+  }
+
+  .pf-hero-blob--2 {
+    width: 260px;
+    height: 260px;
+    bottom: -80px;
+    left: 40px;
+  }
+
+  .pf-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    flex-direction: row;
+  }
+
+  .pf-left {
+    width: 100%;
+  }
+
+  .pf-sidebar {
+    width: 100%;
+  }
+
+  .pf-tab {
+    font-size: 0.9rem;
+    padding: 0.72rem 1rem;
+  }
+
+  .pf-card {
+    padding: 1.8rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .pf-card-title {
+    font-size: 1.06rem;
+  }
+
+  .pf-card-title-text {
+    display: inline;
+  }
+
+  .pf-card-icon-box {
+    width: 36px;
+    height: 36px;
+  }
+
+  .pf-edit-btn {
+    font-size: 0.85rem;
+    padding: 7px 15px;
+  }
+
+  .pf-edit-btn-text {
+    display: inline;
+  }
+
+  .pf-add-addr-btn {
+    font-size: 0.85rem;
+    padding: 7px 14px;
+  }
+
+  .pf-add-addr-text {
+    display: inline;
+  }
+
+  .pf-info-row {
+    padding: 1.05rem 1.15rem;
+    gap: 14px;
+  }
+
+  .pf-info-icon-box {
+    width: 40px;
+    height: 40px;
+  }
+
+  .pf-info-value {
+    font-size: 1rem;
+  }
+
+  .pf-field-label {
+    font-size: 0.76rem;
+  }
+
+  .pf-input {
+    font-size: 0.97rem;
+  }
+
+  .pf-addr-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+
+  .pf-addr-display {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .pf-set-default-btn {
+    width: auto;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+  }
+
+  .pf-addr-edit-footer {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pf-default-toggle {
+    width: auto;
+    flex: 1;
+    padding: 7px 15px;
+    justify-content: center;
+  }
+
+  .pf-remove-btn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+  }
+
+  .pf-action-bar {
+    position: sticky;
+    bottom: 1.5rem;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 1.05rem 1.5rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(62, 39, 35, 0.14);
+    border: 1px solid var(--coffee-light);
+    margin-top: 1.2rem;
+    z-index: 10;
+    left: auto;
+    right: auto;
+    width: auto;
+  }
+
+  .pf-cancel-btn {
+    width: auto;
+    padding: 0.66rem 1.4rem;
+    font-size: 0.9rem;
+  }
+
+  .pf-cancel-btn-text {
+    display: inline;
+  }
+
+  .pf-save-btn {
+    width: auto;
+    padding: 0.66rem 1.9rem;
+    font-size: 0.95rem;
+  }
+
+  .pf-save-btn-text {
+    display: inline;
+  }
+
+  .pf-logout-btn {
+    width: auto;
+    max-width: none;
+    padding: 0.68rem 1.35rem;
+    font-size: 0.9rem;
+  }
+
+  .pf-logout-btn span {
+    display: inline;
+  }
+
+  .pf-promo-card {
+    padding: 1.9rem 1.6rem;
+    border-radius: 22px;
+    box-shadow: 0 14px 36px rgba(62, 39, 35, 0.22);
+  }
+
+  .pf-promo-emoji {
+    font-size: 2.6rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .pf-promo-title {
+    font-size: 1.02rem;
+  }
+
+  .pf-promo-sub {
+    font-size: 0.82rem;
+    margin: 0 0 1.3rem;
+  }
+
+  .pf-promo-cta {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  .pf-empty-state {
+    padding: 3.8rem 2rem;
+  }
+
+  .pf-empty-icon-box {
+    width: 66px;
+    height: 66px;
+  }
+
+  .pf-empty-state h4 {
+    font-size: 1.08rem;
+  }
+
+  .pf-empty-state p {
+    font-size: 0.9rem;
+    margin: 0 0 1.6rem;
+  }
+
+  .pf-empty-cta {
+    padding: 0.78rem 1.9rem;
+    font-size: 0.95rem;
+  }
+
+  .pf-addr-list {
+    gap: 1.2rem;
+  }
+
+  .pf-addr-card {
+    padding: 1.2rem;
+  }
+
+  .pf-addr-home-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .pf-addr-text {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .pf-primary-pill {
+    font-size: 0.65rem;
+    padding: 3px 10px;
+  }
+
+  .pf-input-wrap {
+    padding: 0.18rem 0.95rem;
+  }
+
+  .pf-form {
+    gap: 1.25rem;
+  }
+
+  .pf-field {
+    gap: 7px;
+  }
+
+  .pf-badge {
+    font-size: 0.72rem;
+    padding: 4px 11px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VERY SMALL SCREENS (under 400px)
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 400px) {
+  .pf-page {
+    padding: 0 0.75rem 10rem;
+    margin: 0;
+  }
+
+  .pf-hero {
+    padding: 1.2rem 1rem;
+    gap: 1rem;
+  }
+
+  .pf-hero-text h1 {
+    font-size: 1.2rem;
+  }
+
+  .pf-card {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+  }
+
+  .pf-tab {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.7rem;
+    gap: 3px;
+  }
+
+  .pf-edit-btn {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+
+  .pf-add-addr-btn {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+
+  .pf-action-bar {
+    padding: 1rem 0.75rem;
+    padding-bottom: 2rem;
+    gap: 10px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .pf-cancel-btn,
+  .pf-save-btn {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .pf-addr-input {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .pf-promo-emoji {
+    font-size: 1.8rem;
+  }
+
+  .pf-info-label {
+    font-size: 0.6rem;
+  }
+}

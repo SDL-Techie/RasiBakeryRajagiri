@@ -1,0 +1,771 @@
+/* .rasi-products-page {
+  background-color: #f1f3f6;
+  padding: 20px 0;
+}
+
+.rasi-products-container {
+  max-width: 1244px;
+  margin: 0 auto;
+  display: flex;
+  gap: 16px;
+  padding: 0 16px;
+}
+
+.rasi-products-sidebar {
+  width: 280px;
+  background-color: var(--white);
+  padding: 20px;
+  height: fit-content;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+}
+
+.rasi-filter-section {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 20px;
+}
+
+.rasi-filter-section:last-child {
+  border-bottom: none;
+}
+
+.rasi-filter-section h3 {
+  font-size: 16px;
+  color: var(--primary);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.rasi-filter-section ul li {
+  margin-bottom: 10px;
+}
+
+.rasi-filter-section label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.rasi-price-range {
+  width: 100%;
+  accent-color: var(--primary);
+}
+
+.rasi-price-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.rasi-products-main {
+  flex: 1;
+  background-color: var(--white);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+}
+
+.rasi-products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 15px;
+}
+
+.rasi-breadcrumb {
+  font-size: 12px;
+  color: #878787;
+}
+
+.rasi-products-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rasi-sort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.rasi-sort select {
+  border: 1px solid #ddd;
+  padding: 5px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.rasi-view-toggle {
+  display: flex;
+  gap: 10px;
+}
+
+.rasi-view-toggle button {
+  font-size: 18px;
+  color: #878787;
+}
+
+.rasi-view-toggle button.active {
+  color: var(--primary);
+}
+
+.rasi-products-display.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 992px) {
+  .rasi-products-sidebar {
+    display: none;
+  }
+} */
+
+
+/* ============================================
+   PRODUCTS PAGE - RESPONSIVE CSS
+   Mobile First Approach
+   ============================================ */
+
+:root {
+  --primary: #a0522d;
+  --white: #ffffff;
+  --light-gray: #f1f3f6;
+  --border-gray: #f0f0f0;
+  --text-gray: #878787;
+  --dark-gray: #333333;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   GENERAL STYLES
+   ============================================ */
+
+.rasi-products-page {
+  /* background-color: var(--light-gray); */
+  padding: 16px 0;
+  min-height: 100vh;
+}
+
+.rasi-products-container {
+  max-width: 1244px;
+  margin: 0 auto;
+  display: flex;
+  gap: 16px;
+  padding: 0 12px;
+  position: relative;
+}
+
+/* ============================================
+   LOADING STATE
+   ============================================ */
+
+.rasi-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  gap: 20px;
+  color: var(--primary);
+}
+
+.rasi-loading-container .spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   SIDEBAR - MOBILE FIRST
+   ============================================ */
+
+.rasi-sidebar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary);
+  /* padding: 8px; */
+  position: absolute;
+
+  /* top: 100px; */
+  left: 12px;
+  z-index: 999;
+}
+
+.rasi-sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+.rasi-products-sidebar {
+  width: 100%;
+  background-color: var(--white);
+  padding: 20px;
+  height: fit-content;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  margin-bottom: 16px;
+  order: -1;
+}
+
+.rasi-sidebar-header {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.rasi-sidebar-header h2 {
+  font-size: 18px;
+  color: var(--primary);
+  margin: 0;
+}
+
+.rasi-close-sidebar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dark-gray);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================
+   FILTER SECTIONS
+   ============================================ */
+
+.rasi-filter-section {
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-gray);
+  padding-bottom: 20px;
+}
+
+.rasi-filter-section:last-of-type {
+  border-bottom: none;
+}
+
+.rasi-filter-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rasi-filter-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rasi-filter-section ul li {
+  margin-bottom: 10px;
+}
+
+.rasi-filter-section label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--dark-gray);
+  user-select: none;
+}
+
+.rasi-filter-section label input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+
+.rasi-filter-section label span {
+  flex: 1;
+}
+
+/* Price Range */
+
+.rasi-price-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.rasi-price-value {
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 16px;
+}
+
+.rasi-price-range {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border-gray);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 12px 0;
+  accent-color: var(--primary);
+}
+
+.rasi-price-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+.rasi-price-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  border: none;
+  box-shadow: var(--shadow);
+}
+
+.rasi-price-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-gray);
+  margin-top: 8px;
+}
+
+/* Clear Filters Button */
+
+.rasi-clear-filters-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 16px;
+  background-color: var(--light-gray);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rasi-clear-filters-btn:active {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+
+.rasi-products-main {
+  flex: 1;
+  background-color: var(--white);
+  margin-top:40px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  min-width: 0;
+}
+
+/* ============================================
+   PRODUCTS HEADER
+   ============================================ */
+
+.rasi-products-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-gray);
+  padding-bottom: 15px;
+}
+
+.rasi-products-count {
+  font-size: 16px;
+  color: var(--dark-gray);
+  font-weight: 500;
+}
+
+.rasi-products-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.rasi-sort-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: var(--dark-gray);
+  background-color: var(--white);
+  cursor: pointer;
+  outline: none;
+}
+
+.rasi-sort-select:focus {
+  border-color: var(--primary);
+}
+
+.rasi-view-toggle {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.rasi-view-btn {
+  flex: 1;
+  padding: 10px;
+  background-color: var(--light-gray);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.rasi-view-btn:active,
+.rasi-view-btn.active {
+  background-color: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+/* ============================================
+   PRODUCTS DISPLAY - GRID & LIST
+   ============================================ */
+
+.rasi-products-display {
+  display: grid;
+  gap: 12px;
+  min-height: 300px;
+}
+
+.rasi-products-display.grid {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.rasi-products-display.list {
+  grid-template-columns: 1fr;
+}
+
+/* ============================================
+   NO PRODUCTS STATE
+   ============================================ */
+
+.rasi-no-products-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-gray);
+  min-height: 400px;
+}
+
+.rasi-no-products-found svg {
+  color: var(--primary);
+  opacity: 0.5;
+}
+
+.rasi-no-products-found p {
+  font-size: 16px;
+  margin: 0;
+  color: var(--dark-gray);
+}
+
+.rasi-reset-btn {
+  margin-top: 12px;
+  padding: 12px 24px;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rasi-reset-btn:active {
+  opacity: 0.8;
+}
+
+/* ============================================
+   TABLET BREAKPOINT (768px)
+   ============================================ */
+
+@media (min-width: 768px) {
+  .rasi-products-page {
+    padding: 20px 0;
+  }
+
+  .rasi-products-container {
+    flex-direction: row;
+    gap: 20px;
+    padding: 0 16px;
+  }
+
+  .rasi-sidebar-toggle,
+  .rasi-sidebar-overlay {
+    display: none !important;
+  }
+
+  .rasi-products-sidebar {
+    display: block !important;
+    width: 250px;
+    flex-shrink: 0;
+    margin-bottom: 0;
+    order: initial;
+    padding: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+  }
+
+  .rasi-products-main {
+    padding: 20px;
+  }
+
+  .rasi-products-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .rasi-products-controls {
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .rasi-sort-select {
+    width: auto;
+    min-width: 150px;
+  }
+
+  .rasi-view-btn {
+    flex: 0;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
+
+  .rasi-products-display.grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+/* ============================================
+   DESKTOP BREAKPOINT (992px)
+   ============================================ */
+
+@media (min-width: 992px) {
+  .rasi-products-container {
+    gap: 24px;
+    padding: 0 20px;
+  }
+
+  .rasi-products-sidebar {
+    width: 280px;
+    padding: 24px;
+  }
+
+  .rasi-products-main {
+    padding: 24px;
+  }
+
+  .rasi-filter-section {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+  }
+
+  .rasi-products-display.grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+/* ============================================
+   LARGE DESKTOP (1200px+)
+   ============================================ */
+
+@media (min-width: 1200px) {
+  .rasi-products-container {
+    padding: 0 24px;
+  }
+
+  .rasi-products-display.grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+/* ============================================
+   SMALL MOBILE (320px - 480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+  .rasi-products-container {
+    padding: 0 8px;
+  }
+
+  .rasi-sidebar-toggle {
+    display: block;
+  }
+
+  .rasi-products-sidebar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    height: auto;
+    max-height: 90vh;
+    border-radius: 0;
+    margin-bottom: 0;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .rasi-products-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .rasi-sidebar-header {
+    display: flex;
+  }
+
+  .rasi-close-sidebar {
+    display: block;
+  }
+
+  .rasi-sidebar-overlay.open {
+    display: block;
+  }
+
+  .rasi-products-main {
+    padding: 12px;
+  }
+
+  .rasi-products-header {
+    gap: 8px;
+  }
+
+  .rasi-products-count {
+    font-size: 14px;
+  }
+
+  .rasi-products-display.grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY & HOVER STATES
+   ============================================ */
+
+@media (hover: hover) and (pointer: fine) {
+  .rasi-sort-select:hover {
+    border-color: var(--primary);
+  }
+
+  .rasi-view-btn:hover {
+    border-color: var(--primary);
+    background-color: var(--light-gray);
+  }
+
+  .rasi-view-btn.active:hover {
+    background-color: var(--primary);
+  }
+
+  .rasi-clear-filters-btn:hover {
+    background-color: var(--primary);
+    color: var(--white);
+  }
+
+  .rasi-reset-btn:hover {
+    background-color: #8b4513;
+  }
+}
+
+/* ============================================
+   FOCUS STATES FOR KEYBOARD NAVIGATION
+   ============================================ */
+
+button:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .rasi-sidebar-toggle,
+  .rasi-products-header,
+  .rasi-clear-filters-btn {
+    display: none;
+  }
+
+  .rasi-products-page {
+    /* background-color: var(--white); */
+  }
+
+  .rasi-products-display.grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

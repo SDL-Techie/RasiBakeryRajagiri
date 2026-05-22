@@ -1,0 +1,926 @@
+
+
+.rasi-hero-slider {
+  position: relative;
+  height: 500px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.homedesc{
+  color:#8b4513;
+  font-weight: 600;
+}
+
+.rasi-banner-marquee {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 15px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.rasi-banner-marquee-content {
+  display: inline-flex;
+  animation: marquee-scroll 40s linear infinite;
+  gap: 50px;
+}
+
+.rasi-banner-marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.rasi-banner-marquee-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  border-radius: 50%;
+}
+
+/* .rasi-categories-grid slider-container{
+  background-color: white;
+} */
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.rasi-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rasi-slide.active {
+  opacity: 1;
+}
+
+.rasi-slide img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+
+.rasi-slide-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--white);
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.rasi-slide-content h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.rasi-slide-content p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.rasi-btn-primary {
+  background-color: var(--accent);
+  color: var(--primary);
+  padding: 14px 32px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: var(--transition);
+}
+
+.rasi-btn-primary:hover {
+  background-color: var(--highlight);
+  color: var(--white);
+  transform: scale(1.05);
+}
+
+.rasi-slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  z-index: 2;
+  transition: var(--transition);
+}
+
+.rasi-slider-btn:hover {
+  background-color: var(--accent);
+  color: var(--primary);
+}
+
+.rasi-slider-btn.prev { left: 20px; }
+.rasi-slider-btn.next { right: 20px; }
+
+.rasi-section {
+  padding: 80px 0;
+  width: 100%;
+}
+
+.rasi-container {
+  max-width: 1244px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Alternating Backgrounds for Sections */
+.rasi-section:nth-of-type(even) {
+  background-color: var(--white);
+}
+
+.rasi-section:nth-of-type(odd) {
+  background-color: var(--secondary);
+}
+
+/* Specific overrides if needed */
+.rasi-categories-section {
+  background-color: var(--white) !important;
+}
+
+.rasi-featured-section {
+  background-color: var(--secondary) !important;
+}
+
+.rasi-zigzag-section {
+  background-color: var(--white) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.rasi-zigzag-section::before {
+  content: 'RASI';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30vw;
+  font-weight: 900;
+  color: rgba(93, 46, 12, 0.02);
+  z-index: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.rasi-zigzag-section .rasi-container {
+  position: relative;
+  z-index: 1;
+}
+
+.rasi-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+}
+
+.rasi-section-header h2 {
+  font-size: 28px;
+  color: var(--primary);
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.rasi-title-highlight h2::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 40px;
+  height: 12px;
+  background-color: var(--accent);
+  opacity: 0.4;
+  border-radius: 2px;
+  z-index: -1;
+  transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rasi-category-products:hover .rasi-title-highlight h2::after,
+.rasi-featured-section:hover .rasi-title-highlight h2::after,
+.rasi-cookie-highlight:hover .rasi-title-highlight h2::after,
+.rasi-zigzag-section:hover .rasi-title-highlight h2::after {
+  width: 100%;
+}
+
+.rasi-section-header p {
+  color: var(--highlight);
+  margin-top: 5px;
+}
+
+.rasi-view-all {
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid var(--primary);
+  transition: all 0.3s ease;
+}
+
+.rasi-view-all:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  transform: scale(1.05);
+}
+
+.rasi-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.rasi-category-card {
+  background-color: var(--white);
+  padding: 30px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.rasi-category-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.rasi-category-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  border-color: var(--primary);
+}
+
+.rasi-category-card:hover::before {
+  left: 0;
+}
+
+.rasi-category-card:hover .rasi-category-icon {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.rasi-category-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.rasi-category-card h3 {
+  font-size: 18px;
+  color: var(--primary);
+  margin-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+.rasi-category-card:hover h3 {
+  color: var(--primary-dark);
+}
+
+.rasi-category-card span {
+  font-size: 14px;
+  color: var(--highlight);
+}
+
+.rasi-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.rasi-zigzag-row {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  margin-bottom: 120px;
+}
+
+.rasi-zigzag-row:last-child {
+  margin-bottom: 0;
+}
+
+.rasi-zigzag-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.rasi-zigzag-image {
+  flex: 1;
+  height: 450px;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 30px 30px 0 rgba(93, 46, 12, 0.05);
+  transition: transform 0.5s ease;
+}
+
+.rasi-zigzag-image:hover {
+  transform: translateY(-10px);
+}
+
+.rasi-zigzag-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.rasi-zigzag-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.rasi-zigzag-image:hover img {
+  transform: scale(1.05);
+}
+
+.rasi-zigzag-image-decoration {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary);
+  color: var(--white);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  z-index: 2;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.rasi-zigzag-content {
+  flex: 1;
+}
+
+.rasi-zigzag-content h2 {
+  font-size: 42px;
+  color: var(--primary);
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.rasi-zigzag-content p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 35px;
+}
+
+.rasi-btn-outline {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  padding: 14px 32px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rasi-btn-outline:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  box-shadow: 0 10px 20px rgba(93, 46, 12, 0.2);
+  transform: translateY(-2px);
+}
+
+.rasi-zigzag-badge {
+  display: inline-block;
+  background-color: var(--highlight);
+  color: var(--white);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.rasi-newsletter {
+  background-color: var(--secondary);
+  padding: 60px 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.rasi-newsletter-card h2 {
+  font-size: 32px;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.rasi-newsletter-card p {
+  color: var(--primary);
+  margin-bottom: 30px;
+  opacity: 0.8;
+}
+
+.rasi-newsletter-form {
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.rasi-newsletter-form input {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+}
+
+.rasi-newsletter-form button {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 0 24px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.rasi-home-contact-full {
+  position: relative;
+  padding: 100px 0;
+  background-image: url('https://picsum.photos/seed/bakery-shop/1920/1080');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 60px 0;
+}
+
+.rasi-home-contact-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(93, 46, 12, 0.85));
+  z-index: 1;
+}
+
+.rasi-home-contact-full .rasi-container {
+  position: relative;
+  z-index: 2;
+}
+
+.rasi-contact-header-white h2 {
+  color: var(--white);
+}
+
+.rasi-contact-header-white p {
+  color: rgba(255,255,255,0.8);
+}
+
+.rasi-home-contact-info-centered {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+  color:white
+}
+
+.rasi-contact-item-dark {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.rasi-contact-item-dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: all 0.6s ease;
+  z-index: -1;
+}
+
+.rasi-contact-item-dark:hover {
+  transform: translateY(-10px);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--highlight);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.rasi-contact-item-dark:hover::before {
+  left: 100%;
+}
+
+.rasi-contact-item-dark:hover .rasi-contact-icon {
+  background-color: var(--highlight);
+  color: var(--white);
+  transform: scale(1.1) rotate(5deg);
+}
+
+.rasi-contact-icon {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(242, 125, 38, 0.2);
+  color: var(--highlight);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.rasi-contact-text h4 {
+  font-size: 18px;
+  color: var(--white);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.rasi-contact-text p {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+@media (max-width: 992px) {
+  .rasi-home-contact {
+    padding: 40px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rasi-hero-slider { height: 350px; }
+  .rasi-slide-content h2 { font-size: 32px; }
+  
+  .rasi-section {
+    margin: 40px auto;
+  }
+
+  .rasi-section-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .rasi-section-header h2 {
+    font-size: 24px;
+  }
+
+  .rasi-zigzag-row, .rasi-zigzag-row.reverse {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .rasi-zigzag-image { width: 100%; height: 300px; box-shadow: 10px 10px 0 var(--secondary); }
+  .rasi-newsletter-form { flex-direction: column; }
+}
+
+.rasi-cookie-highlight {
+  overflow: hidden;
+}
+
+.rasi-cookie-highlight-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.rasi-cookie-highlight-image {
+  position: relative;
+}
+
+.rasi-cookie-blob {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: var(--primary);
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  overflow: hidden;
+  border: 4px solid var(--white);
+  box-shadow: 20px 20px 0 rgba(0,0,0,0.05);
+  animation: blobMorph 8s ease-in-out infinite;
+}
+
+@keyframes blobMorph {
+  0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  50% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+.rasi-cookie-blob img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.rasi-cookie-highlight-image:hover .rasi-cookie-blob img {
+  transform: scale(1.1);
+}
+
+.rasi-cookie-floating-chip {
+  position: absolute;
+  font-size: 40px;
+  z-index: 2;
+  animation: float 4s ease-in-out infinite;
+}
+
+.rasi-cookie-floating-chip.chip-1 { top: 0; right: 0; animation-delay: 0s; }
+.rasi-cookie-floating-chip.chip-2 { bottom: 0; left: 0; animation-delay: 2s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+.rasi-cookie-highlight-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rasi-cookie-tag {
+  background-color: var(--highlight);
+  color: var(--white);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.rasi-cookie-highlight-content h2 {
+  font-size: 48px;
+  color: var(--primary);
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+.rasi-cookie-highlight-content h2 span {
+  display: block;
+  color: var(--highlight);
+}
+
+.rasi-cookie-highlight-content p {
+  font-size: 18px;
+  /* color: var(--text-muted); */
+  line-height: 1.6;
+}
+
+.rasi-cookie-features {
+  display: flex;
+  gap: 20px;
+  margin: 10px 0;
+}
+
+.rasi-cookie-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--white);
+  padding: 15px;
+  border-radius: 16px;
+  flex: 1;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.rasi-cookie-feature:hover {
+  transform: translateY(-5px);
+}
+
+.rasi-feature-icon {
+  font-size: 24px;
+}
+
+.rasi-cookie-feature span:last-child {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+}
+
+.rasi-cookie-shop-btn {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 16px 32px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  width: fit-content;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.rasi-cookie-shop-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 992px) {
+  .rasi-cookie-highlight-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+  
+  .rasi-cookie-highlight-content {
+    align-items: center;
+  }
+  
+  .rasi-cookie-highlight-content h2 {
+    font-size: 36px;
+  }
+  
+  .rasi-cookie-highlight-image {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+.rasi-marquee-layer {
+  white-space: nowrap;
+  padding: 15px 0;
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.rasi-marquee-content {
+  display: flex;
+  gap: 40px;
+}
+
+.rasi-marquee-primary {
+  background-color: var(--primary);
+  color: var(--white);
+  transform: rotate(-1deg) scale(1.05);
+  z-index: 3;
+}
+
+.rasi-marquee-highlight {
+  background-color: var(--highlight);
+  color: var(--white);
+  transform: rotate(1deg) scale(1.05);
+  z-index: 2;
+}
+
+.rasi-categories-section {
+    background-color: #ffffff !important; /* Forces the background to white */
+}
+
+/* If there is a separate wrapper or container with gray background */
+.rasi-category-wrapper {
+    background: white;
+}
+
+.rasi-marquee-secondary {
+  background-color: var(--secondary);
+  color: var(--primary);
+  transform: rotate(-0.5deg) scale(1.05);
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .rasi-marquee-layer {
+    font-size: 18px;
+    padding: 10px 0;
+  }
+}
+
+
+.slider-container {
+    display: flex;
+    overflow-x: hidden; /* Hide scrollbar but allow sliding */
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.rasi-category-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.rasi-category-arrow {
+    position: absolute;
+    z-index: 10;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    /* box-shadow: 0 4px 6px rgba(0,0,0,0.1); */
+}
+
+.rasi-category-arrow.left { left: -15px; }
+.rasi-category-arrow.right { right: -15px; }
+
+.rasi-category-card {
+    min-width: 200px; /* Essential for the slider to work */
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+
+.rasi-category-products {
+    scroll-margin-top: 100px;
+}
+
+/* 1. Override the alternating section background */
+.rasi-section.rasi-categories-section {
+    background-color: #ffffff !important;
+}
+
+/* 2. Target the specific child inside the section if it has a separate color */
+.rasi-categories-section .rasi-container {
+    background-color: #ffffff !important;
+}
+
+/* 3. Ensure the wrapper around the cards is also white */
+.slider-container, 
+.rasi-category-wrapper {
+    background-color: #ffffff !important;
+}

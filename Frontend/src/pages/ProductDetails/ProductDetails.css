@@ -1,0 +1,793 @@
+.rasi-product-details-page {
+  //background-color: #f1f3f6;
+  padding: 20px 0;
+  min-height: 100vh;
+}
+
+.rasi-pd-container {
+  max-width: 1244px;
+  margin: 0 auto;
+  display: flex;
+  gap: 16px;
+  padding: 0 8px;
+}
+
+.rasi-pd-left {
+  flex: 0.42;
+  background-color: var(--white);
+  padding: 16px;
+  position: sticky;
+  top: 80px;
+  height: fit-content;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.rasi-pd-gallery-wrapper {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.rasi-pd-thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rasi-pd-thumb {
+  width: 64px;
+  height: 64px;
+  border: 2px solid #f0f0f0;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 4px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.rasi-pd-thumb:hover {
+  border-color: var(--secondary);
+  transform: translateX(4px);
+}
+
+.rasi-pd-thumb.active {
+  border-color: var(--highlight);
+  box-shadow: 0 4px 10px rgba(210, 105, 30, 0.2);
+}
+
+.rasi-pd-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.rasi-pd-main-image-container {
+  flex: 1;
+  height: 480px;
+  position: relative;
+  border: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.rasi-pd-slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+
+.rasi-pd-slider-nav:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.rasi-pd-slider-nav.prev { left: 10px; }
+.rasi-pd-slider-nav.next { right: 10px; }
+
+.rasi-pd-image-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+}
+
+.rasi-pd-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ddd;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rasi-pd-dot.active {
+  background-color: var(--primary);
+  width: 20px;
+  border-radius: 4px;
+}
+
+.rasi-pd-main-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.rasi-pd-image-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2;
+}
+
+.rasi-pd-wishlist-btn, .rasi-pd-share-btn {
+  width: 36px;
+  height: 36px;
+  background: var(--white);
+  border: 1px solid #f0f0f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c2c2c2;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: var(--transition);
+}
+
+.rasi-pd-wishlist-btn.active {
+  color: #ff4343;
+}
+
+.rasi-pd-sticky-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.rasi-pd-sticky-actions button,
+.rasi-pd-sticky-actions a {
+  flex: 1;
+  height: 56px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.rasi-pd-add-cart-btn {
+  background-color: var(--white);
+  color: var(--primary);
+  border: 2px solid var(--primary) !important;
+}
+
+.rasi-pd-add-cart-btn:hover {
+  background-color: var(--secondary);
+}
+
+.rasi-pd-buy-now-btn {
+  background-color: var(--accent) !important;
+  color: var(--primary) !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(255, 179, 71, 0.3);
+}
+
+.rasi-pd-buy-now-btn:hover {
+  background-color: var(--highlight) !important;
+  color: var(--white) !important;
+  transform: translateY(-2px);
+}
+
+.rasi-pd-right {
+  flex: 0.58;
+  background-color: var(--white);
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.rasi-pd-breadcrumb {
+  font-size: 12px;
+  color: #878787;
+  margin-bottom: 12px;
+}
+
+.rasi-pd-header {
+  margin-bottom: 12px;
+}
+
+.rasi-pd-brand {
+  font-size: 14px;
+  color: #878787;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.rasi-pd-title {
+  font-size: 18px;
+  color: #212121;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.rasi-pd-rating-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.rasi-pd-rating-badge {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rasi-pd-rating-text {
+  font-size: 14px;
+  color: #878787;
+  font-weight: 600;
+}
+
+.rasi-pd-price-section {
+  margin-bottom: 20px;
+}
+
+.rasi-pd-price-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rasi-pd-current-price {
+  font-size: 28px;
+  font-weight: 600;
+  color: #212121;
+}
+
+.rasi-pd-mrp {
+  font-size: 16px;
+  color: #878787;
+  text-decoration: line-through;
+}
+
+.rasi-pd-discount-tag {
+  font-size: 16px;
+  color: var(--highlight);
+  font-weight: 600;
+}
+
+.rasi-pd-tax-info {
+  font-size: 12px;
+  color: #212121;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.rasi-pd-wow-deal {
+  background: linear-gradient(135deg, var(--highlight), #8B4513);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  color: white;
+  box-shadow: 0 4px 15px rgba(210, 105, 30, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.rasi-pd-wow-deal:hover {
+  transform: scale(1.02);
+}
+
+.wow-badge {
+  background: #000;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1;
+  transform: skewX(-10deg);
+  margin: 8px;
+}
+
+.wow-text { color: #fff; }
+.deal-text { color: #ffda00; }
+
+.wow-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px 8px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.wow-footer {
+  background: var(--secondary);
+  color: #212121;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.rasi-pd-quantity-section {
+  margin-bottom: 24px;
+}
+
+.rasi-pd-quantity-section p {
+  font-size: 14px;
+  color: #212121;
+  margin-bottom: 12px;
+}
+
+.rasi-pd-qty-options {
+  display: flex;
+  gap: 12px;
+}
+
+.rasi-pd-qty-btn {
+  padding: 8px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rasi-pd-qty-btn.active {
+  background: #212121;
+  color: white;
+  border-color: #212121;
+}
+
+.rasi-pd-delivery-section {
+  margin-bottom: 24px;
+  padding: 20px 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.rasi-pd-delivery-section h3 {
+  font-size: 14px;
+  color: #878787;
+  margin-bottom: 16px;
+}
+
+.rasi-pd-location-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-light);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.rasi-pd-location-selector svg {
+  color: var(--primary);
+}
+
+.rasi-pd-select-loc-btn {
+  color: var(--primary);
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.order-timer {
+  font-size: 12px;
+  color: #ff6161;
+  margin-top: 2px;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.rasi-pd-delivery-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rasi-pd-info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #212121;
+}
+
+.rasi-pd-info-item svg {
+  color: var(--primary);
+}
+
+.rasi-pd-description-section {
+  margin-bottom: 24px;
+}
+
+.rasi-pd-description-section h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.rasi-pd-description-section p {
+  font-size: 14px;
+  color: #212121;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.rasi-pd-highlights {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.rasi-pd-highlights li {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rasi-pd-offers-section h3 {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.rasi-pd-offer-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.rasi-pd-offer-item p {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .rasi-pd-container {
+    flex-direction: column;
+  }
+  .rasi-pd-left {
+    position: static;
+    width: 100%;
+  }
+  .rasi-pd-gallery-wrapper {
+    flex-direction: column-reverse;
+  }
+  .rasi-pd-thumbnails {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .rasi-pd-main-image-container {
+    height: 300px;
+  }
+  .rasi-pd-sticky-actions {
+    position: fixed;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: var(--white);
+    padding: 10px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 10px;
+    margin-top: 0;
+  }
+  .rasi-pd-sticky-actions button,
+  .rasi-pd-sticky-actions a {
+    border-radius: 4px;
+    height: 48px;
+    padding: 0;
+    font-size: 14px;
+    text-transform: none;
+    flex: 1;
+  }
+}
+
+/* ✅ Layout Fixes & Responsiveness */
+.rasi-pd-loader-container {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rasi-pd-container {
+  display: flex;
+  flex-direction: row; /* Desktop */
+  gap: 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ✅ Mobile View (Max 768px) */
+@media (max-width: 768px) {
+  .rasi-pd-container {
+    flex-direction: column; /* Stack vertically */
+    padding: 10px;
+  }
+  
+  .rasi-pd-gallery-wrapper {
+    flex-direction: column-reverse; /* Thumbnails below main image on mobile */
+  }
+  
+  .rasi-pd-thumbnails {
+    flex-direction: row;
+    height: auto;
+    overflow-x: auto;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .rasi-pd-thumb {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+  }
+
+  .rasi-pd-title {
+    font-size: 1.5rem;
+  }
+
+  .rasi-pd-sticky-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 100;
+  }
+  
+  .rasi-product-details-page {
+    padding-bottom: 80px; /* Space for sticky buttons */
+  }
+}
+
+/* ✅ Laptop/Tablet View (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .rasi-pd-container {
+    gap: 20px;
+  }
+}
+
+/* ✅ Ingredients Section Styling */
+.rasi-pd-info-block {
+  margin-top: 25px;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.rasi-pd-info-block h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.ingredients-tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ingredient-tag {
+  background: #f5f5f5;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #555;
+  border: 1px solid #e0e0e0;
+}
+
+.rating-pill {
+  background: #4caf50;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: bold;
+}
+
+/* ProductDetails.css Mobile Fix */
+@media screen and (max-width: 768px) {
+    .rasi-pd-sticky-actions.visible-actions {
+        display: flex !important; /* Force display */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 12px;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        z-index: 1000;
+        gap: 10px;
+    }
+
+    .rasi-pd-add-cart-btn, .rasi-pd-buy-now-btn {
+        flex: 1;
+        font-size: 14px;
+        padding: 12px 5px;
+        white-space: nowrap;
+    }
+
+    /* Add padding to the bottom of the page so content isn't covered by sticky buttons */
+    .rasi-product-details-page {
+        padding-bottom: 80px;
+    }
+}
+
+/* Container for Desktop View (shows below the image) */
+.rasi-pd-sticky-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+  z-index: 100;
+}
+
+.rasi-pd-add-cart-btn, 
+.rasi-pd-buy-now-btn {
+  flex: 1;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s, background 0.3s;
+  font-size: 14px;
+}
+
+.rasi-pd-add-cart-btn {
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 2px solid #1a1a1a;
+}
+
+.rasi-pd-add-cart-btn:hover {
+  background: #f5f5f5;
+}
+
+.rasi-pd-buy-now-btn {
+  background: #ffc107; /* Rasi Bakery Theme Gold/Yellow */
+  color: #000;
+}
+
+.rasi-pd-buy-now-btn:hover {
+  background: #eab308;
+  transform: translateY(-2px);
+}
+
+/* 📱 MOBILE FIX: Sticky Bottom Bar */
+@media (max-width: 768px) {
+  .rasi-pd-sticky-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 12px 16px;
+    margin: 0;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 10px;
+    z-index: 1000; /* Ensure it's over everything */
+  }
+
+  /* Add space at the bottom of the page so content isn't cut off */
+  .rasi-product-details-page {
+    padding-bottom: 90px;
+  }
+
+  .rasi-pd-add-cart-btn, 
+  .rasi-pd-buy-now-btn {
+    height: 48px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+}
+
+/* Spinner Animation */
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+/* 📱 ULTIMATE MOBILE STICKY FIX */
+@media screen and (max-width: 768px) {
+    /* 1. Ensure the parent doesn't cut off the sticky bar */
+    .rasi-product-details-page {
+        padding-bottom: 100px !important; /* Extra space for the bar */
+        overflow-x: hidden;
+    }
+
+    /* 2. Force the sticky container to the bottom */
+    .rasi-pd-sticky-actions {
+        position: fixed !important; /* Force override */
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100vw !important;
+        background: #ffffff !important;
+        display: flex !important; /* Ensure it's not hidden */
+        flex-direction: row !important;
+        gap: 10px !important;
+        padding: 12px 16px !important;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.15) !important;
+        z-index: 9999 !important; /* Maximum priority */
+        margin: 0 !important;
+    }
+
+    /* 3. Make buttons equal width and readable */
+    .rasi-pd-add-cart-btn, 
+    .rasi-pd-buy-now-btn {
+        flex: 1 !important;
+        height: 50px !important;
+        font-size: 14px !important;
+        margin: 0 !important;
+        border-radius: 8px !important;
+        white-space: nowrap !important;
+    }
+
+    /* 4. Hide thumbnails on very small screens if they look messy, 
+       or keep them in a scrollable row */
+    .rasi-pd-thumbnails {
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        padding-bottom: 5px;
+    }
+}

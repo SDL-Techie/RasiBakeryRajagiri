@@ -1,0 +1,555 @@
+.rasi-orders-page {
+  min-height: 80vh;
+ // background-color: var(--background);
+  padding: 40px 20px;
+}
+
+.rasi-orders-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.rasi-orders-header {
+  margin-bottom: 32px;
+}
+
+.rasi-orders-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
+  color: var(--primary);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.rasi-orders-header p {
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.rasi-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rasi-order-card {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.rasi-order-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.rasi-order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  background: linear-gradient(135deg, rgba(93, 46, 12, 0.02), rgba(255, 215, 0, 0.02));
+}
+
+.rasi-order-id-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.rasi-order-date {
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.rasi-order-status-section {
+  text-align: right;
+}
+
+.rasi-order-status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.rasi-order-status.rasi-status-delivered {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.rasi-order-status.rasi-status-shipped {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.rasi-order-status.rasi-status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.rasi-order-status.rasi-status-cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.rasi-order-total {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.rasi-order-items {
+  padding: 16px;
+  background: #f9f9f9;
+}
+
+.rasi-order-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.rasi-order-item:last-child {
+  border-bottom: none;
+}
+
+.rasi-order-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.rasi-order-item-details {
+  flex: 1;
+}
+
+.rasi-order-item-details h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.rasi-order-item-details p {
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.rasi-order-item-amount {
+  font-weight: 600;
+  color: var(--primary);
+  min-width: 80px;
+  text-align: right;
+}
+
+.rasi-order-footer {
+  padding: 12px 16px;
+  text-align: center;
+  border-top: 1px solid #f0f0f0;
+}
+
+.rasi-order-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: var(--primary);
+  color: var(--white);
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.rasi-order-action-btn:hover {
+  background-color: #5D2E0C;
+  transform: translateY(-2px);
+}
+
+.rasi-empty-orders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background: var(--white);
+  border-radius: 8px;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.rasi-empty-orders .rasi-empty-icon {
+  color: var(--primary);
+  opacity: 0.3;
+  margin-bottom: 24px;
+}
+
+.rasi-empty-orders h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.rasi-empty-orders p {
+  color: var(--text-light);
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+.rasi-shop-now-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: var(--primary);
+  color: var(--white);
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.rasi-shop-now-btn:hover {
+  background-color: #5D2E0C;
+}
+
+@media (max-width: 768px) {
+  .rasi-orders-page {
+    padding: 20px 16px;
+  }
+
+  .rasi-orders-header h1 {
+    font-size: 22px;
+  }
+
+  .rasi-order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .rasi-order-status-section {
+    text-align: left;
+  }
+
+  .rasi-order-item {
+    flex-wrap: wrap;
+  }
+}
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(231, 231, 231, 0.5);
+  --primary-gold: #b38b59; /* Elegant bakery accent */
+  --text-main: #2d3436;
+  --text-muted: #636e72;
+  --status-bg-pending: #fff9db;
+  --status-text-pending: #f59f00;
+  --status-bg-delivered: #ebfbee;
+  --status-text-delivered: #37b24d;
+  --status-bg-shipped: #e7f5ff;
+  --status-text-shipped: #1c7ed6;
+  --status-bg-cancelled: #fff5f5;
+  --text-cancelled: #fa5252;
+}
+
+.rasi-orders-page {
+  min-height: 100vh;
+  //background: #fdfdfd; /* Studio White */
+  padding: 40px 20px;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.rasi-orders-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.rasi-orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.rasi-orders-header h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -1px;
+}
+
+.order-count-badge {
+  background: #000;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 10px;
+  /* font-size: 0.85rem; */
+
+  font-size: 14px;
+  font-weight: 300;
+}
+
+/* ORDER CARD */
+.rasi-order-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.rasi-order-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.rasi-order-card-header {
+  padding: 20px 25px;
+  background: rgba(0, 0, 0, 0.02);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-number {
+  font-weight: 700;
+  color: var(--text-main);
+  font-size: 1.1rem;
+}
+
+.order-date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* STATUS PILLS */
+.status-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rasi-status-pending { background: var(--status-bg-pending); color: var(--status-text-pending); }
+.rasi-status-processing { background: #f3f0ff; color: #7950f2; }
+.rasi-status-delivered { background: var(--status-bg-delivered); color: var(--status-text-delivered); }
+.rasi-status-shipped { background: var(--status-bg-shipped); color: var(--status-text-shipped); }
+.rasi-status-cancelled { background: var(--status-bg-cancelled); color: var(--text-cancelled); }
+
+/* ITEMS SECTION */
+.rasi-order-items-summary {
+  padding: 20px 25px;
+}
+
+.rasi-order-item-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.rasi-order-item-row:last-child {
+  border-bottom: none;
+}
+
+.item-thumbnail {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #f9f9f9;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-name {
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.item-qty {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.item-price {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* FOOTER */
+.rasi-order-card-footer {
+  padding: 20px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.01);
+}
+
+.total-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.total-box span:first-child {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.final-price {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.reorder-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.reorder-btn:hover {
+  background: var(--primary-gold);
+  transform: scale(1.02);
+}
+
+/* EMPTY STATE */
+.rasi-empty-orders {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.empty-icon {
+  color: #dfe6e9;
+  margin-bottom: 20px;
+}
+
+.rasi-shop-now-btn {
+  display: inline-block;
+  margin-top: 25px;
+  background: #000;
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* LOADER */
+.rasi-orders-loader-container {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-muted);
+  gap: 15px;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+  .rasi-order-card-header, .rasi-order-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .reorder-btn { width: 100%; justify-content: center; }
+}
+
+/* Styling for the Fast Order Badge */
+.retail-badge-fast {
+    background: #fff7ed;
+    color: #ea580c;
+    border: 1px solid #ffedd5;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    letter-spacing: 0.5px;
+}
+
+/* Green left border for retail cards to make them pop */
+.rasi-order-card.retail-border {
+    border-left: 5px solid #ea580c;
+}
+
+.rasi-order-card.retail-border .reorder-btn {
+    background: #ea580c;
+}
+
+@media screen and (max-width: 768px) {
+  .rasi-orders-header h1{
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+.order-count-badge{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+.order-number,.order-date,.retail-badge-fast,.item-name,.item-qty {
+  font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+.rasi-order-card.retail-border , .reorder-btn ,    .rasi-order-card.retail-border, .reorder-btn{
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+}
