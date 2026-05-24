@@ -33,7 +33,8 @@
 .ro-page {
     background-color: var(--ro-cream);
     min-height: 100vh;
-    padding: 32px 20px 60px;
+    /* padding: 32px 20px 60px; */
+    padding:10px;
     font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
@@ -958,49 +959,42 @@
     to { transform: rotate(360deg); }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SWIPER OVERRIDES
-   ═══════════════════════════════════════════════════════════════ */
+/* Swiper arrows */
 .ro-product-swiper .swiper-button-next,
 .ro-product-swiper .swiper-button-prev {
-    width: 32px;
-    height: 32px;
-    background: var(--ro-white);
+    /* width: 14px;
+    height: 14px; */
+    padding: 6px;
+    background: #fff;
     border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(93,46,12,0.2);
-    color: var(--ro-primary) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    color: #6B3A2A;
 }
 
 .ro-product-swiper .swiper-button-next::after,
 .ro-product-swiper .swiper-button-prev::after {
-    font-size: 12px !important;
-    font-weight: 800;
+    font-size: 14px !important;
+    font-weight: 700;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   MOBILE RESPONSIVE
-   ═══════════════════════════════════════════════════════════════ */
-@media (max-width: 1024px) {
-    .ro-container {
-        flex-direction: column;
-        gap: 20px;
+/* Mobile arrows */
+@media (max-width: 768px) {
+    .ro-product-swiper .swiper-button-next,
+    .ro-product-swiper .swiper-button-prev {
+        width: 28px;
+        height: 28px;
     }
 
-    .ro-left {
-        flex: none;
-        width: 100%;
-        position: static;
-    }
-
-    .ro-right-title {
-        font-size: 26px;
+    .ro-product-swiper .swiper-button-next::after,
+    .ro-product-swiper .swiper-button-prev::after {
+        font-size: 11px !important;
     }
 }
 
 @media (max-width: 600px) {
-    .ro-page {
+    /* .ro-page {
         padding: 16px 12px 50px;
-    }
+    } */
 
     .ro-right-title {
         font-size: 22px;
@@ -1981,7 +1975,7 @@ Brown & Cream Professional Theme
 .ro-page {
     background-color: var(--ro-cream);
     min-height: 100vh;
-    padding: 36px 20px 72px;
+    /* padding: 36px 20px 72px; */
     font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
@@ -2045,7 +2039,7 @@ Brown & Cream Professional Theme
 
 /* ── Step Progress ── */
 .ro-progress-bar-wrap {
-    padding: 20px 28px 0;
+    /* padding: 20px 28px 0; */
     background: var(--ro-beige);
 }
 
@@ -3218,7 +3212,7 @@ select.ro-input {
 }
 
 @media (max-width: 600px) {
-    .ro-page { padding: 16px 12px 50px; }
+    /* .ro-page { padding: 16px 12px 50px; } */
     .ro-right-title { font-size: 22px; }
     .ro-filter-row { flex-direction: column; gap: 10px; }
     .ro-cat-select { width: 100%; min-width: unset; }
@@ -3229,5 +3223,377 @@ select.ro-input {
     .ro-input-row { flex-direction: column; }
     .ro-step-wrapper { padding: 18px 18px 22px; }
     .ro-form-header { padding: 20px 18px 18px; }
-    .ro-progress-bar-wrap { padding: 16px 18px 0; }
+    /* .ro-progress-bar-wrap { padding: 16px 18px 0; } */
+}
+
+/* =========================
+   PRODUCT SLIDER MOBILE FIX
+========================= */
+
+.ro-slider-wrap {
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.ro-product-swiper {
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.ro-slide {
+  width: 220px !important;
+  height: auto;
+}
+
+/* PRODUCT CARD */
+.ro-product-card {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* IMAGE */
+.ro-card-img-wrap {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+}
+
+.ro-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+
+  .ro-container {
+    flex-direction: column;
+    padding: 10px;
+    gap: 16px;
+  }
+
+  .ro-left,
+  .ro-right {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .ro-right {
+    overflow: hidden;
+  }
+
+  .ro-slide {
+    width: 170px !important;
+  }
+
+  .ro-card-img-wrap {
+    height: 140px;
+  }
+
+  .ro-card-name {
+    font-size: 14px;
+  }
+
+  .ro-card-price {
+    font-size: 13px;
+  }
+
+  .ro-selected-section {
+    padding: 12px;
+  }
+
+  .ro-list-item {
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .ro-list-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .ro-form-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .ro-progress-bar-wrap {
+    overflow-x: auto;
+  }
+
+  .ro-step-dots {
+    min-width: 500px;
+  }
+
+  .ro-input-row {
+    flex-direction: column;
+  }
+
+  .ro-pay-tiles {
+    flex-direction: column;
+  }
+
+  .ro-nav-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ro-next-btn,
+  .ro-back-btn,
+  .ro-submit-btn {
+    width: 100%;
+    height:30px;
+  }
+}
+
+/* EXTRA SMALL DEVICES */
+@media (max-width: 480px) {
+
+  .ro-slide {
+    width: 150px !important;
+  }
+
+  .ro-card-img-wrap {
+    height: 120px;
+  }
+
+  .ro-card-name {
+    font-size: 13px;
+  }
+
+  .ro-card-price {
+    font-size: 12px;
+  }
+
+  .ro-search-input,
+  .ro-cat-select,
+  .ro-input {
+    font-size: 14px;
+  }
+
+  .ro-form-title {
+    font-size: 20px;
+  }
+
+  .ro-right-title {
+    font-size: 22px;
+  }
+}
+
+
+.ro-step-dots {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+}
+
+.ro-step-dot-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ro-step-dot-label {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 6px;
+    word-break: break-word;
+}
+
+/* Mobile fix */
+@media (max-width: 768px) {
+    .ro-step-dot-label {
+        font-size: 11px;
+    }
+
+    .ro-step-dot {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .ro-container {
+        flex-direction: column;
+        padding: 10px;
+        gap: 14px;
+    }
+
+    .ro-left,
+    .ro-right {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 20px;
+    }
+
+    .ro-form-header {
+        padding: 20px 16px;
+    }
+/* 
+    .ro-form-title {
+        font-size: 2rem;
+    } */
+
+    .ro-form-sub {
+        font-size: 10px;
+    }
+
+    .ro-step-wrapper {
+        padding: 16px;
+    }
+
+    .ro-input-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .ro-input,
+    .ro-modal-input,
+    .ro-cat-select,
+    .ro-search-input {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .ro-nav-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .ro-next-btn,
+    .ro-back-btn,
+    .ro-submit-btn {
+        width: 100%;
+        justify-content: center;
+       
+    }
+}
+
+.ro-slide {
+    width: 220px !important;
+}
+
+.ro-product-card {
+    width: 100%;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .ro-slide {
+        width: 160px !important;
+    }
+
+    .ro-card-img-wrap {
+        height: 140px;
+    }
+
+    .ro-card-name {
+        font-size: 15px;
+    }
+
+    .ro-card-price {
+        font-size: 14px;
+    }
+}
+
+.ro-msg-box {
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+}
+
+.ro-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .ro-msg-box {
+        min-height: 160px;
+        padding: 20px;
+    }
+
+    .ro-msg-box span {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .ro-slider-wrap {
+        overflow: hidden;
+        padding: 8px 0;
+    }
+
+    .ro-product-swiper {
+        padding-bottom: 10px;
+    }
+
+    .swiper-wrapper {
+        align-items: stretch;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.ro-page {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+
+    .ro-order-summary {
+        padding: 16px;
+    }
+
+    .ro-pay-tiles {
+        gap: 12px;
+    }
+
+    .ro-pay-tile {
+        padding: 14px;
+    }
+
+    .ro-selected-section {
+        padding: 14px;
+    }
+
+    .ro-list-item {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .ro-list-price {
+        font-size: 14px;
+    }
 }

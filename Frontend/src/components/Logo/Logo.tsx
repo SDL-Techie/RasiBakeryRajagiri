@@ -30,8 +30,12 @@ const Logo: React.FC<{ className?: string }> = ({ className }) => {
       </svg> */}
       <img className="rasi-logo-img" style={{ width: '40px', height: '40px' }} src="/assets/logo.png" alt="Rasi Bakery Logo"/>
       <div className="rasi-logo-text">
-        <span className="rasi-logo-main">RASI</span>
+        {/* <span className="rasi-logo-main">RASI</span>
         <span className="rasi-logo-sub">BAKERY</span>
+        <span className="rasi-logo-sub">RAJAGIRI</span> */}
+            <span className="rasi-logo-main">RAJAGIRI</span>
+        <span className="rasi-logo-sub">RASI BAKERY</span>
+        {/* <span className="rasi-logo-sub">BAKERY</span> */}
       </div>
     </div>
   );

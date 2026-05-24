@@ -443,9 +443,9 @@ const Retailerorder: React.FC = () => {
 
                     {/* Form Header */}
                     <div className="ro-form-header">
-                        <div className="ro-form-brand">
+                        {/* <div className="ro-form-brand">
                             <ShoppingBag size={18} />
-                        </div>
+                        </div> */}
                         <div>
                             <h2 className="ro-form-title">Wholesale Order</h2>
                             <p className="ro-form-sub">Rasi Bakery · Retailer Portal</p>
@@ -522,7 +522,7 @@ const Retailerorder: React.FC = () => {
                         {loading ? (
                             <div className="ro-msg-box"><Loader2 className="ro-spinner" size={28} /><span>Loading…</span></div>
                         ) : filtered.length > 0 ? (
-                            <Swiper modules={[FreeMode, Navigation]} spaceBetween={14} slidesPerView="auto" navigation className="ro-product-swiper">
+                            <Swiper modules={[FreeMode, Navigation]} spaceBetween={14} slidesPerView={window.innerWidth < 768 ? 1.5 : "auto"} navigation className="ro-product-swiper">
                                 {filtered.map((p, idx) => {
                                     const inCart = cart.find(i => i.productId === p._id);
                                     return (

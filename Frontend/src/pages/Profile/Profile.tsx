@@ -12,7 +12,7 @@ import { useCustomerAuth } from '../../context/CustomerAuthContext';
 import Toast from '../../components/Toast/Toast';
 import './Profile.css';
 
-/* ─── Types ──────────────────────────────────────────────────────── */
+/* ─── Types ───────────────────────F───────────────────────────────── */
 interface Address {
   street: string;
   city: string;
@@ -173,14 +173,14 @@ const Profile: React.FC = () => {
         <span className="pf-hero-deco">☕</span>
 
         {/* Avatar */}
-        <motion.div
+        {/* <motion.div
           className="pf-avatar-wrap"
           whileHover={{ scale: 1.07 }}
           transition={{ type: 'spring', stiffness: 280 }}
         >
           <img src={AVATAR_URL} alt="Profile" className="pf-avatar" />
           <span className="pf-avatar-ring" />
-        </motion.div>
+        </motion.div> */}
 
         {/* Name & badges */}
         <div className="pf-hero-text">

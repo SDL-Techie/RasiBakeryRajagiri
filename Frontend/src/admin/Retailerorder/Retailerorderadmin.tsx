@@ -9,7 +9,9 @@ import axios from 'axios';
 import Logo from '../../components/Logo/Logo';
 import './Retailerorderadmin.css';
 
+
 const Retailerorderadmin: React.FC = () => {
+  
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -67,21 +69,53 @@ const Retailerorderadmin: React.FC = () => {
   }, []);
 
   // Filtering Logic
-  const filteredOrders = useMemo(() => {
-    return orders.filter(o => {
-      const matchesSearch = 
-        o.orderId?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        o.customerDetails?.name?.toLowerCase().includes(searchTerm.toLowerCase());
+  // const filteredOrders = useMemo(() => {
+  //   return orders.filter(o => {
+  //     const matchesSearch = 
+  //       o.orderId?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //       o.customerDetails?.name?.toLowerCase().includes(searchTerm.toLowerCase());
       
-      const orderDate = new Date(o.createdAt).setHours(0,0,0,0);
-      const start = startDate ? new Date(startDate).setHours(0,0,0,0) : null;
-      const end = endDate ? new Date(endDate).setHours(23,59,59,999) : null;
+  //     const orderDate = new Date(o.createdAt).setHours(0,0,0,0);
+  //     const start = startDate ? new Date(startDate).setHours(0,0,0,0) : null;
+  //     const end = endDate ? new Date(endDate).setHours(23,59,59,999) : null;
 
-      const matchesDate = (!start || orderDate >= start) && (!end || orderDate <= end);
+  //     const matchesDate = (!start || orderDate >= start) && (!end || orderDate <= end);
+
+  //     return matchesSearch && matchesDate;
+  //   });
+  // }, [orders, searchTerm, startDate, endDate]);
+
+  const filteredOrders = useMemo(() => {
+  return orders
+    .filter((o) => {
+      const matchesSearch =
+        o.orderId?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        o.customerDetails?.name
+          ?.toLowerCase()
+          .includes(searchTerm.toLowerCase());
+
+      const orderDate = new Date(o.createdAt).setHours(0, 0, 0, 0);
+
+      const start = startDate
+        ? new Date(startDate).setHours(0, 0, 0, 0)
+        : null;
+
+      const end = endDate
+        ? new Date(endDate).setHours(23, 59, 59, 999)
+        : null;
+
+      const matchesDate =
+        (!start || orderDate >= start) &&
+        (!end || orderDate <= end);
 
       return matchesSearch && matchesDate;
-    });
-  }, [orders, searchTerm, startDate, endDate]);
+    })
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    );
+}, [orders, searchTerm, startDate, endDate]);
 
   // Stats Calculations
   const stats = useMemo(() => {
@@ -150,6 +184,8 @@ const Retailerorderadmin: React.FC = () => {
       <p>Loading Your Bakery Dashboard...</p>
     </div>
   );
+ 
+  
 
   return (
     <div className="admin-orders-container">
@@ -441,109 +477,350 @@ const Retailerorderadmin: React.FC = () => {
       )}
 
 
-<div className="print-area" >
-  {selectedOrder && (
+{/* PRINT AREA */}
+<div className="print-area">
+  {selectedOrder &&
+    (() => {
 
-   <div className="print-area" style={{ padding: '40px', fontFamily: 'sans-serif', backgroundColor: '#fff' }}>
-  {selectedOrder && (
-    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-      {/* Header with Real Brand Data */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid #4B2E2B', paddingBottom: '20px' }}>
-        <div>
-          <Logo/>
-          <h1 style={{ color: '#4B2E2B', margin: 0, fontSize: '1.8rem', letterSpacing: '1px' }}>RASI BAKERY</h1>
-          <p style={{ margin: '5px 0', color: '#666' }}>Order ID: <span style={{ color: '#4B2E2B', fontWeight: 'bold' }}>#{selectedOrder.orderId}</span></p>
-          <p style={{ margin: 0, color: '#666' }}>Date: {new Date(selectedOrder.createdAt).toLocaleDateString('en-IN')}</p>
-        </div>
-        <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#4B2E2B' }}>
-          <h3 style={{ margin: 0, color: '#4B2E2B' }}>Rasi Bakery & Sweets</h3>
-          <p style={{ margin: '2px 0' }}>Madarasa Street, Rajagiri</p>
-          <p style={{ margin: '2px 0' }}>Thanjavur, Tamil Nadu 614207</p>
-          <p style={{ margin: '2px 0' }}>Ph: +91 94434 76738</p>
-          <p style={{ margin: '2px 0' }}>Email: rajagirirasibakery@gmail.com</p>
-        </div>
-      </div>
+      const itemsPerPage = 15;
 
-      {/* Customer & Schedule Section */}
-      <div style={{ display: 'flex', marginTop: '30px', gap: '50px' }}>
-        <div style={{ flex: 1 }}>
-          <h4 style={{ color: '#8C5A3C', borderBottom: '1px solid #eee', paddingBottom: '5px', textTransform: 'uppercase', fontSize: '0.8rem' }}>Bill To</h4>
-          <p style={{ margin: '10px 0 5px 0' }}><strong>{selectedOrder.customerDetails?.name}</strong></p>
-          <p style={{ margin: 0, fontSize: '0.9rem', color: '#555', lineHeight: '1.4' }}>{selectedOrder.customerDetails?.address}</p>
-          <p style={{ margin: '5px 0', fontSize: '0.9rem', color: '#555' }}>Phone: {selectedOrder.customerDetails?.phone}</p>
-        </div>
-        <div style={{ flex: 1 }}>
-          <h4 style={{ color: '#8C5A3C', borderBottom: '1px solid #eee', paddingBottom: '5px', textTransform: 'uppercase', fontSize: '0.8rem' }}>Delivery Schedule</h4>
-          {/* <p style={{ margin: '10px 0 5px 0' }}><strong>Date:</strong> {new Date(selectedOrder.deliveryDate).toLocaleDateString('en-IN')}</p> */}
-          <strong>Date:</strong>{" "}
-{selectedOrder.deliveryDate
-  ? new Date(selectedOrder.deliveryDate).toLocaleDateString('en-IN')
-  : "Not Assigned"}
-          <p style={{ margin: '5px 0' }}><strong>Time Slot:</strong> {new Date(selectedOrder.deliveryDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-          {/* <p style={{ margin: '5px 0' }}><strong>Payment:</strong> {selectedOrder.payment?.method?.toUpperCase()} ({selectedOrder.payment?.status})</p> */}
-          <strong>Payment:</strong>{" "}
-{selectedOrder.payment?.method?.toLowerCase() === "razorpay"
-  ? "UPI"
-  : selectedOrder.payment?.method?.toUpperCase()}
-        </div>
-      </div>
+      const totalPages = Math.ceil(
+        selectedOrder.items.length / itemsPerPage
+      );
 
-      {/* Items Table */}
-      <table style={{ width: '100%', marginTop: '30px', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr style={{ background: '#FDF4ED', color: '#4B2E2B' }}>
-            <th style={{ padding: '12px 10px', textAlign: 'left', borderBottom: '2px solid #4B2E2B' }}>Item Description</th>
-            <th style={{ padding: '12px 10px', textAlign: 'center', borderBottom: '2px solid #4B2E2B' }}>Qty</th>
-            <th style={{ padding: '12px 10px', textAlign: 'center', borderBottom: '2px solid #4B2E2B' }}>Price</th>
-            <th style={{ padding: '12px 10px', textAlign: 'right', borderBottom: '2px solid #4B2E2B' }}>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {selectedOrder.items?.map((item:any, i:any) => (
-            <tr key={i} style={{ borderBottom: '1px solid #eee' }}>
-              <td style={{ padding: '12px 10px', fontWeight: '500' }}>{item.name}</td>
-              <td style={{ padding: '12px 10px', textAlign: 'center' }}>{item.quantity}</td>
-              <td style={{ padding: '12px 10px', textAlign: 'center' }}>₹{item.price}</td>
-              <td style={{ padding: '12px 10px', textAlign: 'right', fontWeight: '600' }}>₹{item.price * item.quantity}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      return (
+        <>
+          {Array.from({
+            length: totalPages,
+          }).map((_, pageIndex) => {
 
-      {/* Totals Section */}
-      <div style={{ marginLeft: 'auto', width: '280px', marginTop: '30px', backgroundColor: '#FDF4ED', padding: '15px', borderRadius: '8px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-          <span style={{ color: '#666' }}>Subtotal:</span>
-          <span>₹{selectedOrder.pricing?.subtotal}</span>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-          <span style={{ color: '#666' }}>Delivery Charge:</span>
-          <span>₹{selectedOrder.pricing?.deliveryCharge}</span>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '1.2rem', marginTop: '10px', color: '#4B2E2B', borderTop: '1px solid #4B2E2B', paddingTop: '10px' }}>
-          <span>Grand Total:</span>
-          <span>₹{selectedOrder.pricing?.total}</span>
-        </div>
-      </div>
-      
-      {/* Footer */}
-      <div style={{ marginTop: '60px', textAlign: 'center', borderTop: '1px dashed #ccc', paddingTop: '20px' }}>
-        <p style={{ margin: 0, color: '#4B2E2B', fontWeight: '600' }}>Thank you for choosing Rasi Bakery!</p>
-        <p style={{ margin: '5px 0', color: '#888', fontSize: '0.75rem' }}>
-          Visit again for fresh cakes, sweets, and savories.
-        </p>
-        {/* <p style={{ margin: 0, color: '#aaa', fontSize: '0.7rem', fontStyle: 'italic' }}>
-          This is a computer-generated invoice. No signature required.
-        </p> */}
-      </div>
+            const start =
+              pageIndex * itemsPerPage;
+
+            const end =
+              start + itemsPerPage;
+
+            const pageItems =
+              selectedOrder.items.slice(
+                start,
+                end
+              );
+
+            const isLastPage =
+              pageIndex === totalPages - 1;
+
+            return (
+              <div
+                className="invoice-page"
+                key={pageIndex}
+              >
+
+                {/* HEADER */}
+                <div className="invoice-header">
+
+                  <div>
+                    <Logo />
+
+                    <h1>
+                      RAJAGIRI RASI BAKERY
+                    </h1>
+
+                    <p>
+                      Order ID:
+                      #{selectedOrder.orderId}
+                    </p>
+
+                    <p>
+                      Date:
+                      {new Date(
+                        selectedOrder.createdAt
+                      ).toLocaleDateString("en-IN")}
+                    </p>
+                  </div>
+
+                  <div className="company-info">
+                    <h3>
+                      Rasi Bakery & Sweets
+                    </h3>
+
+                    <p>
+                      Madarasa Street,
+                      Rajagiri
+                    </p>
+
+                    <p>
+                      Thanjavur,
+                      Tamil Nadu
+                    </p>
+
+                    <p>
+                      +91 94434 76738
+                    </p>
+                  </div>
+
+                </div>
+
+                {/* CUSTOMER DETAILS ONLY FIRST PAGE */}
+                {pageIndex === 0 && (
+                  <div className="customer-section">
+
+                    <div>
+                      <h4>
+                        Customer Details
+                      </h4>
+
+                      <p>
+                        <strong>
+                          {
+                            selectedOrder
+                              .customerDetails?.name
+                          }
+                        </strong>
+                      </p>
+
+                      <p>
+                        {
+                          selectedOrder
+                            .customerDetails?.address
+                        }
+                      </p>
+
+                      <p>
+                        {
+                          selectedOrder
+                            .customerDetails?.phone
+                        }
+                      </p>
+                    </div>
+
+                    <div>
+                      <h4>Delivery</h4>
+
+                      <p>
+                        {selectedOrder.deliveryDate
+                          ? new Date(
+                              selectedOrder.deliveryDate
+                            ).toLocaleDateString(
+                              "en-IN"
+                            )
+                          : "Not Assigned"}
+                      </p>
+
+                      <p>
+                        {
+                          selectedOrder.payment?.method
+                        }
+                      </p>
+                    </div>
+
+                  </div>
+                )}
+
+                {/* TABLE */}
+                <table className="invoice-table">
+
+                  <thead>
+                    <tr>
+                      <th>S.No</th>
+                      <th>Product</th>
+                      <th>Qty</th>
+                      <th>Price</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    {pageItems.map(
+                      (
+                        item: any,
+                        index: number
+                      ) => (
+                        <tr key={index}>
+
+                          <td>
+                            {start + index + 1}
+                          </td>
+
+                          <td>
+                            {item.name}
+                          </td>
+
+                          <td>
+                            {item.quantity}
+                          </td>
+
+                          <td>
+                            ₹{item.price}
+                          </td>
+
+                          <td>
+                            ₹
+                            {item.price *
+                              item.quantity}
+                          </td>
+
+                        </tr>
+                      )
+                    )}
+
+                  </tbody>
+
+                </table>
+
+                {/* SMALL FOOTER */}
+                <div className="small-footer">
+                  Page {pageIndex + 1} of{" "}
+                  {totalPages}
+                </div>
+
+                {/* LAST PAGE ONLY */}
+                {isLastPage && (
+                  <>
+
+                    {/* TOTALS */}
+                    {/* <div className="totals-section">
+
+                      <div>
+                        <span>
+                          Subtotal
+                        </span>
+
+                        <span>
+                          ₹
+                          {
+                            selectedOrder
+                              .pricing?.subtotal
+                          }
+                        </span>
+                      </div>
+
+                      <div>
+                        <span>
+                          Delivery
+                        </span>
+
+                        <span>
+                          ₹
+                          {
+                            selectedOrder
+                              .pricing
+                              ?.deliveryCharge
+                          }
+                        </span>
+                      </div>
+
+                      <div className="grand-total">
+
+                        <span>
+                          Grand Total
+                        </span>
+
+                        <span>
+                          ₹
+                          {
+                            selectedOrder
+                              .pricing?.total
+                          }
+                        </span>
+
+                      </div>
+
+                    </div> */}
+
+<div className="totals-section">
+
+  <div className="total-row">
+    <span className="label">
+      Subtotal
+    </span>
+
+    <span className="value">
+      ₹
+      {selectedOrder.pricing?.subtotal || 0}
+    </span>
+  </div>
+
+  <div className="total-row">
+    <span className="label">
+      Delivery Charge
+    </span>
+
+    <span className="value">
+      ₹
+      {selectedOrder.pricing?.deliveryCharge || 0}
+    </span>
+  </div>
+
+  {selectedOrder.pricing?.discount > 0 && (
+    <div className="total-row discount-row">
+
+      <span className="label">
+        Discount
+      </span>
+
+      <span className="discount-value">
+        - ₹
+        {selectedOrder.pricing?.discount}
+      </span>
+
     </div>
   )}
-</div>
-  )}
+
+  <div className="grand-total">
+
+    <span>
+      Grand Total
+    </span>
+
+    <span>
+      ₹
+      {selectedOrder.pricing?.total || 0}
+    </span>
+
   </div>
+
+</div>
+                
+
+                    {/* THANK YOU */}
+               
+
+                  </>
+                )}
+
+                     <div className="thankyou-footer">
+
+                      <h3>
+                        Thank you for choosing
+                        Rasi Bakery!
+                      </h3>
+
+                      <p>
+                        Visit again for fresh
+                        cakes, sweets, and
+                        savories.
+                      </p>
+
+                    </div>
+
+              </div>
+            );
+          })}
+        </>
+      );
+    })()}
+</div>
       
     </div>
   );
 };
 
+
+
 export default Retailerorderadmin;
+
+
+
+
+
