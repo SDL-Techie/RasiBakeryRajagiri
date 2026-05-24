@@ -52,22 +52,54 @@ const Orders: React.FC = () => {
   }, []);
 
   // Filtering Logic
-  const filteredOrders = useMemo(() => {
-    return orders.filter(o => {
-      const matchesSearch = 
-        o.orderId?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        o.customerDetails?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        o.customerDetails?.phone?.includes(searchTerm);
+  // const filteredOrders = useMemo(() => {
+  //   return orders.filter(o => {
+  //     const matchesSearch = 
+  //       o.orderId?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //       o.customerDetails?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //       o.customerDetails?.phone?.includes(searchTerm);
       
-      const orderDate = new Date(o.createdAt).setHours(0,0,0,0);
-      const start = startDate ? new Date(startDate).setHours(0,0,0,0) : null;
-      const end = endDate ? new Date(endDate).setHours(23,59,59,999) : null;
+  //     const orderDate = new Date(o.createdAt).setHours(0,0,0,0);
+  //     const start = startDate ? new Date(startDate).setHours(0,0,0,0) : null;
+  //     const end = endDate ? new Date(endDate).setHours(23,59,59,999) : null;
 
-      const matchesDate = (!start || orderDate >= start) && (!end || orderDate <= end);
+  //     const matchesDate = (!start || orderDate >= start) && (!end || orderDate <= end);
+
+  //     return matchesSearch && matchesDate;
+  //   });
+  // }, [orders, searchTerm, startDate, endDate]);
+
+  const filteredOrders = useMemo(() => {
+  return orders
+    .filter((o) => {
+      const matchesSearch =
+        o.orderId?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        o.customerDetails?.name
+          ?.toLowerCase()
+          .includes(searchTerm.toLowerCase());
+
+      const orderDate = new Date(o.createdAt).setHours(0, 0, 0, 0);
+
+      const start = startDate
+        ? new Date(startDate).setHours(0, 0, 0, 0)
+        : null;
+
+      const end = endDate
+        ? new Date(endDate).setHours(23, 59, 59, 999)
+        : null;
+
+      const matchesDate =
+        (!start || orderDate >= start) &&
+        (!end || orderDate <= end);
 
       return matchesSearch && matchesDate;
-    });
-  }, [orders, searchTerm, startDate, endDate]);
+    })
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    );
+}, [orders, searchTerm, startDate, endDate]);
 
   // ✅ Stats Calculations (Corrected target tracking for both 'upi' and 'razorpay' strings)
   const stats = useMemo(() => {
@@ -415,13 +447,13 @@ const Orders: React.FC = () => {
 
       {/* ------------------------------------------------------------- */}
       {/* PRINT AREA (CLEAN INVOICE STAYS IMMUNE FROM RAW SYSTEM CODES) */}
-      {selectedOrder && (
+      {/* {selectedOrder && (
         <div className="print-area">
           <div style={{ padding: '40px', fontFamily: 'sans-serif', backgroundColor: '#fff', maxWidth: '800px', margin: '0 auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid #4B2E2B', paddingBottom: '20px' }}>
               <div>
                 <Logo/>
-                <h1 style={{ color: '#4B2E2B', margin: 0, fontSize: '1.8rem', letterSpacing: '1px' }}>RASI BAKERY</h1>
+                <h1 style={{ color: '#4B2E2B', margin: 0, fontSize: '1.8rem', letterSpacing: '1px' }}>RAJAGIRI RASI BAKERY</h1>
                 <p style={{ margin: '5px 0', color: '#666' }}>Order ID: <span style={{ color: '#4B2E2B', fontWeight: 'bold' }}>#{selectedOrder.orderId || selectedOrder._id?.substring(selectedOrder._id.length - 6).toUpperCase()}</span></p>
                 <p style={{ margin: 0, color: '#666' }}>Date: {new Date(selectedOrder.createdAt).toLocaleDateString('en-IN')}</p>
               </div>
@@ -499,7 +531,341 @@ const Orders: React.FC = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
+
+      <div className="print-area">
+  {selectedOrder &&
+    (() => {
+
+      const itemsPerPage = 15;
+
+      const totalPages = Math.ceil(
+        selectedOrder.items.length / itemsPerPage
+      );
+
+      return (
+        <>
+          {Array.from({
+            length: totalPages,
+          }).map((_, pageIndex) => {
+
+            const start =
+              pageIndex * itemsPerPage;
+
+            const end =
+              start + itemsPerPage;
+
+            const pageItems =
+              selectedOrder.items.slice(
+                start,
+                end
+              );
+
+            const isLastPage =
+              pageIndex === totalPages - 1;
+
+            return (
+              <div
+                className="invoice-page"
+                key={pageIndex}
+              >
+
+                {/* HEADER */}
+                <div className="invoice-header">
+
+                  <div>
+                    <Logo />
+
+                    <h1>
+                      RAJAGIRI RASI BAKERY
+                    </h1>
+
+                    <p>
+                      Order ID:
+                      #{selectedOrder.orderId}
+                    </p>
+
+                    <p>
+                      Date:
+                      {new Date(
+                        selectedOrder.createdAt
+                      ).toLocaleDateString("en-IN")}
+                    </p>
+                  </div>
+
+                  <div className="company-info">
+                    <h3>
+                      Rasi Bakery & Sweets
+                    </h3>
+
+                    <p>
+                      Madarasa Street,
+                      Rajagiri
+                    </p>
+
+                    <p>
+                      Thanjavur,
+                      Tamil Nadu
+                    </p>
+
+                    <p>
+                      +91 94434 76738
+                    </p>
+                  </div>
+
+                </div>
+
+                {/* CUSTOMER DETAILS ONLY FIRST PAGE */}
+                {pageIndex === 0 && (
+                  <div className="customer-section">
+
+                    <div>
+                      <h4>
+                        Customer Details
+                      </h4>
+
+                      <p>
+                        <strong>
+                          {
+                            selectedOrder
+                              .customerDetails?.name
+                          }
+                        </strong>
+                      </p>
+
+                      <p>
+                        {
+                          selectedOrder
+                            .customerDetails?.address
+                        }
+                      </p>
+
+                      <p>
+                        {
+                          selectedOrder
+                            .customerDetails?.phone
+                        }
+                      </p>
+                    </div>
+
+                    <div>
+                      <h4>Delivery</h4>
+
+                      <p>
+                        {selectedOrder.deliveryDate
+                          ? new Date(
+                              selectedOrder.deliveryDate
+                            ).toLocaleDateString(
+                              "en-IN"
+                            )
+                          : "Not Assigned"}
+                      </p>
+
+                      <p>
+                        {
+                          selectedOrder.payment?.method
+                        }
+                      </p>
+                    </div>
+
+                  </div>
+                )}
+
+                {/* TABLE */}
+                <table className="invoice-table">
+
+                  <thead>
+                    <tr>
+                      <th>S.No</th>
+                      <th>Product</th>
+                      <th>Qty</th>
+                      <th>Price</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    {pageItems.map(
+                      (
+                        item: any,
+                        index: number
+                      ) => (
+                        <tr key={index}>
+
+                          <td>
+                            {start + index + 1}
+                          </td>
+
+                          <td>
+                            {item.name}
+                          </td>
+
+                          <td>
+                            {item.quantity}
+                          </td>
+
+                          <td>
+                            ₹{item.price}
+                          </td>
+
+                          <td>
+                            ₹
+                            {item.price *
+                              item.quantity}
+                          </td>
+
+                        </tr>
+                      )
+                    )}
+
+                  </tbody>
+
+                </table>
+
+                {/* SMALL FOOTER */}
+                <div className="small-footer">
+                  Page {pageIndex + 1} of{" "}
+                  {totalPages}
+                </div>
+
+                {/* LAST PAGE ONLY */}
+                {isLastPage && (
+                  <>
+
+                    {/* TOTALS */}
+                    {/* <div className="totals-section">
+
+                      <div>
+                        <span>
+                          Subtotal
+                        </span>
+
+                        <span>
+                          ₹
+                          {
+                            selectedOrder
+                              .pricing?.subtotal
+                          }
+                        </span>
+                      </div>
+
+                      <div>
+                        <span>
+                          Delivery
+                        </span>
+
+                        <span>
+                          ₹
+                          {
+                            selectedOrder
+                              .pricing
+                              ?.deliveryCharge
+                          }
+                        </span>
+                      </div>
+
+                      <div className="grand-total">
+
+                        <span>
+                          Grand Total
+                        </span>
+
+                        <span>
+                          ₹
+                          {
+                            selectedOrder
+                              .pricing?.total
+                          }
+                        </span>
+
+                      </div>
+
+                    </div> */}
+
+<div className="totals-section">
+
+  <div className="total-row">
+    <span className="label">
+      Subtotal
+    </span>
+
+    <span className="value">
+      ₹
+      {selectedOrder.pricing?.subtotal || 0}
+    </span>
+  </div>
+
+  <div className="total-row">
+    <span className="label">
+      Delivery Charge
+    </span>
+
+    <span className="value">
+      ₹
+      {selectedOrder.pricing?.deliveryCharge || 0}
+    </span>
+  </div>
+
+  {selectedOrder.pricing?.discount > 0 && (
+    <div className="total-row discount-row">
+
+      <span className="label">
+        Discount
+      </span>
+
+      <span className="discount-value">
+        - ₹
+        {selectedOrder.pricing?.discount}
+      </span>
+
+    </div>
+  )}
+
+  <div className="grand-total">
+
+    <span>
+      Grand Total
+    </span>
+
+    <span>
+      ₹
+      {selectedOrder.pricing?.total || 0}
+    </span>
+
+  </div>
+
+</div>
+                
+
+                    {/* THANK YOU */}
+               
+
+                  </>
+                )}
+
+                     <div className="thankyou-footer">
+
+                      <h3>
+                        Thank you for choosing
+                        Rasi Bakery!
+                      </h3>
+
+                      <p>
+                        Visit again for fresh
+                        cakes, sweets, and
+                        savories.
+                      </p>
+
+                    </div>
+
+              </div>
+            );
+          })}
+        </>
+      );
+    })()}
+</div>
     </div>
   );
 };

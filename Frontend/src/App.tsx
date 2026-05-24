@@ -18,7 +18,7 @@ import Retailerlogin from './pages/Retailerlogin/Retailerlogin';
 import Retailerorder from './pages/Retailerorder/Retailerorder';
 import Retailerorderadmin from './admin/Retailerorder/Retailerorderadmin';
 import Fastorder from './admin/Fastorder/Fastorder';
-import Userpoint from './components/Userpoints/userpoint'; // Fixed: Uncommented to resolve the <Userpoint /> compilation reference
+import Userpoint from './components/Userpoints/Userpoint'; // Fixed: Uncommented to resolve the <Userpoint /> compilation reference
 
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home/Home'));
