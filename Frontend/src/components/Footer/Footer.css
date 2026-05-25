@@ -96,10 +96,10 @@
 .rasi-footer-section h3::after {
   content: '';
   position: absolute;
-  left: 50%;
+  left: 30%;
   transform: translateX(-50%);
   bottom: -6px;
-  width: 32px;
+  width: 62px;
   height: 2px;
   background-color: var(--accent);
 }
