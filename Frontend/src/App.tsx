@@ -9,9 +9,7 @@ import Footer from './components/Footer/Footer';
 import PWAInstall from './components/PWAInstall/PWAInstall';
 import CookieConsent from './components/CookieConsent/CookieConsent';
 import AdminLayout from './admin/AdminLayout/AdminLayout';
-import ProtectedRoute from './components/ProtectedRoute'; // Imported the Route Guard
 import './App.css';
-
 import Retailer from './admin/Retailer/Retailer';
 import CategoryProduct from './pages/Categoryproducts/CategoryProduct';
 import Pincode from './admin/Pincode/Pincode';
@@ -20,7 +18,7 @@ import Retailerlogin from './pages/Retailerlogin/Retailerlogin';
 import Retailerorder from './pages/Retailerorder/Retailerorder';
 import Retailerorderadmin from './admin/Retailerorder/Retailerorderadmin';
 import Fastorder from './admin/Fastorder/Fastorder';
-import Userpoint from './components/Userpoints/Userpoint';
+import Userpoint from './components/Userpoints/Userpoint'; // Fixed: Uncommented to resolve the <Userpoint /> compilation reference
 
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home/Home'));
@@ -54,6 +52,14 @@ const Loading = () => (
   </div>
 );
 
+// 1. Define explicit types for your component props
+// interface AppContentProps {
+//   theme: string;
+//   toggleTheme: () => void;
+// }
+
+// 2. Destructure properties safely using the defined interface
+// const AppContent: React.FC<AppContentProps> = ({ theme, toggleTheme }) => {
 const AppContent: React.FC = () => {
   const { cartCount, toast, hideToast } = useCart();
   const location = useLocation();
@@ -79,37 +85,41 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="rasi-app">
-      {!isAdmin && <Navbar cartCount={cartCount} />}
+      {!isAdmin && 
+      // <Navbar cartCount={cartCount} theme={theme} toggleTheme={toggleTheme} />
+      <Navbar
+  cartCount={cartCount}
+/>
+      }
       <PWAInstall />
       <Toast show={toast.show} message={toast.message} onClose={hideToast} />
       
       <main className={isAdmin ? "" : "rasi-main-content"}>
         <Suspense fallback={<Loading />}>
           <Routes>
-            {/* Public Routes (No login required) */}
+            {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/about" element={<About />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/retailerlogin" element={<Retailerlogin />} />
-            <Route path="/categoryproduct/:categoryname" element={<CategoryProduct />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/retailerlogin" element={<Retailerlogin/>} />
+            <Route path="/retailerorder" element={<Retailerorder/>} />
+            <Route path="/userpoints" element={<Userpoint/>}/>
+            <Route path="/categoryproduct/:categoryname" element={<CategoryProduct/>}/>
             
-            {/* Protected Client Routes (Login required) */}
-            <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
-            <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
-            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-            <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
-            <Route path="/retailerorder" element={<ProtectedRoute><Retailerorder /></ProtectedRoute>} />
-            <Route path="/userpoints" element={<ProtectedRoute><Userpoint /></ProtectedRoute>} />
-            
-            {/* Protected Admin Routes (Requires authentication to access the layout structure entirely) */}
-            <Route path="admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+            {/* Admin Routes wrapped in AdminLayout */}
+            {/* <Route path="admin" element={<AdminLayout theme={theme} toggleTheme={toggleTheme} />}> */}
+            <Route path="admin" element={<AdminLayout />}>
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="add-category" element={<AddCategory />} />
               <Route path="categories" element={<CategoryDetails />} />
@@ -117,11 +127,11 @@ const AppContent: React.FC = () => {
               <Route path="products" element={<AdminProductDetails />} />
               <Route path="orders" element={<AdminOrders />} />
               <Route path="users" element={<Users />} />
-              <Route path="retailer" element={<Retailer />} />
-              <Route path="pincode" element={<Pincode />} />
-              <Route path="point" element={<Point />} />
-              <Route path="retailerorder" element={<Retailerorderadmin />} />
-              <Route path="fastorder" element={<Fastorder />} />
+              <Route path="retailer" element={<Retailer/>}/>
+              <Route path="pincode" element={<Pincode/>}/>
+              <Route path="point" element={<Point/>}/>
+              <Route path="retailerorder" element={<Retailerorderadmin/>}/>
+              <Route path="fastorder" element={<Fastorder/>}/>
             </Route>
           </Routes>
         </Suspense>
@@ -151,16 +161,28 @@ const AppContent: React.FC = () => {
 };
 
 function App() {
+  // const [theme, setTheme] = useState('light');
+
+  // useEffect(() => {
+  //   document.documentElement.setAttribute('data-theme', theme);
+  // }, [theme]);
+
+  // const toggleTheme = () => {
+  //   setTheme(theme === 'light' ? 'dark' : 'light');
+  // };
+
   return (
     <Router>
       <CustomerAuthProvider>
         <CartProvider>
-          <AppContent />
+          {/* <AppContent theme={theme} toggleTheme={toggleTheme} /> */}
+          <AppContent/>
         </CartProvider>
       </CustomerAuthProvider>
     </Router>
   );
 }
+
 
 // Register Service Worker for PWA installation support
 if ('serviceWorker' in navigator) {
