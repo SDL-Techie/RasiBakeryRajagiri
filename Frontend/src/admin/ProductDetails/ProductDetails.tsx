@@ -1,17 +1,21 @@
+
 import React, { useState, useEffect } from 'react';
-import { Search, AlertTriangle, Loader2, ChevronLeft, ChevronRight, Package, Layers, Tag, Edit3, X, Save } from 'lucide-react';
+import { Search, Loader2, ChevronLeft, ChevronRight, Package, Edit3, X, Save } from 'lucide-react';
 import axios from 'axios';
 import './ProductDetails.css';
 
 interface Category {
   _id: string;
   name: string;
+  image?: string;
+  status?: string;
+  createdAt?: string;
 }
 
 interface Product {
   _id: string;
   name: string;
-  category: Category | null;
+  category: Category | string | null; // Can be a populated object or an ID string
   price: string;
   wholesaleprice: string;
   oldprice?: string;
@@ -22,6 +26,7 @@ interface Product {
 
 const ProductDetails: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]); // Added categories state
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
@@ -36,22 +41,49 @@ const ProductDetails: React.FC = () => {
 
   const BASE_URL = "http://localhost:4000/api/v1";
 
-  const fetchProducts = async () => {
+  // Concurrent fetch for products and category data dropdown options
+  const fetchInitialData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${BASE_URL}/products`);
-      //console.log(response)
-      if (response.data.success) {
-        setProducts(response.data.data);
+      const [productsRes, categoriesRes] = await Promise.all([
+        axios.get(`${BASE_URL}/products`),
+        axios.get(`${BASE_URL}/category`)
+      ]);
+
+      if (productsRes.data.success) {
+        setProducts(productsRes.data.data);
+      }
+      if (categoriesRes.data.success) {
+        // Filter out inactive categories if preferred, or keep all
+        setCategories(categoriesRes.data.data);
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error syncing dashboard inventory metrics:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => { fetchProducts(); }, []);
+  useEffect(() => { 
+    fetchInitialData(); 
+  }, []);
+
+  // Safe helper utility to display the category name reliably on the table rows
+  const getCategoryName = (categoryField: Category | string | null): string => {
+    if (!categoryField) return 'General';
+    if (typeof categoryField === 'object') {
+      return categoryField.name || 'General';
+    }
+    // Fallback look-up lookup match if state holds a flat ID string reference
+    const matchedCat = categories.find(c => c._id === categoryField);
+    return matchedCat ? matchedCat.name : 'General';
+  };
+
+  // Safe helper utility to get the category ID for value matching inside select elements
+  const getCategoryId = (categoryField: Category | string | null): string => {
+    if (!categoryField) return '';
+    return typeof categoryField === 'object' ? categoryField._id : categoryField;
+  };
 
   // ✅ Handle Final Update Submission
   const handleUpdateSubmit = async (e: React.FormEvent) => {
@@ -60,13 +92,22 @@ const ProductDetails: React.FC = () => {
 
     setUpdatingId(editingProduct._id);
     try {
-      const response = await axios.put(`${BASE_URL}/product/${editingProduct._id}`, editingProduct);
+      // Ensure we send down the category payload correctly structured (as an ID string string reference)
+      const payload = {
+        ...editingProduct,
+        category: getCategoryId(editingProduct.category) || null
+      };
+
+      const response = await axios.put(`${BASE_URL}/product/${editingProduct._id}`, payload);
+      
       if (response.data.success) {
+        // Map back update directly inline or re-trigger fetchInitialData() for structural consistency
         setProducts(products.map(p => p._id === editingProduct._id ? response.data.data : p));
         setShowEditModal(false);
         setEditingProduct(null);
       }
     } catch (error) {
+      console.error(error);
       alert("Update failed.");
     } finally {
       setUpdatingId(null);
@@ -87,15 +128,17 @@ const ProductDetails: React.FC = () => {
     }
   };
 
-  const filteredProducts = products.filter(p => 
-    p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    p.category?.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredProducts = products.filter(p => {
+    const pName = p.name.toLowerCase();
+    const catName = getCategoryName(p.category).toLowerCase();
+    const query = searchTerm.toLowerCase();
+    return pName.includes(query) || catName.includes(query);
+  });
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage) || 1;
 
   return (
     <div className="rasi-products-container">
@@ -111,7 +154,7 @@ const ProductDetails: React.FC = () => {
             <span>{filteredProducts.length} Items</span>
           </div>
           <div className="rasi-search-wrapper">
-            <Search size={18} />
+            {/* <Search size={18} /> */}
             <input 
               type="text" 
               placeholder="Search products..." 
@@ -153,7 +196,7 @@ const ProductDetails: React.FC = () => {
                       </div>
                     </td>
                     <td className="hide-on-mobile">
-                      <span className="category-tag">{p.category?.name || 'General'}</span>
+                      <span className="category-tag">{getCategoryName(p.category)}</span>
                     </td>
                     <td><span className="price-text">₹{p.price}</span></td>
                     <td className="hide-on-mobile price-text secondary">₹{p.wholesaleprice}</td>
@@ -178,30 +221,27 @@ const ProductDetails: React.FC = () => {
               </tbody>
             </table>
 
+            <div className="pagination-wrapper">
+              <button
+                className="pagination-btn"
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage(prev => prev - 1)}
+              >
+                <ChevronLeft size={18} />
+              </button>
 
-  <div className="pagination-wrapper">
-  <button
-    className="pagination-btn"
-    disabled={currentPage === 1}
-    onClick={() => setCurrentPage(prev => prev - 1)}
-  >
-    <ChevronLeft size={18} />
-  </button>
+              <span className="pagination-text">
+                Page {currentPage} of {totalPages}
+              </span>
 
-  <span className="pagination-text">
-    Page {currentPage} of {totalPages}
-  </span>
-
-  <button
-    className="pagination-btn"
-    disabled={currentPage === totalPages}
-    onClick={() => setCurrentPage(prev => prev + 1)}
-  >
-    <ChevronRight size={18} />
-  </button>
-</div>
-            
-            {/* ... Keep your Pagination Logic ... */}
+              <button
+                className="pagination-btn"
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage(prev => prev + 1)}
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
           </>
         )}
       </div>
@@ -224,6 +264,32 @@ const ProductDetails: React.FC = () => {
                     value={editingProduct.name} 
                     onChange={(e) => setEditingProduct({...editingProduct, name: e.target.value})}
                   />
+                </div>
+
+                {/* ✅ Category Dropdown Selector Section Added */}
+                <div className="form-group">
+                  <label>Product Category</label>
+                  <select
+                    className="modal-category-select"
+                    value={getCategoryId(editingProduct.category)}
+                    onChange={(e) => setEditingProduct({ ...editingProduct, category: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px',
+                      borderRadius: '6px',
+                      border: '1px solid #ddd',
+                      fontSize: '14px',
+                      marginTop: '4px',
+                      backgroundColor: '#fff'
+                    }}
+                  >
+                    <option value="">Select a Category</option>
+                    {categories.map((cat) => (
+                      <option key={cat._id} value={cat._id}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 
                 <div className="form-row">
@@ -249,7 +315,7 @@ const ProductDetails: React.FC = () => {
                   <label>Description</label>
                   <textarea 
                     rows={3}
-                    value={editingProduct.description} 
+                    value={editingProduct.description || ''} 
                     onChange={(e) => setEditingProduct({...editingProduct, description: e.target.value})}
                   />
                 </div>

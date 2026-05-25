@@ -1,140 +1,3 @@
-/* .rasi-products-page {
-  background-color: #f1f3f6;
-  padding: 20px 0;
-}
-
-.rasi-products-container {
-  max-width: 1244px;
-  margin: 0 auto;
-  display: flex;
-  gap: 16px;
-  padding: 0 16px;
-}
-
-.rasi-products-sidebar {
-  width: 280px;
-  background-color: var(--white);
-  padding: 20px;
-  height: fit-content;
-  box-shadow: var(--shadow);
-  border-radius: 4px;
-}
-
-.rasi-filter-section {
-  margin-bottom: 30px;
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 20px;
-}
-
-.rasi-filter-section:last-child {
-  border-bottom: none;
-}
-
-.rasi-filter-section h3 {
-  font-size: 16px;
-  color: var(--primary);
-  margin-bottom: 15px;
-  text-transform: uppercase;
-}
-
-.rasi-filter-section ul li {
-  margin-bottom: 10px;
-}
-
-.rasi-filter-section label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.rasi-price-range {
-  width: 100%;
-  accent-color: var(--primary);
-}
-
-.rasi-price-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.rasi-products-main {
-  flex: 1;
-  background-color: var(--white);
-  padding: 20px;
-  box-shadow: var(--shadow);
-  border-radius: 4px;
-}
-
-.rasi-products-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 15px;
-}
-
-.rasi-breadcrumb {
-  font-size: 12px;
-  color: #878787;
-}
-
-.rasi-products-controls {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.rasi-sort {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-}
-
-.rasi-sort select {
-  border: 1px solid #ddd;
-  padding: 5px;
-  border-radius: 4px;
-  outline: none;
-}
-
-.rasi-view-toggle {
-  display: flex;
-  gap: 10px;
-}
-
-.rasi-view-toggle button {
-  font-size: 18px;
-  color: #878787;
-}
-
-.rasi-view-toggle button.active {
-  color: var(--primary);
-}
-
-.rasi-products-display.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-@media (max-width: 992px) {
-  .rasi-products-sidebar {
-    display: none;
-  }
-} */
-
-
-/* ============================================
-   PRODUCTS PAGE - RESPONSIVE CSS
-   Mobile First Approach
-   ============================================ */
-
 :root {
   --primary: #a0522d;
   --white: #ffffff;
@@ -146,9 +9,7 @@
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* ============================================
-   GENERAL STYLES
-   ============================================ */
+
 
 .rasi-products-page {
   /* background-color: var(--light-gray); */
@@ -761,9 +622,7 @@ input[type="checkbox"]:focus-visible {
     display: none;
   }
 
-  .rasi-products-page {
-    /* background-color: var(--white); */
-  }
+
 
   .rasi-products-display.grid {
     grid-template-columns: repeat(2, 1fr);

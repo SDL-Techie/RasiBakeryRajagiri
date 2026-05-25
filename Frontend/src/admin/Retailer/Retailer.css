@@ -1,9 +1,3 @@
-/* ============================================================
-   RASI RETAILER — FULL RESPONSIVE CSS
-   Palette: #4B2E2B (Coffee) | #8C5A3C (Terra) | #C08552 (Ochre) | #FFF8F0 (Cream)
-   ============================================================ */
-
-/* ── Loading ── */
 .rasi-loading-state {
   display: flex;
   flex-direction: column;

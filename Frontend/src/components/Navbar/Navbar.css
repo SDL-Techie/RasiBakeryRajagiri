@@ -53,7 +53,7 @@
   opacity: 1;
 }
 
-.rasi-theme-toggle-top {
+/* .rasi-theme-toggle-top {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -64,12 +64,12 @@
   background-color: rgba(255, 255, 255, 0.15);
   transition: var(--transition);
   border: 1px solid rgba(255, 255, 255, 0.1);
-}
+} */
 
-.rasi-theme-toggle-top:hover {
+/* .rasi-theme-toggle-top:hover {
   background-color: rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
-}
+} */
 
 .rasi-marquee {
   background-color: var(--secondary);
@@ -351,9 +351,9 @@
   color: var(--highlight);
 }
 
-.mobile-only {
+/* .mobile-only {
   display: none;
-}
+} */
 
 @media (max-width: 768px) {
   .rasi-navbar-container {
@@ -364,11 +364,11 @@
     display: none;
   }
   
-  .mobile-only {
+  /* .mobile-only {
     display: flex !important;
-  }
+  } */
 
-  .rasi-theme-toggle-mobile {
+  /* .rasi-theme-toggle-mobile {
     color: var(--white);
     padding: 8px;
     border-radius: 50%;
@@ -377,7 +377,7 @@
 
   .rasi-theme-toggle-mobile:hover {
     background-color: rgba(255, 255, 255, 0.1);
-  }
+  } */
 
   .rasi-marquee {
     font-size: 11px;

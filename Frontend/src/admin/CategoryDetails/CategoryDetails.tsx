@@ -80,7 +80,7 @@ const confirmDelete = async () => {
             {categories.length} Total Categories
           </div>
           <div className="rasi-search-wrapper">
-            <Search size={18} />
+            {/* <Search size={18} /> */}
             <input 
               type="text" 
               placeholder="Search category name..." 

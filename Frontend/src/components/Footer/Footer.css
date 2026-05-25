@@ -1,23 +1,45 @@
+
+
 .rasi-footer {
   background-color: var(--bg-dark);
   color: var(--secondary);
   padding: 60px 0 0;
   margin-top: 60px;
+  width: 100%;
+
+
 }
 
+/* Base Container Grid Configured for Multi-Device Flow */
 .rasi-footer-container {
-  max-width: 1244px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 24px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  /* Defaults directly to mobile view stack */
+  grid-template-columns: 1fr;
   gap: 40px;
+}
+
+.rasi-footer-section {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* text-align: center; */
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Brand Section Specific Constrains */
+.rasi-footer-section.brand-summary {
+  max-width: 360px;
+  margin: 0 auto;
 }
 
 .rasi-footer-logo {
   text-decoration: none;
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .rasi-footer-logo .rasi-logo-main {
@@ -34,44 +56,59 @@
   font-size: 14px;
 }
 
+/* Social Media Container Adjustments */
 .rasi-social-links {
   display: flex;
-  gap: 15px;
+  gap: 16px;
+  justify-content: center;
 }
 
 .rasi-social-links a {
-  background-color: rgba(255, 255, 255, 0.1);
-  width: 36px;
-  height: 36px;
+  background-color: rgba(255, 255, 255, 0.08);
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   color: var(--white);
-  transition: var(--transition);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .rasi-social-links a:hover {
   background-color: var(--accent);
   color: var(--primary);
-  transform: translateY(-3px);
+  transform: translateY(-4px);
 }
 
+/* Header Typography Setup */
 .rasi-footer-section h3 {
   color: var(--white);
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   margin-bottom: 20px;
   position: relative;
+  display: inline-block;
 }
 
 .rasi-footer-section h3::after {
   content: '';
   position: absolute;
-  left: 0;
-  bottom: -8px;
-  width: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -6px;
+  width: 32px;
   height: 2px;
   background-color: var(--accent);
+}
+
+/* Navigation Lists Layout */
+.rasi-footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .rasi-footer-section ul li {
@@ -80,30 +117,57 @@
 
 .rasi-footer-section ul li a {
   font-size: 14px;
-  transition: var(--transition);
+  color: var(--secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 
 .rasi-footer-section ul li a:hover {
   color: var(--accent);
-  padding-left: 5px;
 }
 
-.rasi-contact-info p {
+/* Contact Block Layout */
+.rasi-contact-info {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-  font-size: 14px;
+  flex-direction: column;
+
+  gap: 16px;
+  width: 100%;
 }
 
+.rasi-contact-info .contact-item {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.rasi-contact-info .contact-icon {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.rasi-contact-info .contact-item a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.rasi-contact-info .contact-item a:hover {
+  color: var(--accent);
+}
+
+/* Copyright & Developer Footnotes Layer */
 .rasi-footer-bottom {
-  margin-top: 40px;
+  margin-top: 48px;
 }
 
 .rasi-footer-copyright-layer {
   background-color: var(--primary);
   color: var(--white);
-  padding: 15px 16px;
+  padding: 16px 20px;
   text-align: center;
   font-size: 14px;
   font-weight: 500;
@@ -113,20 +177,77 @@
 .rasi-footer-dev-layer {
   background-color: var(--highlight);
   color: var(--white);
-  padding: 10px 16px;
+  padding: 12px 20px;
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
+  line-height: 1.4;
 }
 
 .rasi-footer-dev-layer a {
   color: var(--white);
+
   text-decoration: none;
   transition: opacity 0.3s ease;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+  display: inline-block;
 }
 
 .rasi-footer-dev-layer a:hover {
   opacity: 0.8;
+  color:#2b1b17;
   border-bottom-style: solid;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+
+/* Tablets (Portrait and Landscape views) */
+@media (min-width: 640px) {
+  .rasi-footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 32px;
+  }
+
+  .rasi-footer-section {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .rasi-footer-section.brand-summary {
+    margin: 0;
+    grid-column: span 2;
+    max-width: 100%;
+  }
+
+  .rasi-social-links {
+    justify-content: flex-start;
+  }
+
+  .rasi-footer-section h3::after {
+    left: 0;
+    transform: none;
+  }
+
+  .rasi-footer-section ul li a:hover {
+    padding-left: 6px;
+  }
+
+  .rasi-contact-info .contact-item {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* Laptops & Desktop Screen Sizes */
+@media (min-width: 1024px) {
+  .rasi-footer-container {
+    grid-template-columns: 2.2fr 1fr 1fr 1.8fr;
+    gap: 40px;
+  }
+
+  .rasi-footer-section.brand-summary {
+    grid-column: span 1;
+    max-width: 320px;
+  }
 }

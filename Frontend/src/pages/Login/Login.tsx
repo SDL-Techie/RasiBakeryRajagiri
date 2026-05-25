@@ -143,9 +143,9 @@ const Login: React.FC = () => {
               <input type="checkbox" />
               <span>Remember Me</span>
             </label>
-            <Link to="/forgot-password" style={{ color: 'var(--highlight)', fontSize: '14px', fontWeight: '700' }}>
+            {/* <Link to="/forgot-password" style={{ color: 'var(--highlight)', fontSize: '14px', fontWeight: '700' }}>
                Forgot Password?
-            </Link>
+            </Link> */}
           </div>
           
           <motion.button 

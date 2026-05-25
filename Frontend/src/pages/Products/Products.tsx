@@ -1,13 +1,23 @@
+
+
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { LayoutGrid, List, Loader2, FilterX, Menu, X } from 'lucide-react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import './Products.css';
 
+interface Category {
+  _id: string;
+  name: string;
+  image?: string;
+  status?: string;
+  createdAt?: string;
+}
+
 const Products: React.FC = () => {
   const [view, setView] = useState<'grid' | 'list'>('grid');
   const [products, setProducts] = useState<any[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -19,86 +29,110 @@ const Products: React.FC = () => {
   const userRole = localStorage.getItem('userRole');
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:4000/api/v1/products");
-        const data = res.data.data;
 
-        // Extract categories dynamically
-        const uniqueCategories = [
-          ...new Set(data.map((p: any) => p.category?.name).filter(Boolean))
-        ];
-        setCategories(uniqueCategories as string[]);
+        // 1. Fetch both Products and Categories concurrently for better performance
+        const [productsRes, categoriesRes] = await Promise.all([
+          axios.get("http://localhost:4000/api/v1/products"),
+          axios.get("http://localhost:4000/api/v1/category")
+        ]);
 
-        // ✅ Map products to match ProductCard interface
-        const mappedProducts = data.map((item: any) => {
-          const finalPrice =
-            userRole === "retailer"
-              ? Number(item.wholesaleprice || item.price)
-              : Number(item.price);
+        // 2. Handle Setting Active Categories
+        if (categoriesRes.data.success) {
+          const activeCategories = categoriesRes.data.data.filter(
+            (cat: Category) => cat.status !== "Inactive"
+          );
+          setCategories(activeCategories);
+        }
 
-          return {
-            id: item._id,
-            name: item.name,
-            price: Number(item.price), // Keep base price
-            wholesaleprice: Number(item.wholesaleprice),
-            oldprice: item.oldprice,
-            productimage: item.productimage, // ✅ Matches ProductCard
-            category: item.category, // Pass full object
-            categoryName: item.category?.name, // For filtering
-            rating: 5,
-            status: item.status 
-          };
-        });
+        // 3. Process Products Mapping
+        if (productsRes.data.success) {
+          const data = productsRes.data.data;
+          console.log("Fetched products:", data);
 
-        const activeProducts = mappedProducts.filter(
-          (p: any) => p.status === "Active"
-        );
+          const mappedProducts = data.map((item: any) => {
+            // Support both object populate layouts or flat field references safely
+            const catName = typeof item.category === 'object' 
+              ? item.category?.name 
+              : item.categoryName || item.category;
 
-        setProducts(activeProducts);
+            return {
+              id: item._id,
+              name: item.name,
+              price: Number(item.price), 
+              wholesaleprice: Number(item.wholesaleprice),
+              oldprice: item.oldprice,
+              productimage: item.productimage, 
+              category: item.category, 
+              categoryName: catName, // standard reference target name for filters
+              rating: 5,
+              status: item.status 
+            };
+          });
 
-        if (activeProducts.length > 0) {
-          const maxProductPrice = Math.max(...activeProducts.map((p: any) => p.price));
-          setPriceRange(maxProductPrice);
+          const activeProducts = mappedProducts.filter(
+            (p: any) => p.status === "Active"
+          );
+
+          setProducts(activeProducts);
+
+          // Dynamically set maximum slider window baseline if matching products exist
+          if (activeProducts.length > 0) {
+            const maxProductPrice = Math.max(...activeProducts.map((p: any) => p.price));
+            setPriceRange(maxProductPrice);
+          }
         }
 
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error fetching marketplace data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProducts();
+    fetchData();
   }, [userRole]);
 
-  const toggleCategory = (category: string) => {
+  const toggleCategory = (categoryName: string) => {
     setSelectedCategories(prev =>
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
+      prev.includes(categoryName)
+        ? prev.filter(c => c !== categoryName)
+        : [...prev, categoryName]
     );
   };
 
   const filteredProducts = products
     .filter(p => {
+      // Clean check comparing lowercase or standard name values
       const matchCategory =
         selectedCategories.length === 0 ||
-        selectedCategories.includes(p.categoryName);
+        selectedCategories.some(catName => p.categoryName?.toLowerCase() === catName.toLowerCase() || p.category === catName);
 
-      const matchPrice = p.price <= priceRange;
+      // Verify targeted customer group specific pricing boundaries
+      const activePrice = userRole === "retailer" ? (p.wholesaleprice || p.price) : p.price;
+      const matchPrice = activePrice <= priceRange;
+
       return matchCategory && matchPrice;
     })
     .sort((a, b) => {
-      if (sortBy === "low") return a.price - b.price;
-      if (sortBy === "high") return b.price - a.price;
+      const priceA = userRole === "retailer" ? (a.wholesaleprice || a.price) : a.price;
+      const priceB = userRole === "retailer" ? (b.wholesaleprice || b.price) : b.price;
+
+      if (sortBy === "low") return priceA - priceB;
+      if (sortBy === "high") return priceB - priceA;
       return 0;
     });
 
   const handleClearFilters = () => {
     setSelectedCategories([]);
-    setPriceRange(100000);
+    if (products.length > 0) {
+      const maxProductPrice = Math.max(...products.map((p: any) => p.price));
+      setPriceRange(maxProductPrice);
+    } else {
+      setPriceRange(100000);
+    }
     setSidebarOpen(false);
   };
 
@@ -113,8 +147,8 @@ const Products: React.FC = () => {
 
   return (
     <div className="rasi-products-page">
-     
       <div className="rasi-products-container">
+        
         {/* Mobile Sidebar Toggle Button */}
         <button 
           className="rasi-sidebar-toggle"
@@ -123,7 +157,6 @@ const Products: React.FC = () => {
         >
           {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
-    
 
         {/* Sidebar Overlay (Mobile) */}
         {sidebarOpen && (
@@ -149,15 +182,15 @@ const Products: React.FC = () => {
           <div className="rasi-filter-section">
             <h3>Categories</h3>
             <ul>
-              {categories.map((cat, i) => (
-                <li key={i}>
-                  <label>
+              {categories.map((cat) => (
+                <li key={cat._id}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                     <input
                       type="checkbox"
-                      checked={selectedCategories.includes(cat)}
-                      onChange={() => toggleCategory(cat)}
+                      checked={selectedCategories.includes(cat.name)}
+                      onChange={() => toggleCategory(cat.name)}
                     />
-                    <span>{cat}</span>
+                    <span>{cat.name}</span>
                   </label>
                 </li>
               ))}
@@ -174,13 +207,13 @@ const Products: React.FC = () => {
               type="range"
               className="rasi-price-range"
               min="0"
-              max="100000" 
+              max={products.length > 0 ? Math.max(...products.map(p => p.price)) : 100000}
               value={priceRange}
               onChange={(e) => setPriceRange(Number(e.target.value))}
             />
             <div className="rasi-price-labels">
               <span>₹0</span>
-              <span>₹100k</span>
+              <span>₹{products.length > 0 ? Math.max(...products.map(p => p.price)).toLocaleString() : '100k'}</span>
             </div>
           </div>
 
@@ -190,12 +223,9 @@ const Products: React.FC = () => {
           >
             Clear All Filters
           </button>
-          
         </aside>
 
-
         <main className="rasi-products-main">
-          
           <div className="rasi-products-header">
             <div className="rasi-products-count">
               <strong>Showing {filteredProducts.length} Products</strong>

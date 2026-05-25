@@ -95,7 +95,7 @@ const Retailer: React.FC = () => {
 
         <div className="header-actions">
           <div className="rasi-search-wrapper">
-            <Search size={18} />
+            {/* <Search size={18} /> */}
             <input 
               type="text" 
               placeholder={`Search ${view}...`} 
