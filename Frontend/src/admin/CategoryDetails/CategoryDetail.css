@@ -6,7 +6,7 @@
 */
 
 .rasi-products-container {
-    padding: 2rem;
+    padding: 16px;
     max-width: 1400px;
     margin: 0 auto;
     background-color: #FFF8F0;
@@ -33,7 +33,7 @@
 .subtitle {
     color: #8C5A3C;
     font-size: 0.9rem;
-    margin-top: 4px;
+    /* margin-top: 4px; */
 }
 
 .header-actions {
@@ -43,16 +43,23 @@
 }
 
 .count-pill {
-    background: #C08552;
+    /* background: #C08552; */
+    background: var(--primary);
     color: white;
     padding: 10px 18px;
-    border-radius: 50px;
+    border-radius: 10px;
     font-size: 0.85rem;
     font-weight: 600;
     display: flex;
     align-items: center;
     gap: 8px;
     box-shadow: 0 4px 10px rgba(192, 133, 82, 0.2);
+}
+
+.cat-id{
+    font-size: 10px;
+    color: #8C5A3C;
+    font-family: monospace;
 }
 
 .rasi-search-wrapper {

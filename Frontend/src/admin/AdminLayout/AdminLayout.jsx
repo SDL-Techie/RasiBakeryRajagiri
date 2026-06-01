@@ -2,15 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { 
   FaTachometerAlt, FaPlusCircle, FaList, FaBoxOpen, FaThList, 
   FaShoppingCart, FaUsers, FaSignOutAlt, FaBars, FaSearch, 
-  FaMoon, FaSun, FaTimes, FaUserTie, FaMapMarkerAlt, FaCoins 
+  FaUserTie, FaMapMarkerAlt, FaCoins 
 } from 'react-icons/fa';
 import { Link, useLocation, Outlet, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import axios from 'axios'; // Hooked up axios import
+import { toast, Toaster } from 'react-hot-toast'; // Added toast notification tracking
 import './AdminLayout.css';
 
+// ─── CHILD COMPONENTS: SIDEBAR ───────────────────────────────────────
 const AdminSidebar = ({ isOpen, onClose, onLogout }) => {
   const location = useLocation();
-  
+
   const menuItems = [
     { name: 'Dashboard', icon: <FaTachometerAlt />, path: '/admin/dashboard' },
     { name: 'Add Category', icon: <FaPlusCircle />, path: '/admin/add-category' },
@@ -34,7 +37,7 @@ const AdminSidebar = ({ isOpen, onClose, onLogout }) => {
   return (
     <>
       <AnimatePresence>
-        {isOpen && window.innerWidth <= 1024 && (
+        {isOpen && window.innerWidth <= 2400 && (
           <motion.div 
             className="rasi-sidebar-overlay" 
             initial={{ opacity: 0 }}
@@ -48,7 +51,7 @@ const AdminSidebar = ({ isOpen, onClose, onLogout }) => {
       <motion.div 
         className={`rasi-admin-sidebar ${isOpen ? 'open' : 'closed'}`}
         variants={sidebarVariants}
-        animate={isOpen || window.innerWidth > 1024 ? 'open' : 'closed'}
+        animate={isOpen ? 'open' : 'closed'}
       >
         <div className="rasi-admin-sidebar-header">
           <div className="admin-logo-box">
@@ -56,7 +59,6 @@ const AdminSidebar = ({ isOpen, onClose, onLogout }) => {
              <h2>RASI ADMIN</h2>
           </div>
           <button className="rasi-sidebar-close-btn mobile-only" onClick={onClose}>
-            {/* <FaTimes />  */}
             <span className="rasi-x">X</span>
           </button>
         </div>
@@ -75,6 +77,7 @@ const AdminSidebar = ({ isOpen, onClose, onLogout }) => {
         </nav>
 
         <div className="rasi-sidebar-footer">
+          {/* 🔥 Connected the onLogout prop function callback cleanly right here */}
           <button onClick={onLogout} className="rasi-logout-btn">
             <FaSignOutAlt />
             <span>Logout</span>
@@ -85,7 +88,8 @@ const AdminSidebar = ({ isOpen, onClose, onLogout }) => {
   );
 };
 
-const AdminLayout = ({ theme, toggleTheme }) => {
+// ─── MAIN PARENT COMPONENT: ADMIN LAYOUT ──────────────────────────────
+const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 1024);
   const navigate = useNavigate();
 
@@ -97,13 +101,35 @@ const AdminLayout = ({ theme, toggleTheme }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate('/');
+  // 🔥 Lifted handleLogout up to the parent level layout component scope
+  const handleLogout = async () => {
+    const processToast = toast.loading("Logging out securely...");
+    try {
+      const res = await axios.get("http://localhost:4000/api/v1/logout");
+      
+      if (res.data.success) {
+        // Clear all session markers 
+        localStorage.removeItem('userPhone');
+        localStorage.removeItem('customerMobile');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userRole');
+        localStorage.removeItem('token');
+
+        toast.success("Logged out successfully", { id: processToast });
+        setIsSidebarOpen(false); // Cleanly close sidebar menu state context
+        navigate('/login');
+      }
+    } catch (err) {
+      console.error("Logout failed:", err);
+      toast.error("Something went wrong during logout", { id: processToast });
+    }
   };
 
   return (
-    <div className={`rasi-admin-layout ${theme}`}>
+    <div className="rasi-admin-layout">
+      {/* Dynamic Hot Toast Status System */}
+      <Toaster position="top-right" />
+      
       <AdminSidebar 
         isOpen={isSidebarOpen} 
         onClose={() => setIsSidebarOpen(false)} 
@@ -123,9 +149,6 @@ const AdminLayout = ({ theme, toggleTheme }) => {
           </div>
           
           <div className="header-right-group">
-            {/* <button className="admin-icon-action" onClick={toggleTheme}>
-              {theme === 'light' ? <FaMoon /> : <FaSun />}
-            </button> */}
             <div className="admin-profile-pill">
               <img src="https://i.pinimg.com/736x/ee/bb/ac/eebbac6e5bd39517d6a7043ca623c57e.jpg" alt="Admin" />
               <div className="admin-info desktop-only">

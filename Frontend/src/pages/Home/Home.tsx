@@ -5,6 +5,7 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import SEO from '@/src/components/SEO';
 
 // --- HeroSlider Component ---
 const HeroSlider: React.FC = () => {
@@ -37,7 +38,12 @@ const HeroSlider: React.FC = () => {
   }, [slides.length]);
 
   return (
+    <>
+
+
+    
     <div className="rasi-hero-slider">
+  
       {slides.map((slide, index) => (
         <div key={index} className={`rasi-slide ${index === current ? 'active' : ''}`}>
           <img src={slide.image} alt={slide.title} referrerPolicy="no-referrer" />
@@ -75,7 +81,8 @@ const HeroSlider: React.FC = () => {
         <ChevronRight size={24} />
       </button>
     </div>
-  );
+  </>
+);
 };
 
 // --- CategoryCards Component ---
@@ -311,7 +318,16 @@ const Home: React.FC = () => {
   };
 
   return (
+    <>
+       <SEO
+      title="Rajagiri Rasi Bakery | Fresh Cakes, Breads & Snacks in Thanjavur"
+      description="Rajagiri Rasi Bakery offers fresh cakes, breads, pastries, cookies, sweets and bakery products in Rajagiri, Thanjavur. Order online for delicious homemade treats."
+      keywords="Rajagiri Rasi Bakery, bakery in Thanjavur, cakes, pastries, breads, cookies, bakery products, birthday cakes, sweets, snacks"
+      url="https://www.rajagirirasibakery.com/"
+    />
+
     <div className="rasi-home-page">
+
       <HeroSlider />
       <Marquee />
       <CookieHighlightSection />
@@ -401,6 +417,8 @@ const Home: React.FC = () => {
       </section>
       <MarqueeSection />
     </div>
+    </>
+    
   );
 };
 

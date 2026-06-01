@@ -21,7 +21,7 @@
 
 .rasi-add-category-container {
     padding: 16px;
-    background-color: var(--rasi-ac-cream-bg);
+    /* background-color: var(--rasi-ac-cream-bg); */
     min-height: 100vh;
     animation: rasi-ac-fadeIn 0.5s ease;
     width: 100%;

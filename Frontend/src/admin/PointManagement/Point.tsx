@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaCoins, FaPercent, FaShoppingBag, FaSave, FaSync, FaInfoCircle, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
+import { 
+    FaCoins, 
+    FaPercent, 
+    FaShoppingBag, 
+    FaSave, 
+    FaSync, 
+    FaCheckCircle, 
+    FaExclamationCircle, 
+    FaPlus, 
+    FaTimes, 
+    FaEdit, 
+    FaCalendarAlt,
+    FaArrowRight
+} from 'react-icons/fa';
 import './Point.css';
 
 const Point = () => {
     const [loading, setLoading] = useState(true);
+    const [isFormOpen, setIsFormOpen] = useState(false);
+    
     const [settings, setSettings] = useState({
         minOrderAmount: 0,
         pointsEarnedPerOrder: 0,
         pointsRequiredForDiscount: 0,
-        discountPercentage: 0
+        discountPercentage: 0,
+        couponValidityDays: 0
     });
 
-    // Toast State
     const [toast, setToast] = useState({ show: false, message: '', type: '' });
 
-    const showToast = (message:any, type = 'success') => {
+    const showToast = (message: string, type = 'success') => {
         setToast({ show: true, message, type });
         setTimeout(() => setToast({ show: false, message: '', type: '' }), 3000);
     };
@@ -27,9 +42,14 @@ const Point = () => {
     const fetchSettings = async () => {
         try {
             setLoading(true);
-            const res = await axios.get('http://localhost:4000/api/v1/points-settings');
-             console.log(res)
-            if (res.data) setSettings(res.data);
+            const res = await axios.get('http://localhost:4000/api/v1/getpointsettings', {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+            });
+            if (res.data?.data) {
+                setSettings(res.data.data);
+            } else if (res.data) {
+                setSettings(res.data);
+            }
             setLoading(false);
         } catch (err) {
             console.error("Error fetching settings", err);
@@ -37,13 +57,18 @@ const Point = () => {
         }
     };
 
-    const handleSave = async (e:any) => {
+    const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:4000/api/v1/points-settings', settings);
+            const res = await axios.post('http://localhost:4000/api/v1/createpointsettings', settings, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+            });
             showToast("Loyalty Rules Updated Successfully!", "success");
-            setSettings(res.data.settings);
-           
+            
+            if (res.data?.data) {
+                setSettings(res.data.data);
+            }
+            setIsFormOpen(false);
         } catch (err) {
             showToast("Error saving settings", "error");
         }
@@ -55,99 +80,200 @@ const Point = () => {
             {toast.show && (
                 <div className={`toast-notification ${toast.type}`}>
                     {toast.type === 'success' ? <FaCheckCircle /> : <FaExclamationCircle />}
-                    {toast.message}
+                    <span>{toast.message}</span>
                 </div>
             )}
 
-            {/* Header */}
+            {/* Header Area */}
             <div className="rasi-users-header">
                 <div className="header-info">
                     <h1>Point Management</h1>
                     <span className="user-count-badge">Bakery Rewards Active</span>
                 </div>
-                {/* <div className="contact-item">
-                    <FaInfoCircle />
-                    <span className='point-desc'>Configure points earned per Cocoa spent</span>
-                </div> */}
-            </div>
-
-            {/* Input Card */}
-            <div className="rasi-table-card" style={{ 
-                padding: '15px'
-                , marginBottom: '2rem' }}>
-                <form onSubmit={handleSave}>
-                    <div className="settings-grid">
-                        <div className="input-group">
-                            <label><FaShoppingBag /> Min Purchase (₹)</label>
-                            <input 
-                                type="number" 
-                                value={settings.minOrderAmount} 
-                                onChange={(e) => setSettings({...settings, minOrderAmount:Number(e.target.value) })}
-                                required
-                            />
-                        </div>
-                        <div className="input-group">
-                            <label><FaCoins /> Points Earned</label>
-                            <input 
-                                type="number" 
-                                value={settings.pointsEarnedPerOrder} 
-                                onChange={(e) => setSettings({...settings, pointsEarnedPerOrder: Number(e.target.value)})}
-                                required
-                            />
-                        </div>
-                        <div className="input-group">
-                            <label><FaSync /> Points Needed</label>
-                            <input 
-                                type="number" 
-                                value={settings.pointsRequiredForDiscount} 
-                                onChange={(e) => setSettings({...settings, pointsRequiredForDiscount: Number(e.target.value)})}
-                                required
-                            />
-                        </div>
-                        <div className="input-group">
-                            <label><FaPercent /> Reward (%)</label>
-                            <input 
-                                type="number" 
-                                value={settings.discountPercentage} 
-                                onChange={(e) => setSettings({...settings, discountPercentage: Number(e.target.value)})}
-                                required
-                            />
-                        </div>
-                    </div>
-                    <button type="submit" className="save-settings-btn">
-                        <FaSave /> Save Configuration
+                
+                {!isFormOpen && (
+                    <button className="add-settings-btn" onClick={() => setIsFormOpen(true)}>
+                        <FaPlus /> Config Rules
                     </button>
-                </form>
+                )}
             </div>
 
-            {/* Summary Table */}
-            <div className="rasi-table-card">
-                <table className="rasi-users-table">
-                    <thead>
-                        <tr>
-                            <th>Rule Overview</th>
-                            <th>Value</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td className="bold-name">Points per purchase above ₹{settings.minOrderAmount}</td>
-                            <td><span className="user-count-badge" style={{color: '#5d4037'}}>+{settings.pointsEarnedPerOrder} Pts</span></td>
-                            <td><span className="status-badge status-active">Enabled</span></td>
-                        </tr>
-                        <tr>
-                            <td className="bold-name">Threshold for Reward Claim</td>
-                            <td><span className="user-count-badge" style={{color: '#5d4037'}}>{settings.pointsRequiredForDiscount} Pts</span></td>
-                            <td><span className="status-badge status-active">Enabled</span></td>
-                        </tr>
-                        <tr>
-                            <td className="bold-name">Claimable Benefit</td>
-                            <td><span className="user-count-badge" style={{background: '#d4a373', color: 'white'}}>{settings.discountPercentage}% OFF</span></td>
-                            <td><span className="status-badge status-active">Enabled</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+            {/* Collapsible Input Form Card */}
+            {isFormOpen && (
+                <div className="form-card-wrapper animate-slide-down">
+                    <div className="form-card-header">
+                        <h2>{settings.minOrderAmount ? "Modify Loyalty Rules" : "Create Loyalty Rules"}</h2>
+                        <button className="close-form-icon-btn" onClick={() => setIsFormOpen(false)}>
+                            <FaTimes />
+                        </button>
+                    </div>
+                    <form onSubmit={handleSave}>
+                        <div className="settings-grid">
+                            <div className="input-group">
+                                <label><FaShoppingBag /> Min Purchase (₹)</label>
+                                <input 
+                                    type="number" 
+                                    value={settings.minOrderAmount} 
+                                    onChange={(e) => setSettings({...settings, minOrderAmount: Number(e.target.value) })}
+                                    required
+                                    min="0"
+                                />
+                            </div>
+                            <div className="input-group">
+                                <label><FaCoins /> Points Earned</label>
+                                <input 
+                                    type="number" 
+                                    value={settings.pointsEarnedPerOrder} 
+                                    onChange={(e) => setSettings({...settings, pointsEarnedPerOrder: Number(e.target.value)})}
+                                    required
+                                    min="0"
+                                />
+                            </div>
+                            <div className="input-group">
+                                <label><FaSync /> Points Needed</label>
+                                <input 
+                                    type="number" 
+                                    value={settings.pointsRequiredForDiscount} 
+                                    onChange={(e) => setSettings({...settings, pointsRequiredForDiscount: Number(e.target.value)})}
+                                    required
+                                    min="0"
+                                />
+                            </div>
+                            <div className="input-group">
+                                <label><FaPercent /> Reward (%)</label>
+                                <input 
+                                    type="number" 
+                                    value={settings.discountPercentage} 
+                                    onChange={(e) => setSettings({...settings, discountPercentage: Number(e.target.value)})}
+                                    required
+                                    min="0"
+                                    max="100"
+                                />
+                            </div>
+                            <div className="input-group">
+                                <label><FaCalendarAlt /> Coupon Validity (Days)</label>
+                                <input 
+                                    type="number" 
+                                    value={settings.couponValidityDays || 0} 
+                                    onChange={(e) => setSettings({...settings, couponValidityDays: Number(e.target.value)})}
+                                    required
+                                    min="1"
+                                />
+                            </div>
+                        </div>
+                        <div className="form-actions-wrapper">
+                            <button type="submit" className="save-settings-btn">
+                                <FaSave /> Save Layout
+                            </button>
+                            <button type="button" className="cancel-settings-btn" onClick={() => setIsFormOpen(false)}>
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            )}
+
+            {/* Dashboard Summary Cards Section */}
+            <div className="dashboard-cards-section-wrapper">
+                <div className="cards-section-header">
+                    {/* <div className="section-title-group">
+                        <h3>Active Reward Metrics</h3>
+                        <p className="section-subtitle">Real-time parameters for user earning thresholds and coupons</p>
+                    </div> */}
+                    {!isFormOpen && (
+                        <button className="inline-change-rules-btn" onClick={() => setIsFormOpen(true)}>
+                            <FaEdit /> Adjust Parameters
+                        </button>
+                    )}
+                </div>
+                
+                {loading ? (
+                    <div className="loading-placeholder">Loading rule matrices...</div>
+                ) : (
+                    <div className="metrics-display-grid">
+                        
+                        {/* Card 1: Earning Rule */}
+                        <div className="metric-card purchase-rule-card">
+                            <div className="metric-card-top">
+                                <div className="metric-icon-box box-orange">
+                                    <FaShoppingBag />
+                                </div>
+                                <span className="status-indicator active">Active</span>
+                            </div>
+                            <div className="metric-card-body">
+                                <p className="metric-label">Purchase Threshold</p>
+                                <h2 className="metric-value">₹{settings.minOrderAmount}</h2>
+                                <p className="metric-description">
+                                    Amount Required For {settings.pointsEarnedPerOrder} Points.
+                                </p>
+                            </div>
+                            <div className="metric-card-footer">
+                                <span className="footer-highlight">Yields +{settings.pointsEarnedPerOrder} Pts</span>
+                            </div>
+                        </div>
+
+                        {/* Card 2: Accumulation Goal */}
+                        <div className="metric-card threshold-rule-card">
+                            <div className="metric-card-top">
+                                <div className="metric-icon-box box-gold">
+                                    <FaCoins />
+                                </div>
+                                <span className="status-indicator active">Active</span>
+                            </div>
+                            <div className="metric-card-body">
+                                <p className="metric-label">Point Target</p>
+                                <h2 className="metric-value">{settings.pointsRequiredForDiscount} <span className="unit-text">Pts</span></h2>
+                                <p className="metric-description">
+                                    If you Reach {settings.pointsRequiredForDiscount} Points .You will have {settings.discountPercentage} percentage off
+                                </p>
+                            </div>
+                            <div className="metric-card-footer">
+                                <span className="footer-highlight text-gold">Milestone Limit</span>
+                            </div>
+                        </div>
+
+                        {/* Card 3: Reward Percent */}
+                        <div className="metric-card benefit-rule-card">
+                            <div className="metric-card-top">
+                                <div className="metric-icon-box box-brown">
+                                    <FaPercent />
+                                </div>
+                                <span className="status-indicator active">Active</span>
+                            </div>
+                            <div className="metric-card-body">
+                                <p className="metric-label">Claimable Reward</p>
+                                <h2 className="metric-value">{settings.discountPercentage}% <span className="unit-text">OFF</span></h2>
+                                <p className="metric-description">
+                                    Discount scale applied to the billing order once voucher is redeemed.
+                                </p>
+                            </div>
+                            <div className="metric-card-footer">
+                                <span className="footer-badge-pill">Storewide Token</span>
+                            </div>
+                        </div>
+
+                        {/* Card 4: Coupon Expiry */}
+                        <div className="metric-card validity-rule-card">
+                            <div className="metric-card-top">
+                                <div className="metric-icon-box box-blue">
+                                    <FaCalendarAlt />
+                                </div>
+                                <span className="status-indicator active">Active</span>
+                            </div>
+                            <div className="metric-card-body">
+                                <p className="metric-label">Coupon Lifespan</p>
+                                <h2 className="metric-value">{settings.couponValidityDays || 7} <span className="unit-text">Days</span></h2>
+                                <p className="metric-description">
+                                    Validity frame before the generated voucher becomes inactive.
+                                </p>
+                            </div>
+                            <div className="metric-card-footer">
+                                <span className="footer-highlight">Strict Expiration</span>
+                            </div>
+                        </div>
+
+                    </div>
+                )}
             </div>
         </div>
     );

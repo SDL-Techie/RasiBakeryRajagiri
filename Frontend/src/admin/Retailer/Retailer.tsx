@@ -27,14 +27,22 @@ const Retailer: React.FC = () => {
     try {
       setLoading(true);
       // 1. Fetch Users & Filter Retailers
-      const userRes = await axios.get(`${API_BASE}/getalluser`);
+      const userRes = await axios.get(`${API_BASE}/getalluser`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
       if (userRes.data.success) {
         const retailers = userRes.data.data.filter((u: any) => u.role?.toLowerCase() === 'retailer');
         setUsers(retailers);
       }
 
       // 2. Fetch Access Codes
-      const codesRes = await axios.get(`${API_BASE}/allcodes`);
+      const codesRes = await axios.get(`${API_BASE}/allcodes`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
       if (codesRes.data.success) {
         setAccessCodes(codesRes.data.data);
       }
@@ -51,7 +59,11 @@ const Retailer: React.FC = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await axios.post(`${API_BASE}/createretailercode`, { assignedTo, code: manualCode });
+      const res = await axios.post(`${API_BASE}/createretailercode`, { assignedTo, code: manualCode }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
       if (res.data.success) {
         toast.success("Access Code Generated");
         setAssignedTo(''); setManualCode(''); setShowForm(false);
@@ -119,11 +131,11 @@ const Retailer: React.FC = () => {
                </div>
                <form onSubmit={handleCreateCode} className="retailer-inline-form">
                   <div className="input-field">
-                    <User size={16} />
+                    Code Name
                     <input type="text" placeholder="Recipient (e.g. Metro Sweets)" required value={assignedTo} onChange={(e) => setAssignedTo(e.target.value)} />
                   </div>
                   <div className="input-field">
-                    <Key size={16} />
+                      Unique Code
                     <input type="text" placeholder="Unique Code" required value={manualCode} onChange={(e) => setManualCode(e.target.value.toUpperCase())} />
                   </div>
                   <button type="submit" disabled={submitting} className="form-submit-btn">
@@ -172,8 +184,8 @@ const Retailer: React.FC = () => {
                       </td>
                       <td>
                         <div className="contact-stack">
-                           <span><Mail size={12}/> {item.email}</span>
-                           <span><Phone size={12}/> {item.phoneno || 'N/A'}</span>
+                           <span> {item.email}</span>
+                           <span> {item.phoneno || 'N/A'}</span>
                         </div>
                       </td>
                       <td>
@@ -218,8 +230,8 @@ const Retailer: React.FC = () => {
                     <span className="main-name">{item.name}</span>
                     <span className="badge-active">Verified</span>
                   </div>
-                  <div className="card-row"><Mail size={13}/> {item.email}</div>
-                  <div className="card-row"><Phone size={13}/> {item.phoneno || 'N/A'}</div>
+                  <div className="card-row"> {item.email}</div>
+                  <div className="card-row">{item.phoneno || 'N/A'}</div>
                   <div className="card-footer">
                     <span className="id-badge">#{item._id.slice(-6).toUpperCase()}</span>
                     <div className="card-row"><Calendar size={13}/> {new Date(item.createdAt).toLocaleDateString()}</div>

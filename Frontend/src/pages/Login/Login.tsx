@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { useCustomerAuth } from '../../context/CustomerAuthContext';
-import { Eye, EyeOff } from 'lucide-react';
+// import { Eye, EyeOff } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import './Login.css';
 
@@ -22,72 +22,139 @@ const Login: React.FC = () => {
     }
   }, [searchParams]);
 
-  // Updated admin credentials with your new requirement
-  const adminCredentials = {
-    '8903652269': { password: 'admin@sdl!', role: 'admin' },
-    '8220701195': { password: 'rrb@1195', role: 'admin' },
-    '9444292269': { password: 'admin123', role: 'admin' } // ✅ New Admin Added
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  //   const loginToast = toast.loading('Verifying credentials...');
+  //   try {
+  //     // ✅ UNIFIED LOGIN: Every user (Admin/Retailer/Customer) routes through the backend database
+  //     const response = await axios.post('http://localhost:4000/api/v1/login', {
+  //       phoneno: formData.phoneno,
+  //       password: formData.password
+  //     });
+
+  //     if (response.data.success) {
+  //       const userData = response.data.user;
+  //       const token = response.data.token;
+        
+  //       // Store session data securely in LocalStorage
+  //       localStorage.setItem('token', token);
+  //       localStorage.setItem('userPhone', userData.phoneno);
+  //       localStorage.setItem('userName', userData.name);
+  //       localStorage.setItem('userRole', userData.role || 'customer');
+
+  //       // Extra flag checks for the admin layout state configurations
+  //       if (userData.role === 'admin') {
+  //         localStorage.setItem('isAdminLoggedIn', 'true');
+  //         localStorage.setItem('adminRole', 'admin');
+  //       } else {
+  //         // Clear any stale admin tracking if a customer logs in
+  //         localStorage.removeItem('isAdminLoggedIn');
+  //         localStorage.removeItem('adminRole');
+  //       }
+
+  //       // Synchronize Global Context State Provider parameters
+  //       login({
+  //         id: userData._id,
+  //         name: userData.name,
+  //         mobile: userData.phoneno,
+  //         address: userData.addresses || [],
+  //         role: userData.role,
+  //       }, token);
+
+  //       toast.success(`Welcome back, ${userData.name}!`, { id: loginToast });
+        
+  //       // 🔥 Dynamic layout redirection engine based directly on secure database value
+  //       setTimeout(() => {
+  //         if (userData.role === 'admin') {
+  //           navigate('/admin/dashboard');
+  //         } else {
+  //           navigate('/');
+  //         }
+  //       }, 1500);
+  //     } 
+  //   } catch (error: any) {
+  //     const message = error.response?.data?.message || 'Login failed. Please check your credentials.';
+  //     toast.error(message, { id: loginToast });
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    // 1. Check Admin Login first (Hardcoded logic)
-    const adminUser = adminCredentials[formData.phoneno as keyof typeof adminCredentials];
-    if (adminUser && adminUser.password === formData.password) {
-      localStorage.setItem('adminRole', adminUser.role);
-      localStorage.setItem('userRole', adminUser.role); // Syncing role
-      localStorage.setItem('isAdminLoggedIn', 'true');
+  const loginToast = toast.loading('Verifying credentials...');
+  try {
+    const response = await axios.post('http://localhost:4000/api/v1/login', {
+      phoneno: formData.phoneno,
+      password: formData.password
+    });
+
+
+    if (response.data.success) {
+      // ✅ FIX: Safely read user data whether it is nested under .user or .data
+      const userData = response.data.user || response.data.data;
+      const token = response.data.token;
+
+      if (!userData) {
+        throw new Error("User data structure missing from backend payload response.");
+      }
+
+      // Convert role completely to lowercase to eliminate casing matching errors ('Admin' vs 'admin')
+      const targetRole = (userData.role || 'customer').toLowerCase();
+
+      // Store session data securely in LocalStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('userPhone', userData.phoneno);
+      localStorage.setItem('userName', userData.name);
+      localStorage.setItem('userRole', targetRole);
+
+      // Extra flags checks for your admin layout router state tracking
+      if (targetRole === 'admin') {
+        localStorage.setItem('isAdminLoggedIn', 'true');
+        localStorage.setItem('adminRole', 'admin');
+      } else {
+        localStorage.removeItem('isAdminLoggedIn');
+        localStorage.removeItem('adminRole');
+      }
+
+      // Synchronize Global Context State Provider parameters
+      login({
+        id: userData._id,
+        name: userData.name,
+        mobile: userData.phoneno,
+        address: userData.addresses || [],
+        role: targetRole,
+      }, token);
+
+      toast.success(`Welcome back, ${userData.name}!`, { id: loginToast });
       
-      toast.success(`Welcome Admin: ${adminUser.role}`);
-      setLoading(false);
-      navigate('/admin/dashboard');
-      return;
-    }
-
-    // 2. Node.js Backend Login for regular customers/retailers
-    const loginToast = toast.loading('Verifying credentials...');
-    try {
-      const response = await axios.post('http://localhost:4000/api/v1/login', {
-        phoneno: formData.phoneno,
-        password: formData.password
-      });
-
-      //console.log(response)
-
-      if (response.data.success) {
-        const userData = response.data.data;
-
-        // Store in LocalStorage
-        localStorage.setItem('userPhone', userData.phoneno);
-        localStorage.setItem('userName', userData.name);
-        localStorage.setItem('userRole', userData.role || 'customer');
-
-        // Update Context
-        login({
-          id: userData._id,
-          name: userData.name,
-          mobile: userData.phoneno,
-          address: userData.addresses || [],
-          role: userData.role,
-        }, response.data.token);
-
-        toast.success(`Welcome back, ${userData.name}!`, { id: loginToast });
-        setTimeout(() => navigate('/'), 1500);
-      } 
-    } catch (error: any) {
-      const message = error.response?.data?.message || 'Login failed. Please try again.';
-      toast.error(message, { id: loginToast });
-    } finally {
-      setLoading(false);
-    }
-  };
-
+      // ✅ FIX: Dynamic routing check handles string values accurately
+      setTimeout(() => {
+        if (targetRole === 'admin') {
+          console.log("Redirecting user cleanly to admin area dashboard route...");
+          navigate('/admin/dashboard');
+        } else {
+          console.log("Redirecting standard client down to default catalog root index...");
+          navigate('/');
+        }
+      }, 1000);
+    } 
+  } catch (error: any) {
+    console.error("Login Submission Error Handling Context:", error);
+    const message = error.response?.data?.message || error.message || 'Login failed. Please check your credentials.';
+    toast.error(message, { id: loginToast });
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <div className="rasi-login-page">
       <Toaster position="top-center" />
@@ -114,6 +181,7 @@ const Login: React.FC = () => {
               onChange={handleChange}
               placeholder=" "
               maxLength={10}
+              autoComplete="tel"
             />
             <label htmlFor="phoneno">Phone Number</label>
           </div>
@@ -127,6 +195,7 @@ const Login: React.FC = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder=" "
+              autoComplete="current-password"
             />
             <label htmlFor="password">Password</label>
             <button
@@ -134,7 +203,7 @@ const Login: React.FC = () => {
               className="rasi-password-toggle"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              {/* {showPassword ? <EyeOff size={20} /> : <Eye size={20} />} */}
             </button>
           </div>
           
@@ -143,9 +212,6 @@ const Login: React.FC = () => {
               <input type="checkbox" />
               <span>Remember Me</span>
             </label>
-            {/* <Link to="/forgot-password" style={{ color: 'var(--highlight)', fontSize: '14px', fontWeight: '700' }}>
-               Forgot Password?
-            </Link> */}
           </div>
           
           <motion.button 

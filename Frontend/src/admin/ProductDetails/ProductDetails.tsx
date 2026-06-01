@@ -1,8 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { Search, Loader2, ChevronLeft, ChevronRight, Package, Edit3, X, Save } from 'lucide-react';
 import axios from 'axios';
 import './ProductDetails.css';
+import * as XLSX from "xlsx";
+import { Download } from "lucide-react";
 
 interface Category {
   _id: string;
@@ -68,6 +69,51 @@ const ProductDetails: React.FC = () => {
     fetchInitialData(); 
   }, []);
 
+
+  const handleExportToExcel = () => {
+  if (filteredProducts.length === 0) {
+    alert("No products available to export");
+    return;
+  }
+
+  const sheetData = filteredProducts.map((product) => ({
+    "Product Name": product.name,
+    "Category": getCategoryName(product.category),
+    "Retail Price": product.price,
+    "Wholesale Price": product.wholesaleprice,
+    "Old Price": product.oldprice || "",
+    "Description": product.description || "",
+    "Status": product.status,
+    "Image URL": product.productimage || ""
+  }));
+
+  const worksheet = XLSX.utils.json_to_sheet(sheetData);
+
+  const workbook = XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(
+    workbook,
+    worksheet,
+    "Products"
+  );
+
+  worksheet["!cols"] = [
+    { wch: 30 },
+    { wch: 20 },
+    { wch: 15 },
+    { wch: 15 },
+    { wch: 15 },
+    { wch: 50 },
+    { wch: 15 },
+    { wch: 50 }
+  ];
+
+  XLSX.writeFile(
+    workbook,
+    `Products_${new Date().toISOString().slice(0, 10)}.xlsx`
+  );
+};
+
   // Safe helper utility to display the category name reliably on the table rows
   const getCategoryName = (categoryField: Category | string | null): string => {
     if (!categoryField) return 'General';
@@ -98,7 +144,12 @@ const ProductDetails: React.FC = () => {
         category: getCategoryId(editingProduct.category) || null
       };
 
-      const response = await axios.put(`${BASE_URL}/product/${editingProduct._id}`, payload);
+      const response = await axios.put(`${BASE_URL}/product/${editingProduct._id}`, payload , {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }
+);
       
       if (response.data.success) {
         // Map back update directly inline or re-trigger fetchInitialData() for structural consistency
@@ -117,7 +168,12 @@ const ProductDetails: React.FC = () => {
   const handleStatusChange = async (productId: string, newStatus: string) => {
     try {
       setUpdatingId(productId);
-      const response = await axios.put(`${BASE_URL}/product/${productId}`, { status: newStatus });
+      const response = await axios.put(`${BASE_URL}/product/${productId}`, { status: newStatus }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }
+);
       if (response.data.success) {
         setProducts(products.map(p => p._id === productId ? { ...p, status: newStatus } : p));
       }
@@ -144,7 +200,7 @@ const ProductDetails: React.FC = () => {
     <div className="rasi-products-container">
       <div className="rasi-products-header">
         <div className="header-info">
-          <h1>Inventory Management</h1>
+          <h1>Product Management</h1>
           <p className="subtitle">Update bakery product details and pricing</p>
         </div>
         
@@ -153,6 +209,13 @@ const ProductDetails: React.FC = () => {
             <Package size={14} />
             <span>{filteredProducts.length} Items</span>
           </div>
+          <button
+  className="export-btn"
+  onClick={handleExportToExcel}
+>
+  <Download size={16} />
+  Export
+</button>
           <div className="rasi-search-wrapper">
             {/* <Search size={18} /> */}
             <input 
@@ -178,7 +241,7 @@ const ProductDetails: React.FC = () => {
                 <tr>
                   <th>Product</th>
                   <th className="hide-on-mobile">Category</th>
-                  <th>Retail Price</th>
+                  <th>Price</th>
                   <th className="hide-on-mobile">Wholesale</th>
                   <th>Status</th>
                   <th>Action</th>
@@ -252,7 +315,7 @@ const ProductDetails: React.FC = () => {
           <div className="rasi-edit-modal">
             <div className="modal-header">
               <h3>Edit Product</h3>
-              <button onClick={() => setShowEditModal(false)}><X size={20}/></button>
+              <button style={{color: 'white', border: 'none', cursor: 'pointer'}} onClick={() => setShowEditModal(false)}><X size={20}/></button>
             </div>
             
             <form onSubmit={handleUpdateSubmit} className="rasi-edit-form">
@@ -294,7 +357,7 @@ const ProductDetails: React.FC = () => {
                 
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Retail Price (₹)</label>
+                    <label>Price (₹)</label>
                     <input 
                       type="number" 
                       value={editingProduct.price} 

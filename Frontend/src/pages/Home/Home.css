@@ -218,7 +218,7 @@
 
 .rasi-title-highlight h2::after {
   content: '';
-  position: absolute;
+  /* position: absolute; */
   bottom: 2px;
   left: 0;
   width: 40px;
@@ -243,10 +243,10 @@
 }
 
 .rasi-view-all {
-  background-color: var(--secondary);
-  color: var(--primary);
+  background-color: var(--primary);
+  color: var(--secondary);
   padding: 8px 20px;
-  border-radius: 20px;
+  border-radius: 10px;
   font-size: 14px;
   font-weight: 700;
   border: 1px solid var(--primary);
@@ -330,7 +330,10 @@
 .rasi-products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 24px;
+  /* gap: 24px; */
+  color: var(--primary);
+  text-align: center;
+  font-weight: bold;
 }
 
 .rasi-zigzag-row {
@@ -428,10 +431,11 @@
 
 .rasi-btn-outline {
   border: 2px solid var(--primary);
-  color: var(--primary);
+  color: var(--secondary);
   padding: 14px 32px;
-  border-radius: 30px;
+  border-radius: 10px;
   font-weight: 700;
+  background-color:var(--primary);
   font-size: 16px;
   transition: all 0.3s ease;
   display: inline-flex;

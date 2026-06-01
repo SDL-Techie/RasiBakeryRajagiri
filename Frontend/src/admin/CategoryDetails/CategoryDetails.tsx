@@ -26,6 +26,7 @@ const CategoryDetails: React.FC = () => {
       setLoading(true);
       setError(null);
       const response = await axios.get(API_URL);
+      console.log(response)
       if (response.data.success) {
         setCategories(response.data.data);
       } else {
@@ -55,7 +56,11 @@ const confirmDelete = async () => {
   if (!deleteTarget) return;
 
   try {
-    const response = await axios.delete(`${API_URL}/delete/${deleteTarget.id}`);
+    const response = await axios.delete(`${API_URL}/delete/${deleteTarget.id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
     if (response.data.success) {
       setCategories((prev) => prev.filter((cat) => cat._id !== deleteTarget.id));
       setDeleteTarget(null); // Close modal
@@ -80,7 +85,7 @@ const confirmDelete = async () => {
             {categories.length} Total Categories
           </div>
           <div className="rasi-search-wrapper">
-            {/* <Search size={18} /> */}
+            <Search size={18} />
             <input 
               type="text" 
               placeholder="Search category name..." 
@@ -133,7 +138,8 @@ const confirmDelete = async () => {
                     <span className="product-name">{cat.name}</span>
                   </td>
                   <td data-label="ID" className="hide-on-mobile">
-                    <code className="id-code">#CAT-{cat._id.slice(-5).toUpperCase()}</code>
+                    {/* <code className="id-code">#CAT-{cat._id.slice(-5).toUpperCase()}</code> */}
+                    <span className='cat-id'>{cat._id}</span>
                   </td>
                   <td data-label="Status">
                     <span className={`status-badge ${cat.status?.toLowerCase() === 'active' ? 'active' : 'inactive'}`}>

@@ -125,7 +125,7 @@ body {
   gap: 0.5rem;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--secondary);
+  /* color: var(--secondary); */
 }
 
 .date-input span {
@@ -434,7 +434,7 @@ body {
 
 .modal-header {
   padding: 1.25rem;
-  background: #fdfaf9;
+  /* background: #fdfaf9; */
   border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
@@ -449,7 +449,8 @@ body {
 }
 
 .modal-header-title h2 { 
-  color: #4B2E2B; 
+  /* color: #4B2E2B;  */
+  /* color: var(--white); */
   margin: 0; 
   font-size: 1.2rem; 
 }
@@ -488,7 +489,8 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  color: #999;
+  color:var(--primary);
+  /* color: #999; */
   padding: 0;
   display: flex;
   align-items: center;
@@ -727,9 +729,10 @@ body {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--secondary);
+    color: var(--white);
     border-bottom: 2px solid var(--bg-color);
     font-weight: 600;
+    background-color:var(--primary);
   }
 
   .professional-table tbody {
@@ -842,7 +845,7 @@ body {
     gap: 0.5rem;
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--secondary);
+    /* color: var(--secondary); */
   }
 
   .date-input input {

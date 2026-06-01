@@ -4,7 +4,7 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* ── Tokens ────────────────────────────────────────────────────── */
-:root {
+/* :root {
     --ro-primary:     #5D2E0C;
     --ro-primary-dk:  #3e2010;
     --ro-mid:         #8d6e63;
@@ -25,7 +25,7 @@
     --ro-shadow:      0 20px 50px rgba(93,46,12,0.12);
     --ro-shadow-sm:   0 4px 12px rgba(93,46,12,0.08);
     --ro-transition:  0.22s ease;
-}
+} */
 
 /* ── Base ──────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,7 +34,7 @@
     background-color: var(--ro-cream);
     min-height: 100vh;
     /* padding: 32px 20px 60px; */
-    padding:10px;
+    /* padding:10px; */
     font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
@@ -43,6 +43,7 @@
     margin: 0 auto;
     display: flex;
     gap: 28px;
+    padding: 20px;
     align-items: flex-start;
 }
 
@@ -391,7 +392,8 @@
 /* ── Submit button ── */
 .ro-submit-btn {
     width: 100%;
-    height: 52px;
+    /* height: 52px; */
+    min-height: 22px;
     background: var(--ro-mid);
     color: #fff;
     border: none;
@@ -1467,7 +1469,7 @@ Brown & Cream Professional Theme
 /* THE LEFT SIDE (Logistics Form) */
 .rasi-left-logistics {
     flex: 0 0 450px; /* Fixed width: 450px wide, won't shrink or grow */
-    background: #4a2c2a; /* Based on your theme colors */
+    background: #4a2c2a; 
     border-radius: 20px;
     padding: 25px;
     position: sticky; /* Keep it visible while scrolling products */
@@ -1754,7 +1756,7 @@ Brown & Cream Professional Theme
     flex-direction: column;
     gap: 8px;
     /* background-color:#6d4c41; */
-    background-color:#d7ccc8;
+    /* background-color:#d7ccc8; */
     border:none
 }
 
@@ -1767,7 +1769,7 @@ Brown & Cream Professional Theme
 }
 
 .input-field input, .input-field select {
-    background: white;
+    background: #d9d4d3;
     border: none;
     padding: 12px 15px;
     border-radius: 10px;
@@ -2325,6 +2327,31 @@ select.ro-input {
 .ro-next-btn:hover:not(:disabled) {
     background: var(--ro-coffee-dk);
     box-shadow: 0 6px 20px rgba(107, 58, 42, 0.3);
+}
+
+@media (max-width: 768px) {
+
+  .ro-next-btn,
+  .ro-submit-btn {
+    width: 100%;
+    min-height: 22px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    /* font-size: 15px; */
+    /* font-weight: 600; */
+
+    border-radius: 14px;
+    background: #6B3A2A;
+    color: #fff;
+
+    border: none;
+    cursor: pointer;
+  }
+
 }
 
 .ro-next-btn:disabled {
@@ -3196,10 +3223,11 @@ select.ro-input {
 /* ═══════════════════════════════════════════════════════════════
    MOBILE RESPONSIVE
    ═══════════════════════════════════════════════════════════════ */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
     .ro-container {
         flex-direction: column;
         gap: 20px;
+     
     }
 
     .ro-left {
@@ -3281,6 +3309,7 @@ select.ro-input {
   .ro-right {
     width: 100%;
     min-width: 100%;
+    padding:10px;
   }
 
   .ro-right {
@@ -3420,6 +3449,17 @@ select.ro-input {
     }
 }
 
+@media (max-width: 480px) {
+  .ro-submit-btn {
+    min-height: 22px;
+    padding: 8px 10px;
+    /* font-size: 15px; */
+    border-radius: 14px;
+  }
+}
+
+
+
 @media (max-width: 768px) {
 
     .ro-container {
@@ -3474,7 +3514,7 @@ select.ro-input {
     .ro-submit-btn {
         width: 100%;
         justify-content: center;
-       
+    
     }
 }
 

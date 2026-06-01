@@ -1,5 +1,6 @@
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
+import {HelmetProvider} from 'react-helmet-async';
 import App from './App.tsx';
 import './index.css';
 // Sample data helper is kept for manual testing only
@@ -21,6 +22,8 @@ if (!localStorage.getItem('rasi_wishlist')) {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
   </StrictMode>,
 );

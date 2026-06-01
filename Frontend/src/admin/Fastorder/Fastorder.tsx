@@ -25,7 +25,11 @@ const Fastorder: React.FC = () => {
     const fetchAllOrders = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:4000/api/v1/all-retailer-orders');
+            const res = await axios.get('http://localhost:4000/api/v1/all-retailer-orders', {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
             console.log(res)
             if (res.data.success) {
                 setOrders(res.data.data);
@@ -128,7 +132,11 @@ const Fastorder: React.FC = () => {
     const handleStatusChange = async (orderId: string, newStatus: string) => {
         setUpdating(orderId);
         try {
-            const res = await axios.put(`http://localhost:4000/api/v1/retailer-order/${orderId}`, { status: newStatus });
+            const res = await axios.put(`http://localhost:4000/api/v1/retailer-order/${orderId}`, { status: newStatus }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
             if (res.data.success) {
                 setOrders(prev => prev.map(o => o._id === orderId ? { ...o, status: newStatus } : o));
             }
@@ -392,9 +400,9 @@ const Fastorder: React.FC = () => {
                   <div>
                     <Logo />
 
-                    <h1>
+                    {/* <h1>
                       RAJAGIRI RASI BAKERY
-                    </h1>
+                    </h1> */}
 
                     <p>
                       Order ID:
@@ -411,7 +419,7 @@ const Fastorder: React.FC = () => {
 
                   <div className="company-info">
                     <h3>
-                      Rasi Bakery & Sweets
+                      RAJAGIRI RASI BAKERY
                     </h3>
 
                     <p>
@@ -664,7 +672,7 @@ const Fastorder: React.FC = () => {
 
                       <h3>
                         Thank you for choosing
-                        Rasi Bakery!
+                         RAJAGIRI RASI BAKERY!
                       </h3>
 
                       <p>

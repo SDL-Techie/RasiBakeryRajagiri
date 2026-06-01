@@ -99,7 +99,12 @@ const Retailerorder: React.FC = () => {
 
     useEffect(() => {
         if (!customer?.id) return;
-        axios.get<{ data: { addresses: Address[]; name: string; phoneno: string } }>(`${API}/profile/${customer.id}`)
+        axios.get<{ data: { addresses: Address[]; name: string; phoneno: string } }>(`${API}/profile/${customer.id}`,
+ {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  })
             .then(r => {
                 const p = r.data.data;
                 setAddresses(p.addresses || []);
@@ -148,7 +153,12 @@ const Retailerorder: React.FC = () => {
         const updated: Address[] = [...addresses, { ...newAddr, isDefault: addresses.length === 0 }];
         try {
             setIsSaving(true);
-            await axios.put(`${API}/profile/${customer?.id}`, { addresses: updated });
+            await axios.put(`${API}/profile/${customer?.id}`, { addresses: updated },
+ {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
             setAddresses(updated);
             showToast('✅ Address saved');
             setShowModal(false);
@@ -191,7 +201,11 @@ const Retailerorder: React.FC = () => {
                 const { data } = await axios.post(`${API}/initiate-retailer-payment`, {
                     pricing: orderPayload.pricing,
                     retailerDetails: orderPayload.retailerDetails,
-                });
+                },  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
                 if (!data.success) { showToast('❌ Payment initiation failed.'); setIsSaving(false); return; }
                 const rzp = data.razorpay;
                 const options: RzpOptions = {
@@ -201,7 +215,11 @@ const Retailerorder: React.FC = () => {
                     name: 'Rasi Bakery Wholesale', order_id: rzp.orderId,
                     handler: async (response: RzpResponse) => {
                         try {
-                            const vr = await axios.post(`${API}/verify-retailer-payment`, { ...response, orderPayload });
+                            const vr = await axios.post(`${API}/verify-retailer-payment`, { ...response, orderPayload } , {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  } );
                             vr.data.success ? completeFlow() : showToast('❌ Payment verification failed.');
                         } catch { showToast('❌ Verification error.'); }
                         finally { setIsSaving(false); }
@@ -214,7 +232,11 @@ const Retailerorder: React.FC = () => {
             } catch { showToast('❌ Failed to initiate payment.'); setIsSaving(false); }
         } else {
             try {
-                const { data } = await axios.post(`${API}/createretailerorder`, orderPayload);
+                const { data } = await axios.post(`${API}/createretailerorder`, orderPayload ,    {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
                 data.success ? completeFlow() : showToast('❌ Order failed.');
             } catch { showToast('❌ Submission failed.'); }
             finally { setIsSaving(false); }

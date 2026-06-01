@@ -140,9 +140,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         <div className="rasi-product-price-row">
           <span className="rasi-price">₹{currentDisplayPrice}</span>
-          {struckPrice && Number(struckPrice) > Number(currentDisplayPrice) && (
+          {/* {struckPrice && Number(struckPrice) > Number(currentDisplayPrice) && (
             <span className="rasi-old-price">₹{struckPrice}</span>
-          )}
+          )} */}
           {isRetailer && <span className="retailer-badge">Wholesale</span>}
         </div>
       </div>

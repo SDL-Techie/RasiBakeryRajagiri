@@ -1,18 +1,46 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import aboutHeroBg from '../img/about.png';
 import './About.css';
+import SEO from '../../components/SEO';
 
 const About: React.FC = () => {
   return (
+    <>
+
+    <SEO
+  title="About Us | Rajagiri Rasi Bakery"
+  description="Learn about Rajagiri Rasi Bakery and our tradition of baking fresh cakes, breads and sweets."
+  keywords="About Rajagiri Bakery, Bakery History, Rajagiri Bakery"
+/>
+
+
     <div className="rasi-about-page">
-      <section className="rasi-about-hero">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          About Rasi Bakery
-        </motion.h1>
-        <p>A tradition of taste and quality since 1995</p>
+      
+      {/* 2. Apply the imported image via inline style */}
+      <section 
+        className="rasi-about-hero" 
+        style={{ backgroundImage: `url(${aboutHeroBg})` }}
+      >
+        {/* Dark overlay to keep text legible */}
+        <div className="rasi-about-hero-overlay"></div>
+        
+        <div className="rasi-about-hero-content">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            About Rasi Bakery
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            A tradition of taste and quality since 1995
+          </motion.p>
+        </div>
       </section>
 
       <div className="rasi-about-container">
@@ -23,7 +51,7 @@ const About: React.FC = () => {
             </div>
             <div className="rasi-zigzag-content">
               <h2>Our Humble Beginnings</h2>
-              <p>Rasi Bakery started as a small family-owned shop with a single oven and a passion for baking. Our founder, Mr. Rasi, believed that everyone deserves access to fresh, high-quality bakery products made with love.</p>
+              <p>Rasi Bakery started as a small family-owned shop with a single oven and a passion for baking. Our founder believed that everyone deserves access to fresh, high-quality bakery products made with love.</p>
             </div>
           </div>
 
@@ -50,7 +78,7 @@ const About: React.FC = () => {
 
         <section className="rasi-stats-section">
           <div className="rasi-stat-item">
-            <h3>28+</h3>
+            <h3>30+</h3>
             <p>Years of Experience</p>
           </div>
           <div className="rasi-stat-item">
@@ -68,6 +96,7 @@ const About: React.FC = () => {
         </section>
       </div>
     </div>
+    </>
   );
 };
 

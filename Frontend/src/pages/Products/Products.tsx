@@ -1,10 +1,9 @@
-
-
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { LayoutGrid, List, Loader2, FilterX, Menu, X } from 'lucide-react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import './Products.css';
+import SEO from '@/src/components/SEO';
 
 interface Category {
   _id: string;
@@ -50,7 +49,7 @@ const Products: React.FC = () => {
         // 3. Process Products Mapping
         if (productsRes.data.success) {
           const data = productsRes.data.data;
-          console.log("Fetched products:", data);
+          //console.log("Fetched products:", data);
 
           const mappedProducts = data.map((item: any) => {
             // Support both object populate layouts or flat field references safely
@@ -146,6 +145,15 @@ const Products: React.FC = () => {
   }
 
   return (
+    <>
+ 
+ <SEO
+  title="Products | Rajagiri Rasi Bakery"
+  description="Explore cakes, sweets, breads and bakery products."
+  keywords="rajagiri bakery, cakes, breads, sweets, bakery products, online bakery, thanjavur bakery"
+  url="https://www.rajagirirasibakery.com/products"
+/>
+
     <div className="rasi-products-page">
       <div className="rasi-products-container">
         
@@ -280,6 +288,7 @@ const Products: React.FC = () => {
         </main>
       </div>
     </div>
+    </>
   );
 };
 

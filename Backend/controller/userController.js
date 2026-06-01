@@ -1,31 +1,61 @@
 import User from "../model/userModel.js"
 import Retailer from "../model/retailerModel.js";
+import bcryptjs from "bcryptjs";
+import { sendToken } from "../helper/jwtToken.js";
+import PointSetting from "../model/pointsetting.js";
+import UserPoint from "../model/userpointModel.js";
+import mongoose from "mongoose";
 
-
-
-// export const createuser = async (req, res) => {
+// const seedDefaultAdmin = async () => {
 //     try {
-//         const { phoneno } = req.body;
+//         const adminPhone = "8903652269";
+//         const adminExists = await User.findOne({ phoneno: adminPhone });
 
-//         // Check if user already exists
-//         const existingUser = await User.findOne({ phoneno });
-//         if (existingUser) {
-//             return res.status(400).json({
-//                 success: false,
-//                 message: "Phone number already registered. Please login."
+//         if (!adminExists) {
+//             await User.create({
+//admin@sdl!
+//                 name: "Super Admin",
+//                 phoneno: adminPhone,
+//                 password: hashedPassword, // Make sure your userModel hashes this via pre-save hooks!
+//                 role: "admin",
+//                 isRetailerVerified: false
 //             });
+//             console.log("✅ Default Super Admin successfully seeded in database.");
 //         }
-
-//         const user = await User.create(req.body);
-//         res.status(201).json({
-//             success: true,
-//             message: "Successfully Registered",
-//             data: user,
-//         });
-//     } catch (err) {
-//         res.status(500).json({ success: false, message: err.message });
+//     } catch (error) {
+//         console.error("❌ Error seeding default admin:", error.message);
 //     }
 // };
+
+
+const seedDefaultAdmin = async () => {
+    try {
+        const adminPhone = "8903652269";
+        const adminExists = await User.findOne({ phoneno: adminPhone });
+
+        if (!adminExists) {
+            // Explicitly generate the salt and hash block for the default credentials
+            const salt = await bcryptjs.genSalt(10);
+            const hashedPassword = await bcryptjs.hash("admin@sdl", salt);
+
+            await User.create({
+                name: "Super Admin",
+                phoneno: adminPhone,
+                password: "admin@sdl", // ✅ Fixed: Variable is now defined properly
+                role: "admin",
+                isRetailerVerified: false
+            });
+            //console.log("✅ Default Super Admin successfully seeded in database.");
+        }
+    } catch (error) {
+        console.error("❌ Error seeding default admin:", error.message);
+    }
+};
+if (mongoose.connection.readyState === 1) {
+    seedDefaultAdmin();
+} else {
+    mongoose.connection.once("open", () => seedDefaultAdmin());
+}
 
 export const createuser = async (req, res) => {
     try {
@@ -70,15 +100,22 @@ export const createuser = async (req, res) => {
             isRetailerVerified: isVerified
         });
 
-        res.status(201).json({
-            success: true,
-            message: userRole === "retailer" ? "Retailer Registered!" : "Successfully Registered!",
-            data: {
-                id: newUser._id,
-                name: newUser.name,
-                role: newUser.role
-            }
-        });
+        // const token = newUser.getJWTToken();
+
+        // res.status(201).json({
+        //     success: true,
+        //     message: userRole === "retailer" ? "Retailer Registered!" : "Successfully Registered!",
+        //     data: {
+        //         id: newUser._id,
+        //         name: newUser.name,
+        //         role: newUser.role,
+               
+        //         // password: newUser.password,
+        //     },
+        //      token: token
+        // });
+
+        sendToken(newUser,201,res);
 
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
@@ -99,7 +136,7 @@ export const loginUser = async (req, res) => {
         }
 
         // 2. Find user by Phone Number
-        const user = await User.findOne({ phoneno });
+        const user = await User.findOne({ phoneno }).select('+password'); // Explicitly include password for verification
 
         if (!user) {
             return res.status(401).json({
@@ -107,7 +144,7 @@ export const loginUser = async (req, res) => {
                 message: "Phone number not registered"
             });
         }
-        const isPasswordMatched = user.password === password;
+        const isPasswordMatched = await user.comparePassword(password);
 
         if (!isPasswordMatched) {
             return res.status(401).json({
@@ -115,20 +152,23 @@ export const loginUser = async (req, res) => {
                 message: "Invalid credentials"
             });
         }
-
+      //  const token=user.getJWTToken();
         
-        // 4. Success Response
-        res.status(200).json({
-            success: true,
-            message: `Welcome back, ${user.name}`,
-            data: {
-                _id: user._id,
-                name: user.name,
-                phoneno: user.phoneno,
-                role: user.role, 
-                addresses: user.addresses 
-            }
-        });
+      //   // 4. Success Response
+      //   res.status(200).json({
+      //       success: true,
+      //       message: `Welcome back, ${user.name}`,
+      //       data: {
+      //           _id: user._id,
+      //           name: user.name,
+      //           phoneno: user.phoneno,
+      //           role: user.role, 
+      //           addresses: user.addresses 
+      //       },
+      //       token: token
+      //   });
+
+      sendToken(user,200,res);
 
     } catch (err) {
         res.status(500).json({
@@ -137,6 +177,19 @@ export const loginUser = async (req, res) => {
         });
     }
 };
+
+export const Logoutuser=async(req,res)=>{
+  const options={
+    expires:new Date(Date.now()),
+    httpOnly:true,
+    secure: process.env.NODE_ENV === "production" ? true : false,
+    sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+  }
+  res.status(200).cookie("token", null, options).json({
+    success: true,
+    message: "Logged out successfully"
+  });
+}
 
 // userController.js
 
@@ -203,25 +256,116 @@ export const getUserById = async (req, res) => {
   }
 };
 
+// export const getAllUsers = async (req, res) => {
+//     try {
+//         // Find all users but exclude passwords for security
+//         const users = await User.find().select('-password').sort({ createdAt: -1 });
+        
+//         res.status(200).json({
+//             success: true,
+//             count: users.length,
+//             data: users
+//         });
+//     } catch (error) {
+//         res.status(500).json({
+//             success: false,
+//             message: "Failed to fetch users",
+//             error: error.message
+//         });
+//     }
+// };
+
+
 export const getAllUsers = async (req, res) => {
     try {
-        // Find all users but exclude passwords for security
-        const users = await User.find().select('-password').sort({ createdAt: -1 });
+        // 1. Fetch system-wide point settings configurations rules
+        const settings = await PointSetting.findOne();
         
+        // 2. Fetch manual loyalty profile overrides map for quick reference checks
+        const manualUserPoints = await UserPoint.find();
+        const userPointsMap = new Map(manualUserPoints.map(up => [up.userPhone, up]));
+
+        // 3. Aggregate all users with their corresponding order payment records
+        const usersWithMetrics = await User.aggregate([
+            {
+                // Exclude passwords and sensitive data for security right away
+                $project: {
+                    password: 0
+                }
+            },
+            {
+                // Core Lookup: Match users down to their placed order collection metrics
+                $lookup: {
+                    from: "orders", // Must exactly match your MongoDB orders collection name
+                    localField: "phoneno",
+                    foreignField: "customerDetails.phone",
+                    as: "historicalOrders"
+                }
+            },
+            {
+                // Structure dynamic field mapping calculations
+                $addFields: {
+                    totalPurchase: {
+                        $sum: {
+                            $map: {
+                                input: "$historicalOrders",
+                                as: "order",
+                                in: {
+                                    $cond: [
+                                        { $eq: ["$$order.status", "Cancelled"] },
+                                        0,
+                                        { $ifNull: ["$$order.pricing.total", 0] }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                // Sort users with newly registered profiles displaying first
+                $sort: { createdAt: -1 }
+            }
+        ]);
+
+        // 4. Map over results to inject accurate, verified current loyalty point levels
+        const finalizedUsersList = usersWithMetrics.map(user => {
+            const phone = user.phoneno;
+            const finalAmountSpent = user.totalPurchase || 0;
+
+            // Calculate live mathematical point baseline fallback defaults
+            let liveCalculatedPoints = 0;
+            if (settings) {
+                liveCalculatedPoints = Math.floor(finalAmountSpent / settings.minOrderAmount) * settings.pointsEarnedPerOrder;
+            }
+
+            // Check if this explicit user phone contains a verified manual reward profile override
+            const balanceOverride = userPointsMap.get(phone);
+            const currentPoints = balanceOverride?.currentPoints !== undefined ? balanceOverride.currentPoints : liveCalculatedPoints;
+
+            return {
+                ...user,
+                historicalOrders: undefined, // Clears the massive order arrays from bloating the payload response
+                totalPurchase: finalAmountSpent,
+                currentPoints: currentPoints
+            };
+        });
+
+        // 5. Send optimized payload package directly back down to React components
         res.status(200).json({
             success: true,
-            count: users.length,
-            data: users
+            count: finalizedUsersList.length,
+            data: finalizedUsersList
         });
+
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Failed to fetch users",
+            message: "Failed to fetch users with live purchase metrics",
             error: error.message
         });
     }
 };
-
 
 export const verifyAndRegisterRetailer = async (req, res) => {
     try {
@@ -331,4 +475,64 @@ export const retailerLogin = async (req, res) => {
       message: err.message
     });
   }
+};
+
+
+export const updateUserRole = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { role } = req.body;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid User ID structure format."
+            });
+        }
+
+        if (!['customer', 'admin'].includes(role)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid role assignment requested. Select Admin or Customer."
+            });
+        }
+
+        // 1. Fetch user to verify super admin status safely before changes
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User account not found."
+            });
+        }
+
+        const targetPhone = user.phoneno || user.phone || "";
+        if (targetPhone === "8903652269") {
+            return res.status(403).json({
+                success: false,
+                message: "The root Super Admin configuration cannot be modified."
+            });
+        }
+
+        // 2. 🔥 Update role directly without triggering pre-save hooks
+        const updatedUser = await User.findByIdAndUpdate(
+            id,
+            { $set: { role: role } },
+            { new: true, runValidators: true }
+        ).select("-password");
+
+        return res.status(200).json({
+            success: true,
+            message: `User privileges updated to ${role} successfully`,
+            data: updatedUser
+        });
+
+    } catch (error) {
+        console.error("CRITICAL BACKEND ROLE UPDATE ERROR:", error); 
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error occurred while editing account permissions.",
+            error: error.message
+        });
+    }
 };

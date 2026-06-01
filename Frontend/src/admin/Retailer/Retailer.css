@@ -1,3 +1,9 @@
+/* ============================================================
+   RASI RETAILER — FULL RESPONSIVE CSS
+   Palette: #4B2E2B (Coffee) | #8C5A3C (Terra) | #C08552 (Ochre) | #FFF8F0 (Cream)
+   ============================================================ */
+
+/* ── Loading ── */
 .rasi-loading-state {
   display: flex;
   flex-direction: column;
@@ -190,7 +196,8 @@
 .input-field input::placeholder { color: #b5a090; }
 
 .form-submit-btn {
-  background: #C08552;
+  /* background: #C08552; */
+  background: #4B2E2B;
   color: white;
   border: none;
   padding: 0 24px;
@@ -723,7 +730,7 @@
 
 .modal-header {
   padding: 20px;
-  background: var(--primary);
+  /* background: var(--primary); */
   color: white;
   display: flex;
   justify-content: space-between;

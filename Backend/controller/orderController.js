@@ -11,6 +11,7 @@ const razorpayInstance=new Razorpay({
 })
 
 
+
 export const initiateRazorpayPayment = async (req, res) => {
   try {
     const { amount } = req.body; // Raw numeric pricing total (e.g., 450)

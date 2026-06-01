@@ -1,4 +1,9 @@
-:root {
+/* ============================================
+   PRODUCTS PAGE - RESPONSIVE CSS
+   Mobile First Approach
+   ============================================ */
+
+/* :root {
   --primary: #a0522d;
   --white: #ffffff;
   --light-gray: #f1f3f6;
@@ -7,9 +12,11 @@
   --dark-gray: #333333;
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
+} */
 
-
+/* ============================================
+   GENERAL STYLES
+   ============================================ */
 
 .rasi-products-page {
   /* background-color: var(--light-gray); */
@@ -97,8 +104,8 @@
   display: none;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
   border-bottom: 1px solid var(--border-gray);
 }
 
@@ -258,8 +265,8 @@
 .rasi-products-main {
   flex: 1;
   background-color: var(--white);
-  margin-top:40px;
-  padding: 16px;
+  /* margin-top:40px; */
+  padding: 10px;
   box-shadow: var(--shadow);
   border-radius: 4px;
   min-width: 0;
@@ -282,6 +289,7 @@
   font-size: 16px;
   color: var(--dark-gray);
   font-weight: 500;
+  text-align: center;
 }
 
 .rasi-products-controls {
@@ -525,7 +533,7 @@
     right: 0;
     top: 0;
     z-index: 1000;
-    height: auto;
+    height: 100%;
     max-height: 90vh;
     border-radius: 0;
     margin-bottom: 0;
@@ -550,9 +558,9 @@
     display: block;
   }
 
-  .rasi-products-main {
+  /* .rasi-products-main {
     padding: 12px;
-  }
+  } */
 
   .rasi-products-header {
     gap: 8px;
@@ -622,7 +630,9 @@ input[type="checkbox"]:focus-visible {
     display: none;
   }
 
-
+  .rasi-products-page {
+    /* background-color: var(--white); */
+  }
 
   .rasi-products-display.grid {
     grid-template-columns: repeat(2, 1fr);

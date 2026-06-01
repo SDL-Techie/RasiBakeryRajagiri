@@ -3,7 +3,7 @@
    Mobile First Approach
 ════════════════════════════════════════════════════════════════ */
 
-:root {
+/* :root {
   --primary-blue: #2563eb;
   --light-blue: #eff6ff;
   --border-color: #e5e7eb;
@@ -16,7 +16,7 @@
   --red-text: #e11d48;
   --green-light: #f0fdf4;
   --green-text: #16a34a;
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -25,7 +25,7 @@
 /* Container & Layout */
 .rasi-pincode-container {
   padding: 1rem;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   min-height: 100vh;
   font-family: 'Inter', -apple-system, sans-serif;
   color: var(--text-primary);
@@ -90,11 +90,11 @@
 .rasi-search-box input {
   width: 100%;
   padding: 0.65rem 1rem 0.65rem 2.5rem;
-  border: 1px solid var(--border-color);
+  border: 0.2px solid #3e2723;
   border-radius: 10px;
   font-size: 0.85rem;
   transition: all 0.2s ease;
-  background-color: var(--bg-light);
+  background-color: var(--white);
   color: var(--text-primary);
   outline: none;
   box-sizing: border-box;
@@ -103,7 +103,7 @@
 .rasi-search-box input:focus {
   outline: none;
   border-color: var(--primary-blue);
-  background-color: var(--bg-card);
+  background-color: var(--white);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
@@ -117,6 +117,7 @@
 .form-card {
   margin-bottom: 1.5rem;
   padding: 1rem;
+
 }
 
 .pincode-form {
@@ -141,7 +142,7 @@
 
 .id-text {
   font-family: 'JetBrains Mono', monospace;
-  color: var(--text-muted);
+  /* color: var(--white); */
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -170,7 +171,7 @@
    TABLE SECTION - MOBILE FIRST (CARD VIEW)
 ════════════════════════════════════════════════════════════════ */
 .rasi-table-card {
-  background: var(--bg-card);
+  /* background: var(--primary); */
   border-radius: 16px;
   border: 1px solid #eaeaea;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02);
@@ -298,12 +299,12 @@
 
 .role-tag.admin {
   background-color: var(--red-light);
-  color: var(--red-text);
+  /* color: var(--white); */
 }
 
 .role-tag.customer {
-  background-color: var(--green-light);
-  color: var(--green-text);
+  background-color: #f0fdf4;
+  color: #16653d;
 }
 
 /* Delete Button */
@@ -444,8 +445,10 @@ input[type=number] {
 
   .rasi-users-table th {
     padding: 1rem 1rem;
-    background-color: #f8fafc;
-    color: var(--text-secondary);
+    /* background-color: #f8fafc; */
+    background-color: var(--primary);
+
+    color: var(--white);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -478,6 +481,7 @@ input[type=number] {
     padding: 1rem;
     border-bottom: 1px solid #f8fafc;
     color: var(--text-primary);
+    background-color: white;
     font-size: 0.9rem;
     vertical-align: middle;
   }
@@ -543,6 +547,8 @@ input[type=number] {
   .form-card {
     margin-bottom: 2rem;
     padding: 1.5rem;
+    
+
   }
 
   .form-row {
@@ -636,6 +642,7 @@ input[type=number] {
   .rasi-users-table tr {
     padding: 0.8rem;
     margin-bottom: 0.5rem;
+    background: var(--white);
   }
 
   .rasi-users-table td {
@@ -687,5 +694,89 @@ input[type=number] {
 
   .admin-loading-state {
     min-height: 50vh;
+  }
+}
+
+.delete-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.delete-modal {
+  background: #fff;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  animation: popupScale 0.25s ease;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.modal-header svg {
+  /* color: #ef4444; */
+/* color:#eaeaea; */
+/* color: var(--primary); */
+padding:2px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.delete-modal p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.cancel-btn,
+.confirm-delete-btn {
+  flex: 1;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cancel-btn {
+  background: #e5e7eb;
+}
+
+.confirm-delete-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.confirm-delete-btn:hover {
+  background: #dc2626;
+}
+
+@keyframes popupScale {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }

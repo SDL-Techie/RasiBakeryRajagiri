@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Youtube, MapPin, Phone, Mail } from 'lucide-react';
@@ -51,15 +50,15 @@ const Footer: React.FC = () => {
           <h3>Contact Us</h3>
           <div className="rasi-contact-info">
             <div className="contact-item">
-              <MapPin size={18} className="contact-icon" /> 
+              {/* <MapPin size={18} className="contact-icon" />  */}
               <span>Madarasa Street, Rajagiri, Thanjavur, TN 614207</span>
             </div>
             <div className="contact-item">
-              <Phone size={18} className="contact-icon" /> 
+              {/* <Phone size={18} className="contact-icon" />  */}
               <a href="tel:+919443476738">+91 94434 76738</a>
             </div>
             <div className="contact-item">
-              <Mail size={18} className="contact-icon" /> 
+              {/* <Mail size={18} className="contact-icon" />  */}
               <a href="mailto:rajagirirasibakery@gmail.com">rajagirirasibakery@gmail.com</a>
             </div>
           </div>

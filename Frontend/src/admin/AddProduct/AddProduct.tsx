@@ -10,6 +10,8 @@ import './AddProduct.css';
 const BASE_URL = "http://localhost:4000/api/v1";
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dyggibpsi/image/upload";
 const UPLOAD_PRESET = "Rajagiri Rasi Bakery";
+const DEFAULT_IMAGE =
+  "https://i.pinimg.com/736x/e4/58/cf/e458cf4771adc487f8ae39bc248270b6.jpg";
 
 interface Category { _id: string; name: string; }
 
@@ -48,34 +50,74 @@ const AddProduct: React.FC = () => {
         }
     };
 
-    // --- EXCEL IMPORT LOGIC ---
-    const handleExcelImport = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
+const handleExcelImport = async (
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
+  try {
+    const file = e.target.files?.[0];
 
-        const reader = new FileReader();
-        reader.onload = (evt) => {
-            const bstr = evt.target?.result;
-            const wb = XLSX.read(bstr, { type: 'binary' });
-            const wsname = wb.SheetNames[0];
-            const ws = wb.Sheets[wsname];
-            const data: any[] = XLSX.utils.sheet_to_json(ws);
+    if (!file) return;
 
-            if (data.length > 0) {
-                const firstRow = data[0];
-                setFormData(prev => ({
-                    ...prev,
-                    name: firstRow.name || '',
-                    price: firstRow.price?.toString() || '',
-                    wholesalePrice: firstRow.wholesalePrice?.toString() || '',
-                    description: firstRow.description || '',
-                    ingredients: firstRow.ingredients || ''
-                }));
-                setMessage({ type: 'success', text: "Data imported from Excel! Please upload an image to finish." });
-            }
-        };
-        reader.readAsBinaryString(file);
-    };
+    const buffer = await file.arrayBuffer();
+
+    const workbook = XLSX.read(buffer, {
+      type: "array",
+    });
+
+    const sheetName = workbook.SheetNames[0];
+
+    const worksheet = workbook.Sheets[sheetName];
+
+    const excelRows: any[] =
+      XLSX.utils.sheet_to_json(worksheet);
+
+    if (!excelRows.length) {
+      alert("Excel file is empty");
+      return;
+    }
+
+    const formattedProducts = excelRows.map((row) => ({
+      name: row.name || "",
+      category: row.category || "",
+      price: Number(row.price) || 0,
+      wholesaleprice: Number(row.wholesaleprice) || 0,
+      oldprice: Number(row.oldprice) || 0,
+      description: row.description || "",
+      ingredients: row.ingredients || "",
+      status: row.status || "Active",
+
+      productimage:
+        row.productimage &&
+        String(row.productimage).trim() !== ""
+          ? row.productimage
+          : DEFAULT_IMAGE,
+    }));
+
+    const res = await axios.post(
+      `${BASE_URL}/products/bulk`,
+      {
+        products: formattedProducts,
+      }
+    );
+
+    if (res.data.success) {
+      alert(
+        `${formattedProducts.length} products imported successfully`
+      );
+
+   setMessage({
+  type: "success",
+  text: `${formattedProducts.length} products imported successfully`,
+});
+
+      // Clear file input
+      e.target.value = "";
+    }
+  } catch (error) {
+    console.error("Excel Import Error:", error);
+    alert("Import failed");
+  }
+};
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -95,7 +137,11 @@ const AddProduct: React.FC = () => {
                 productimage: cloudRes.data.secure_url
             };
 
-            const res = await axios.post(`${BASE_URL}/products`, payload);
+            const res = await axios.post(`${BASE_URL}/products`, payload,  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
             if (res.data.success) {
                 setMessage({ type: 'success', text: 'Product added to Rasi Bakery inventory!' });
                 setFormData({ name: '', category: '', price: '', wholesalePrice: '', oldPrice: '', description: '', ingredients: '', status: 'Active', image: null });
@@ -113,12 +159,24 @@ const AddProduct: React.FC = () => {
                     <h1><PackagePlus size={28} /> Add New Product</h1>
                     <p>Create a new item for Rasi Bakery & Sweets</p>
                 </div>
-                {/* <div className="excel-import-wrapper">
-                    <input type="file" id="excel-up" accept=".xlsx, .xls" onChange={handleExcelImport} hidden />
-                    <label htmlFor="excel-up" className="excel-btn">
-                        <FileSpreadsheet size={18} /> Import from Excel
-                    </label>
-                </div> */}
+             
+             <div className="excel-import-wrapper">
+  <input
+    type="file"
+    id="excel-up"
+    accept=".xlsx,.xls"
+    onChange={handleExcelImport}
+    hidden
+  />
+
+  <label
+    htmlFor="excel-up"
+    className="excel-btn"
+  >
+    <FileSpreadsheet size={18} />
+    Import Products
+  </label>
+</div>
             </div>
 
             {message && (
@@ -154,7 +212,7 @@ const AddProduct: React.FC = () => {
                             <h3><IndianRupee size={16} /> Pricing</h3>
                             <div className="ap-row">
                                 <div className="ap-input-group">
-                                    <label>Retail Price</label>
+                                    <label>Price</label>
                                     <input type="number" name="price" value={formData.price} onChange={handleChange} required placeholder="0.00" />
                                 </div>
                                 <div className="ap-input-group">

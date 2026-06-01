@@ -1,10 +1,10 @@
-:root {
+/* :root {
     --coffee: #4B2E2B;
     --coffee-light: #6D4C41;
     --studio-white: #ffffff;
     --glass: rgba(255, 255, 255, 0.8);
     --border: #e2e8f0;
-}
+} */
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -43,7 +43,7 @@
 .excel-import-wrapper { flex-shrink: 0; }
 
 .excel-btn {
-    background: #107c41;
+    background: var(--primary);
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
@@ -57,7 +57,7 @@
     white-space: nowrap;
 }
 
-.excel-btn:hover { background: #0a5c30; }
+.excel-btn:hover { background: var(--secondary) }
 
 /* ── Alert ── */
 .ap-alert {
@@ -78,9 +78,9 @@
 
 /* ── Glass Form ── */
 .ap-glass-form {
-    background: var(--glass);
+    background:rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
-    border: 1px solid var(--studio-white);
+    border: 1px solid #ffffff;
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
@@ -95,7 +95,7 @@
 
 /* ── Section Card ── */
 .ap-section {
-    background: var(--studio-white);
+    background:#ffffff;
     padding: 20px;
     border-radius: 12px;
     margin-bottom: 20px;
@@ -197,7 +197,7 @@
 .ap-submit-btn {
     width: 100%;
     padding: 16px;
-    background: var(--coffee);
+    background: var(--primary);
     color: white;
     border: none;
     border-radius: 12px;

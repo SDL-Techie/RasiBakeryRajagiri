@@ -279,6 +279,7 @@
 .rasi-products-container {
     /* padding: 2rem; */
     padding:10px;
+    /* padding-top: 100px; */
     max-width: 1400px;
     margin: 0 auto;
     background-color: #FFF8F0;
@@ -307,16 +308,95 @@
 
 .header-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 
+.export-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:none;
+  cursor:pointer;
+  padding:10px 14px;
+  border-radius:8px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:600;
+}
+
+.export-btn:hover{
+  opacity:.9;
+}
+
 .count-pill {
-    background: #C08552;
-    color: white;
+    /* color: white; */
     padding: 8px 16px;
-    border-radius: 50px;
+    border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 600;
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FIXED PAGINATION ARCHITECTURE
+════════════════════════════════════════════════════════════════ */
+
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px;
+    border-top: 1px solid #f0e6da;
+    background-color: #ffffff;
+}
+
+.pagination-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #4B2E2B;
+    border-radius: 10px;
+    background: #4B2E2B;
+    color: #FFF8F0; /* Clean cream contrast color for the arrows */
+    
+    /* 🔥 CRITICAL FIXES FOR THE ARROW GRAPHICS */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Ensure the Lucide SVG icon reads the button color values perfectly */
+.pagination-btn svg {
+    display: block;
+    color: currentColor;
+    flex-shrink: 0;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: #8C5A3C; /* Terra Cotta shift on interaction */
+    border-color: #8C5A3C;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(140, 90, 60, 0.2);
+}
+
+.pagination-btn:disabled {
+    background: #f4ece4;
+    border-color: #eaddcf;
+    color: #c4b5a6;
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.pagination-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4B2E2B;
+    letter-spacing: -0.01em;
+    user-select: none;
 }
 
 /* Search Input */
@@ -475,7 +555,7 @@
 .rasi-edit-modal {
     background: white;
     width: 90%;
-    height: 98%;
+    height: auto;
     max-width: 500px;
     border-radius: 12px;
     overflow: hidden;
@@ -483,16 +563,15 @@
     animation: slideUp 0.3s ease-out;
 }
 
-.modal-header {
+ /* {
     padding: 16px 20px;
     border-bottom: 1px solid #eee;
     display: flex;
   
     justify-content: space-between;
     align-items: center;
-    /* background: #f8f9fa; */
     background: #4B2E2B;
-}
+} */
 
 .modal-header h3 {
     color: white;

@@ -8,31 +8,31 @@
     --sidebar-bg: #3e2723;
     --white: #ffffff;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --sidebar-width: 260px;
 }
 
-.dark {
-    --bg-cream: #1a1210;
-    --white: #2c1e1b;
-    --primary-brown: #efebe9;
-    --light-brown: #d7ccc8;
-    --sidebar-bg: #120b0a;
-}
 
 * {
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
 }
 
-.rasi-admin-layout {
+/* .rasi-admin-layout {
     display: flex;
     min-height: 100vh;
     background-color: var(--bg-cream);
     color: var(--primary-brown);
-}
+} */
 
+.rasi-admin-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #fdfbf9;
+    color: #4e342e;
+}
 /* --- SIDEBAR --- */
 .rasi-admin-sidebar {
-    width: 280px;
+    width: var(--sidebar-width);
     background-color: var(--sidebar-bg);
     height: 100vh;
     position: fixed;
@@ -153,18 +153,29 @@
 .rasi-logout-btn:hover { background: #d32f2f; color: white; }
 
 /* --- MAIN CONTENT --- */
-.rasi-admin-main {
+/* .rasi-admin-main {
     flex: 1;
     margin-left: 0;
     transition: var(--transition);
     width: 100%;
+} */
+
+
+.rasi-admin-main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  min-width: 0;
+  width: auto;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
 }
 
 .rasi-admin-main.shifted {
     margin-left: 280px;
 }
 
-.rasi-admin-header {
+/* .rasi-admin-header {
     height: 70px;
     background: var(--white);
     display: flex;
@@ -175,12 +186,24 @@
     top: 0;
     z-index: 900;
     border-bottom: 1px solid rgba(0,0,0,0.05);
+} */
+
+
+.rasi-admin-header {
+  height: var(--header-height);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .header-left, .header-right {
     display: flex;
     align-items: center;
-    gap: 20px;
+    /* gap: 20px; */
 }
 
 .breadcrumb {
@@ -267,16 +290,15 @@
     .rasi-admin-content-inner { padding: 15px; }
 }
 
-:root {
+/* :root {
   --sidebar-width: 260px;
   --header-height: 70px;
   --primary-gold: #d4a373;
   --bg-light: #f8f9fa;
-  --bg-dark: #111827;
   --sidebar-dark: #1f2937;
   --text-main: #1f2937;
   --transition: all 0.3s ease;
-}
+} */
 
 .rasi-admin-layout {
   display: flex;
@@ -316,7 +338,7 @@
 .logo-dot {
   width: 12px;
   height: 12px;
-  background: var(--primary-gold);
+  background: #d4a373;;
   border-radius: 50%;
 }
 
@@ -358,8 +380,8 @@
 .rasi-admin-menu li.active a,
 .rasi-admin-menu li a:hover {
   /* background: rgba(212, 163, 115, 0.1); */
-  color: var(--primary-gold);
-  border-right: 3px solid var(--primary-gold);
+  color: var(--white);
+  border-right: 3px solid #d4a373;
 }
 
 .menu-icon { font-size: 1.1rem; }
@@ -448,9 +470,23 @@
   color: #6b7280;
 }
 
-.rasi-admin-content-wrapper {
-  /* padding: 30px; */
+/* .rasi-admin-content-wrapper {
+
   min-height: calc(100vh - var(--header-height));
+} */
+
+
+/* .rasi-admin-content-wrapper {
+  min-height: calc(100vh - var(--header-height));
+  width: 100%;
+  overflow-x: hidden;
+} */
+
+.rasi-admin-content-wrapper {
+  min-height: calc(100vh - var(--header-height));
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 /* Responsive Overrides */
@@ -458,7 +494,7 @@
   .rasi-admin-main { margin-left: 0; }
   
   .rasi-admin-sidebar {
-    width: 280px;
+  width: var(--sidebar-width);
   }
   
   .rasi-sidebar-overlay {
@@ -473,9 +509,6 @@
 }
 
 @media (max-width: 480px) {
-  .rasi-admin-content-wrapper { 
-    /* padding: 15px;  */
-  }
   .rasi-admin-header { padding: 0 15px; }
 }
 
@@ -504,3 +537,4 @@
   background: #ef4444;
   color: white;
 }
+

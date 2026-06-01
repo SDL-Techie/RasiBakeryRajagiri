@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCustomerAuth } from '../../context/CustomerAuthContext';
+import { ArrowLeft } from "lucide-react";
 import axios from 'axios';
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import "./ProductDetails.css"
 import {
   Star, ShoppingCart, Zap, Heart, Share2,
   Loader, Leaf, Info, Loader2
 } from 'lucide-react';
+import SEO from '@/src/components/SEO';
 
 
 
@@ -80,7 +83,6 @@ const isRetailer = isLoggedIn && customer?.role?.toLowerCase() === 'retailer';
       try {
         const res = await axios.get(`http://localhost:4000/api/v1/product/${id}`);
         const data = res.data.data;
-
         const gallery = data.images && data.images.length > 0 ? data.images : [data.productimage];
         const ingredientList = data.ingredients 
           ? data.ingredients.split(/ {2,}/).filter((i: string) => i.trim() !== "") 
@@ -215,7 +217,23 @@ const handleBuyNow = () => {
   const discountPercent = !isRetailer && product.oldPrice ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100) : 0;
 
   return (
+    <>
+<SEO
+  title={`${product.name} | Rajagiri Rasi Bakery`}
+  description={product.description}
+  keywords={`${product.name}, ${product.categoryName}, bakery products, Rajagiri Rasi Bakery`}
+  url={`https://www.rajagirirasibakery.com/product/${product.id}`}
+/>
+
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="rasi-product-details-page">
+      <Toaster position="top-center" reverseOrder={false} />
+      <div
+  className="rasi-back-btn"
+  onClick={() => navigate(-1)}
+>
+  <ArrowLeft size={18} />
+  <span>Back</span>
+</div>
       <div className="rasi-pd-container">
         {/* Left Side: Images & Action Buttons */}
         <div className="rasi-pd-left">
@@ -319,6 +337,7 @@ const handleBuyNow = () => {
         </div>
       </div>
     </motion.div>
+    </>
   );
 };
 

@@ -18,7 +18,10 @@ import Retailerlogin from './pages/Retailerlogin/Retailerlogin';
 import Retailerorder from './pages/Retailerorder/Retailerorder';
 import Retailerorderadmin from './admin/Retailerorder/Retailerorderadmin';
 import Fastorder from './admin/Fastorder/Fastorder';
-import Userpoint from './components/Userpoints/Userpoint'; // Fixed: Uncommented to resolve the <Userpoint /> compilation reference
+import Userpoint from './pages/Userpoints/Userpoint'; 
+import AdminProtectedRoute from "./components/AdminProtectedRoute"; 
+import Coupon from './pages/Coupon/Coupon';
+import NotFound from './components/NotFound';
 
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home/Home'));
@@ -52,14 +55,6 @@ const Loading = () => (
   </div>
 );
 
-// 1. Define explicit types for your component props
-// interface AppContentProps {
-//   theme: string;
-//   toggleTheme: () => void;
-// }
-
-// 2. Destructure properties safely using the defined interface
-// const AppContent: React.FC<AppContentProps> = ({ theme, toggleTheme }) => {
 const AppContent: React.FC = () => {
   const { cartCount, toast, hideToast } = useCart();
   const location = useLocation();
@@ -85,12 +80,7 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="rasi-app">
-      {!isAdmin && 
-      // <Navbar cartCount={cartCount} theme={theme} toggleTheme={toggleTheme} />
-      <Navbar
-  cartCount={cartCount}
-/>
-      }
+      {!isAdmin && <Navbar cartCount={cartCount} />}
       <PWAInstall />
       <Toast show={toast.show} message={toast.message} onClose={hideToast} />
       
@@ -99,6 +89,7 @@ const AppContent: React.FC = () => {
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
+            {/* Public Route Fix: Adjusted path from "/products" to follow standard naming structure if needed */}
             <Route path="/products" element={<Products />} />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
@@ -112,27 +103,31 @@ const AppContent: React.FC = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/checkout" element={<Checkout />} />
-            <Route path="/retailerlogin" element={<Retailerlogin/>} />
-            <Route path="/retailerorder" element={<Retailerorder/>} />
-            <Route path="/userpoints" element={<Userpoint/>}/>
-            <Route path="/categoryproduct/:categoryname" element={<CategoryProduct/>}/>
+            <Route path="/retailerlogin" element={<Retailerlogin />} />
+            <Route path="/retailerorder" element={<Retailerorder />} />
+            <Route path="/coupon-user-points" element={<Userpoint/>} />
+            <Route path="/categoryproduct/:categoryname" element={<CategoryProduct />} />
+            <Route path="/coupon-user" element={<Coupon/>}/>
             
-            {/* Admin Routes wrapped in AdminLayout */}
-            {/* <Route path="admin" element={<AdminLayout theme={theme} toggleTheme={toggleTheme} />}> */}
-            <Route path="admin" element={<AdminLayout />}>
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="add-category" element={<AddCategory />} />
-              <Route path="categories" element={<CategoryDetails />} />
-              <Route path="add-product" element={<AddProduct />} />
-              <Route path="products" element={<AdminProductDetails />} />
-              <Route path="orders" element={<AdminOrders />} />
-              <Route path="users" element={<Users />} />
-              <Route path="retailer" element={<Retailer/>}/>
-              <Route path="pincode" element={<Pincode/>}/>
-              <Route path="point" element={<Point/>}/>
-              <Route path="retailerorder" element={<Retailerorderadmin/>}/>
-              <Route path="fastorder" element={<Fastorder/>}/>
+            {/* Admin Routes wrapped in AdminProtectedRoute Layout wrapper */}
+            <Route element={<AdminProtectedRoute />}>
+              <Route path="admin" element={<AdminLayout />}>
+                <Route path="dashboard" element={<AdminDashboard />} />
+                <Route path="add-category" element={<AddCategory />} />
+                <Route path="categories" element={<CategoryDetails />} />
+                <Route path="add-product" element={<AddProduct />} />
+                <Route path="products" element={<AdminProductDetails />} />
+                <Route path="orders" element={<AdminOrders />} />
+                <Route path="users" element={<Users />} />
+                <Route path="retailer" element={<Retailer />} />
+                <Route path="pincode" element={<Pincode />} />
+                <Route path="point" element={<Point />} />
+                <Route path="retailerorder" element={<Retailerorderadmin />} />
+                <Route path="fastorder" element={<Fastorder />} />
+              </Route>
             </Route>
+
+            <Route path="*" element={<NotFound/>}/>
           </Routes>
         </Suspense>
       </main>
@@ -161,28 +156,16 @@ const AppContent: React.FC = () => {
 };
 
 function App() {
-  // const [theme, setTheme] = useState('light');
-
-  // useEffect(() => {
-  //   document.documentElement.setAttribute('data-theme', theme);
-  // }, [theme]);
-
-  // const toggleTheme = () => {
-  //   setTheme(theme === 'light' ? 'dark' : 'light');
-  // };
-
   return (
     <Router>
       <CustomerAuthProvider>
         <CartProvider>
-          {/* <AppContent theme={theme} toggleTheme={toggleTheme} /> */}
-          <AppContent/>
+          <AppContent />
         </CartProvider>
       </CustomerAuthProvider>
     </Router>
   );
 }
-
 
 // Register Service Worker for PWA installation support
 if ('serviceWorker' in navigator) {

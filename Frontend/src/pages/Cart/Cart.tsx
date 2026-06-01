@@ -38,7 +38,13 @@ const Cart: React.FC = () => {
       return;
     }
     try {
-      const res = await axios.get(`http://localhost:4000/api/v1/cart/${userPhone}`);
+      const res = await axios.get(`http://localhost:4000/api/v1/cart/${userPhone}`,
+          {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }
+      );
       if (res.data.success) {
         setCartItems(res.data.data.items || []);
       }
@@ -123,7 +129,7 @@ const Cart: React.FC = () => {
       <div className="rasi-cart-empty-container">
         <ShoppingBag size={64} />
         <h2>Your cart is empty!</h2>
-        <p>Explore our delicious bakery items.</p>
+        {/* <p>Explore our delicious bakery items.</p> */}
         <Link to="/products" className="rasi-cart-action-btn">Shop Now</Link>
       </div>
     );

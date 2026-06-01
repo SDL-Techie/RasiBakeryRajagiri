@@ -37,7 +37,11 @@ const Userpoint: React.FC = () => {
     const fetchPoints = async () => {
         if (!customerphone) return;
         try {
-            const res = await axios.get(`http://localhost:4000/api/v1/user-points/${customerphone}`);
+            const res = await axios.get(`http://localhost:4000/api/v1/user-points/${customerphone}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
             console.log(res)
             if (res.data.success) {
                 setPointsData(res.data);
@@ -196,9 +200,9 @@ const Userpoint: React.FC = () => {
                     </div>
                 )}
 
-                <div className="loyalty-rule-box">
+                {/* <div className="loyalty-rule-box">
                     <p>{loyaltyStatus.pointRuleText}</p>
-                </div>
+                </div> */}
             </div>
         </div>
     );

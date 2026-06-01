@@ -30,8 +30,22 @@ const Orders: React.FC = () => {
     try {
       setLoading(true);
       const [customerRes, retailerRes] = await Promise.allSettled([
-        axios.get(`http://localhost:4000/api/v1/getorderbyphone/${phone}`),
-        axios.get(`http://localhost:4000/api/v1/retailer-order/phone/${phone}`)
+        // axios.get(`http://localhost:4000/api/v1/getorderbyphone/${phone}`),
+  axios.get(
+  `http://localhost:4000/api/v1/getorderbyphone/${phone}`,
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }
+),
+        axios.get(`http://localhost:4000/api/v1/retailer-order/phone/${phone}`,
+            {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }
+        )
       ]);
 
       let combinedOrders: any[] = [];
@@ -71,36 +85,79 @@ const Orders: React.FC = () => {
   };
 
   // ✅ Processes backend data changes upon confirming
-  const executeCancellationRequest = async () => {
-    if (!selectedOrderId) return;
+  // const executeCancellationRequest = async () => {
+  //   if (!selectedOrderId) return;
     
-    const targetId = selectedOrderId;
-    // Close modal view layer instantly to maintain fast UX response flow
-    setShowConfirmModal(false);
-    setSelectedOrderId(null);
+  //   const targetId = selectedOrderId;
+  //   // Close modal view layer instantly to maintain fast UX response flow
+  //   setShowConfirmModal(false);
+  //   setSelectedOrderId(null);
 
-    try {
-      setCancellingId(targetId);
-      const { data } = await axios.put(`http://localhost:4000/api/v1/order/cancel/${targetId}`);
+  //   try {
+  //     setCancellingId(targetId);
+  //     const { data } = await axios.put(`http://localhost:4000/api/v1/order/cancel/${targetId}`, {
+  //   headers: {
+  //     Authorization: `Bearer ${localStorage.getItem("token")}`
+  //   }
+  // });
 
-      if (data.success) {
-        toast.success("🎉 Order cancelled successfully!");
-        setOrders(prevOrders => 
-          prevOrders.map(order => 
-            order._id === targetId ? { ...order, status: 'Cancelled' } : order
-          )
-        );
-      } else {
-        toast.error(data.message || "❌ Failed to cancel order.");
+  //     if (data.success) {
+  //       toast.success("🎉 Order cancelled successfully!");
+  //       setOrders(prevOrders => 
+  //         prevOrders.map(order => 
+  //           order._id === targetId ? { ...order, status: 'Cancelled' } : order
+  //         )
+  //       );
+  //     } else {
+  //       toast.error(data.message || "❌ Failed to cancel order.");
+  //     }
+  //   } catch (err: any) {
+  //     console.error("Cancellation error:", err);
+  //     toast.error(err.response?.data?.message || "❌ Connection error during cancellation.");
+  //   } finally {
+  //     setCancellingId(null);
+  //   }
+  // };
+
+  // ✅ Update the cancellation handler in Orders.tsx
+const executeCancellationRequest = async () => {
+  if (!selectedOrderId) return;
+  
+  const targetId = selectedOrderId;
+  setShowConfirmModal(false);
+  setSelectedOrderId(null);
+
+  try {
+    setCancellingId(targetId);
+    
+    // Pass an empty object as the 2nd argument (body) so that headers lands in the 3rd argument (config)
+    const { data } = await axios.put(
+      `http://localhost:4000/api/v1/order/cancel/${targetId}`, 
+      {}, 
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
       }
-    } catch (err: any) {
-      console.error("Cancellation error:", err);
-      toast.error(err.response?.data?.message || "❌ Connection error during cancellation.");
-    } finally {
-      setCancellingId(null);
-    }
-  };
+    );
 
+    if (data.success) {
+      toast.success("🎉 Order cancelled successfully!");
+      setOrders(prevOrders => 
+        prevOrders.map(order => 
+          order._id === targetId ? { ...order, status: 'Cancelled' } : order
+        )
+      );
+    } else {
+      toast.error(data.message || "❌ Failed to cancel order.");
+    }
+  } catch (err: any) {
+    console.error("Cancellation error:", err);
+    toast.error(err.response?.data?.message || "❌ Connection error during cancellation.");
+  } finally {
+    setCancellingId(null);
+  }
+};
   useEffect(() => {
     if (!activePhone) {
       setLoading(false);
@@ -222,11 +279,11 @@ const Orders: React.FC = () => {
                           display: 'flex',
                           alignItems: 'center',
                           gap: '6px',
-                          padding: '8px 12px',
+                          padding: '10px',
                           backgroundColor: '#FEF2F2',
                           color: '#EF4444',
                           borderRadius: '6px',
-                          fontSize: '14px',
+                          fontSize: '10px',
                           fontWeight: '500',
                           border: '1px solid #FCA5A5',
                           cursor: 'pointer'
@@ -235,9 +292,9 @@ const Orders: React.FC = () => {
                         {cancellingId === order._id ? (
                           <Loader2 size={16} className="animate-spin" />
                         ) : (
-                          <Trash2 size={16} />
+                          <Trash2 size={14} />
                         )}
-                        Cancel Order
+                        Cancel
                       </button>
                     )}
 

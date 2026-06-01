@@ -42,7 +42,7 @@ const Register: React.FC = () => {
   }
 
   setLoading(true);
-  const loadToast = toast.loading("Creating your account...");
+  // const loadToast = toast.loading("Creating your account...");
 
   try {
     // Only ONE endpoint needed now
@@ -53,14 +53,15 @@ const Register: React.FC = () => {
       // If isRetailer is true, send the code; otherwise send null/undefined
       code: isRetailer ? formData.retailerCode.toUpperCase() : undefined
     });
-    
+    // console.log(response);
     if (response.data.success) {
-      toast.success(response.data.message, { id: loadToast });
+      // toast.success(response.data.message, { id: loadToast });
+      toast.success("Registration successful!");
       setTimeout(() => navigate('/login'), 2000);
     }
   } catch (err: any) {
     const msg = err.response?.data?.message || "Registration failed";
-    toast.error(msg, { id: loadToast });
+    // toast.error(msg, { id: loadToast });
   } finally {
     setLoading(false);
   }
@@ -87,12 +88,12 @@ const Register: React.FC = () => {
           </div>
 
           <div className="rasi-form-group">
-            <input type="tel" name="phoneno" required value={formData.phoneno} onChange={handleChange} placeholder=" " maxLength={10} />
+            <input type="tel" name="phoneno" required value={formData.phoneno} onChange={handleChange} placeholder=" " maxLength={10} autoComplete="mobilenumber"/>
             <label>Mobile Number *</label>
           </div>
           
           <div className="rasi-form-group">
-            <input type={showPassword ? "text" : "password"} name="password" required value={formData.password} onChange={handleChange} placeholder=" " />
+            <input type={showPassword ? "text" : "password"} name="password" required value={formData.password} onChange={handleChange} placeholder="" autoComplete="new-password"/>
             <label>Password *</label>
             <button type="button" className="rasi-password-toggle" onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -100,7 +101,7 @@ const Register: React.FC = () => {
           </div>
 
           <div className="rasi-form-group">
-            <input type={showPassword ? "text" : "password"} name="confirmPassword" required value={formData.confirmPassword} onChange={handleChange} placeholder=" " />
+            <input type={showPassword ? "text" : "password"} name="confirmPassword" required value={formData.confirmPassword} onChange={handleChange} placeholder=" "  autoComplete="new-password" />
             <label>Confirm Password *</label>
           </div>
 

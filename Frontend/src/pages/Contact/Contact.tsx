@@ -2,9 +2,17 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import './Contact.css';
+import SEO from '@/src/components/SEO';
 
 const Contact: React.FC = () => {
   return (
+    <>
+   <SEO
+  title="Contact Rajagiri Rasi Bakery"
+  description="Get in touch with Rajagiri Rasi Bakery for orders, custom cakes, enquiries and bakery services in Rajagiri, Thanjavur."
+  keywords="contact rajagiri bakery, bakery phone number, custom cake orders, bakery enquiry"
+  url="https://www.rajagirirasibakery.com/contact"
+/>
     <div className="rasi-contact-page">
       <div className="rasi-contact-hero">
         <motion.div 
@@ -94,6 +102,7 @@ const Contact: React.FC = () => {
         ></iframe>
       </div>
     </div>
+    </>
   );
 };
 

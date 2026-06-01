@@ -1,8 +1,16 @@
 import React from 'react';
 import './PrivacyPolicy.css';
+import SEO from '@/src/components/SEO';
 
 const PrivacyPolicy: React.FC = () => {
   return (
+    <>
+    <SEO
+  title="Privacy Policy | Rajagiri Rasi Bakery"
+  description="Read the privacy policy of Rajagiri Rasi Bakery and learn how we collect, use and protect customer information."
+  keywords="privacy policy, rajagiri bakery privacy, customer data policy"
+  url="https://www.rajagirirasibakery.com/privacy-policy"
+    />
     <div className="rasi-policy-page">
       <div className="rasi-policy-container">
         <h1>Privacy Policy</h1>
@@ -29,6 +37,7 @@ const PrivacyPolicy: React.FC = () => {
         </section>
       </div>
     </div>
+    </>
   );
 };
 

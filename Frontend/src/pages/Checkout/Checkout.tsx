@@ -24,8 +24,14 @@ const role= localStorage.getItem("userRole");
   const location = useLocation();
   const { customer, isLoggedIn, authLoading } = useCustomerAuth();
 
-  const passedItems = location.state?.items || [];
-  const passedSubtotal = location.state?.subtotal || 0;
+  // const passedItems = location.state?.items || [];
+  const [passedItems,setpassedItems] = useState(location.state?.items || []);
+  // const passedSubtotal = location.state?.subtotal || 0;
+  const passedSubtotal = passedItems.reduce(
+  (total: number, item: any) =>
+    total + item.productId.price * item.quantity,
+  0
+);
   const isBuyNow = location.state?.isBuyNow || false;
 
   const [loading, setLoading] = useState(true);
@@ -73,7 +79,11 @@ const role= localStorage.getItem("userRole");
     }
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/v1/profile/${customer?.id}`);
+        const res = await axios.get(`http://localhost:4000/api/v1/profile/${customer?.id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
         const profile = res.data.data;
         setFormData({ name: profile.name, email: profile.email || '', mobile: profile.phoneno });
         setAddresses(profile.addresses || []);
@@ -91,6 +101,25 @@ const role= localStorage.getItem("userRole");
   const discountAmount = appliedCoupon ? Math.round((passedSubtotal * appliedCoupon.discount) / 100) : 0;
   const total = (passedSubtotal - discountAmount) + dynamicDeliveryFee;
 
+  const updateQuantity = (index: number, quantity: number) => {
+  const updatedItems = [...passedItems];
+
+  updatedItems[index] = {
+    ...updatedItems[index],
+    quantity: quantity < 1 ? 1 : quantity,
+  };
+
+  setpassedItems(updatedItems);
+};
+
+const increaseQuantity = (index: number) => {
+  updateQuantity(index, passedItems[index].quantity + 1);
+};
+
+const decreaseQuantity = (index: number) => {
+  updateQuantity(index, passedItems[index].quantity - 1);
+};
+
   const handleApplyCoupon = async () => {
     if (!couponCode) return;
     setIsValidating(true);
@@ -99,7 +128,12 @@ const role= localStorage.getItem("userRole");
       const res = await axios.post(`http://localhost:4000/api/v1/validate-coupon`, {
         phone: formData.mobile,
         couponCode: couponCode.trim().toUpperCase()
-      });
+      }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }
+);
       if (res.data.success) {
         setAppliedCoupon({ code: couponCode.toUpperCase(), discount: res.data.discountValue });
         showToast(res.data.message || "🎉 Coupon applied!");
@@ -150,105 +184,6 @@ const role= localStorage.getItem("userRole");
     };
   };
 
-  // ─────────────────────────────────────────────────────────
-  // ✅ MAIN: Place Order Handler
-  //    COD  → POST /order directly
-  //    UPI  → POST /create-razorpay-order → open modal → on success → POST /verify-payment (which saves order)
-  // ─────────────────────────────────────────────────────────
-  // const handlePlaceOrder = async () => {
-  //   const selectedAddress = addresses.find(a => a.isDefault) || addresses[0];
-  //   if (!selectedAddress) {
-  //     return showToast("⚠️ Please add a delivery address");
-  //   }
-
-  //   const orderPayload = buildOrderPayload();
-
-  //   try {
-  //     setIsSaving(true);
-
-  //     // ── COD Flow ─────────────────────────────────────────
-  //     if (paymentMethod === 'cod') {
-  //       // const { data } = await axios.post("http://localhost:4000/api/v1/order", orderPayload);
-  //               const { data } = await axios.post("http://localhost:4000/api/v1/createordercod", orderPayload);
-  //       if (data.success) {
-  //         await completeFlow();
-  //       }
-  //       return;
-  //     }
-
-  //     // ── UPI Flow ─────────────────────────────────────────
-  //     // Step 1: Create Razorpay order ONLY (no DB save yet)
-  //     const { data: rzData } = await axios.post("http://localhost:4000/api/v1/razorpay/initiate", {
-  //       amount: total,
-  //       // customerName: formData.name,
-  //       // customerPhone: formData.mobile,
-  //     });
-
-  //     if (!rzData.success) {
-  //       showToast("❌ Could not initiate payment. Please try again.");
-  //       setIsSaving(false);
-  //       return;
-  //     }
-
-  //     // Step 2: Open Razorpay modal
-  //     const options = {
-  //       key: rzData.razorpay.key,
-  //       amount: rzData.razorpay.amount,
-  //       currency: rzData.razorpay.currency,
-  //       name: "Rasi Bakery",
-  //       order_id: rzData.razorpay.orderId,
-
-  //       // ✅ Step 3: Payment SUCCESS → verify signature → save order to DB
-  //       handler: async function (response: any) {
-  //         try {
-  //           const verifyRes = await axios.post("http://localhost:4000/api/v1/verify-payment", {
-  //             razorpay_order_id: response.razorpay_order_id,
-  //             razorpay_payment_id: response.razorpay_payment_id,
-  //             razorpay_signature: response.razorpay_signature,
-  //             orderPayload,  // ✅ Pass full order data — DB save happens here
-  //           });
-
-  //           if (verifyRes.data.success) {
-  //             await completeFlow();
-  //           } else {
-  //             showToast("❌ Payment verification failed. Please contact support.");
-  //             setIsSaving(false);
-  //           }
-  //         } catch {
-  //           showToast("❌ Payment verification error. Please contact support.");
-  //           setIsSaving(false);
-  //         }
-  //       },
-
-  //       prefill: { name: formData.name, contact: formData.mobile },
-  //       theme: { color: "#562F00" },
-
-  //       // ✅ Step 3 (failure): User closes modal or payment fails → NO order saved
-  //       modal: {
-  //         ondismiss: () => {
-  //           showToast("⚠️ Payment cancelled. Your order was not placed.");
-  //           setIsSaving(false);
-  //         },
-  //       },
-  //     };
-
-  //     const rzp = new (window as any).Razorpay(options);
-
-  //     // ✅ Handle Razorpay payment failure event
-  //     rzp.on("payment.failed", function () {
-  //       showToast("❌ Payment failed. Please try again.");
-  //       setIsSaving(false);
-  //     });
-
-  //     rzp.open();
-
-  //   } catch (err: any) {
-  //     showToast(err.response?.data?.message || "❌ Something went wrong. Please try again.");
-  //     console.error(err);
-  //     setIsSaving(false);
-  //   }
-  // };
-
   const handlePlaceOrder = async () => {
     const selectedAddress = addresses.find(a => a.isDefault) || addresses[0];
     if (!selectedAddress) {
@@ -262,7 +197,11 @@ const role= localStorage.getItem("userRole");
 
       // ── COD Flow ─────────────────────────────────────────
       if (paymentMethod === 'cod') {
-        const { data } = await axios.post("http://localhost:4000/api/v1/createordercod", orderPayload);
+        const { data } = await axios.post("http://localhost:4000/api/v1/createordercod", orderPayload ,  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
      if (data.success) {
 
     // ✅ MARK COUPON USED
@@ -272,7 +211,11 @@ const role= localStorage.getItem("userRole");
         {
           phone: formData.mobile,
           couponCode: appliedCoupon.code
-        }
+        }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }
       );
     }
 
@@ -285,7 +228,11 @@ const role= localStorage.getItem("userRole");
       // Step 1: Initialize transaction with your backend controller
       const { data: rzData } = await axios.post("http://localhost:4000/api/v1/razorpay/initiate", {
         amount: total
-      });
+      }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
 
       if (!rzData.success) {
         showToast("❌ Could not initiate payment. Please try again.");
@@ -317,7 +264,12 @@ const role= localStorage.getItem("userRole");
               items: orderPayload.items,
               pricing: orderPayload.pricing,
               deliveryDate: orderPayload.deliveryDate
-            });
+            }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }
+);
 
             if (verifyRes.data.success) {
               if (appliedCoupon) {
@@ -326,7 +278,11 @@ const role= localStorage.getItem("userRole");
       {
         phone: formData.mobile,
         couponCode: appliedCoupon.code
-      }
+      }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }
     );
   }
 
@@ -384,14 +340,14 @@ const role= localStorage.getItem("userRole");
         await axios.delete(`http://localhost:4000/api/v1/cart/${formData.mobile}`);
       }
 
-      await axios.post("http://localhost:4000/api/v1/whatsapptrigger", {
-        name: formData.name,
-        phone: formData.mobile,
-        total,
-        items: passedItems.map((i: any) => i.productId.name).join(", "),
-      });
+      // await axios.post("http://localhost:4000/api/v1/whatsapptrigger", {
+      //   name: formData.name,
+      //   phone: formData.mobile,
+      //   total,
+      //   items: passedItems.map((i: any) => i.productId.name).join(", "),
+      // });
 
-      showToast("🎉 Order confirmed! You will receive a confirmation shortly.");
+      // showToast("🎉 Order confirmed! You will receive a confirmation shortly.");
 
       setTimeout(() => {
         navigate("/orders");
@@ -410,7 +366,11 @@ const role= localStorage.getItem("userRole");
         email: formData.email,
         phoneno: formData.mobile,
         addresses: updatedAddresses,
-      });
+      }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
       setAddresses(updatedAddresses);
       const newDefault = updatedAddresses.find((a: any) => a.isDefault) || updatedAddresses[0];
       if (newDefault) checkPincodeCharge(newDefault.zipCode);
@@ -624,14 +584,47 @@ const role= localStorage.getItem("userRole");
               <div key={idx} className="rasi-summary-item-row">
                 <div className="rasi-mini-img-wrap">
                   <img src={item.productId.productimage} alt="" className="rasi-mini-img" />
-                  <span className="rasi-item-qty-badge">{item.quantity}</span>
+                  {/* <span className="rasi-item-qty-badge">{item.quantity}</span> */}
+  
                 </div>
                 <div className="rasi-item-info">
                   <p className="rasi-item-name">{item.productId.name}</p>
                   <p className="rasi-item-price-each">₹{item.productId.price} × {item.quantity}</p>
                 </div>
-                <p className="rasi-item-total-price">₹{item.productId.price * item.quantity}</p>
+
+                        <p className="rasi-item-total-price">₹{item.productId.price * item.quantity}</p>
+        
+                                <div className="rasi-qty-control">
+  <button
+    type="button"
+    onClick={() => decreaseQuantity(idx)}
+  >
+    -
+  </button>
+
+  <input
+    type="number"
+    min="1"
+    value={item.quantity}
+    onChange={(e) =>
+      updateQuantity(
+        idx,
+        Number(e.target.value)
+      )
+    }
+  />
+
+  <button
+    type="button"
+    onClick={() => increaseQuantity(idx)}
+  >
+    +
+  </button>
+</div>
+
+
               </div>
+              
             ))}
           </div>
 

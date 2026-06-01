@@ -104,22 +104,22 @@ export const updateproduct = async (req, res) => {
     }
 };
 
-export const deleteproduct = async (req, res) => {
-    try {
-        const product = await Product.findByIdAndDelete(req.params.id);
+// export const deleteproduct = async (req, res) => {
+//     try {
+//         const product = await Product.findByIdAndDelete(req.params.id);
 
-        if (!product) {
-            return res.status(404).json({ success: false, message: "Product not found" });
-        }
+//         if (!product) {
+//             return res.status(404).json({ success: false, message: "Product not found" });
+//         }
 
-        res.status(200).json({
-            success: true,
-            message: "Product deleted successfully"
-        });
-    } catch (err) {
-        res.status(500).json({ success: false, message: err.message });
-    }
-};
+//         res.status(200).json({
+//             success: true,
+//             message: "Product deleted successfully"
+//         });
+//     } catch (err) {
+//         res.status(500).json({ success: false, message: err.message });
+//     }
+// };
 
 
 
@@ -152,4 +152,65 @@ export const getProductsByCategoryName = async (req, res) => {
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
     }
+};
+
+
+// export const bulkImportProducts = async (req, res) => {
+
+//   try {
+//     const { products } = req.body;
+
+//     if (!products || !products.length) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "No products found",
+//       });
+//     }
+
+//     const insertedProducts =
+//       await Product.insertMany(products);
+
+//     res.status(201).json({
+//       success: true,
+//       count: insertedProducts.length,
+//       data: insertedProducts,
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// };
+
+
+export const bulkImportProducts = async (req, res) => {
+  try {
+    // console.log("Received Products:", req.body.products);
+
+    const { products } = req.body;
+
+    if (!products || !products.length) {
+      return res.status(400).json({
+        success: false,
+        message: "No products found",
+      });
+    }
+
+    const insertedProducts = await Product.insertMany(products);
+
+    res.status(201).json({
+      success: true,
+      count: insertedProducts.length,
+      data: insertedProducts,
+    });
+  } catch (error) {
+    console.error("Bulk Import Error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      stack: error.stack,
+    });
+  }
 };

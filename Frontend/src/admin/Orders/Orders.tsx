@@ -26,7 +26,11 @@ const Orders: React.FC = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:4000/api/v1/getallordercod");
+      const res = await axios.get("http://localhost:4000/api/v1/getallordercod", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
      // console.log(res.data)
       if (res.data.success) {
         // Filter the data here before saving it to state
@@ -139,7 +143,12 @@ const Orders: React.FC = () => {
   const handleStatusChange = async (orderId: string, newStatus: string) => {
     setUpdating(orderId);
     try {
-      const res = await axios.put(`http://localhost:4000/api/v1/order/${orderId}`, { status: newStatus });
+      const res = await axios.put(`http://localhost:4000/api/v1/order/${orderId}`, { status: newStatus }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }
+);
       if (res.data.success) {
         setOrders(prev => prev.map(o => o._id === orderId ? { ...o, status: newStatus } : o));
       }

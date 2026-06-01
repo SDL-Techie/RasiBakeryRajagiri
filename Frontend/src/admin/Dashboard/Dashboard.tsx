@@ -34,12 +34,28 @@ const Dashboard: React.FC = () => {
         setLoading(true);
         try {
             const [orderRes, userRes, productRes, categoryRes, statusRes, fastOrderRes] = await Promise.all([
-                axios.get(`${API_BASE}/getallordercod`),
-                axios.get(`${API_BASE}/getalluser`),
+                axios.get(`${API_BASE}/getallordercod`,          {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }),
+                axios.get(`${API_BASE}/getalluser`,          {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }),
                 axios.get(`${API_BASE}/products`),
                 axios.get(`${API_BASE}/category`),
-                axios.get(`${API_BASE}/getorderstatus`),
-                axios.get(`${API_BASE}/all-retailer-orders`)
+                axios.get(`${API_BASE}/getorderstatus`,{
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }),
+                axios.get(`${API_BASE}/all-retailer-orders`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  })
             ]);
 
             const allOrders = orderRes.data.data || [];

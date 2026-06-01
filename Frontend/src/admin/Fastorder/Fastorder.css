@@ -3,7 +3,7 @@
    Mobile First Approach | Coffee Brown Theme
 ════════════════════════════════════════════════════════════════ */
 
-:root {
+/* :root {
   --deep-coffee: #4B2E2B;
   --terra-cotta: #8C5A3C;
   --ochre: #C08552;
@@ -12,7 +12,7 @@
   --border-color: #e0d5cb;
   --success-green: #2e7d32;
   --light-bg: #f8f1eb;
-}
+} */
 
 .title {
   padding: 3px;
@@ -39,7 +39,7 @@
 }
 
 .stat-card {
-  background: var(--pure-white);
+  background: var(--white);
   padding: 1rem;
   border-radius: 12px;
   display: flex;
@@ -59,10 +59,10 @@
   flex-shrink: 0;
 }
 
-.stat-icon.brown {
+/* .stat-icon.brown {
   background: var(--light-bg);
   color: var(--terra-cotta);
-}
+} */
 
 .stat-info p {
   margin: 0;
@@ -130,8 +130,8 @@
 }
 
 .export-btn {
-  background: var(--pure-white);
-  color: var(--deep-coffee);
+  background: var(--primary);
+  color: var(--white);
 }
 
 .export-btn:hover {
@@ -139,7 +139,7 @@
 }
 
 .refresh-btn {
-  background: var(--deep-coffee);
+  background: var(--primary);
   color: white;
   border: none;
   flex: 0 1 auto;
@@ -167,10 +167,10 @@
 .search-bar {
   display: flex;
   align-items: center;
-  background: var(--pure-white);
+  background: var(--white);
   padding: 0.75rem 1rem;
   border-radius: 10px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--primary);
   width: 100%;
   gap: 0.75rem;
 }
@@ -221,7 +221,7 @@
   border: none;
   outline: none;
   font-size: 0.85rem;
-  color: var(--deep-coffee);
+  /* color: var(--deep-coffee); */
   background: transparent;
   flex: 1;
 }
@@ -459,9 +459,10 @@
 }
 
 .order-modal-content {
-  background: var(--pure-white);
+  background: var(--white);
   width: 100%;
   max-width: 600px;
+  color:var(--primary);
   max-height: 90vh;
   border-radius: 16px;
   overflow-y: auto;
@@ -474,9 +475,10 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 1.25rem;
-  background: var(--light-bg);
+  /* background: var(--light-bg); */
   border-bottom: 1px solid #eee;
   gap: 1rem;
+  color: var(--primary);
 }
 
 .modal-header-title {
@@ -486,7 +488,7 @@
 }
 
 .modal-header-title h2 {
-  color: var(--deep-coffee);
+  /* color: var(--deep-coffee); */
   margin: 0;
   font-size: 1.2rem;
   font-weight: 700;
@@ -494,7 +496,7 @@
 
 .modal-id {
   font-weight: 800;
-  color: var(--ochre);
+  /* color: var(--ochre); */
   font-size: 0.9rem;
 }
 
@@ -505,7 +507,7 @@
 }
 
 .print-btn {
-  background: var(--deep-coffee);
+  background: var(--primary);
   color: white;
   border: none;
   padding: 0.55rem 0.75rem;
@@ -531,7 +533,8 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #999;
+  color:
+  /* color: #999; */
   padding: 0;
   display: flex;
   align-items: center;
@@ -648,8 +651,8 @@
 }
 
 .billing-summary {
-  background: var(--deep-coffee);
-  color: white;
+  background: var(--primary);
+  /* color: white; */
   padding: 1rem;
   border-radius: 12px;
 }
@@ -807,9 +810,10 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--terra-cotta);
+    color: var(--white);
     border-bottom: 2px solid var(--cream-bg);
     font-weight: 700;
+    background: var(--primary);
   }
 
   .admin-table tbody {
@@ -1347,4 +1351,20 @@
   font-size: 22px;
   font-weight: 800;
   color: #4B2E2B;
+}
+
+.place-order-btn {
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: none;
+  background: #8b5e3c;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
 }

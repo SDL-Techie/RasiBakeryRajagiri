@@ -87,7 +87,7 @@
 
 /* Reusable Primary Button */
 .rasi-btn-primary {
-  background-color: #e67e22;
+  background-color: var(--primary);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -99,7 +99,7 @@
 }
 
 .rasi-btn-primary:hover {
-  background-color: #d35400;
+  background-color: var(--primary);
 }
 
 /* Mobile Responsive Adjustments */

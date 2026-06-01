@@ -1,8 +1,16 @@
 import React from 'react';
 import './Terms.css';
+import SEO from '@/src/components/SEO';
 
 const Terms: React.FC = () => {
   return (
+    <>
+    <SEO
+  title="Terms & Conditions | Rajagiri Rasi Bakery"
+  description="Read the terms and conditions for using Rajagiri Rasi Bakery services and placing online orders."
+  keywords="terms and conditions, bakery terms, online order terms"
+  url="https://www.rajagirirasibakery.com/terms"
+/>
     <div className="rasi-terms-page">
       <div className="rasi-terms-container">
         <h1>Terms & Conditions</h1>
@@ -29,6 +37,7 @@ const Terms: React.FC = () => {
         </section>
       </div>
     </div>
+    </>
   );
 };
 

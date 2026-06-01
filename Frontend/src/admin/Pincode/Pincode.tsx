@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MapPin, IndianRupee, Search, Trash2, Loader2, Plus, MapPinned, X } from 'lucide-react';
@@ -49,25 +46,49 @@ const Pincode = () => {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!window.confirm("Are you sure you want to delete this delivery zone?")) {
-      return;
-    }
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+const [selectedId, setSelectedId] = useState<string | null>(null);
 
-    setDeleting(id);
-    try {
-      await axios.delete(`http://localhost:4000/api/v1/deletepincode/${id}`);
-      toast.success("Delivery zone deleted successfully");
-      fetchPincodes();
-    } catch (err) {
-      console.error("Error deleting pincode", err);
-      toast.error("Error deleting delivery zone");
-    } finally {
-      setDeleting(null);
-    }
-  };
+//   const handleDelete = async () => {
+//   if (!selectedId) return;
 
-  const filteredPincodes = pincodes.filter(p => 
+//   try {
+//     await axios.delete(
+//       `http://localhost:4000/api/v1/deletepincode/${selectedId}`
+//     );
+
+//     toast.success("Deleted successfully");
+//     fetchPincodes();
+//   } catch (err) {
+//     toast.error("Delete failed");
+//   }
+// };
+ 
+
+const handleDelete = async () => {
+  if (!selectedId) return;
+
+  try {
+    setDeleting(selectedId);
+
+    await axios.delete(
+      `http://localhost:4000/api/v1/deletepincode/${selectedId}`
+    );
+
+    toast.success("Deleted successfully");
+
+    setShowDeleteModal(false);
+    setSelectedId(null);
+
+    fetchPincodes();
+  } catch (err) {
+    toast.error("Delete failed");
+  } finally {
+    setDeleting(null);
+  }
+};
+
+const filteredPincodes = pincodes.filter(p => 
     p.pincode.includes(searchTerm)
   );
 
@@ -107,7 +128,7 @@ const Pincode = () => {
             <div className="form-group">
               <label className="id-text">PINCODE</label>
               <div className="rasi-search-box">
-                {/* <MapPin className="search-icon" size={16} /> */}
+                <MapPin className="search-icon" size={16} />
                 <input 
                   type="text" 
                   placeholder="614201" 
@@ -119,9 +140,9 @@ const Pincode = () => {
             </div>
 
             <div className="form-group">
-              <label className="id-text">DELIVERY CHARGE</label>
+              <label className="id-text">DELIVERY CHARGE (₹)</label>
               <div className="rasi-search-box">
-                {/* <IndianRupee className="search-icon" size={16} /> */}
+                <IndianRupee className="search-icon" size={16} />
                 <input 
                   type="number" 
                   placeholder="200" 
@@ -180,7 +201,11 @@ const Pincode = () => {
                   <td data-label="Action" className="col-action">
                     <button 
                       className="delete-btn" 
-                      onClick={() => handleDelete(item._id)}
+                      // onClick={() => handleDelete(item._id)}
+                      onClick={() => {
+  setSelectedId(item._id);
+  setShowDeleteModal(true);
+}}
                       disabled={deleting === item._id}
                       title="Delete delivery zone"
                     >
@@ -200,8 +225,44 @@ const Pincode = () => {
             </tbody>
           </table>
         </div>
+        
+      </div>
+  {showDeleteModal && (
+  <div className="delete-modal-overlay">
+    <div className="delete-modal">
+      <div className="modal-header">
+        {/* <Trash2 size={28} /> */}
+        <h3>Delete Delivery Zone</h3>
+      </div>
+
+      <p>
+        Are you sure you want to delete this delivery zone?
+      </p>
+
+      <div className="modal-actions">
+        <button
+          className="cancel-btn"
+          onClick={() => {
+            setShowDeleteModal(false);
+            setSelectedId(null);
+          }}
+        >
+          Cancel
+        </button>
+
+      <button
+  className="confirm-delete-btn"
+  onClick={handleDelete}
+>
+  Delete
+</button>
       </div>
     </div>
+  </div>
+)}    
+      
+    </div>
+    
   );
 };
 

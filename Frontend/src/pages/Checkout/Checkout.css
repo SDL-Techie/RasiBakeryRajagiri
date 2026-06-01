@@ -4,14 +4,14 @@
    All class names prefixed with rasi- to avoid conflicts
 ══════════════════════════════════════════════════ */
 
-:root {
+/* :root {
   --rasi-primary: #562F00;
   --rasi-white: #fff;
   --rasi-bg-subtle: #faf8f5;
   --rasi-border: #ede5dc;
   --rasi-text-main: #1a0f00;
   --rasi-text-muted: #9b8c80;
-}
+} */
 
 /* ─── Root & Page ─── */
 .rasi-checkout-page-root {
@@ -184,7 +184,7 @@
   border-radius: 20px;
   padding: 16px;
   margin-bottom: 12px;
-  border: 1.5px solid var(--rasi-border);
+  border: 1px solid var(--primary);
   box-shadow: 0 2px 8px rgba(86, 47, 0, 0.04);
   transition: box-shadow 0.2s;
 }
@@ -267,18 +267,47 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  background: linear-gradient(135deg, #fdf8f4 0%, #f5ece0 100%);
+  /* background: linear-gradient(135deg, #fdf8f4 0%, #f5ece0 100%); */
+  background:var(--primary);
   border-radius: 14px;
+  color: var(--white);
   padding: 14px 16px;
   border: 1px solid #f0e4d0;
 }
+
+.rasi-qty-control {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 6px;
+}
+
+.rasi-qty-control button {
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f4f4f4;
+  font-size: 16px;
+}
+
+.rasi-qty-control input {
+  width: 30px;
+  height: 20px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+
 
 .rasi-customer-avatar {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--rasi-primary);
-  color: #fff;
+  background: var(--white);
+  color: var(--primary);
   font-size: 18px;
   font-weight: 800;
   display: flex;
@@ -291,13 +320,13 @@
 .rasi-cust-name {
   font-size: 15px;
   font-weight: 700;
-  color: var(--rasi-text-main);
+  color: var(--white);
   margin: 0;
 }
 
 .rasi-cust-phone {
   font-size: 13px;
-  color: var(--rasi-text-muted);
+  color: var(--white);
   margin: 3px 0 0;
 }
 
@@ -364,8 +393,8 @@
 }
 
 .rasi-add-address-dashed-btn {
-  border: 2px dashed var(--rasi-border);
-  background: transparent;
+  border: 2px dashed var(--secondary);
+
   padding: 18px;
   border-radius: 14px;
   color: var(--rasi-text-muted);
@@ -424,7 +453,7 @@
   border-radius: 12px;
   font-size: 14px;
   outline: none;
-  background: #faf8f5;
+  /* background: #faf8f5; */
   color: var(--rasi-text-main);
   transition: border-color 0.2s, box-shadow 0.2s;
   width: 100%;
@@ -435,7 +464,7 @@
 .rasi-input:focus {
   border-color: var(--rasi-primary);
   box-shadow: 0 0 0 3px rgba(86, 47, 0, 0.08);
-  background: #fff;
+  /* background: #fff; */
 }
 
 .rasi-select-wrapper {
@@ -491,8 +520,10 @@
 }
 
 .rasi-pay-tile.rasi-active {
-  border-color: var(--rasi-primary);
-  background: linear-gradient(135deg, #fdf8f4 0%, #f5ece0 100%);
+  border-color: rgb(39, 27, 27);
+  color:var(--white);
+  /* background: linear-gradient(135deg, #fdf8f4 0%, #f5ece0 100%); */
+  background:var(--primary);
   box-shadow: 0 4px 12px rgba(86, 47, 0, 0.1);
 }
 
@@ -572,7 +603,8 @@
 ══════════════════════════════════════════════════ */
 .rasi-btn-primary-large {
   width: 100%;
-  background: linear-gradient(135deg, var(--rasi-primary) 0%, #7a4a1a 100%);
+  /* background: linear-gradient(135deg, var(--rasi-primary) 0%, #7a4a1a 100%); */
+  background: var(--primary);
   color: #fff;
   border: none;
   padding: 16px 20px;
@@ -733,7 +765,7 @@
   top: -6px;
   right: -6px;
   background: #fff;
-  color: var(--rasi-primary);
+  color: var(--primary);
   font-size: 10px;
   font-weight: 800;
   width: 18px;
@@ -775,6 +807,7 @@
   font-size: 12px;
   font-weight: 700;
   color: #ffd89b;
+padding-top: 4px;
   margin: 0;
   white-space: nowrap;
   flex-shrink: 0;
@@ -897,7 +930,8 @@
 
 .rasi-coupon-btn.rasi-apply {
   background: #fff;
-  color: var(--rasi-primary);
+  /* color: white; */
+  color:#562F00
 }
 
 .rasi-coupon-btn.rasi-apply:active:not(:disabled) {
@@ -1063,7 +1097,8 @@
 }
 
 .rasi-modal-sheet {
-  background: var(--rasi-white);
+  /* background: var(--rasi-white); */
+  background: linear-gradient(135deg, #fdf8f4 0%, #f5ece0 100%);
   border-radius: 24px 24px 0 0;
   width: 100%;
   max-width: 520px;
@@ -1217,8 +1252,8 @@
 }
 
 .rasi-addr-list-tile.rasi-selected {
-  border-color: var(--rasi-primary);
-  background: linear-gradient(135deg, #fdf8f4 0%, #f5ece0 100%);
+  border-color: var(--primary);
+  /* background: linear-gradient(135deg, #fdf8f4 0%, #f5ece0 100%); */
 }
 
 .rasi-addr-list-radio {
@@ -1234,8 +1269,8 @@
 }
 
 .rasi-addr-list-tile.rasi-selected .rasi-addr-list-radio {
-  border-color: var(--rasi-primary);
-  background: var(--rasi-primary);
+  border-color: var(--primary);
+  background: var(--primary);
 }
 
 .rasi-radio-dot {
@@ -1277,7 +1312,7 @@
 .rasi-default-tag {
   font-size: 10px;
   font-weight: 700;
-  background: var(--rasi-primary);
+  background: var(--primary);
   color: #fff;
   border-radius: 5px;
   padding: 2px 7px;
@@ -1434,7 +1469,7 @@
 
 .rasi-save-addr-btn {
   width: 100%;
-  background: linear-gradient(135deg, var(--rasi-primary) 0%, #7a4a1a 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #7a4a1a 100%);
   color: #fff;
   border: none;
   padding: 12px;

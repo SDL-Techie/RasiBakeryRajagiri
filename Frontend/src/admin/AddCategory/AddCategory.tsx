@@ -58,11 +58,19 @@ const AddCategory: React.FC = () => {
         name: formData.name.trim(),
         image: imageUrl,
         status: 'Active'
-      });
+      }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
 
       if (response.data.success) {
         setMessage({ type: 'success', text: 'Category created successfully!' });
         setFormData({ name: '', image: null });
+          // window.location.reload();
+            setTimeout(() => {
+    window.location.reload();
+  }, 1000);
       }
 
       setTimeout(() => setMessage(null), 4000);
