@@ -735,6 +735,8 @@ padding:2px;
 .modal-header h3 {
   margin: 0;
   font-size: 20px;
+  color:black;
+  text-align: center;
 }
 
 .delete-modal p {

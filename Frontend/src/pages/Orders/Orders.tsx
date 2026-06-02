@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
   Package, ShoppingBag, Loader2, Zap,
-  Clock, CheckCircle, Truck, XCircle, Trash2, AlertTriangle
+  Clock, CheckCircle, Truck, XCircle, Trash2, AlertTriangle,
+  UserCheck
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -191,12 +192,20 @@ const executeCancellationRequest = async () => {
 
   if (!activePhone) {
     return (
+      // <div className="rasi-empty-orders">
+      //   <XCircle size={60} className="empty-icon text-red-400" />
+      //   <h2>Authentication Required</h2>
+      //   <p>Please log in with your account to track your orders.</p>
+      //   <Link to="/login" className="rasi-shop-now-btn">Go to Login</Link>
+      // </div>
       <div className="rasi-empty-orders">
-        <XCircle size={60} className="empty-icon text-red-400" />
-        <h2>Authentication Required</h2>
-        <p>Please log in with your account to track your orders.</p>
-        <Link to="/login" className="rasi-shop-now-btn">Go to Login</Link>
-      </div>
+  <ShoppingBag size={60} className="empty-icon text-amber-600" /> 
+  
+  <h2>Please login to see your orders</h2>
+  <p>Log in to your account to review your order history and track active deliveries.</p>
+  
+  <Link to="/login" className="rasi-shop-now-btn">Go to Login</Link>
+</div>
     );
   }
 
@@ -268,8 +277,8 @@ const executeCancellationRequest = async () => {
                     <span className="final-price">₹{order.pricing?.total || order.total}</span>
                   </div>
                   
-                  <div className="footer-actions-group" style={{ display: 'flex', gap: '8px', marginLeft: 'auto' }}>
-                    {/* {isCancellable && ( */}
+                  {/* <div className="footer-actions-group" style={{ display: 'flex', gap: '8px', marginLeft: 'auto' }}>
+                  
                     {isCancellable && userRole !== "retailer" && (
                       <button 
                         onClick={() => handleCancelClick(order._id)}
@@ -301,7 +310,11 @@ const executeCancellationRequest = async () => {
                     <Link to={order.isRetail ? "/retailerorder" : "/products"} className="reorder-btn">
                       <ShoppingBag size={16} /> {order.isRetail ? 'Quick Restock' : 'Order Again'}
                     </Link>
-                  </div>
+                  </div> */}
+
+                    {/* <Link to={order.isRetail ? "/retailerorder" : "/products"} className="reorder-btn">
+                      <ShoppingBag size={16} /> {order.isRetail ? 'Quick Restock' : 'Order Again'}
+                    </Link> */}
                 </div>
               </div>
             );

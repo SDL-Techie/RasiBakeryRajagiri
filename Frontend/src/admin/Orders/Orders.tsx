@@ -585,9 +585,9 @@ const Orders: React.FC = () => {
                   <div>
                     <Logo />
 
-                    <h1>
+                    {/* <h1>
                       RAJAGIRI RASI BAKERY
-                    </h1>
+                    </h1> */}
 
                     <p>
                       Order ID:
@@ -604,7 +604,7 @@ const Orders: React.FC = () => {
 
                   <div className="company-info">
                     <h3>
-                      Rasi Bakery & Sweets
+                     Rajagiri Rasi Bakery & Sweets
                     </h3>
 
                     <p>
@@ -857,7 +857,7 @@ const Orders: React.FC = () => {
 
                       <h3>
                         Thank you for choosing
-                        Rasi Bakery!
+                        Rajagiri Rasi Bakery!
                       </h3>
 
                       <p>

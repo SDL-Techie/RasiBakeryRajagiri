@@ -3,13 +3,13 @@
   margin-bottom:27px
 }
 
-:root {
+/* :root {
   --bg-color: #FFF8F0;
   --primary: #4B2E2B;
   --secondary: #8C5A3C;
   --accent: #C08552;
   --white: #ffffff;
-}
+} */
 
 body {
   background-color: var(--bg-color);
@@ -59,7 +59,7 @@ body {
 .stat-icon.brown { background: #5d2e0c }
 
 .stat-info p { margin: 0; font-size: 0.85rem; color: #666; font-weight: 500; }
-.stat-info h3 { margin: 0; font-size: 1.4rem; font-weight: 700; color: var(--primary); }
+.stat-info h3 { margin: 0; font-size: 1.4rem; font-weight: 700; color: var(--rasi-ac-coffee); }
 
 /* Header & Filters */
 .filter-row {
@@ -130,8 +130,8 @@ body {
   transition: 0.2s;
 }
 
-.export-btn { background: var(--primary); color: white; }
-.refresh-btn { background: var(--bg-color); color: var(--primary); border: 1px solid var(--accent); }
+.export-btn { background: var(--rasi-ac-coffee); color: white; }
+.refresh-btn { background: var(--bg-color); color: var(--rasi-ac-coffee); border: 1px solid var(--accent); }
 
 /* Table Styling */
 .orders-table-wrapper {

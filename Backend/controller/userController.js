@@ -30,7 +30,7 @@ import mongoose from "mongoose";
 
 const seedDefaultAdmin = async () => {
     try {
-        const adminPhone = "8903652269";
+        const adminPhone = "8220701195";
         const adminExists = await User.findOne({ phoneno: adminPhone });
 
         if (!adminExists) {

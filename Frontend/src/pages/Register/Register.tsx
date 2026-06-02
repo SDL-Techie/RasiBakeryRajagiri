@@ -24,9 +24,6 @@ const Register: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-
-
-
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
 
@@ -59,9 +56,23 @@ const Register: React.FC = () => {
       toast.success("Registration successful!");
       setTimeout(() => navigate('/login'), 2000);
     }
-  } catch (err: any) {
-    const msg = err.response?.data?.message || "Registration failed";
-    // toast.error(msg, { id: loadToast });
+  } 
+  // catch (err: any) {
+  //   const msg = err.response?.data?.message || "Registration failed";
+  //   // toast.error(msg, { id: loadToast });
+
+  catch (err: any) {
+  const msg = err.response?.data?.message || "Registration failed";
+
+  toast.error(msg);
+
+  // If number already exists, suggest login
+  if (msg === "Phone number already registered.") {
+    setTimeout(() => {
+      navigate('/login');
+    }, 2000);
+  }
+  
   } finally {
     setLoading(false);
   }

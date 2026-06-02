@@ -128,7 +128,7 @@ const filteredPincodes = pincodes.filter(p =>
             <div className="form-group">
               <label className="id-text">PINCODE</label>
               <div className="rasi-search-box">
-                <MapPin className="search-icon" size={16} />
+                {/* <MapPin className="search-icon" size={16} /> */}
                 <input 
                   type="text" 
                   placeholder="614201" 
@@ -142,7 +142,7 @@ const filteredPincodes = pincodes.filter(p =>
             <div className="form-group">
               <label className="id-text">DELIVERY CHARGE (₹)</label>
               <div className="rasi-search-box">
-                <IndianRupee className="search-icon" size={16} />
+                {/* <IndianRupee className="search-icon" size={16} /> */}
                 <input 
                   type="number" 
                   placeholder="200" 

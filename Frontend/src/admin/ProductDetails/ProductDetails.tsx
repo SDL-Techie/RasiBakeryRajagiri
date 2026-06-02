@@ -313,7 +313,7 @@ const ProductDetails: React.FC = () => {
       {showEditModal && editingProduct && (
         <div className="rasi-modal-overlay">
           <div className="rasi-edit-modal">
-            <div className="modal-header">
+            <div className="modal-header-header">
               <h3>Edit Product</h3>
               <button style={{color: 'white', border: 'none', cursor: 'pointer'}} onClick={() => setShowEditModal(false)}><X size={20}/></button>
             </div>

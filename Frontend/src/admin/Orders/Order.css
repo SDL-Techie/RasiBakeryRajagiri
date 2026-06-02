@@ -3,13 +3,13 @@
   margin-bottom: 27px;
 }
 
-:root {
+/* :root {
   --bg-color: #FFF8F0;
   --primary: #4B2E2B;
   --secondary: #8C5A3C;
   --accent: #C08552;
   --white: #ffffff;
-}
+} */
 
 body {
   background-color: var(--bg-color);
@@ -164,7 +164,7 @@ body {
 }
 
 .export-btn { 
-  background: var(--primary); 
+  background: var(--rasi-ac-coffee); 
   color: white;  
 }
 

@@ -6,6 +6,7 @@ import { useCustomerAuth } from '../../context/CustomerAuthContext';
 // import { Eye, EyeOff } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import './Login.css';
+import { Eye, EyeOff } from 'lucide-react';
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({ phoneno: '', password: '' });
@@ -203,16 +204,16 @@ const Login: React.FC = () => {
               className="rasi-password-toggle"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {/* {showPassword ? <EyeOff size={20} /> : <Eye size={20} />} */}
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
           
-          <div className="rasi-form-options">
+          {/* <div className="rasi-form-options">
             <label className="rasi-checkbox">
               <input type="checkbox" />
               <span>Remember Me</span>
             </label>
-          </div>
+          </div> */}
           
           <motion.button 
             type="submit" 

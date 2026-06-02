@@ -71,7 +71,7 @@ const confirmDelete = async () => {
 };
 
   return (
-    <div className="rasi-products-container">
+    <div className="rasi-category-container-main">
       {/* Header Section */}
       <div className="rasi-products-header">
         <div className="header-info">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { LayoutGrid, List, Loader2, FilterX, Menu, X } from 'lucide-react';
+import { LayoutGrid, List, Loader2, FilterX, Menu, X, Filter } from 'lucide-react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import './Products.css';
 import SEO from '@/src/components/SEO';
@@ -163,7 +163,7 @@ const Products: React.FC = () => {
           onClick={() => setSidebarOpen(!sidebarOpen)}
           aria-label="Toggle filters"
         >
-          {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
+          {sidebarOpen ? <X size={24} /> : <Filter size={24} /> }
         </button>
 
         {/* Sidebar Overlay (Mobile) */}
