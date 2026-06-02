@@ -239,7 +239,7 @@ body {
 .professional-table td::before {
   content: attr(data-label);
   font-weight: 700;
-  color: var(--secondary);
+  color: var(--primary);
   display: block;
   font-size: 0.7rem;
   text-transform: uppercase;

@@ -43,7 +43,7 @@
 .excel-import-wrapper { flex-shrink: 0; }
 
 .excel-btn {
-    background: var(--primary);
+    background: #4B2E2B;;
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
@@ -197,7 +197,7 @@
 .ap-submit-btn {
     width: 100%;
     padding: 16px;
-    background: var(--rasi-ac-coffee);
+    background:#4E2A1C ;
     color: white;
     border: none;
     border-radius: 12px;

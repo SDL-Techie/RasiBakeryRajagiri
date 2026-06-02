@@ -102,28 +102,61 @@ const AdminLayout = () => {
   }, []);
 
   // 🔥 Lifted handleLogout up to the parent level layout component scope
-  const handleLogout = async () => {
-    const processToast = toast.loading("Logging out securely...");
-    try {
-      const res = await axios.get("http://localhost:4000/api/v1/logout");
+  // const handleLogout = async () => {
+  //   const processToast = toast.loading("Logging out securely...");
+  //   try {
+  //     const res = await axios.get("http://localhost:4000/api/v1/logout");
       
-      if (res.data.success) {
-        // Clear all session markers 
-        localStorage.removeItem('userPhone');
-        localStorage.removeItem('customerMobile');
-        localStorage.removeItem('userName');
-        localStorage.removeItem('userRole');
-        localStorage.removeItem('token');
+  //     if (res.data.success) {
+  //       // Clear all session markers 
+  //       localStorage.removeItem('userPhone');
+  //       localStorage.removeItem('customerMobile');
+  //       localStorage.removeItem('userName');
+  //       localStorage.removeItem('userRole');
+  //       localStorage.removeItem('token');
 
-        toast.success("Logged out successfully", { id: processToast });
-        setIsSidebarOpen(false); // Cleanly close sidebar menu state context
-        navigate('/login');
-      }
-    } catch (err) {
-      console.error("Logout failed:", err);
-      toast.error("Something went wrong during logout", { id: processToast });
+  //       toast.success("Logged out successfully", { id: processToast });
+  //       setIsSidebarOpen(false); // Cleanly close sidebar menu state context
+  //       navigate('/login');
+  //     }
+  //   } catch (err) {
+  //     console.error("Logout failed:", err);
+  //     toast.error("Something went wrong during logout", { id: processToast });
+  //   }
+  // };
+
+
+  const handleLogout = async () => {
+  const processToast = toast.loading("Logging out securely...");
+  try {
+    const res = await axios.get("http://localhost:4000/api/v1/logout");
+    
+    if (res.data.success) {
+      // ✅ Only call the API, context logout is called separately
+      // If you have useCustomerAuth here, use it:
+      // const { logout: contextLogout } = useCustomerAuth();
+      // contextLogout();
+      
+      // OR if this is admin-only, just clear localStorage:
+      localStorage.removeItem('token');
+      localStorage.removeItem('customerId');
+      localStorage.removeItem('customerName');
+      localStorage.removeItem('customerMobile');
+      localStorage.removeItem('customerRole');
+      localStorage.removeItem('isCustomerLoggedIn');
+      
+      toast.success("Logged out successfully", { id: processToast });
+      setIsSidebarOpen(false);
+      navigate('/login');
+         setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }
-  };
+  } catch (err) {
+    console.error("Logout failed:", err);
+    toast.error("Something went wrong during logout", { id: processToast });
+  }
+};
 
   return (
     <div className="rasi-admin-layout">

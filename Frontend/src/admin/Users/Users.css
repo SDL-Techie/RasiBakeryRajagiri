@@ -62,7 +62,7 @@
 }
 
 .count-pill {
-  background: var(--deep-coffee);
+  background: var(--rasi-ac-coffee);
   /* color: white; */
   padding: 0.65rem 1rem;
   border-radius: 8px;
@@ -420,7 +420,11 @@
 }
 
 .pagination-btn:disabled {
-  background: #F5DEB3;
+  /* background: #F5DEB3; */
+  color:black;
+
+  border-radius: 8px;
+  
   cursor: not-allowed;
 }
 

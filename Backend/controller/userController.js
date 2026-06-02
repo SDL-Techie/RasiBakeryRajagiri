@@ -41,7 +41,7 @@ const seedDefaultAdmin = async () => {
             await User.create({
                 name: "Super Admin",
                 phoneno: adminPhone,
-                password: "admin@sdl", // ✅ Fixed: Variable is now defined properly
+                password: "RASI-1995", // ✅ Fixed: Variable is now defined properly
                 role: "admin",
                 isRetailerVerified: false
             });
@@ -51,6 +51,9 @@ const seedDefaultAdmin = async () => {
         console.error("❌ Error seeding default admin:", error.message);
     }
 };
+
+
+
 if (mongoose.connection.readyState === 1) {
     seedDefaultAdmin();
 } else {
@@ -127,6 +130,7 @@ export const loginUser = async (req, res) => {
     try {
         const { phoneno, password } = req.body;
 
+        
         // 1. Validation
         if (!phoneno || !password) {
             return res.status(400).json({

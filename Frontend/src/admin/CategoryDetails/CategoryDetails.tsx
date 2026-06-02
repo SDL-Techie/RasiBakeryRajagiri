@@ -80,7 +80,7 @@ const confirmDelete = async () => {
         </div>
         
         <div className="header-actions">
-          <div className="count-pill">
+          <div className="count-pill-category">
             <Layers size={16} />
             {categories.length} Total Categories
           </div>

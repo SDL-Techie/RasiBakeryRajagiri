@@ -70,11 +70,26 @@ export const CustomerAuthProvider: React.FC<{ children: ReactNode }> = ({ childr
   };
 
   // ✅ LOGOUT
-  const logout = () => {
-    setCustomer(null);
-    setIsLoggedIn(false);
-    localStorage.clear(); 
-  };
+  // const logout = () => {
+  //   setCustomer(null);
+  //   setIsLoggedIn(false);
+  //   localStorage.clear(); 
+  // };
+
+  // ✅ FIXED LOGOUT
+const logout = () => {
+  setCustomer(null);
+  setIsLoggedIn(false);
+  
+  // ✅ Only clear auth-related data, not everything
+  localStorage.removeItem('token');
+  localStorage.removeItem('customerId');
+  localStorage.removeItem('customerName');
+  localStorage.removeItem('customerMobile');
+  localStorage.removeItem('customerRole');
+  localStorage.removeItem('isCustomerLoggedIn');
+  localStorage.removeItem('userPhone'); // From your navbar
+};
 
   // ✅ UPDATE CUSTOMER
   const updateCustomer = (updates: Partial<Customer>) => {

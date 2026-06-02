@@ -93,28 +93,47 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      const res = await axios.get("http://localhost:4000/api/v1/logout");
+  // const handleLogout = async () => {
+  //   try {
+  //     const res = await axios.get("http://localhost:4000/api/v1/logout");
       
-      if (res.data.success) {
-        logout(); 
-        localStorage.removeItem('userPhone');
-        localStorage.removeItem('customerMobile');
-        localStorage.removeItem('userName');
-        localStorage.removeItem('userRole');
-        localStorage.removeItem('token');
+  //     if (res.data.success) {
+  //       logout(); 
+  //       localStorage.removeItem('userPhone');
+  //       localStorage.removeItem('customerMobile');
+  //       localStorage.removeItem('userName');
+  //       localStorage.removeItem('userRole');
+  //       localStorage.removeItem('token');
 
-        navigate('/login');
-        closeMenu();
-        setIsUserDropdownOpen(false);
-        toast.success("Logged out successfully");
-      }
-    } catch (err) {
-      console.error("Logout failed:", err);
-      toast.error("Something went wrong during logout");
+  //       navigate('/login');
+  //       closeMenu();
+  //       setIsUserDropdownOpen(false);
+  //       toast.success("Logged out successfully");
+  //     }
+  //   } catch (err) {
+  //     console.error("Logout failed:", err);
+  //     toast.error("Something went wrong during logout");
+  //   }
+  // };
+
+
+const handleLogout = async () => {
+  try {
+    const res = await axios.get("http://localhost:4000/api/v1/logout");
+    
+    if (res.data.success) {
+      logout(); // This calls your context logout which handles everything
+      setIsUserDropdownOpen(false);
+      closeMenu();
+      navigate('/login');
+      toast.success("Logged out successfully");
+  
     }
-  };
+  } catch (err) {
+    console.error("Logout failed:", err);
+    toast.error("Something went wrong during logout");
+  }
+};
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
