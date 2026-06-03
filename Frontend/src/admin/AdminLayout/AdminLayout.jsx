@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   FaTachometerAlt, FaPlusCircle, FaList, FaBoxOpen, FaThList, 
   FaShoppingCart, FaUsers, FaSignOutAlt, FaBars, FaSearch, 
-  FaUserTie, FaMapMarkerAlt, FaCoins 
+  FaUserTie, FaMapMarkerAlt, FaCoins , FaDatabase
 } from 'react-icons/fa';
 import { Link, useLocation, Outlet, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,6 +27,7 @@ const AdminSidebar = ({ isOpen, onClose, onLogout }) => {
     { name: 'Retailer', icon: <FaUserTie />, path: '/admin/retailer' },
     { name: 'Pincode', icon: <FaMapMarkerAlt />, path: '/admin/pincode' },
     { name: 'Point', icon: <FaCoins />, path: '/admin/point' },
+    {name:'Storage' , icon:< FaDatabase/>, path:'/admin/backup'}
   ];
 
   const sidebarVariants = {

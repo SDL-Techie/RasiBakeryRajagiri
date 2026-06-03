@@ -1,0 +1,321 @@
+{
+  "users": [
+    {
+      "_id": "6a1fd5b4db8cc832fd53a93b",
+      "name": "Super Admin",
+      "phoneno": "8220701195",
+      "role": "admin",
+      "password": "$2b$10$1vbpkMUytLvnOxlo3vpVoeJo8OBhBev9Glg/h6FtCtDP8EGgNVQqq",
+      "isRetailerVerified": false,
+      "addresses": [
+        {
+          "street": "Kamalia Street House No 3",
+          "city": "Thanjavur, Tamil Nadu, India",
+          "state": "newyork",
+          "zipCode": "614201",
+          "isDefault": true,
+          "_id": "6a1fd8fd82585c7a14e80537"
+        }
+      ],
+      "createdAt": "2026-06-03T07:20:20.344Z",
+      "updatedAt": "2026-06-03T07:34:21.604Z",
+      "__v": 0,
+      "email": ""
+    },
+    {
+      "_id": "6a1fd85c82585c7a14e804b2",
+      "name": "Nurul Shifaa K",
+      "phoneno": "8610789126",
+      "role": "customer",
+      "password": "$2b$10$ThoRumZ95vHls6dboulEr.i.Pb272TH6qcTMAj2jj1yOW9z7wLrG6",
+      "retailerCode": null,
+      "isRetailerVerified": false,
+      "addresses": [
+        {
+          "street": "Kamalia Street House No 3",
+          "city": "Thanjavur, Tamil Nadu, India",
+          "state": "newyork",
+          "zipCode": "614201",
+          "isDefault": true,
+          "_id": "6a1fd92b82585c7a14e80584"
+        }
+      ],
+      "createdAt": "2026-06-03T07:31:40.416Z",
+      "updatedAt": "2026-06-03T07:35:07.539Z",
+      "__v": 0,
+      "email": ""
+    }
+  ],
+  "retailers": [],
+  "products": [
+    {
+      "_id": "6a1fd7dc82585c7a14e80492",
+      "name": "demo Biscuit",
+      "price": "30",
+      "category": "6a1bf12d84aad12ffe630a53",
+      "wholesaleprice": "20",
+      "oldprice": "35",
+      "description": "Crispy biscuit",
+      "status": "Active",
+      "ingredients": "Flour,Butter",
+      "productimage": "https://i.pinimg.com/736x/5d/bc/d4/5dbcd4aa812befd45f2297dc23f7e08c.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80493",
+      "name": "plum cake",
+      "price": "120",
+      "category": "6a1bf12d84aad12ffe630a53",
+      "wholesaleprice": "100",
+      "oldprice": "80",
+      "description": "fluffy cake flour,",
+      "status": "Active",
+      "ingredients": "flour,Butter,wine,",
+      "productimage": "https://i.pinimg.com/736x/f3/ef/ab/f3efab0fb53168a538faadec7e1a4d52.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80494",
+      "name": "waffle",
+      "price": "100",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "80",
+      "oldprice": "60",
+      "description": "crispy sweets",
+      "status": "Active",
+      "ingredients": "flour,batter,chocolate",
+      "productimage": "https://i.pinimg.com/736x/20/e7/41/20e7415b221304788969bf8443bba145.jpg\n",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80495",
+      "name": "cookies",
+      "price": "50",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "20",
+      "oldprice": "40",
+      "description": "Crispy biscuit",
+      "status": "Active",
+      "ingredients": "flour,flavours",
+      "productimage": "https://i.pinimg.com/736x/80/84/6c/80846c146480d9f268422ba7f5f7f03f.jpg\n\n\n\n\n\n\n\n",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80496",
+      "name": "milk shake",
+      "price": "120",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "100",
+      "oldprice": "80",
+      "description": "tasty drink",
+      "status": "Active",
+      "ingredients": "cream,milk,",
+      "productimage": "https://i.pinimg.com/736x/1f/ae/f8/1faef86e50b91ece5fd574803e0f8c30.jpg\n\n\n\n\n\n",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80497",
+      "name": "pancake",
+      "price": "300",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "250",
+      "oldprice": "200",
+      "description": "sweet cakes",
+      "status": "Active",
+      "ingredients": "flour,egg,batter",
+      "productimage": "https://i.pinimg.com/736x/8e/7f/89/8e7f89552625a64967cb56596b6c56a8.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80498",
+      "name": "lemonade",
+      "price": "150",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "100",
+      "oldprice": "90",
+      "description": "refreshing drink",
+      "status": "Active",
+      "ingredients": "lemon,ice cubes,",
+      "productimage": "https://i.pinimg.com/736x/93/ee/20/93ee20287f13f86937f425ac053b7a21.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80499",
+      "name": "caramel ice cream",
+      "price": "200",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "150",
+      "oldprice": "100",
+      "description": "sweet desserts",
+      "status": "Active",
+      "ingredients": "cream,milk,sugar",
+      "productimage": "https://i.pinimg.com/736x/51/34/50/513450f24d945cc4d070332199ca5f2d.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e8049a",
+      "name": "apple pie",
+      "price": "350",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "300",
+      "oldprice": "240",
+      "description": "sweet desserts",
+      "status": "Active",
+      "ingredients": "apple,cheese,flour\n",
+      "productimage": "https://i.pinimg.com/736x/96/d0/40/96d0404ee63dc33382f4921a2f48e2e1.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e8049b",
+      "name": "mango sago",
+      "price": "420",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "380",
+      "oldprice": "300",
+      "description": "summer drink",
+      "status": "Active",
+      "ingredients": "mango,milk,cream",
+      "productimage": "https://i.pinimg.com/736x/b1/32/60/b1326099a2c71826242e1ff929ebae23.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e8049c",
+      "name": "flavour yogurt",
+      "price": "200",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "180",
+      "oldprice": "120",
+      "description": "healthy desserts",
+      "status": "Active",
+      "ingredients": "yogurt,add flavours",
+      "productimage": "https://i.pinimg.com/736x/b6/cf/b2/b6cfb2568d8e3936afc8dd0abc11ddcb.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e8049d",
+      "name": "pani puri",
+      "price": "100",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "130",
+      "oldprice": "80",
+      "description": "chat foods",
+      "status": "Active",
+      "ingredients": "flour,spices",
+      "productimage": "https://i.pinimg.com/736x/17/23/21/1723211248032602b15486bbca4d5f2f.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e8049e",
+      "name": "stawberry cake",
+      "price": "100",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "140",
+      "oldprice": "120",
+      "description": "sweet desserts",
+      "status": "Active",
+      "ingredients": "flour,stawberry",
+      "productimage": "https://i.pinimg.com/736x/da/5a/67/da5a67076f9f0f3c8878e102ee9e882c.jpg",
+      "__v": 0
+    }
+  ],
+  "categories": [
+    {
+      "_id": "6a1fd8e682585c7a14e80514",
+      "name": "Cookies",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780472038/uhn1ko575ykqxb5i73fl.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-03T07:33:58.845Z",
+      "__v": 0
+    }
+  ],
+  "orders": [
+    {
+      "_id": "6a1fd90382585c7a14e8053d",
+      "customerDetails": {
+        "userId": "6a1fd5b4db8cc832fd53a93b",
+        "name": "Super Admin",
+        "phone": "8220701195",
+        "address": "Kamalia Street House No 3, Thanjavur, Tamil Nadu, India",
+        "pincode": "614201",
+        "role": "admin"
+      },
+      "items": [
+        {
+          "productId": "6a1fd7dc82585c7a14e8049c",
+          "name": "flavour yogurt",
+          "price": 200,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/b6/cf/b2/b6cfb2568d8e3936afc8dd0abc11ddcb.jpg",
+          "_id": "6a1fd90382585c7a14e8053e"
+        }
+      ],
+      "pricing": {
+        "subtotal": 200,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "total": 200,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": null,
+      "status": "Ordered",
+      "createdAt": "2026-06-03T07:34:27.415Z",
+      "orderId": "RASI-1PD8MW",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd92f82585c7a14e8058a",
+      "customerDetails": {
+        "userId": "6a1fd85c82585c7a14e804b2",
+        "name": "Nurul Shifaa K",
+        "phone": "8610789126",
+        "address": "Kamalia Street House No 3, Thanjavur, Tamil Nadu, India",
+        "pincode": "614201",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "6a1fd7dc82585c7a14e8049b",
+          "name": "mango sago",
+          "price": 420,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/b1/32/60/b1326099a2c71826242e1ff929ebae23.jpg",
+          "_id": "6a1fd92f82585c7a14e8058b"
+        }
+      ],
+      "pricing": {
+        "subtotal": 420,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "total": 420,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": null,
+      "status": "Ordered",
+      "createdAt": "2026-06-03T07:35:11.825Z",
+      "orderId": "RASI-2LB99K",
+      "__v": 0
+    }
+  ],
+  "retailerOrders": [],
+  "carts": [],
+  "wishlists": [],
+  "coupons": [],
+  "pincodes": [],
+  "userPoints": [],
+  "pointSettings": [],
+  "backupDate": "2026-06-03T07:36:32.301Z"
+}

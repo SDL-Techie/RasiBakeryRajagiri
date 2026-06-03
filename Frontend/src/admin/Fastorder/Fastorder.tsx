@@ -30,7 +30,7 @@ const Fastorder: React.FC = () => {
       Authorization: `Bearer ${localStorage.getItem("token")}`
     }
   });
-            console.log(res)
+            // console.log(res)
             if (res.data.success) {
                 setOrders(res.data.data);
             }

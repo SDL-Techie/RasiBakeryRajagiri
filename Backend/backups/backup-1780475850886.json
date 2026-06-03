@@ -1,0 +1,514 @@
+{
+  "users": [
+    {
+      "_id": "6a1fe7b4f865e389a039228e",
+      "name": "Super Admin",
+      "phoneno": "8220701195",
+      "role": "admin",
+      "password": "$2b$10$.puOsPHQBA4ZtNU4p0zYrep8EiOYQV7p6s0THmS0SZZxLQmNADf2e",
+      "isRetailerVerified": false,
+      "addresses": [],
+      "createdAt": "2026-06-03T08:37:08.094Z",
+      "updatedAt": "2026-06-03T08:37:08.094Z",
+      "__v": 0
+    }
+  ],
+  "retailers": [
+    {
+      "_id": "69e6396dfa48975386a73ac7",
+      "code": "H1A5",
+      "assignedTo": "Sweets",
+      "isUsed": false,
+      "activatedBy": null,
+      "createdAt": "2026-04-20T14:34:21.764Z",
+      "updatedAt": "2026-04-20T14:34:21.764Z",
+      "__v": 0
+    }
+  ],
+  "products": [
+    {
+      "_id": "69e625c1fa48975386a73986",
+      "name": "demo",
+      "price": "1",
+      "category": "6a06be8327d1186dbe2e8943",
+      "wholesaleprice": "1",
+      "oldprice": "1",
+      "description": "rrrrrrrrr",
+      "status": "Active",
+      "ingredients": "rrrrrrrr",
+      "productimage": "https://res.cloudinary.com/dyggibpsi/image/upload/v1776690625/eybbdtufqesqowzo7jgo.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a06c94427d1186dbe2e8a0e",
+      "name": "coconut tender",
+      "price": "1",
+      "category": "69de08b446c6360046346e36",
+      "wholesaleprice": "1",
+      "oldprice": "1",
+      "description": "cocnut juice...",
+      "status": "Active",
+      "ingredients": "........",
+      "productimage": "https://res.cloudinary.com/dyggibpsi/image/upload/v1778829635/nwemff0alsiwqtpj6fbu.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a0c71b971aa1358de67dff3",
+      "name": "Paniyaram",
+      "price": "120",
+      "category": "69de08b446c6360046346e36",
+      "wholesaleprice": "200",
+      "oldprice": "220",
+      "description": "",
+      "status": "Active",
+      "ingredients": "",
+      "productimage": "https://res.cloudinary.com/dyggibpsi/image/upload/v1779200441/icgbkyefhzruvumrlfcd.png",
+      "__v": 0
+    }
+  ],
+  "categories": [
+    {
+      "_id": "69de08b446c6360046346e36",
+      "name": "Paniyaram",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1776158900/el7dtzxvjap6d9psvlky.jpg",
+      "status": "Active",
+      "createdAt": "2026-04-14T09:28:20.724Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a06be8327d1186dbe2e8943",
+      "name": "Fresh Juice",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1778826883/ehkq629peyct58z8isqm.jpg",
+      "status": "Active",
+      "createdAt": "2026-05-15T06:34:43.986Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0c719d71aa1358de67dfef",
+      "name": "Sweets",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1779200412/kgvwx395fowbxrxll7ki.png",
+      "status": "Active",
+      "createdAt": "2026-05-19T14:20:13.463Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a13f9777835abc331d841c9",
+      "name": "cookie",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1779693942/yinpxruwkpyhzl95fovm.jpg",
+      "status": "Active",
+      "createdAt": "2026-05-25T07:25:43.464Z",
+      "__v": 0
+    }
+  ],
+  "orders": [
+    {
+      "_id": "69e6261dfa48975386a739b7",
+      "orderId": "Rasi2026001",
+      "customerDetails": {
+        "userId": "69e625f0fa48975386a7398f",
+        "name": "user",
+        "phone": "1234567890",
+        "address": "JH Residency, Thanjavur",
+        "pincode": "614201",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "69e625c1fa48975386a73986",
+          "name": "demo",
+          "price": 1,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1776690625/eybbdtufqesqowzo7jgo.jpg",
+          "_id": "69e6261dfa48975386a739b8"
+        }
+      ],
+      "pricing": {
+        "subtotal": 1,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "total": 1,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "deliveryDate": "1999-12-31T18:30:00.000Z",
+      "status": "Delivered",
+      "createdAt": "2026-04-20T13:11:57.379Z",
+      "__v": 0
+    },
+    {
+      "_id": "69e6262efa48975386a739dc",
+      "orderId": "Rasi2026002",
+      "customerDetails": {
+        "userId": "69e625f0fa48975386a7398f",
+        "name": "user",
+        "phone": "1234567890",
+        "address": "JH Residency, Thanjavur",
+        "pincode": "614201",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "69e625c1fa48975386a73986",
+          "name": "demo",
+          "price": 1,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1776690625/eybbdtufqesqowzo7jgo.jpg",
+          "_id": "69e6262efa48975386a739dd"
+        }
+      ],
+      "pricing": {
+        "subtotal": 1,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "total": 1,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "UPI",
+        "status": "paid"
+      },
+      "deliveryDate": "1999-12-31T18:30:00.000Z",
+      "status": "Processing",
+      "createdAt": "2026-04-20T13:12:14.061Z",
+      "__v": 0
+    },
+    {
+      "_id": "69e63ad6fa48975386a73b04",
+      "orderId": "Rasi2026003",
+      "customerDetails": {
+        "userId": "69e639b5fa48975386a73ad6",
+        "name": "SWEETS",
+        "phone": "9894262269",
+        "address": "JH Residency, Thanjavur",
+        "pincode": "614201",
+        "role": "retailer"
+      },
+      "items": [
+        {
+          "productId": "69e625c1fa48975386a73986",
+          "name": "demo",
+          "price": 1,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1776690625/eybbdtufqesqowzo7jgo.jpg",
+          "_id": "69e63ad6fa48975386a73b05"
+        }
+      ],
+      "pricing": {
+        "subtotal": 1,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "total": 1,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "UPI",
+        "status": "Pending"
+      },
+      "deliveryDate": "1970-01-01T00:00:00.000Z",
+      "status": "Ordered",
+      "createdAt": "2026-04-20T14:40:22.974Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a06cab027d1186dbe2e8a65",
+      "orderId": "Rasi2026004",
+      "customerDetails": {
+        "userId": "6a06c99927d1186dbe2e8a27",
+        "name": "shifaa",
+        "phone": "8610789126",
+        "address": "JH Residency, Thanjavur",
+        "pincode": "614201",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "6a06c94427d1186dbe2e8a0e",
+          "name": "coconut tender",
+          "price": 1,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1778829635/nwemff0alsiwqtpj6fbu.jpg",
+          "_id": "6a06cab027d1186dbe2e8a66"
+        }
+      ],
+      "pricing": {
+        "subtotal": 1,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "total": 1,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "deliveryDate": null,
+      "status": "Ordered",
+      "createdAt": "2026-05-15T07:26:40.693Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0c37bbfce91498b81367c1",
+      "orderId": "Rasi2026005",
+      "customerDetails": {
+        "userId": "6a0998391ad3c6366b72ead6",
+        "name": "Mohamed Shaik Marzook",
+        "phone": "9361058146",
+        "address": "195 - Ayyampettai, Thanjavur",
+        "pincode": "614201",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "69e625c1fa48975386a73986",
+          "name": "demo",
+          "price": 1,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1776690625/eybbdtufqesqowzo7jgo.jpg",
+          "_id": "6a0c37bbfce91498b81367c2"
+        }
+      ],
+      "pricing": {
+        "subtotal": 1,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "total": 1,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "deliveryDate": null,
+      "status": "Ordered",
+      "createdAt": "2026-05-19T10:13:15.385Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0c3a66fce91498b81367ed",
+      "orderId": "Rasi2026006",
+      "customerDetails": {
+        "userId": "6a0998391ad3c6366b72ead6",
+        "name": "Mohamed Shaik Marzook",
+        "phone": "9361058146",
+        "address": "195 - Ayyampettai, Thanjavur",
+        "pincode": "614201",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "6a06c94427d1186dbe2e8a0e",
+          "name": "coconut tender",
+          "price": 1,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1778829635/nwemff0alsiwqtpj6fbu.jpg",
+          "_id": "6a0c3a66fce91498b81367ee"
+        }
+      ],
+      "pricing": {
+        "subtotal": 1,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "total": 1,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "UPI",
+        "status": "paid"
+      },
+      "deliveryDate": null,
+      "status": "Processing",
+      "createdAt": "2026-05-19T10:24:38.370Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0c60d7e2f8d432815c61ac",
+      "orderId": "Rasi2026007",
+      "customerDetails": {
+        "userId": "6a0998391ad3c6366b72ead6",
+        "name": "Mohamed Shaik Marzook",
+        "phone": "9361058146",
+        "address": "195 - Ayyampettai, Thanjavur",
+        "pincode": "614201",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "69e625c1fa48975386a73986",
+          "name": "demo",
+          "price": 1,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1776690625/eybbdtufqesqowzo7jgo.jpg",
+          "_id": "6a0c60d7e2f8d432815c61ad"
+        }
+      ],
+      "pricing": {
+        "subtotal": 1,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "total": 1,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "deliveryDate": null,
+      "status": "Ordered",
+      "createdAt": "2026-05-19T13:08:39.901Z",
+      "__v": 0
+    }
+  ],
+  "retailerOrders": [
+    {
+      "_id": "6a1406587835abc331d84439",
+      "orderId": "RASI-Retail-2026001",
+      "retailerDetails": {
+        "userId": "6a14016d7835abc331d8438b",
+        "businessName": "mena bakery",
+        "name": "retailer",
+        "phone": "0000000000",
+        "address": "kmk, ayyampet",
+        "pincode": "614201",
+        "isRegistered": false
+      },
+      "items": [
+        {
+          "productId": "6a06c94427d1186dbe2e8a0e",
+          "name": "coconut tender",
+          "category": "Paniyaram",
+          "price": 1,
+          "quantity": 6,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1778829635/nwemff0alsiwqtpj6fbu.jpg",
+          "_id": "6a1406587835abc331d8443a"
+        },
+        {
+          "productId": "6a0c71b971aa1358de67dff3",
+          "name": "Paniyaram",
+          "category": "Paniyaram",
+          "price": 200,
+          "quantity": 5,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1779200441/icgbkyefhzruvumrlfcd.png",
+          "_id": "6a1406587835abc331d8443b"
+        },
+        {
+          "productId": "69e625c1fa48975386a73986",
+          "name": "demo",
+          "category": "Fresh Juice",
+          "price": 1,
+          "quantity": 7,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1776690625/eybbdtufqesqowzo7jgo.jpg",
+          "_id": "6a1406587835abc331d8443c"
+        }
+      ],
+      "logistics": {
+        "orderType": "Pickup",
+        "deliveryDate": null,
+        "timeSlot": null
+      },
+      "pricing": {
+        "subtotal": 1013,
+        "deliveryCharge": 0,
+        "total": 1013
+      },
+      "payment": {
+        "method": "cod",
+        "status": "Pending",
+        "razorpayOrderId": null,
+        "razorpayPaymentId": null,
+        "razorpaySignature": null,
+        "paidAt": null
+      },
+      "status": "Ordered",
+      "createdAt": "2026-05-25T08:20:40.388Z",
+      "__v": 0
+    }
+  ],
+  "carts": [
+    {
+      "_id": "69e63b32fa48975386a73b2d",
+      "userPhone": "9894262269",
+      "items": [
+        {
+          "productId": "69e625c1fa48975386a73986",
+          "quantity": 50,
+          "_id": "69e63b32fa48975386a73b2e"
+        }
+      ],
+      "createdAt": "2026-04-20T14:41:54.517Z",
+      "updatedAt": "2026-04-20T14:42:10.417Z",
+      "__v": 0
+    }
+  ],
+  "wishlists": [
+    {
+      "_id": "6a0c5df8e2f8d432815c60a5",
+      "userPhone": "9361058146",
+      "productId": "69e625c1fa48975386a73986",
+      "addedAt": "2026-05-19T12:56:24.932Z",
+      "createdAt": "2026-05-19T12:56:24.938Z",
+      "updatedAt": "2026-05-19T12:56:24.938Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1401087835abc331d84377",
+      "userPhone": "8610789126",
+      "productId": "69e625c1fa48975386a73986",
+      "addedAt": "2026-05-25T07:58:00.926Z",
+      "createdAt": "2026-05-25T07:58:00.928Z",
+      "updatedAt": "2026-05-25T07:58:00.928Z",
+      "__v": 0
+    }
+  ],
+  "coupons": [],
+  "pincodes": [
+    {
+      "_id": "6a1407308fef90504b918cf8",
+      "pincode": "614201",
+      "__v": 0,
+      "createdAt": "2026-05-25T08:24:16.500Z",
+      "deliveryCharge": 10,
+      "status": "Active"
+    }
+  ],
+  "userPoints": [
+    {
+      "_id": "6a0c60d774256c703f04e234",
+      "userPhone": "9361058146",
+      "__v": 0,
+      "activeCoupons": [],
+      "createdAt": "2026-05-19T13:08:39.907Z",
+      "currentPoints": 1,
+      "customerName": "Mohamed Shaik Marzook",
+      "history": [
+        {
+          "orderId": "6a0c60d7e2f8d432815c61ac",
+          "pointsChanged": 1,
+          "type": "earned",
+          "createdAt": "2026-05-19T13:08:39.907Z",
+          "_id": "6a0c60d7e2f8d432815c61b0"
+        }
+      ],
+      "totalAmountSpent": 1,
+      "totalPointsEarned": 1,
+      "updatedAt": "2026-05-19T13:08:39.907Z",
+      "userRole": "customer"
+    }
+  ],
+  "pointSettings": [
+    {
+      "_id": "69de097946c6360046346e4d",
+      "minOrderAmount": 1,
+      "pointsEarnedPerOrder": 1,
+      "pointsRequiredForDiscount": 4,
+      "discountPercentage": 1,
+      "createdAt": "2026-04-14T09:31:37.664Z",
+      "updatedAt": "2026-06-02T08:11:10.800Z",
+      "__v": 0,
+      "couponValidityDays": 7
+    }
+  ],
+  "backupDate": "2026-06-03T08:37:30.886Z"
+}

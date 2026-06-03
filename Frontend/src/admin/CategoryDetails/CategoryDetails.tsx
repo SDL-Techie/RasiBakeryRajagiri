@@ -26,7 +26,7 @@ const CategoryDetails: React.FC = () => {
       setLoading(true);
       setError(null);
       const response = await axios.get(API_URL);
-      console.log(response)
+      // console.log(response)
       if (response.data.success) {
         setCategories(response.data.data);
       } else {

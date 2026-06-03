@@ -1,0 +1,1028 @@
+{
+  "users": [
+    {
+      "_id": "6a1ee00881f1122a214c8f8a",
+      "name": "Super Admin",
+      "phoneno": "8220701195",
+      "role": "admin",
+      "isRetailerVerified": false,
+      "addresses": [],
+      "createdAt": "2026-06-02T13:52:08.279Z",
+      "updatedAt": "2026-06-02T13:52:08.279Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1ee64881f1122a214c9225",
+      "name": "shifaa",
+      "phoneno": "9898989898",
+      "role": "customer",
+      "retailerCode": null,
+      "isRetailerVerified": false,
+      "addresses": [],
+      "createdAt": "2026-06-02T14:18:48.077Z",
+      "updatedAt": "2026-06-02T14:18:48.077Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1ee70581f1122a214c928c",
+      "name": "sh",
+      "phoneno": "1234567890",
+      "role": "customer",
+      "retailerCode": null,
+      "isRetailerVerified": false,
+      "addresses": [],
+      "createdAt": "2026-06-02T14:21:57.400Z",
+      "updatedAt": "2026-06-02T14:21:57.400Z",
+      "__v": 0
+    }
+  ],
+  "retailers": [
+    {
+      "_id": "6a1bf9ea84aad12ffe630d17",
+      "code": "RASI123",
+      "assignedTo": "Rasi-demo",
+      "isUsed": false,
+      "activatedBy": null,
+      "createdAt": "2026-05-31T09:05:46.539Z",
+      "updatedAt": "2026-05-31T09:05:46.539Z",
+      "__v": 0
+    }
+  ],
+  "products": [
+    {
+      "_id": "6a1bf24d84aad12ffe630a74",
+      "name": "demo Biscuit demo",
+      "price": "400",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "200",
+      "oldprice": "35",
+      "description": "Crispy biscuit",
+      "status": "Active",
+      "ingredients": "Flour,Butter",
+      "productimage": "https://i.pinimg.com/736x/5d/bc/d4/5dbcd4aa812befd45f2297dc23f7e08c.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1bf3e484aad12ffe630a93",
+      "name": "choclate coated ",
+      "price": "2",
+      "category": "6a1bf12d84aad12ffe630a53",
+      "wholesaleprice": "10",
+      "oldprice": "-2",
+      "description": "xxx",
+      "status": "Active",
+      "ingredients": "xxx",
+      "productimage": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780216803/tpdurtksoxps5bikcjj7.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e7790349c71ea920580a3",
+      "name": "bis",
+      "price": "1",
+      "category": "6a1e773b349c71ea9205809a",
+      "wholesaleprice": "1",
+      "oldprice": "0",
+      "description": "xxx",
+      "status": "Active",
+      "ingredients": "xxx",
+      "productimage": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780381583/eo3fvfb9iquqpvllmnjo.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea92058617",
+      "name": "demo Biscuit",
+      "price": "30",
+      "category": "6a1bf12d84aad12ffe630a53",
+      "wholesaleprice": "20",
+      "oldprice": "35",
+      "description": "Crispy biscuit",
+      "status": "Active",
+      "ingredients": "Flour,Butter",
+      "productimage": "https://i.pinimg.com/736x/5d/bc/d4/5dbcd4aa812befd45f2297dc23f7e08c.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea92058618",
+      "name": "plum cake",
+      "price": "120",
+      "category": "6a1bf12d84aad12ffe630a53",
+      "wholesaleprice": "100",
+      "oldprice": "80",
+      "description": "fluffy cake flour,",
+      "status": "Active",
+      "ingredients": "flour,Butter,wine,",
+      "productimage": "https://i.pinimg.com/736x/f3/ef/ab/f3efab0fb53168a538faadec7e1a4d52.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea92058619",
+      "name": "waffle",
+      "price": "100",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "80",
+      "oldprice": "60",
+      "description": "crispy sweets",
+      "status": "Active",
+      "ingredients": "flour,batter,chocolate",
+      "productimage": "https://i.pinimg.com/736x/20/e7/41/20e7415b221304788969bf8443bba145.jpg\n",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea9205861a",
+      "name": "cookies",
+      "price": "50",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "20",
+      "oldprice": "40",
+      "description": "Crispy biscuit",
+      "status": "Active",
+      "ingredients": "flour,flavours",
+      "productimage": "https://i.pinimg.com/736x/80/84/6c/80846c146480d9f268422ba7f5f7f03f.jpg\n\n\n\n\n\n\n\n",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea9205861b",
+      "name": "milk shake",
+      "price": "120",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "100",
+      "oldprice": "80",
+      "description": "tasty drink",
+      "status": "Inactive",
+      "ingredients": "cream,milk,",
+      "productimage": "https://i.pinimg.com/736x/1f/ae/f8/1faef86e50b91ece5fd574803e0f8c30.jpg\n\n\n\n\n\n",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea9205861c",
+      "name": "pancake",
+      "price": "300",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "250",
+      "oldprice": "200",
+      "description": "sweet cakes",
+      "status": "Active",
+      "ingredients": "flour,egg,batter",
+      "productimage": "https://i.pinimg.com/736x/8e/7f/89/8e7f89552625a64967cb56596b6c56a8.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea9205861d",
+      "name": "lemonade",
+      "price": "150",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "100",
+      "oldprice": "90",
+      "description": "refreshing drink",
+      "status": "Active",
+      "ingredients": "lemon,ice cubes,",
+      "productimage": "https://i.pinimg.com/736x/93/ee/20/93ee20287f13f86937f425ac053b7a21.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea9205861e",
+      "name": "caramel ice cream",
+      "price": "200",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "150",
+      "oldprice": "100",
+      "description": "sweet desserts",
+      "status": "Active",
+      "ingredients": "cream,milk,sugar",
+      "productimage": "https://i.pinimg.com/736x/51/34/50/513450f24d945cc4d070332199ca5f2d.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea9205861f",
+      "name": "apple pie",
+      "price": "350",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "300",
+      "oldprice": "240",
+      "description": "sweet desserts",
+      "status": "Active",
+      "ingredients": "apple,cheese,flour\n",
+      "productimage": "https://i.pinimg.com/736x/96/d0/40/96d0404ee63dc33382f4921a2f48e2e1.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea92058620",
+      "name": "mango sago",
+      "price": "420",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "380",
+      "oldprice": "300",
+      "description": "summer drink",
+      "status": "Active",
+      "ingredients": "mango,milk,cream",
+      "productimage": "https://i.pinimg.com/736x/b1/32/60/b1326099a2c71826242e1ff929ebae23.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea92058621",
+      "name": "flavour yogurt",
+      "price": "200",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "180",
+      "oldprice": "120",
+      "description": "healthy desserts",
+      "status": "Active",
+      "ingredients": "yogurt,add flavours",
+      "productimage": "https://i.pinimg.com/736x/b6/cf/b2/b6cfb2568d8e3936afc8dd0abc11ddcb.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea92058622",
+      "name": "pani puri",
+      "price": "100",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "130",
+      "oldprice": "80",
+      "description": "chat foods",
+      "status": "Active",
+      "ingredients": "flour,spices",
+      "productimage": "https://i.pinimg.com/736x/17/23/21/1723211248032602b15486bbca4d5f2f.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e86a4349c71ea92058623",
+      "name": "stawberry cake",
+      "price": "100",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "140",
+      "oldprice": "120",
+      "description": "sweet desserts",
+      "status": "Active",
+      "ingredients": "flour,stawberry",
+      "productimage": "https://i.pinimg.com/736x/da/5a/67/da5a67076f9f0f3c8878e102ee9e882c.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae3546996",
+      "name": "demo Biscuit",
+      "price": "30",
+      "category": "6a1bf12d84aad12ffe630a53",
+      "wholesaleprice": "20",
+      "oldprice": "35",
+      "description": "Crispy biscuit",
+      "status": "Active",
+      "ingredients": "Flour,Butter",
+      "productimage": "https://i.pinimg.com/736x/5d/bc/d4/5dbcd4aa812befd45f2297dc23f7e08c.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae3546997",
+      "name": "plum cake",
+      "price": "120",
+      "category": "6a1bf12d84aad12ffe630a53",
+      "wholesaleprice": "100",
+      "oldprice": "80",
+      "description": "fluffy cake flour,",
+      "status": "Active",
+      "ingredients": "flour,Butter,wine,",
+      "productimage": "https://i.pinimg.com/736x/f3/ef/ab/f3efab0fb53168a538faadec7e1a4d52.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae3546998",
+      "name": "waffle",
+      "price": "100",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "80",
+      "oldprice": "60",
+      "description": "crispy sweets",
+      "status": "Active",
+      "ingredients": "flour,batter,chocolate",
+      "productimage": "https://i.pinimg.com/736x/20/e7/41/20e7415b221304788969bf8443bba145.jpg\n",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae3546999",
+      "name": "cookies",
+      "price": "50",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "20",
+      "oldprice": "40",
+      "description": "Crispy biscuit",
+      "status": "Active",
+      "ingredients": "flour,flavours",
+      "productimage": "https://i.pinimg.com/736x/80/84/6c/80846c146480d9f268422ba7f5f7f03f.jpg\n\n\n\n\n\n\n\n",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae354699a",
+      "name": "milk shake",
+      "price": "120",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "100",
+      "oldprice": "80",
+      "description": "tasty drink",
+      "status": "Active",
+      "ingredients": "cream,milk,",
+      "productimage": "https://i.pinimg.com/736x/1f/ae/f8/1faef86e50b91ece5fd574803e0f8c30.jpg\n\n\n\n\n\n",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae354699b",
+      "name": "pancake",
+      "price": "300",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "250",
+      "oldprice": "200",
+      "description": "sweet cakes",
+      "status": "Active",
+      "ingredients": "flour,egg,batter",
+      "productimage": "https://i.pinimg.com/736x/8e/7f/89/8e7f89552625a64967cb56596b6c56a8.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae354699c",
+      "name": "lemonade",
+      "price": "150",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "100",
+      "oldprice": "90",
+      "description": "refreshing drink",
+      "status": "Active",
+      "ingredients": "lemon,ice cubes,",
+      "productimage": "https://i.pinimg.com/736x/93/ee/20/93ee20287f13f86937f425ac053b7a21.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae354699d",
+      "name": "caramel ice cream",
+      "price": "200",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "150",
+      "oldprice": "100",
+      "description": "sweet desserts",
+      "status": "Active",
+      "ingredients": "cream,milk,sugar",
+      "productimage": "https://i.pinimg.com/736x/51/34/50/513450f24d945cc4d070332199ca5f2d.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae354699e",
+      "name": "apple pie",
+      "price": "350",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "300",
+      "oldprice": "240",
+      "description": "sweet desserts",
+      "status": "Active",
+      "ingredients": "apple,cheese,flour\n",
+      "productimage": "https://i.pinimg.com/736x/96/d0/40/96d0404ee63dc33382f4921a2f48e2e1.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae354699f",
+      "name": "mango sago",
+      "price": "420",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "380",
+      "oldprice": "300",
+      "description": "summer drink",
+      "status": "Active",
+      "ingredients": "mango,milk,cream",
+      "productimage": "https://i.pinimg.com/736x/b1/32/60/b1326099a2c71826242e1ff929ebae23.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae35469a0",
+      "name": "flavour yogurt",
+      "price": "200",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "180",
+      "oldprice": "120",
+      "description": "healthy desserts",
+      "status": "Active",
+      "ingredients": "yogurt,add flavours",
+      "productimage": "https://i.pinimg.com/736x/b6/cf/b2/b6cfb2568d8e3936afc8dd0abc11ddcb.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae35469a1",
+      "name": "pani puri",
+      "price": "100",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "130",
+      "oldprice": "80",
+      "description": "chat foods",
+      "status": "Active",
+      "ingredients": "flour,spices",
+      "productimage": "https://i.pinimg.com/736x/17/23/21/1723211248032602b15486bbca4d5f2f.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8f79e4c390dae35469a2",
+      "name": "stawberry cake",
+      "price": "100",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "140",
+      "oldprice": "120",
+      "description": "sweet desserts",
+      "status": "Active",
+      "ingredients": "flour,stawberry",
+      "productimage": "https://i.pinimg.com/736x/da/5a/67/da5a67076f9f0f3c8878e102ee9e882c.jpg",
+      "__v": 0
+    }
+  ],
+  "categories": [
+    {
+      "_id": "6a1bf11684aad12ffe630a50",
+      "name": "Cakes",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780216085/dd6scvjkpsfpf4w0dgcm.jpg",
+      "status": "Active",
+      "createdAt": "2026-05-31T08:28:06.363Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e773b349c71ea9205809a",
+      "name": "shifaa",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780381498/h9jccuxvr3np74tnvkze.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-02T06:24:59.194Z",
+      "__v": 0
+    }
+  ],
+  "orders": [
+    {
+      "_id": "6a1bf6b984aad12ffe630bf1",
+      "customerDetails": {
+        "userId": "6a1bf01a510e4252884ac9a6",
+        "name": "UserSHifaa",
+        "phone": "8610789126",
+        "address": "chinnatheru, thanjavur",
+        "pincode": "666666",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "6a1bf3e484aad12ffe630a93",
+          "name": "choclate coated ",
+          "price": 2,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780216803/tpdurtksoxps5bikcjj7.jpg",
+          "_id": "6a1bf6b984aad12ffe630bf2"
+        },
+        {
+          "productId": "6a1bf24d84aad12ffe630a74",
+          "name": "demo Biscuit",
+          "price": 300,
+          "quantity": 2,
+          "image": "https://i.pinimg.com/736x/5d/bc/d4/5dbcd4aa812befd45f2297dc23f7e08c.jpg",
+          "_id": "6a1bf6b984aad12ffe630bf3"
+        }
+      ],
+      "pricing": {
+        "subtotal": 602,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "total": 602,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": "2026-06-04T00:30:00.000Z",
+      "status": "Cancelled",
+      "createdAt": "2026-05-31T08:52:09.170Z",
+      "orderId": "RASI-PUAALC",
+      "__v": 0
+    },
+    {
+      "_id": "6a1bfb3284aad12ffe630d8e",
+      "customerDetails": {
+        "userId": "6a1bfa1484aad12ffe630d20",
+        "name": "Retailer Shifaa",
+        "phone": "9597811304",
+        "address": "harini road, thanjavur",
+        "pincode": "614201",
+        "role": "retailer"
+      },
+      "items": [
+        {
+          "productId": "6a1bf24d84aad12ffe630a74",
+          "name": "demo Biscuit",
+          "price": 300,
+          "quantity": 2,
+          "image": "https://i.pinimg.com/736x/5d/bc/d4/5dbcd4aa812befd45f2297dc23f7e08c.jpg",
+          "_id": "6a1bfb3284aad12ffe630d8f"
+        }
+      ],
+      "pricing": {
+        "subtotal": 600,
+        "deliveryCharge": 10,
+        "discount": 0,
+        "total": 610,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": "2026-06-05T20:30:00.000Z",
+      "status": "Shipped",
+      "createdAt": "2026-05-31T09:11:14.420Z",
+      "orderId": "RASI-X5IUJL",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e76e0349c71ea92058031",
+      "customerDetails": {
+        "userId": "6a1e769d349c71ea92057fde",
+        "name": "demodemo",
+        "phone": "9898989898",
+        "address": "cnkjs, nc kj",
+        "pincode": "614201",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "6a1bf3e484aad12ffe630a93",
+          "name": "choclate coated ",
+          "price": 2,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780216803/tpdurtksoxps5bikcjj7.jpg",
+          "_id": "6a1e76e0349c71ea92058032"
+        }
+      ],
+      "pricing": {
+        "subtotal": 2,
+        "deliveryCharge": 60,
+        "discount": 0,
+        "total": 62,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": "2026-06-18T20:30:00.000Z",
+      "status": "Delivered",
+      "createdAt": "2026-06-02T06:23:28.378Z",
+      "orderId": "RASI-YXZTYI",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8424349c71ea92058483",
+      "customerDetails": {
+        "userId": "6a1e7991349c71ea92058126",
+        "name": "demodemoretailer",
+        "phone": "0000000000",
+        "address": "Kamalia Street House No 3, Thanjavur, Tamil Nadu, India",
+        "pincode": "614207",
+        "role": "retailer"
+      },
+      "items": [
+        {
+          "productId": "6a1bf3e484aad12ffe630a93",
+          "name": "choclate coated ",
+          "price": 10,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780216803/tpdurtksoxps5bikcjj7.jpg",
+          "_id": "6a1e8424349c71ea92058484"
+        }
+      ],
+      "pricing": {
+        "subtotal": 10,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "total": 10,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": "2026-06-27T00:30:00.000Z",
+      "status": "Ordered",
+      "createdAt": "2026-06-02T07:20:04.725Z",
+      "orderId": "RASI-8E2BRG",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e873f349c71ea9205883d",
+      "customerDetails": {
+        "userId": "6a1e6b56349c71ea92057d95",
+        "name": "farvin",
+        "phone": "9597811304",
+        "address": "kmk nagar, ayyampet",
+        "pincode": "614201",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "6a1e86a4349c71ea92058623",
+          "name": "stawberry cake",
+          "price": 100,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/da/5a/67/da5a67076f9f0f3c8878e102ee9e882c.jpg",
+          "_id": "6a1e873f349c71ea9205883e"
+        },
+        {
+          "productId": "6a1e86a4349c71ea92058621",
+          "name": "flavour yogurt",
+          "price": 200,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/b6/cf/b2/b6cfb2568d8e3936afc8dd0abc11ddcb.jpg",
+          "_id": "6a1e873f349c71ea9205883f"
+        },
+        {
+          "productId": "6a1e86a4349c71ea9205861d",
+          "name": "lemonade",
+          "price": 150,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/93/ee/20/93ee20287f13f86937f425ac053b7a21.jpg",
+          "_id": "6a1e873f349c71ea92058840"
+        },
+        {
+          "productId": "6a1e86a4349c71ea9205861e",
+          "name": "caramel ice cream",
+          "price": 200,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/51/34/50/513450f24d945cc4d070332199ca5f2d.jpg",
+          "_id": "6a1e873f349c71ea92058841"
+        },
+        {
+          "productId": "6a1e86a4349c71ea9205861f",
+          "name": "apple pie",
+          "price": 350,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/96/d0/40/96d0404ee63dc33382f4921a2f48e2e1.jpg",
+          "_id": "6a1e873f349c71ea92058842"
+        },
+        {
+          "productId": "6a1e86a4349c71ea9205861c",
+          "name": "pancake",
+          "price": 300,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/8e/7f/89/8e7f89552625a64967cb56596b6c56a8.jpg",
+          "_id": "6a1e873f349c71ea92058843"
+        },
+        {
+          "productId": "6a1e86a4349c71ea9205861b",
+          "name": "milk shake",
+          "price": 120,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/1f/ae/f8/1faef86e50b91ece5fd574803e0f8c30.jpg\n\n\n\n\n\n",
+          "_id": "6a1e873f349c71ea92058844"
+        },
+        {
+          "productId": "6a1e86a4349c71ea9205861a",
+          "name": "cookies",
+          "price": 50,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/80/84/6c/80846c146480d9f268422ba7f5f7f03f.jpg\n\n\n\n\n\n\n\n",
+          "_id": "6a1e873f349c71ea92058845"
+        },
+        {
+          "productId": "6a1e86a4349c71ea92058617",
+          "name": "demo Biscuit",
+          "price": 30,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/5d/bc/d4/5dbcd4aa812befd45f2297dc23f7e08c.jpg",
+          "_id": "6a1e873f349c71ea92058846"
+        },
+        {
+          "productId": "6a1e86a4349c71ea92058618",
+          "name": "plum cake",
+          "price": 120,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/f3/ef/ab/f3efab0fb53168a538faadec7e1a4d52.jpg",
+          "_id": "6a1e873f349c71ea92058847"
+        },
+        {
+          "productId": "6a1e86a4349c71ea92058619",
+          "name": "waffle",
+          "price": 100,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/20/e7/41/20e7415b221304788969bf8443bba145.jpg\n",
+          "_id": "6a1e873f349c71ea92058848"
+        },
+        {
+          "productId": "6a1e7790349c71ea920580a3",
+          "name": "bis",
+          "price": 1,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780381583/eo3fvfb9iquqpvllmnjo.jpg",
+          "_id": "6a1e873f349c71ea92058849"
+        },
+        {
+          "productId": "6a1bf3e484aad12ffe630a93",
+          "name": "choclate coated ",
+          "price": 2,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780216803/tpdurtksoxps5bikcjj7.jpg",
+          "_id": "6a1e873f349c71ea9205884a"
+        },
+        {
+          "productId": "6a1bf24d84aad12ffe630a74",
+          "name": "demo Biscuit demo",
+          "price": 400,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/5d/bc/d4/5dbcd4aa812befd45f2297dc23f7e08c.jpg",
+          "_id": "6a1e873f349c71ea9205884b"
+        },
+        {
+          "productId": "6a1e86a4349c71ea92058620",
+          "name": "mango sago",
+          "price": 420,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/b1/32/60/b1326099a2c71826242e1ff929ebae23.jpg",
+          "_id": "6a1e873f349c71ea9205884c"
+        },
+        {
+          "productId": "6a1e86a4349c71ea92058622",
+          "name": "pani puri",
+          "price": 100,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/17/23/21/1723211248032602b15486bbca4d5f2f.jpg",
+          "_id": "6a1e873f349c71ea9205884d"
+        }
+      ],
+      "pricing": {
+        "subtotal": 2643,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "total": 2643,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": "2026-06-05T20:30:00.000Z",
+      "status": "Ordered",
+      "createdAt": "2026-06-02T07:33:19.406Z",
+      "orderId": "RASI-RM27GB",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8c64349c71ea92058b0b",
+      "customerDetails": {
+        "userId": "6a1e6b56349c71ea92057d95",
+        "name": "farvin",
+        "phone": "9597811304",
+        "address": "kmk nagar, ayyampet",
+        "pincode": "614201",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "6a1e86a4349c71ea92058620",
+          "name": "mango sago",
+          "price": 420,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/b1/32/60/b1326099a2c71826242e1ff929ebae23.jpg",
+          "_id": "6a1e8c64349c71ea92058b0c"
+        }
+      ],
+      "pricing": {
+        "subtotal": 420,
+        "deliveryCharge": 0,
+        "discount": 42,
+        "total": 378,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": null,
+      "status": "Cancelled",
+      "createdAt": "2026-06-02T07:55:16.156Z",
+      "orderId": "RASI-IUAPYJ",
+      "__v": 0
+    }
+  ],
+  "retailerOrders": [
+    {
+      "_id": "6a1bfead84aad12ffe630e7f",
+      "orderId": "RASI-Retail-2026001",
+      "retailerDetails": {
+        "userId": "6a1bfa1484aad12ffe630d20",
+        "businessName": "shifa",
+        "name": "Retailer Shifaa",
+        "phone": "9597811304",
+        "address": "harini road, thanjavur",
+        "pincode": "614201",
+        "isRegistered": false
+      },
+      "items": [
+        {
+          "productId": "6a1bf24d84aad12ffe630a74",
+          "name": "demo Biscuit",
+          "category": "Cakes",
+          "price": 200,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/5d/bc/d4/5dbcd4aa812befd45f2297dc23f7e08c.jpg",
+          "_id": "6a1bfead84aad12ffe630e80"
+        }
+      ],
+      "logistics": {
+        "orderType": "Delivery",
+        "deliveryDate": "2026-05-28T00:00:00.000Z",
+        "timeSlot": "Afternoon (1PM–4PM)"
+      },
+      "pricing": {
+        "subtotal": 200,
+        "deliveryCharge": 10,
+        "total": 210
+      },
+      "payment": {
+        "method": "cod",
+        "status": "Pending",
+        "razorpayOrderId": null,
+        "razorpayPaymentId": null,
+        "razorpaySignature": null,
+        "paidAt": null
+      },
+      "status": "Ordered",
+      "createdAt": "2026-05-31T09:26:05.392Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e79ec349c71ea92058166",
+      "orderId": "RASI-Retail-2026002",
+      "retailerDetails": {
+        "userId": "6a1e7991349c71ea92058126",
+        "businessName": "kk",
+        "name": "demodemoretailer",
+        "phone": "0000000000",
+        "address": "cnkjs, m m,",
+        "pincode": "614201",
+        "isRegistered": false
+      },
+      "items": [
+        {
+          "productId": "6a1e7790349c71ea920580a3",
+          "name": "bis",
+          "category": "shifaa",
+          "price": 1,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780381583/eo3fvfb9iquqpvllmnjo.jpg",
+          "_id": "6a1e79ec349c71ea92058167"
+        }
+      ],
+      "logistics": {
+        "orderType": "Delivery",
+        "deliveryDate": "2026-06-11T00:00:00.000Z",
+        "timeSlot": "Afternoon (1PM–4PM)"
+      },
+      "pricing": {
+        "subtotal": 1,
+        "deliveryCharge": 0,
+        "total": 1
+      },
+      "payment": {
+        "method": "cod",
+        "status": "Pending",
+        "razorpayOrderId": null,
+        "razorpayPaymentId": null,
+        "razorpaySignature": null,
+        "paidAt": null
+      },
+      "status": "Ordered",
+      "createdAt": "2026-06-02T06:36:28.961Z",
+      "__v": 0
+    }
+  ],
+  "carts": [
+    {
+      "_id": "6a1e83e6349c71ea92058421",
+      "userPhone": "0000000000",
+      "items": [
+        {
+          "productId": "6a1bf3e484aad12ffe630a93",
+          "quantity": 1,
+          "_id": "6a1e83e6349c71ea92058422"
+        }
+      ],
+      "createdAt": "2026-06-02T07:19:02.829Z",
+      "updatedAt": "2026-06-02T07:19:02.829Z",
+      "__v": 0
+    }
+  ],
+  "wishlists": [
+    {
+      "_id": "6a1bf5b584aad12ffe630b92",
+      "userPhone": "8610789126",
+      "productId": "6a1bf3e484aad12ffe630a93",
+      "addedAt": "2026-05-31T08:47:49.276Z",
+      "createdAt": "2026-05-31T08:47:49.277Z",
+      "updatedAt": "2026-05-31T08:47:49.277Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8408349c71ea92058463",
+      "userPhone": "0000000000",
+      "productId": "6a1bf3e484aad12ffe630a93",
+      "addedAt": "2026-06-02T07:19:36.574Z",
+      "createdAt": "2026-06-02T07:19:36.575Z",
+      "updatedAt": "2026-06-02T07:19:36.575Z",
+      "__v": 0
+    }
+  ],
+  "coupons": [
+    {
+      "_id": "6a1abd58b12f34e37c9ec5eb",
+      "code": "RASI-NTGMN",
+      "userPhone": "3333333333",
+      "discountPercentage": 20,
+      "isUsed": false,
+      "expiryDate": "2026-06-29T10:35:04.153Z",
+      "createdAt": "2026-05-30T10:35:04.158Z",
+      "updatedAt": "2026-05-30T10:35:04.158Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1abefab12f34e37c9ec625",
+      "code": "RASI-YB80Y",
+      "userPhone": "3333333333",
+      "discountPercentage": 20,
+      "isUsed": true,
+      "expiryDate": "2026-06-29T10:42:02.977Z",
+      "createdAt": "2026-05-30T10:42:03.004Z",
+      "updatedAt": "2026-05-30T10:59:58.892Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1bd73b2da113212557b26f",
+      "code": "RASI-KHDF5",
+      "userPhone": "1234567890",
+      "discountPercentage": 10,
+      "isUsed": true,
+      "expiryDate": "2026-06-30T06:37:47.692Z",
+      "createdAt": "2026-05-31T06:37:47.693Z",
+      "updatedAt": "2026-05-31T07:24:42.079Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1e8c1b349c71ea92058a87",
+      "code": "RASI-42W83",
+      "userPhone": "9597811304",
+      "discountPercentage": 10,
+      "isUsed": true,
+      "expiryDate": "2026-07-02T07:54:03.618Z",
+      "createdAt": "2026-06-02T07:54:03.620Z",
+      "updatedAt": "2026-06-02T07:55:16.175Z",
+      "__v": 0
+    }
+  ],
+  "pincodes": [
+    {
+      "_id": "6a1e789866af31d40bd74a37",
+      "pincode": "614208",
+      "__v": 0,
+      "createdAt": "2026-06-02T06:30:48.388Z",
+      "deliveryCharge": 200,
+      "status": "Active"
+    }
+  ],
+  "userPoints": [
+    {
+      "_id": "6a1e8c1b349c71ea92058a85",
+      "userPhone": "9597811304",
+      "currentPoints": 220,
+      "totalPointsEarned": 320,
+      "totalPointsRedeemed": 100,
+      "createdAt": "2026-06-02T07:54:03.616Z",
+      "updatedAt": "2026-06-02T07:54:03.616Z",
+      "__v": 0
+    }
+  ],
+  "pointSettings": [
+    {
+      "_id": "6a1bf7f266af31d40bd74a34",
+      "__v": 0,
+      "couponValidityDays": 1,
+      "createdAt": "2026-05-31T08:57:22.510Z",
+      "discountPercentage": 10,
+      "minOrderAmount": 100,
+      "pointsEarnedPerOrder": 10,
+      "pointsRequiredForDiscount": 100,
+      "updatedAt": "2026-06-02T06:32:19.157Z"
+    }
+  ],
+  "backupDate": "2026-06-03T07:11:20.401Z"
+}

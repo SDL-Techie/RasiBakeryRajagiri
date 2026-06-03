@@ -28,30 +28,51 @@ import mongoose from "mongoose";
 // };
 
 
+// const seedDefaultAdmin = async () => {
+//     try {
+//         const adminPhone = "8220701195";
+//         const adminExists = await User.findOne({ phoneno: adminPhone });
+
+//         if (!adminExists) {
+//             // Explicitly generate the salt and hash block for the default credentials
+//             const salt = await bcryptjs.genSalt(10);
+//             const hashedPassword = await bcryptjs.hash("admin@sdl", salt);
+
+//             await User.create({
+//                 name: "Super Admin",
+//                 phoneno: adminPhone,
+//                 password: "RASI-1995", // ✅ Fixed: Variable is now defined properly
+//                 role: "admin",
+//                 isRetailerVerified: false
+//             });
+//             //console.log("✅ Default Super Admin successfully seeded in database.");
+//         }
+//     } catch (error) {
+//         console.error("❌ Error seeding default admin:", error.message);
+//     }
+// };
+
+
 const seedDefaultAdmin = async () => {
     try {
         const adminPhone = "8220701195";
         const adminExists = await User.findOne({ phoneno: adminPhone });
 
         if (!adminExists) {
-            // Explicitly generate the salt and hash block for the default credentials
-            const salt = await bcryptjs.genSalt(10);
-            const hashedPassword = await bcryptjs.hash("admin@sdl", salt);
-
             await User.create({
                 name: "Super Admin",
                 phoneno: adminPhone,
-                password: "RASI-1995", // ✅ Fixed: Variable is now defined properly
+                password: "RASI-1995",
                 role: "admin",
                 isRetailerVerified: false
             });
-            //console.log("✅ Default Super Admin successfully seeded in database.");
+
+            console.log("✅ Default Super Admin created");
         }
     } catch (error) {
         console.error("❌ Error seeding default admin:", error.message);
     }
 };
-
 
 
 if (mongoose.connection.readyState === 1) {
@@ -536,6 +557,208 @@ export const updateUserRole = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "Internal server error occurred while editing account permissions.",
+            error: error.message
+        });
+    }
+};
+
+
+
+export const createCredential = async (req, res) => {
+    try {
+        // 1. Verify requester is admin
+        const { role: requesterRole } = req.user; // From verifyUser middleware
+        
+        if (requesterRole !== 'admin') {
+            return res.status(403).json({
+                success: false,
+                message: "Only admins can create credentials"
+            });
+        }
+ 
+        const { name, phoneno, password, role } = req.body;
+ 
+        // 2. Validate input
+        if (!name || !phoneno || !password || !role) {
+            return res.status(400).json({
+                success: false,
+                message: "Please provide name, phone number, password, and role"
+            });
+        }
+ 
+        if (!['customer', 'admin'].includes(role)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid role. Must be 'customer' or 'admin'"
+            });
+        }
+ 
+        // 3. Check if phone already exists
+        const existingUser = await User.findOne({ phoneno });
+        if (existingUser) {
+            return res.status(400).json({
+                success: false,
+                message: "Phone number already registered"
+            });
+        }
+ 
+        // 4. Create the new user/admin
+        const newUser = await User.create({
+            name,
+            phoneno,
+            password, // Will be hashed by pre-save hook
+            role: role.toLowerCase(),
+            isRetailerVerified: false
+        });
+ 
+        // 5. Return success response
+        res.status(201).json({
+            success: true,
+            message: `${role} created successfully!`,
+            data: {
+                _id: newUser._id,
+                name: newUser.name,
+                phoneno: newUser.phoneno,
+                role: newUser.role,
+                createdAt: newUser.createdAt
+            }
+        });
+ 
+    } catch (error) {
+        console.error("Create Credential Error:", error);
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+ 
+// ✨ NEW: Get Users Only (Exclude Admins)
+export const getUsers = async (req, res) => {
+    try {
+        const settings = await PointSetting.findOne();
+        const manualUserPoints = await UserPoint.find();
+        const userPointsMap = new Map(manualUserPoints.map(up => [up.userPhone, up]));
+ 
+        const usersWithMetrics = await User.aggregate([
+            {
+                $match: { role: { $ne: 'admin' } } // Exclude admins
+            },
+            {
+                $project: { password: 0 }
+            },
+            {
+                $lookup: {
+                    from: "orders",
+                    localField: "phoneno",
+                    foreignField: "customerDetails.phone",
+                    as: "historicalOrders"
+                }
+            },
+            {
+                $addFields: {
+                    totalPurchase: {
+                        $sum: {
+                            $map: {
+                                input: "$historicalOrders",
+                                as: "order",
+                                in: {
+                                    $cond: [
+                                        { $eq: ["$$order.status", "Cancelled"] },
+                                        0,
+                                        { $ifNull: ["$$order.pricing.total", 0] }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                $sort: { createdAt: -1 }
+            }
+        ]);
+ 
+        const finalizedUsersList = usersWithMetrics.map(user => {
+            const phone = user.phoneno;
+            const finalAmountSpent = user.totalPurchase || 0;
+ 
+            let liveCalculatedPoints = 0;
+            if (settings) {
+                liveCalculatedPoints = Math.floor(finalAmountSpent / settings.minOrderAmount) * settings.pointsEarnedPerOrder;
+            }
+ 
+            const balanceOverride = userPointsMap.get(phone);
+            const currentPoints = balanceOverride?.currentPoints !== undefined ? balanceOverride.currentPoints : liveCalculatedPoints;
+ 
+            return {
+                ...user,
+                historicalOrders: undefined,
+                totalPurchase: finalAmountSpent,
+                currentPoints: currentPoints
+            };
+        });
+ 
+        res.status(200).json({
+            success: true,
+            count: finalizedUsersList.length,
+            data: finalizedUsersList
+        });
+ 
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch users",
+            error: error.message
+        });
+    }
+};
+ 
+// ✨ NEW: Get Admins Only
+export const getAdmins = async (req, res) => {
+    try {
+        const admins = await User.find({ role: 'admin' })
+            .select('-password')
+            .sort({ createdAt: -1 });
+ 
+        res.status(200).json({
+            success: true,
+            count: admins.length,
+            data: admins
+        });
+ 
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch admins",
+            error: error.message
+        });
+    }
+};
+ 
+// ✨ NEW: Get User Details by ID
+export const getUserDetails = async (req, res) => {
+    try {
+        const { id } = req.params;
+ 
+        const user = await User.findById(id).select('-password');
+        
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+ 
+        res.status(200).json({
+            success: true,
+            data: user
+        });
+ 
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error fetching user details",
             error: error.message
         });
     }
