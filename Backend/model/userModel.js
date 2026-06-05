@@ -34,7 +34,14 @@ email:String,
         state: String,
         zipCode: String,
         isDefault: { type: Boolean, default: false }
-    }]
+    }],
+
+     pwaInstalled: {
+    type: Boolean,
+    default: false
+  } 
+
+    
 }, { timestamps: true });
 
 

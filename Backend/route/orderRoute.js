@@ -1,5 +1,5 @@
 import express from "express";
-import { calculateTotalSpentFromOrders, cancelOrder, createordercod, getallordercod,  getordercodbyphone, getOrderStatusStats, initiateRazorpayPayment, updateOrderStatus, verifyRazorpayPaymentAndCreateOrder } from "../controller/orderController.js";
+import { calculateTotalSpentFromOrders, cancelOrder, createordercod, getallordercod,  getordercodbyphone, getOrderStatusStats, initiateRazorpayPayment, updateOrder, updateOrderStatus, verifyRazorpayPaymentAndCreateOrder } from "../controller/orderController.js";
 import { verifyUser } from "../helper/userAuth.js";
 const router = express.Router();
 router.put("/order/:id", verifyUser, updateOrderStatus);
@@ -14,4 +14,7 @@ router.get("/getorderbyphone/:phone",verifyUser,getordercodbyphone)
 router.post("/razorpay/initiate",verifyUser, initiateRazorpayPayment); 
 router.post("/razorpay/verify",verifyUser,verifyRazorpayPaymentAndCreateOrder)
 router.put("/order/cancel/:id",verifyUser,cancelOrder)
+
+
+router.put("/order/edit/:id", updateOrder)
 export default router;

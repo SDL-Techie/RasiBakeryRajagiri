@@ -165,3 +165,35 @@ export const initiateRetailerPayment = async (req, res) => {
     return res.status(500).json({ success: false, message: err.message });
   }
 };
+
+
+export const updateRetailerOrder = async (req, res) => {
+  try {
+    const updatedOrder =
+      await RetailerOrder.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+    if (!updatedOrder) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: updatedOrder,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

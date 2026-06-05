@@ -28,6 +28,7 @@ const retailerOrderSchema = new mongoose.Schema({
   pricing: {
     subtotal:       { type: Number, required: true },
     deliveryCharge: { type: Number, default: 0 },
+    discount: {    type: Number, default: 0,},
     total:          { type: Number, required: true },
   },
   payment: {

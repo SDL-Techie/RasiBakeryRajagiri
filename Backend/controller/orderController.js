@@ -322,3 +322,25 @@ export const cancelOrder = async (req, res) => {
     });
   }
 };
+
+
+export const updateOrder = async (req, res) => {
+  try {
+    const order =
+      await Order.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true }
+      );
+
+    res.status(200).json({
+      success: true,
+      data: order,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

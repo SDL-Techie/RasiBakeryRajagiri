@@ -1,5 +1,5 @@
 import express from 'express';
-import { createCredential, createuser, getAdmins, getAllUsers, getUserById, getUserDetails, getUsers, loginUser, Logoutuser, retailerLogin, updateProfile, updateUserRole } from '../controller/userController.js';
+import { createCredential, createuser, getAdmins, getAllUsers, getUserById, getUserDetails, getUsers, loginUser, Logoutuser, retailerLogin, updateProfile, updatePwaInstallStatus, updateUserRole } from '../controller/userController.js';
 import { verifyUser } from '../helper/userAuth.js';
 const router=express.Router();
 
@@ -14,4 +14,5 @@ router.get("/users-list",getUsers)
 router.get("/admins-list",getAdmins)
 router.post("/create-credential",verifyUser,createCredential)
 router.get("/user-details/:id",getUserDetails)
+router.put("/pwa-installed/:userId",updatePwaInstallStatus)
 export default router;

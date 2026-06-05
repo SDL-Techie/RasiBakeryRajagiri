@@ -1,0 +1,951 @@
+{
+  "users": [
+    {
+      "_id": "6a1fd5b4db8cc832fd53a93b",
+      "name": "Super Admin",
+      "phoneno": "8220701195",
+      "role": "admin",
+      "email": "",
+      "password": "$2b$10$1vbpkMUytLvnOxlo3vpVoeJo8OBhBev9Glg/h6FtCtDP8EGgNVQqq",
+      "isRetailerVerified": false,
+      "addresses": [
+        {
+          "street": "Kamalia Street House No 3",
+          "city": "Thanjavur, Tamil Nadu, India",
+          "state": "newyork",
+          "zipCode": "614201",
+          "isDefault": true,
+          "_id": "6a1fd8fd82585c7a14e80537"
+        }
+      ],
+      "createdAt": "2026-06-03T07:20:20.344Z",
+      "updatedAt": "2026-06-03T07:34:21.604Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd85c82585c7a14e804b2",
+      "name": "Nurul Shifaa K",
+      "phoneno": "8610789126",
+      "role": "customer",
+      "email": "",
+      "password": "$2b$10$ThoRumZ95vHls6dboulEr.i.Pb272TH6qcTMAj2jj1yOW9z7wLrG6",
+      "retailerCode": null,
+      "isRetailerVerified": false,
+      "addresses": [
+        {
+          "street": "Kamalia Street House No 3",
+          "city": "Thanjavur, Tamil Nadu, India",
+          "state": "newyork",
+          "zipCode": "614201",
+          "isDefault": true,
+          "_id": "6a1fd92b82585c7a14e80584"
+        },
+        {
+          "street": "Kamalia Street House No 3",
+          "city": "Thanjavur, Tamil Nadu, India",
+          "state": "ayyampet",
+          "zipCode": "614207",
+          "isDefault": false,
+          "_id": "6a21bf53eaa39584dc4f91e9"
+        }
+      ],
+      "createdAt": "2026-06-03T07:31:40.416Z",
+      "updatedAt": "2026-06-04T18:09:23.915Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fde7812489f3d36bf8f80",
+      "name": "user-1",
+      "phoneno": "0000000000",
+      "role": "customer",
+      "password": "$2b$10$DleqD.LXMhW5jtO4e7BzA.uMkM/JAEs6q3Zat1mRUcYrkBY6gk4wa",
+      "isRetailerVerified": false,
+      "addresses": [],
+      "createdAt": "2026-06-03T07:57:44.561Z",
+      "updatedAt": "2026-06-03T07:57:44.561Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fde9812489f3d36bf8f8a",
+      "name": "admin-1",
+      "phoneno": "1111111111",
+      "role": "admin",
+      "password": "$2b$10$1Yfhqt4.yEai0pCFuXnPXOBkaSlFRCbu.n.YvrIS12gZbS7tn5hJ2",
+      "isRetailerVerified": false,
+      "addresses": [],
+      "createdAt": "2026-06-03T07:58:16.373Z",
+      "updatedAt": "2026-06-03T07:58:16.373Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a2108345f70fa1650c73b01",
+      "name": "shifaa-reatiler",
+      "phoneno": "9898989898",
+      "role": "retailer",
+      "password": "$2b$10$7VuJBvowT0/JnpLd.zmfRe1YeUXuZ8UgeZ2Kej1RHjoL/hsj77J.q",
+      "retailerCode": "RASI-666",
+      "isRetailerVerified": true,
+      "addresses": [
+        {
+          "street": "Kamalia Street House No 3",
+          "city": "Thanjavur, Tamil Nadu, India",
+          "state": "newyork",
+          "zipCode": "614201",
+          "isDefault": true,
+          "_id": "6a211169b8e76e243417b262"
+        }
+      ],
+      "createdAt": "2026-06-04T05:08:04.893Z",
+      "updatedAt": "2026-06-04T05:47:21.328Z",
+      "__v": 0,
+      "email": ""
+    }
+  ],
+  "retailers": [
+    {
+      "_id": "6a2108095f70fa1650c73af6",
+      "code": "RASI-666",
+      "assignedTo": "RASI-Retailer-Code",
+      "isUsed": false,
+      "activatedBy": null,
+      "createdAt": "2026-06-04T05:07:21.255Z",
+      "updatedAt": "2026-06-04T05:07:21.255Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a21248eb8e76e243417b735",
+      "code": "1234",
+      "assignedTo": "rasi",
+      "isUsed": false,
+      "activatedBy": null,
+      "createdAt": "2026-06-04T07:09:02.162Z",
+      "updatedAt": "2026-06-04T07:09:02.162Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a2124b3b8e76e243417b74a",
+      "code": "123456",
+      "assignedTo": "shifaa",
+      "isUsed": false,
+      "activatedBy": null,
+      "createdAt": "2026-06-04T07:09:39.550Z",
+      "updatedAt": "2026-06-04T07:09:39.550Z",
+      "__v": 0
+    }
+  ],
+  "products": [
+    {
+      "_id": "6a1fd7dc82585c7a14e80492",
+      "name": "demo Biscuit",
+      "price": "30",
+      "category": "6a1fdbe67dc165df73827ce3",
+      "wholesaleprice": "20",
+      "oldprice": "35",
+      "description": "Crispy biscuit",
+      "status": "Active",
+      "ingredients": "Flour,Butter",
+      "productimage": "https://i.pinimg.com/736x/5d/bc/d4/5dbcd4aa812befd45f2297dc23f7e08c.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80493",
+      "name": "plum cake",
+      "price": "120",
+      "category": "6a1fdbe67dc165df73827ce3",
+      "wholesaleprice": "100",
+      "oldprice": "80",
+      "description": "fluffy cake flour,",
+      "status": "Active",
+      "ingredients": "flour,Butter,wine,",
+      "productimage": "https://i.pinimg.com/736x/f3/ef/ab/f3efab0fb53168a538faadec7e1a4d52.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80494",
+      "name": "waffle",
+      "price": "100",
+      "category": "6a1fdbe67dc165df73827ce3",
+      "wholesaleprice": "80",
+      "oldprice": "60",
+      "description": "crispy sweets",
+      "status": "Active",
+      "ingredients": "flour,batter,chocolate",
+      "productimage": "https://i.pinimg.com/736x/20/e7/41/20e7415b221304788969bf8443bba145.jpg\n",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80495",
+      "name": "cookies",
+      "price": "50",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "20",
+      "oldprice": "40",
+      "description": "Crispy biscuit",
+      "status": "Active",
+      "ingredients": "flour,flavours",
+      "productimage": "https://i.pinimg.com/736x/80/84/6c/80846c146480d9f268422ba7f5f7f03f.jpg\n\n\n\n\n\n\n\n",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80496",
+      "name": "milk shake",
+      "price": "120",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "100",
+      "oldprice": "80",
+      "description": "tasty drink",
+      "status": "Active",
+      "ingredients": "cream,milk,",
+      "productimage": "https://i.pinimg.com/736x/1f/ae/f8/1faef86e50b91ece5fd574803e0f8c30.jpg\n\n\n\n\n\n",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80497",
+      "name": "pancake",
+      "price": "300",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "250",
+      "oldprice": "200",
+      "description": "sweet cakes",
+      "status": "Active",
+      "ingredients": "flour,egg,batter",
+      "productimage": "https://i.pinimg.com/736x/8e/7f/89/8e7f89552625a64967cb56596b6c56a8.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80498",
+      "name": "lemonade",
+      "price": "150",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "100",
+      "oldprice": "90",
+      "description": "refreshing drink",
+      "status": "Active",
+      "ingredients": "lemon,ice cubes,",
+      "productimage": "https://i.pinimg.com/736x/93/ee/20/93ee20287f13f86937f425ac053b7a21.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e80499",
+      "name": "caramel ice cream",
+      "price": "200",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "150",
+      "oldprice": "100",
+      "description": "sweet desserts",
+      "status": "Active",
+      "ingredients": "cream,milk,sugar",
+      "productimage": "https://i.pinimg.com/736x/51/34/50/513450f24d945cc4d070332199ca5f2d.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e8049a",
+      "name": "apple pie",
+      "price": "350",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "300",
+      "oldprice": "240",
+      "description": "sweet desserts",
+      "status": "Active",
+      "ingredients": "apple,cheese,flour\n",
+      "productimage": "https://i.pinimg.com/736x/96/d0/40/96d0404ee63dc33382f4921a2f48e2e1.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e8049b",
+      "name": "mango sago",
+      "price": "420",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "380",
+      "oldprice": "300",
+      "description": "summer drink",
+      "status": "Active",
+      "ingredients": "mango,milk,cream",
+      "productimage": "https://i.pinimg.com/736x/b1/32/60/b1326099a2c71826242e1ff929ebae23.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e8049c",
+      "name": "flavour yogurt",
+      "price": "200",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "180",
+      "oldprice": "120",
+      "description": "healthy desserts",
+      "status": "Active",
+      "ingredients": "yogurt,add flavours",
+      "productimage": "https://i.pinimg.com/736x/b6/cf/b2/b6cfb2568d8e3936afc8dd0abc11ddcb.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e8049d",
+      "name": "pani puri",
+      "price": "100",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "130",
+      "oldprice": "80",
+      "description": "chat foods",
+      "status": "Active",
+      "ingredients": "flour,spices",
+      "productimage": "https://i.pinimg.com/736x/17/23/21/1723211248032602b15486bbca4d5f2f.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd7dc82585c7a14e8049e",
+      "name": "stawberry cake",
+      "price": "100",
+      "category": "6a1bf11684aad12ffe630a50",
+      "wholesaleprice": "140",
+      "oldprice": "120",
+      "description": "sweet desserts",
+      "status": "Active",
+      "ingredients": "flour,stawberry",
+      "productimage": "https://i.pinimg.com/736x/da/5a/67/da5a67076f9f0f3c8878e102ee9e882c.jpg",
+      "__v": 0
+    },
+    {
+      "_id": "6a2108aa5f70fa1650c73b43",
+      "name": "Dustinbun",
+      "price": "90",
+      "category": "6a1fd8e682585c7a14e80514",
+      "wholesaleprice": "78",
+      "oldprice": "100",
+      "description": "bxhjabs",
+      "status": "Active",
+      "ingredients": "bhshaj",
+      "productimage": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780549802/ysymf4b8qfhubbjege8l.jpg",
+      "__v": 0
+    }
+  ],
+  "categories": [
+    {
+      "_id": "6a1fd8e682585c7a14e80514",
+      "name": "Cooki",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780472038/uhn1ko575ykqxb5i73fl.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-03T07:33:58.845Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fdbe67dc165df73827ce3",
+      "name": "biscuits",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780472805/yfkjhcxnwaw5tjw8afwd.jpg",
+      "status": "Inactive",
+      "createdAt": "2026-06-03T07:46:46.449Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a2108765f70fa1650c73b3b",
+      "name": "demo",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780549749/l6rb3m37om4udpdjmpe0.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T05:09:10.254Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a211866b8e76e243417b558",
+      "name": "shifaa",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780553829/csxyyiuca6fvn2hnvgmd.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T06:17:10.653Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a213df0b8e76e243417be61",
+      "name": "harini",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780563439/pk69yee0rkwccmqnuo1e.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T08:57:20.517Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a213dfeb8e76e243417be65",
+      "name": "farvin",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780563454/trasrr7x61gs04lgjivx.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T08:57:34.737Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a213e1bb8e76e243417be69",
+      "name": "abcd",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780563482/fvreckcigaflnfzjyxgt.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T08:58:03.217Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a213e29b8e76e243417be6d",
+      "name": "1234",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780563496/wu8mkzskeqag6yjqjyot.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T08:58:17.431Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a213e65b8e76e243417be8d",
+      "name": "4567",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780563557/hjuit9v3utiwlyx4pdwu.png",
+      "status": "Active",
+      "createdAt": "2026-06-04T08:59:17.956Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a213e75b8e76e243417be91",
+      "name": "101112",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780563573/hlpjl0vf0dnydwuqbut1.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T08:59:33.851Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a213e88b8e76e243417be95",
+      "name": "12131415",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780563591/pyvir5lh7ylgs5yupzr2.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T08:59:52.550Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a213e99b8e76e243417be99",
+      "name": "21222324",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780563609/hurpqwthbvhdnyootbkn.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T09:00:09.869Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a213eacb8e76e243417be9d",
+      "name": "313233",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780563627/pbrjx2q0nsoq7vp2g65t.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T09:00:28.110Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a213ed3b8e76e243417bea1",
+      "name": "889900",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780563666/daljk67lp2retvwprnfo.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T09:01:07.432Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a213eebb8e76e243417bea5",
+      "name": "6666",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780563691/rmhxjo6n451ltuxh5r2m.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T09:01:31.997Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a213f30b8e76e243417bea9",
+      "name": "00000",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780563758/mbyetnpha6laimyfggep.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T09:02:40.307Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a21a7a7aeca742744cc2c55",
+      "name": "shifaa2dcbjdbc",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780590502/ayip0eo3xrghenghespx.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T16:28:23.389Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a21a7bcaeca742744cc2c59",
+      "name": "nurullll",
+      "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780590523/ykvgistsqv6fstgi9jbd.jpg",
+      "status": "Active",
+      "createdAt": "2026-06-04T16:28:44.157Z",
+      "__v": 0
+    }
+  ],
+  "orders": [
+    {
+      "_id": "6a1fd90382585c7a14e8053d",
+      "orderId": "RASI-1PD8MW",
+      "customerDetails": {
+        "userId": "6a1fd5b4db8cc832fd53a93b",
+        "name": "Super Admin",
+        "phone": "8220701195",
+        "address": "Kamalia Street House No 3, Thanjavur, Tamil Nadu, India",
+        "pincode": "614201",
+        "role": "admin"
+      },
+      "items": [
+        {
+          "productId": "6a1fd7dc82585c7a14e8049c",
+          "name": "flavour yogurt",
+          "price": 200,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/b6/cf/b2/b6cfb2568d8e3936afc8dd0abc11ddcb.jpg",
+          "_id": "6a1fd90382585c7a14e8053e"
+        }
+      ],
+      "pricing": {
+        "subtotal": 200,
+        "deliveryCharge": 0,
+        "discount": 0,
+        "usePoints": false,
+        "total": 200
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": null,
+      "status": "Ordered",
+      "createdAt": "2026-06-03T07:34:27.415Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a1fd92f82585c7a14e8058a",
+      "orderId": "RASI-2LB99K",
+      "customerDetails": {
+        "userId": "6a1fd85c82585c7a14e804b2",
+        "name": "Nurul Shifaa K-updated",
+        "phone": "8610789126",
+        "address": "Kamalia Street House No 3, Thanjavur, Tamil Nadu, India",
+        "pincode": "614202",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "6a1fd7dc82585c7a14e8049b",
+          "name": "mango sago",
+          "price": 400,
+          "quantity": 4,
+          "image": "https://i.pinimg.com/736x/b1/32/60/b1326099a2c71826242e1ff929ebae23.jpg",
+          "_id": "6a1fd92f82585c7a14e8058b"
+        }
+      ],
+      "pricing": {
+        "subtotal": 1600,
+        "deliveryCharge": 10,
+        "discount": 20,
+        "usePoints": false,
+        "total": 1590
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Paid"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": "2026-06-04T06:37:00.000Z",
+      "status": "Ordered",
+      "createdAt": "2026-06-03T07:35:11.825Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a211174b8e76e243417b268",
+      "customerDetails": {
+        "userId": "6a2108345f70fa1650c73b01",
+        "name": "shifaa-retailer-updated-updated",
+        "phone": "9898989898",
+        "address": "Kamalia Street House No 3, Thanjavur, Tamil Nadu, India",
+        "pincode": "614201",
+        "role": "retailer"
+      },
+      "items": [
+        {
+          "productId": "6a1fd7dc82585c7a14e80497",
+          "name": "pancake",
+          "price": 300,
+          "quantity": 2,
+          "image": "https://i.pinimg.com/736x/8e/7f/89/8e7f89552625a64967cb56596b6c56a8.jpg",
+          "_id": "6a211174b8e76e243417b269"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e80495",
+          "name": "cookies",
+          "price": 50,
+          "quantity": 2,
+          "image": "https://i.pinimg.com/736x/80/84/6c/80846c146480d9f268422ba7f5f7f03f.jpg\n\n\n\n\n\n\n\n",
+          "_id": "6a211174b8e76e243417b26a"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e80493",
+          "name": "plum cake",
+          "price": 120,
+          "quantity": 2,
+          "image": "https://i.pinimg.com/736x/f3/ef/ab/f3efab0fb53168a538faadec7e1a4d52.jpg",
+          "_id": "6a211174b8e76e243417b26b"
+        }
+      ],
+      "pricing": {
+        "subtotal": 940,
+        "deliveryCharge": 10,
+        "discount": 20,
+        "total": 930,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": "2026-06-25T20:30:00.000Z",
+      "status": "Ordered",
+      "createdAt": "2026-06-04T05:47:32.746Z",
+      "orderId": "RASI-JWJ2F1",
+      "__v": 0
+    },
+    {
+      "_id": "6a2127a3b8e76e243417ba6b",
+      "customerDetails": {
+        "userId": "6a1fd85c82585c7a14e804b2",
+        "name": "Nurul Shifaa K",
+        "phone": "8610789126",
+        "address": "Kamalia Street House No 3, Thanjavur, Tamil Nadu, India",
+        "pincode": "614201",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "6a1fd7dc82585c7a14e80492",
+          "name": "demo Biscuit",
+          "price": 30,
+          "quantity": -10,
+          "image": "https://i.pinimg.com/736x/5d/bc/d4/5dbcd4aa812befd45f2297dc23f7e08c.jpg",
+          "_id": "6a2127a3b8e76e243417ba6c"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e8049c",
+          "name": "flavour yogurt",
+          "price": 200,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/b6/cf/b2/b6cfb2568d8e3936afc8dd0abc11ddcb.jpg",
+          "_id": "6a2127a3b8e76e243417ba6d"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e8049d",
+          "name": "pani puri",
+          "price": 100,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/17/23/21/1723211248032602b15486bbca4d5f2f.jpg",
+          "_id": "6a2127a3b8e76e243417ba6e"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e8049a",
+          "name": "apple pie",
+          "price": 350,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/96/d0/40/96d0404ee63dc33382f4921a2f48e2e1.jpg",
+          "_id": "6a2127a3b8e76e243417ba6f"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e8049b",
+          "name": "mango sago",
+          "price": 420,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/b1/32/60/b1326099a2c71826242e1ff929ebae23.jpg",
+          "_id": "6a2127a3b8e76e243417ba70"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e80499",
+          "name": "caramel ice cream",
+          "price": 200,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/51/34/50/513450f24d945cc4d070332199ca5f2d.jpg",
+          "_id": "6a2127a3b8e76e243417ba71"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e80498",
+          "name": "lemonade",
+          "price": 150,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/93/ee/20/93ee20287f13f86937f425ac053b7a21.jpg",
+          "_id": "6a2127a3b8e76e243417ba72"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e80494",
+          "name": "waffle",
+          "price": 100,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/20/e7/41/20e7415b221304788969bf8443bba145.jpg\n",
+          "_id": "6a2127a3b8e76e243417ba73"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e80495",
+          "name": "cookies",
+          "price": 50,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/80/84/6c/80846c146480d9f268422ba7f5f7f03f.jpg\n\n\n\n\n\n\n\n",
+          "_id": "6a2127a3b8e76e243417ba74"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e80497",
+          "name": "pancake",
+          "price": 300,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/8e/7f/89/8e7f89552625a64967cb56596b6c56a8.jpg",
+          "_id": "6a2127a3b8e76e243417ba75"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e80496",
+          "name": "milk shake",
+          "price": 120,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/1f/ae/f8/1faef86e50b91ece5fd574803e0f8c30.jpg\n\n\n\n\n\n",
+          "_id": "6a2127a3b8e76e243417ba76"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e80493",
+          "name": "plum cake",
+          "price": 120,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/f3/ef/ab/f3efab0fb53168a538faadec7e1a4d52.jpg",
+          "_id": "6a2127a3b8e76e243417ba77"
+        },
+        {
+          "productId": "6a2108aa5f70fa1650c73b43",
+          "name": "Dustinbun",
+          "price": 90,
+          "quantity": 3,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780549802/ysymf4b8qfhubbjege8l.jpg",
+          "_id": "6a2127a3b8e76e243417ba78"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e8049e",
+          "name": "stawberry cake",
+          "price": 100,
+          "quantity": 2,
+          "image": "https://i.pinimg.com/736x/da/5a/67/da5a67076f9f0f3c8878e102ee9e882c.jpg",
+          "_id": "6a2127a3b8e76e243417ba79"
+        }
+      ],
+      "pricing": {
+        "subtotal": 2280,
+        "deliveryCharge": 20,
+        "discount": 30,
+        "total": 2270,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "cod",
+        "status": "Paid"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": "2026-06-11T04:30:00.000Z",
+      "status": "Ordered",
+      "createdAt": "2026-06-04T07:22:11.766Z",
+      "orderId": "RASI-UNCP5J",
+      "__v": 0
+    },
+    {
+      "_id": "6a21bf91eaa39584dc4f9252",
+      "customerDetails": {
+        "userId": "6a1fd85c82585c7a14e804b2",
+        "name": "Nurul Shifaa K",
+        "phone": "8610789126",
+        "address": "Kamalia Street House No 3, Thanjavur, Tamil Nadu, India",
+        "pincode": "614201",
+        "role": "customer"
+      },
+      "items": [
+        {
+          "productId": "6a1fd7dc82585c7a14e80495",
+          "name": "cookies",
+          "price": 50,
+          "quantity": 1,
+          "image": "https://i.pinimg.com/736x/80/84/6c/80846c146480d9f268422ba7f5f7f03f.jpg\n\n\n\n\n\n\n\n",
+          "_id": "6a21bf91eaa39584dc4f9253"
+        }
+      ],
+      "pricing": {
+        "subtotal": 50,
+        "deliveryCharge": 10,
+        "discount": 5,
+        "total": 55,
+        "usePoints": false
+      },
+      "payment": {
+        "method": "COD",
+        "status": "Pending"
+      },
+      "razorpayOrderId": null,
+      "razorpayPaymentId": null,
+      "razorpaySignature": null,
+      "deliveryDate": null,
+      "status": "Ordered",
+      "createdAt": "2026-06-04T18:10:25.210Z",
+      "orderId": "RASI-U44GVJ",
+      "__v": 0
+    }
+  ],
+  "retailerOrders": [
+    {
+      "_id": "6a21a647aeca742744cc2bb9",
+      "orderId": "RASI-Retail-2026001",
+      "retailerDetails": {
+        "userId": "6a2108345f70fa1650c73b01",
+        "businessName": "shifa bkery",
+        "name": "shifaa-reatiler",
+        "phone": "9898989898",
+        "address": "Kamalia Street House No 3, Thanjavur, Tamil Nadu, India",
+        "pincode": "614201",
+        "isRegistered": false
+      },
+      "items": [
+        {
+          "productId": "6a2108aa5f70fa1650c73b43",
+          "name": "Dustinbun",
+          "category": "Cooki",
+          "price": 78,
+          "quantity": 1,
+          "image": "https://res.cloudinary.com/dyggibpsi/image/upload/v1780549802/ysymf4b8qfhubbjege8l.jpg",
+          "_id": "6a21a647aeca742744cc2bba"
+        }
+      ],
+      "logistics": {
+        "orderType": "Pickup",
+        "deliveryDate": "2026-06-12T00:00:00.000Z",
+        "timeSlot": "Morning (9AM–12PM)"
+      },
+      "pricing": {
+        "discount": 10,
+        "subtotal": 78,
+        "deliveryCharge": 5,
+        "total": 73
+      },
+      "payment": {
+        "method": "cod",
+        "status": "Pending",
+        "razorpayOrderId": null,
+        "razorpayPaymentId": null,
+        "razorpaySignature": null,
+        "paidAt": null
+      },
+      "status": "Ordered",
+      "createdAt": "2026-06-04T16:22:31.971Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a21a6a8aeca742744cc2c03",
+      "orderId": "RASI-Retail-2026002",
+      "retailerDetails": {
+        "userId": "6a2108345f70fa1650c73b01",
+        "businessName": "shifa bakery",
+        "name": "shifaa-reatiler",
+        "phone": "9898989898",
+        "address": "Kamalia Street House No 3, Thanjavur, Tamil Nadu, India",
+        "pincode": "614201",
+        "isRegistered": false
+      },
+      "items": [
+        {
+          "productId": "6a1fd7dc82585c7a14e80492",
+          "name": "demo Biscuit",
+          "category": "biscuits",
+          "price": 20,
+          "quantity": 2,
+          "image": "https://i.pinimg.com/736x/5d/bc/d4/5dbcd4aa812befd45f2297dc23f7e08c.jpg",
+          "_id": "6a21a6a8aeca742744cc2c04"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e80494",
+          "name": "waffle",
+          "category": "biscuits",
+          "price": 80,
+          "quantity": 2,
+          "image": "https://i.pinimg.com/736x/20/e7/41/20e7415b221304788969bf8443bba145.jpg\n",
+          "_id": "6a21a6a8aeca742744cc2c05"
+        },
+        {
+          "productId": "6a1fd7dc82585c7a14e80493",
+          "name": "plum cake",
+          "category": "biscuits",
+          "price": 100,
+          "quantity": 2,
+          "image": "https://i.pinimg.com/736x/f3/ef/ab/f3efab0fb53168a538faadec7e1a4d52.jpg",
+          "_id": "6a21a6a8aeca742744cc2c06"
+        }
+      ],
+      "logistics": {
+        "orderType": "Delivery",
+        "deliveryDate": "2026-06-11T00:00:00.000Z",
+        "timeSlot": "Morning (9AM–12PM)"
+      },
+      "pricing": {
+        "discount": 20,
+        "subtotal": 400,
+        "deliveryCharge": 10,
+        "total": 390
+      },
+      "payment": {
+        "method": "cod",
+        "status": "Pending",
+        "razorpayOrderId": null,
+        "razorpayPaymentId": null,
+        "razorpaySignature": null,
+        "paidAt": null
+      },
+      "status": "Ordered",
+      "createdAt": "2026-06-04T16:24:08.242Z",
+      "__v": 0
+    }
+  ],
+  "carts": [],
+  "wishlists": [],
+  "coupons": [
+    {
+      "_id": "6a21bf6eeaa39584dc4f9201",
+      "code": "RASI-3VHNU",
+      "userPhone": "8610789126",
+      "discountPercentage": 10,
+      "isUsed": true,
+      "expiryDate": "2026-07-04T18:09:50.081Z",
+      "createdAt": "2026-06-04T18:09:50.083Z",
+      "updatedAt": "2026-06-04T18:10:25.254Z",
+      "__v": 0
+    }
+  ],
+  "pincodes": [
+    {
+      "_id": "6a1fdf8966af31d40bd74a39",
+      "pincode": "614201",
+      "deliveryCharge": 10,
+      "status": "Active",
+      "createdAt": "2026-06-03T08:02:17.524Z",
+      "__v": 0
+    }
+  ],
+  "userPoints": [
+    {
+      "_id": "6a21bf6eeaa39584dc4f91ff",
+      "userPhone": "8610789126",
+      "currentPoints": 280,
+      "totalPointsEarned": 380,
+      "totalPointsRedeemed": 100,
+      "createdAt": "2026-06-04T18:09:50.062Z",
+      "updatedAt": "2026-06-04T18:09:50.062Z",
+      "__v": 0
+    }
+  ],
+  "pointSettings": [
+    {
+      "_id": "6a1fdf7c66af31d40bd74a38",
+      "minOrderAmount": 100,
+      "pointsEarnedPerOrder": 10,
+      "pointsRequiredForDiscount": 100,
+      "discountPercentage": 10,
+      "couponValidityDays": 7,
+      "createdAt": "2026-06-03T08:02:04.691Z",
+      "updatedAt": "2026-06-03T08:02:04.691Z",
+      "__v": 0
+    }
+  ],
+  "backupDate": "2026-06-05T04:03:16.897Z"
+}

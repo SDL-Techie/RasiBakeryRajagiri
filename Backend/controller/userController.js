@@ -763,3 +763,32 @@ export const getUserDetails = async (req, res) => {
         });
     }
 };
+
+
+export const updatePwaInstallStatus = async (req, res) => {
+  try {
+    console.log("PWA Install API Hit");
+    const { userId } = req.params;
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        pwaInstalled: true
+      },
+      {
+        new: true
+      }
+    );
+
+    res.status(200).json({
+      success: true,
+      user
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
