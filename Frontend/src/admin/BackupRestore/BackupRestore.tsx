@@ -17,8 +17,15 @@ const BackupRestore = () => {
 
       const response = await axios.get(
         "http://localhost:4000/api/v1/backup",
+        
         {
-          responseType: "blob"
+          responseType: "blob",
+           
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  
+
         }
       );
 
@@ -68,7 +75,9 @@ const BackupRestore = () => {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+ 
           }
         }
       );

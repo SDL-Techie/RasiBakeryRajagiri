@@ -208,6 +208,7 @@
   margin-bottom: 30px;
 }
 
+
 .rasi-section-header h2 {
   font-size: 28px;
   color: var(--primary);
@@ -334,6 +335,9 @@
   color: var(--primary);
   text-align: center;
   font-weight: bold;
+  justify-content: center;
+  align-items: center;
+
 }
 .rasi-products-grid p{
   text-align: center;

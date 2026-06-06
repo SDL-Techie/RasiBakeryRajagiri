@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import './Fastorder.css';
 import Logo from '@/src/components/Logo/Logo';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Fastorder: React.FC = () => {
@@ -21,6 +22,8 @@ const Fastorder: React.FC = () => {
     const [endDate, setEndDate] = useState('');
     const [selectedOrder, setSelectedOrder] = useState<any | null>(null);
     const [updating, setUpdating] = useState<string | null>(null);
+    const [isEditOpen, setIsEditOpen] = useState(false);
+const [editForm, setEditForm] = useState<any>(null);
 
     const fetchAllOrders = async () => {
         setLoading(true);
@@ -53,22 +56,71 @@ const Fastorder: React.FC = () => {
         }
     };
 
-    // 1. FILTERING LOGIC (Search + Dates)
-    // const filteredOrders = useMemo(() => {
-    //     return orders.filter(o => {
-    //         const matchesSearch = 
-    //             o.orderId?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    //             o.retailerDetails?.businessName?.toLowerCase().includes(searchTerm.toLowerCase());
-            
-    //         const orderDate = new Date(o.createdAt).setHours(0,0,0,0);
-    //         const start = startDate ? new Date(startDate).setHours(0,0,0,0) : null;
-    //         const end = endDate ? new Date(endDate).setHours(23,59,59,999) : null;
+    const handleEditOrder = (order: any) => {
+  setEditForm(JSON.parse(JSON.stringify(order)));
+  setIsEditOpen(true);
+};
 
-    //         const matchesDate = (!start || orderDate >= start) && (!end || orderDate <= end);
-    //         return matchesSearch && matchesDate;
-    //     });
-    // }, [orders, searchTerm, startDate, endDate]);
+const recalculatePricing = (order: any) => {
+  const subtotal = order.items.reduce(
+    (sum: number, item: any) =>
+      sum + Number(item.price) * Number(item.quantity),
+    0
+  );
 
+  const deliveryCharge =
+    Number(order.pricing?.deliveryCharge || 0);
+
+  const discount =
+    Number(order.pricing?.discount || 0);
+
+  const total =
+    subtotal + deliveryCharge - discount;
+
+  return {
+    ...order,
+    pricing: {
+      ...order.pricing,
+      subtotal,
+      total,
+    },
+  };
+};
+
+
+const saveEditedOrder = async () => {
+  try {
+    const res = await axios.put(
+      `http://localhost:4000/api/v1/retailer-order/edit/${editForm._id}`,
+      editForm,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+
+    if (res.data.success) {
+      setOrders((prev) =>
+        prev.map((o) =>
+          o._id === editForm._id
+            ? res.data.data
+            : o
+        )
+      );
+
+      setSelectedOrder(res.data.data);
+      setIsEditOpen(false);
+
+      toast.success("Order updated successfully");
+    }
+  } catch (err) {
+    console.error(err);
+    toast.error("Update failed");
+  }
+};
+
+    
     const filteredOrders = useMemo(() => {
   return orders
     .filter((o) => {
@@ -141,7 +193,7 @@ const Fastorder: React.FC = () => {
                 setOrders(prev => prev.map(o => o._id === orderId ? { ...o, status: newStatus } : o));
             }
         } catch (error) {
-            alert("Update failed");
+            toast.error("Update failed");
         } finally {
             setUpdating(null);
         }
@@ -156,6 +208,12 @@ const Fastorder: React.FC = () => {
 
     return (
         <div className="admin-order-page">
+                   <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 3000,
+        }}
+      />
 
             <h1 className="title">Fast Order Management (wholesale)</h1>
             
@@ -304,12 +362,38 @@ const Fastorder: React.FC = () => {
                                 <h2>Wholesale Details</h2>
                                 <span className="modal-id">#{selectedOrder.orderId}</span>
                             </div>
-                            <div className="modal-header-actions">
+                            {/* <div className="modal-header-actions">
                                 <button className="print-btn" onClick={handlePrint}>
                                     <Printer size={18} /> <span className="btn-label">Print Invoice</span>
                                 </button>
                                 <button className="close-modal" onClick={() => setSelectedOrder(null)}><X size={24} /></button>
-                            </div>
+                            </div> */}
+
+                            <div className="modal-header-actions">
+
+  <button
+    className="edit-btn"
+    onClick={() => handleEditOrder(selectedOrder)}
+  >
+    Edit Order
+  </button>
+
+  <button
+    className="print-btn"
+    onClick={handlePrint}
+  >
+    <Printer size={18} />
+    Print Invoice
+  </button>
+
+  <button
+    className="close-modal"
+    onClick={() => setSelectedOrder(null)}
+  >
+    <X size={24} />
+  </button>
+
+</div>
                         </div>
 
                         <div className="modal-body">
@@ -349,12 +433,258 @@ const Fastorder: React.FC = () => {
 
                             <div className="modal-section billing-summary">
                                 <div className="bill-row"><span>Subtotal</span> <span>₹{selectedOrder.pricing?.subtotal}</span></div>
+                                <div className="bill-row">
+  <span>Delivery Charge</span>
+  <span>₹{selectedOrder.pricing?.deliveryCharge || 0}</span>
+</div>
+
+{selectedOrder.pricing?.discount > 0 && (
+  <div className="bill-row">
+    <span>Discount</span>
+    <span>- ₹{selectedOrder.pricing?.discount}</span>
+  </div>
+)}
                                 <div className="bill-row total"><span>Grand Total</span> <span>₹{selectedOrder.pricing?.total}</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
             )}
+
+
+     {isEditOpen && editForm && (
+  <div
+    className="modal-overlay"
+    onClick={() => setIsEditOpen(false)}
+  >
+    <div
+      className="order-modal-content"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="modal-header">
+        <h2>Edit Wholesale Order</h2>
+
+        <button
+          className="close-modal"
+          onClick={() => setIsEditOpen(false)}
+        >
+          <X />
+        </button>
+      </div>
+
+      <div className="modal-body">
+
+        <h3>Retailer Details</h3>
+
+        <input
+          value={editForm.retailerDetails?.businessName || ""}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              retailerDetails: {
+                ...editForm.retailerDetails,
+                businessName: e.target.value,
+              },
+            })
+          }
+        />
+
+        <input
+          value={editForm.retailerDetails?.phone || ""}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              retailerDetails: {
+                ...editForm.retailerDetails,
+                phone: e.target.value,
+              },
+            })
+          }
+        />
+
+        <textarea
+          value={editForm.retailerDetails?.address || ""}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              retailerDetails: {
+                ...editForm.retailerDetails,
+                address: e.target.value,
+              },
+            })
+          }
+        />
+
+        <h3>Products</h3>
+
+        {editForm.items?.map(
+          (item: any, index: number) => (
+            <div
+              key={index}
+              className="product-edit-card"
+            >
+              <input
+                value={item.name}
+                onChange={(e) => {
+                  const items = [...editForm.items];
+                  items[index].name =
+                    e.target.value;
+
+                  setEditForm({
+                    ...editForm,
+                    items,
+                  });
+                }}
+              />
+
+              <input
+                type="number"
+                value={item.price}
+                onChange={(e) => {
+                  const items = [...editForm.items];
+                  items[index].price =
+                    Number(e.target.value);
+
+                  const updated = {
+                    ...editForm,
+                    items,
+                  };
+
+                  setEditForm(
+                    recalculatePricing(updated)
+                  );
+                }}
+              />
+
+              <input
+                type="number"
+                value={item.quantity}
+                onChange={(e) => {
+                  const items = [...editForm.items];
+                  items[index].quantity =
+                    Number(e.target.value);
+
+                  const updated = {
+                    ...editForm,
+                    items,
+                  };
+
+                  setEditForm(
+                    recalculatePricing(updated)
+                  );
+                }}
+              />
+            </div>
+          )
+        )}
+
+        <h3>Pricing</h3>
+
+        <label>Subtotal</label>
+
+        <input
+          value={
+            editForm.pricing?.subtotal || 0
+          }
+          readOnly
+        />
+
+        <label>Delivery Charge</label>
+
+        <input
+          type="number"
+          value={
+            editForm.pricing?.deliveryCharge || 0
+          }
+          onChange={(e) => {
+            const updated = {
+              ...editForm,
+              pricing: {
+                ...editForm.pricing,
+                deliveryCharge: Number(
+                  e.target.value
+                ),
+              },
+            };
+
+            setEditForm(
+              recalculatePricing(updated)
+            );
+          }}
+        />
+
+        <label>Discount</label>
+
+        <input
+          type="number"
+          value={
+            editForm.pricing?.discount || 0
+          }
+          onChange={(e) => {
+            const updated = {
+              ...editForm,
+              pricing: {
+                ...editForm.pricing,
+                discount: Number(
+                  e.target.value
+                ),
+              },
+            };
+
+            setEditForm(
+              recalculatePricing(updated)
+            );
+          }}
+        />
+
+        <label>Grand Total</label>
+
+        <input
+          value={
+            editForm.pricing?.total || 0
+          }
+          readOnly
+        />
+
+        <h3>Status</h3>
+
+        <select
+          value={editForm.status}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              status: e.target.value,
+            })
+          }
+        >
+          <option value="Ordered">
+            Ordered
+          </option>
+          <option value="Processing">
+            Processing
+          </option>
+          <option value="Shipped">
+            Shipped
+          </option>
+          <option value="Delivered">
+            Delivered
+          </option>
+          <option value="Cancelled">
+            Cancelled
+          </option>
+        </select>
+
+        <button
+          className="save-btn"
+          onClick={saveEditedOrder}
+        >
+          Save Changes
+        </button>
+
+      </div>
+    </div>
+  </div>
+)}       
 
             {/* PRINT AREA (Hidden on screen) */}
                <div className="print-area">

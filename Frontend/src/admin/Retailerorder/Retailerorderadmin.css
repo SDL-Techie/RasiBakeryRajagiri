@@ -92,6 +92,7 @@ body {
 .search-icon { position: absolute; left: 10px; top: 30%; color: #999; }
 
 .date-group {
+  background-color: white;
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -647,4 +648,128 @@ body {
   font-size: 22px;
   font-weight: 800;
   color: #4B2E2B;
+}
+
+/* =========================
+   EDIT ORDER MODAL
+========================= */
+
+.edit-btn {
+  background: #4b2e2b;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.edit-btn:hover {
+  background: #6d4c41;
+}
+
+.modal-body h3 {
+  margin-top: 20px;
+  margin-bottom: 12px;
+  color: #4b2e2b;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+/* Form Fields */
+
+.modal-body input,
+.modal-body textarea,
+.modal-body select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.modal-body input:focus,
+.modal-body textarea:focus,
+.modal-body select:focus {
+  border-color: #4b2e2b;
+  box-shadow: 0 0 0 3px rgba(75, 46, 43, 0.1);
+}
+
+.modal-body textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* Product Card */
+
+.product-edit-card {
+  border: 1px solid #e8e8e8;
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.product-edit-card input {
+  margin-bottom: 10px;
+}
+
+/* Save Button */
+
+.save-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background: #28a745;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  background: #218838;
+}
+
+/* Scroll */
+
+.order-modal-content {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+  .order-modal-content {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .modal-body {
+    padding: 15px;
+  }
+
+  .modal-body h3 {
+    font-size: 15px;
+  }
+
+  .edit-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .save-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
 }

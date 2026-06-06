@@ -8,6 +8,7 @@ import {
 import axios from 'axios';
 import Logo from '../../components/Logo/Logo';
 import './Order.css';
+import toast, { Toaster } from "react-hot-toast";
 
 const Orders: React.FC = () => {
 
@@ -51,9 +52,71 @@ const Orders: React.FC = () => {
     window.print();
   };
 
+const [isEditOpen, setIsEditOpen] = useState(false);
+const [editForm, setEditForm] = useState<any>(null);
+
   useEffect(() => {
     fetchOrders();
   }, []);
+
+  const handleEditOrder = (order:any) => {
+  setEditForm(JSON.parse(JSON.stringify(order)));
+  setIsEditOpen(true);
+};
+
+const saveEditedOrder = async () => {
+  try {
+    const res = await axios.put(
+      `http://localhost:4000/api/v1/order/edit/${editForm._id}`,
+      editForm,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem(
+            "token"
+          )}`,
+        },
+      }
+    );
+
+    if (res.data.success) {
+      setOrders((prev) =>
+        prev.map((o) =>
+          o._id === editForm._id
+            ? res.data.data
+            : o
+        )
+      );
+
+      setSelectedOrder(res.data.data);
+
+      setIsEditOpen(false);
+toast.success("Order updated successfully");
+    
+    }
+  } catch (error) {
+    console.error(error);
+    toast.error("Update failed");
+  }
+};
+
+
+const recalculatePricing = (items: any[], pricing: any) => {
+  const subtotal = items.reduce(
+    (sum, item) => sum + (item.price || 0) * (item.quantity || 0),
+    0
+  );
+
+  const deliveryCharge = pricing?.deliveryCharge || 0;
+  const discount = pricing?.discount || 0;
+
+  return {
+    ...pricing,
+    subtotal,
+    total: subtotal + deliveryCharge - discount,
+  };
+};
+
+
 
   // Filtering Logic
   // const filteredOrders = useMemo(() => {
@@ -168,6 +231,12 @@ const Orders: React.FC = () => {
 
   return (
     <div className="admin-orders-container">
+           <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 3000,
+        }}
+      />
       {/* 1. STATS SECTION */}
       <h1 className="title">Order Management</h1>
       <div className="stats-grid no-print">
@@ -345,6 +414,10 @@ const Orders: React.FC = () => {
                 <span className="modal-id">#{selectedOrder.orderId || selectedOrder._id?.substring(selectedOrder._id.length - 6).toUpperCase()}</span>
               </div>
               <div className="modal-header-actions">
+
+                <button className="edit-btn" onClick={() => handleEditOrder(selectedOrder)}> Edit Order
+                </button>
+  
                 <button className="print-btn" onClick={handlePrint} title="Print Invoice">
                   <Printer size={18} /> <span className="btn-label">Print Invoice</span>
                 </button>
@@ -454,93 +527,413 @@ const Orders: React.FC = () => {
         </div>
       )}
 
-      {/* ------------------------------------------------------------- */}
-      {/* PRINT AREA (CLEAN INVOICE STAYS IMMUNE FROM RAW SYSTEM CODES) */}
-      {/* {selectedOrder && (
-        <div className="print-area">
-          <div style={{ padding: '40px', fontFamily: 'sans-serif', backgroundColor: '#fff', maxWidth: '800px', margin: '0 auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid #4B2E2B', paddingBottom: '20px' }}>
-              <div>
-                <Logo/>
-                <h1 style={{ color: '#4B2E2B', margin: 0, fontSize: '1.8rem', letterSpacing: '1px' }}>RAJAGIRI RASI BAKERY</h1>
-                <p style={{ margin: '5px 0', color: '#666' }}>Order ID: <span style={{ color: '#4B2E2B', fontWeight: 'bold' }}>#{selectedOrder.orderId || selectedOrder._id?.substring(selectedOrder._id.length - 6).toUpperCase()}</span></p>
-                <p style={{ margin: 0, color: '#666' }}>Date: {new Date(selectedOrder.createdAt).toLocaleDateString('en-IN')}</p>
-              </div>
-              <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#4B2E2B' }}>
-                <h3 style={{ margin: 0, color: '#4B2E2B' }}>Rasi Bakery & Sweets</h3>
-                <p style={{ margin: '2px 0' }}>Madarasa Street, Rajagiri</p>
-                <p style={{ margin: '2px 0' }}>Thanjavur, Tamil Nadu 614207</p>
-                <p style={{ margin: '2px 0' }}>Ph: +91 94434 76738</p>
-                <p style={{ margin: '2px 0' }}>Email: rajagirirasibakery@gmail.com</p>
-              </div>
-            </div>
 
-            <div style={{ display: 'flex', marginTop: '30px', gap: '50px' }}>
-              <div style={{ flex: 1 }}>
-                <h4 style={{ color: '#8C5A3C', borderBottom: '1px solid #eee', paddingBottom: '5px', textTransform: 'uppercase', fontSize: '0.8rem' }}>Bill To</h4>
-                <p style={{ margin: '10px 0 5px 0' }}><strong>{selectedOrder.customerDetails?.name}</strong></p>
-                <p style={{ margin: 0, fontSize: '0.9rem', color: '#555', lineHeight: '1.4' }}>{selectedOrder.customerDetails?.address}</p>
-                <p style={{ margin: '5px 0', fontSize: '0.9rem', color: '#555' }}>Phone: {selectedOrder.customerDetails?.phone}</p>
-              </div>
-              <div style={{ flex: 1 }}>
-                <h4 style={{ color: '#8C5A3C', borderBottom: '1px solid #eee', paddingBottom: '5px', textTransform: 'uppercase', fontSize: '0.8rem' }}>Delivery Schedule</h4>
-                <p style={{ margin: '10px 0 5px 0' }}><strong>Date:</strong> {selectedOrder.deliveryDate ? new Date(selectedOrder.deliveryDate).toLocaleDateString('en-IN') : 'Immediate Delivery'}</p>
-                <p style={{ margin: '5px 0' }}><strong>Payment Mode:</strong> {selectedOrder.payment?.method?.toUpperCase() === 'RAZORPAY' ? 'ONLINE PAYMENT' : selectedOrder.payment?.method?.toUpperCase()}</p>
-                <p style={{ margin: '5px 0' }}><strong>Payment Status:</strong> {selectedOrder.payment?.status || 'Paid'}</p>
-              </div>
-            </div>
+{isEditOpen && editForm && (
+  <div
+    className="modal-overlay"
+    onClick={() => setIsEditOpen(false)}
+  >
+    <div
+      className="order-modal-content"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="modal-header">
+        <h2>Edit Order</h2>
 
-            <table style={{ width: '100%', marginTop: '30px', borderCollapse: 'collapse' }}>
-              <thead>
-                <tr style={{ background: '#FDF4ED', color: '#4B2E2B' }}>
-                  <th style={{ padding: '12px 10px', textAlign: 'left', borderBottom: '2px solid #4B2E2B' }}>Item Description</th>
-                  <th style={{ padding: '12px 10px', textAlign: 'center', borderBottom: '2px solid #4B2E2B' }}>Qty</th>
-                  <th style={{ padding: '12px 10px', textAlign: 'center', borderBottom: '2px solid #4B2E2B' }}>Price</th>
-                  <th style={{ padding: '12px 10px', textAlign: 'right', borderBottom: '2px solid #4B2E2B' }}>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {selectedOrder.items?.map((item: any, i: number) => (
-                  <tr key={i} style={{ borderBottom: '1px solid #eee' }}>
-                    <td style={{ padding: '12px 10px', fontWeight: '500' }}>{item.name}</td>
-                    <td style={{ padding: '12px 10px', textAlign: 'center' }}>{item.quantity}</td>
-                    <td style={{ padding: '12px 10px', textAlign: 'center' }}>₹{item.price}</td>
-                    <td style={{ padding: '12px 10px', textAlign: 'right', fontWeight: '600' }}>₹{item.price * item.quantity}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <button
+          className="close-modal"
+          onClick={() => setIsEditOpen(false)}
+        >
+          <X size={24} />
+        </button>
+      </div>
 
-            <div style={{ marginLeft: 'auto', width: '280px', marginTop: '30px', backgroundColor: '#FDF4ED', padding: '15px', borderRadius: '8px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <span style={{ color: '#666' }}>Subtotal:</span>
-                <span>₹{selectedOrder.pricing?.subtotal || selectedOrder.total}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <span style={{ color: '#666' }}>Delivery Charge:</span>
-                <span>₹{selectedOrder.pricing?.deliveryCharge || 0}</span>
-              </div>
-              {selectedOrder.pricing?.discount > 0 && (
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                  <span style={{ color: '#666' }}>Discount:</span>
-                  <span style={{ color: '#27ae60' }}>- ₹{selectedOrder.pricing?.discount}</span>
-                </div>
-              )}
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '1.2rem', marginTop: '10px', color: '#4B2E2B', borderTop: '1px solid #4B2E2B', paddingTop: '10px' }}>
-                <span>Grand Total:</span>
-                <span>₹{selectedOrder.pricing?.total || selectedOrder.total}</span>
-              </div>
+      <div className="modal-body">
+
+        {/* CUSTOMER DETAILS */}
+
+        <h3>Customer Details</h3>
+
+        <input
+          type="text"
+          placeholder="Customer Name"
+          value={editForm.customerDetails?.name || ""}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              customerDetails: {
+                ...editForm.customerDetails,
+                name: e.target.value,
+              },
+            })
+          }
+        />
+
+        <input
+          type="text"
+          placeholder="Phone"
+          value={editForm.customerDetails?.phone || ""}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              customerDetails: {
+                ...editForm.customerDetails,
+                phone: e.target.value,
+              },
+            })
+          }
+        />
+
+        <textarea
+          placeholder="Address"
+          value={editForm.customerDetails?.address || ""}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              customerDetails: {
+                ...editForm.customerDetails,
+                address: e.target.value,
+              },
+            })
+          }
+        />
+
+        <input
+          type="text"
+          placeholder="Pincode"
+          value={editForm.customerDetails?.pincode || ""}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              customerDetails: {
+                ...editForm.customerDetails,
+                pincode: e.target.value,
+              },
+            })
+          }
+        />
+
+        {/* DELIVERY DATE */}
+
+        <h3>Delivery Date</h3>
+
+        <input
+          type="datetime-local"
+          value={
+            editForm.deliveryDate
+              ? new Date(editForm.deliveryDate)
+                  .toISOString()
+                  .slice(0, 16)
+              : ""
+          }
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              deliveryDate: e.target.value,
+            })
+          }
+        />
+
+        {/* ORDER STATUS */}
+
+        <h3>Order Status</h3>
+
+        <select
+          value={editForm.status}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              status: e.target.value,
+            })
+          }
+        >
+          <option value="Ordered">Ordered</option>
+          <option value="Processing">Processing</option>
+          <option value="Shipped">Shipped</option>
+          <option value="Delivered">Delivered</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+
+        {/* PAYMENT */}
+
+        <h3>Payment</h3>
+
+        <select
+          value={editForm.payment?.method}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              payment: {
+                ...editForm.payment,
+                method: e.target.value,
+              },
+            })
+          }
+        >
+          <option value="cod">COD</option>
+          <option value="upi">UPI</option>
+          <option value="razorpay">Razorpay</option>
+        </select>
+
+        <select
+          value={editForm.payment?.status}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              payment: {
+                ...editForm.payment,
+                status: e.target.value,
+              },
+            })
+          }
+        >
+          <option value="Pending">Pending</option>
+          <option value="Paid">Paid</option>
+          <option value="Failed">Failed</option>
+        </select>
+
+        {/* PRICING */}
+
+      
+
+        {/* PRODUCTS */}
+
+        <h3>Products</h3>
+
+        {editForm.items?.map(
+          (item: any, index: number) => (
+            <div
+              key={index}
+              style={{
+                border: "1px solid #ddd",
+                padding: "10px",
+                marginBottom: "10px",
+                borderRadius: "8px",
+              }}
+            >
+              <label>Product Name</label>
+              <input
+                type="text"
+                placeholder="Product Name"
+                value={item.name}
+                onChange={(e) => {
+                  const items = [...editForm.items];
+                  items[index].name =
+                    e.target.value;
+
+                  setEditForm({
+                    ...editForm,
+                    items,
+                  });
+                }}
+              />
+
+              {/* <input
+                type="number"
+                placeholder="Price"
+                value={item.price}
+                onChange={(e) => {
+                  const items = [...editForm.items];
+                  items[index].price =
+                    Number(e.target.value);
+
+                  setEditForm({
+                    ...editForm,
+                    items,
+                  });
+                }}
+              /> */}
+
+<label>Price</label>
+              <input
+  type="number"
+  placeholder="Price"
+  value={item.price}
+  onChange={(e) => {
+    const items = [...editForm.items];
+
+    items[index].price = Number(
+      e.target.value
+    );
+
+    const pricing = recalculatePricing(
+      items,
+      editForm.pricing
+    );
+
+    setEditForm({
+      ...editForm,
+      items,
+      pricing,
+    });
+  }}
+/>
+<label>Quantity</label>
+
+              {/* <input
+                type="number"
+                placeholder="Quantity"
+                value={item.quantity}
+                onChange={(e) => {
+                  const items = [...editForm.items];
+                  items[index].quantity =
+                    Number(e.target.value);
+
+                  setEditForm({
+                    ...editForm,
+                    items,
+                  });
+                }}
+              /> */}
+
+
+              <input
+  type="number"
+  placeholder="Quantity"
+  value={item.quantity}
+  onChange={(e) => {
+    const items = [...editForm.items];
+
+    items[index].quantity = Number(
+      e.target.value
+    );
+
+    const pricing = recalculatePricing(
+      items,
+      editForm.pricing
+    );
+
+    setEditForm({
+      ...editForm,
+      items,
+      pricing,
+    });
+  }}
+/>
             </div>
-            
-            <div style={{ marginTop: '60px', textAlign: 'center', borderTop: '1px dashed #ccc', paddingTop: '20px' }}>
-              <p style={{ margin: 0, color: '#4B2E2B', fontWeight: '600' }}>Thank you for choosing Rasi Bakery!</p>
-              <p style={{ margin: '5px 0', color: '#888', fontSize: '0.75rem' }}>
-                Visit again for fresh cakes, sweets, and savories.
-              </p>
-            </div>
-          </div>
-        </div>
-      )} */}
+          )
+        )}
+
+          <h3>Pricing</h3>
+
+
+        {/* <label>Subtotal</label>
+        <input
+          type="number"
+          placeholder="Subtotal"
+          value={editForm.pricing?.subtotal || 0}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              pricing: {
+                ...editForm.pricing,
+                subtotal: Number(e.target.value),
+              },
+            })
+          }
+        /> */}
+
+<label>Subtotal</label>
+<input
+  type="number"
+  value={editForm.pricing?.subtotal || 0}
+  readOnly
+  className="readonly-input"
+/>
+
+
+        <label>Delivery Charge</label>
+        <input
+  type="number"
+  value={
+    editForm.pricing?.deliveryCharge || 0
+  }
+  onChange={(e) => {
+    const pricing = {
+      ...editForm.pricing,
+      deliveryCharge: Number(
+        e.target.value
+      ),
+    };
+
+    const updatedPricing =
+      recalculatePricing(
+        editForm.items,
+        pricing
+      );
+
+    setEditForm({
+      ...editForm,
+      pricing: updatedPricing,
+    });
+  }}
+/>
+
+
+        <label>Discount</label>
+<input
+  type="number"
+  value={
+    editForm.pricing?.discount || 0
+  }
+  onChange={(e) => {
+    const pricing = {
+      ...editForm.pricing,
+      discount: Number(
+        e.target.value
+      ),
+    };
+
+    const updatedPricing =
+      recalculatePricing(
+        editForm.items,
+        pricing
+      );
+
+    setEditForm({
+      ...editForm,
+      pricing: updatedPricing,
+    });
+  }}
+/>
+
+
+        <label>Grand Total</label>
+        {/* <input
+          type="number"
+          placeholder="Grand Total"
+          value={editForm.pricing?.total || 0}
+          onChange={(e) =>
+            setEditForm({
+              ...editForm,
+              pricing: {
+                ...editForm.pricing,
+                total: Number(e.target.value),
+              },
+            })
+          }
+        /> */}
+
+        <input
+  type="number"
+  value={editForm.pricing?.total || 0}
+  readOnly
+/>
+
+        {/* SAVE */}
+
+        <button
+          className="save-btn"
+          onClick={saveEditedOrder}
+        >
+          Save Changes
+        </button>
+
+      </div>
+    </div>
+  </div>
+)}
+
 
       <div className="print-area">
   {selectedOrder &&

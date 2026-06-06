@@ -229,7 +229,7 @@ const handleBuyNow = () => {
       <Toaster position="top-center" reverseOrder={false} />
       <div
   className="rasi-back-btn"
-  onClick={() => navigate(-1)}
+  onClick={() => navigate("/")}
 >
   <ArrowLeft size={18} />
   <span>Back</span>

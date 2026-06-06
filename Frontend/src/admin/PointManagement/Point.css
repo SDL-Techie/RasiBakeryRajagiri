@@ -35,7 +35,7 @@
   flex-wrap: wrap;
   gap: 16px;
   margin-bottom: 2rem;
-  border-bottom: 2px solid var(--border-tan);
+  /* border-bottom: 2px solid var(--border-tan); */
   padding-bottom: 1.5rem;
 }
 
@@ -105,7 +105,7 @@
 
 /* Collapsible Interactive Input Form Card Wrapper */
 .form-card-wrapper {
-  background: var(--pure-white);
+  background-color:white;
   border-radius: 16px;
   border: 1px solid var(--border-tan);
   box-shadow: 0 10px 25px rgba(93, 64, 55, 0.06);
@@ -268,7 +268,8 @@
 
 /* Individual Metric Card Style Rules */
 .metric-card {
-  background: var(--pure-white);
+  /* background: var(--pure-white); */
+  background-color:white;
   border: 1px solid var(--border-tan);
   border-radius: 16px;
   padding: 20px;

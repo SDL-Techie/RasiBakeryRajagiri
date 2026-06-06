@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Loader2, Search, Trash2, Layers, AlertCircle, RefreshCcw } from 'lucide-react';
+import { Loader2, Search, Trash2, Layers, AlertCircle, RefreshCcw ,Pencil} from 'lucide-react';
 import axios from 'axios';
 import './CategoryDetail.css';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import toast, { Toaster } from "react-hot-toast";
 
 const API_URL = "http://localhost:4000/api/v1/category";
 
@@ -20,6 +20,10 @@ const CategoryDetails: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editCategory, setEditCategory] = useState<Category | null>(null);
+  const [editName, setEditName] = useState("");
+  const [editStatus, setEditStatus] = useState("Active");
 
   const fetchCategories = async () => {
     try {
@@ -48,6 +52,47 @@ const CategoryDetails: React.FC = () => {
   );
 
 
+  const handleUpdateCategory = async () => {
+  if (!editCategory) return;
+
+  try {
+    const response = await axios.put(
+      `${API_URL}/${editCategory._id}`,
+      {
+        name: editName,
+        status: editStatus
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+    );
+
+    if (response.data.success) {
+      setCategories(prev =>
+        prev.map(cat =>
+          cat._id === editCategory._id
+            ? {
+                ...cat,
+                name: editName,
+                status: editStatus
+              }
+            : cat
+        )
+      );
+
+      setShowEditModal(false);
+      setEditCategory(null);
+
+      toast.success("Category updated successfully");
+    }
+  } catch (err: any) {
+    alert(err.response?.data?.message || "Update failed");
+  }
+};
+
+
   // Inside CategoryDetails component...
 
 const [deleteTarget, setDeleteTarget] = useState<{ id: string, name: string } | null>(null);
@@ -72,6 +117,13 @@ const confirmDelete = async () => {
 
   return (
     <div className="rasi-category-container-main">
+            <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 3000,
+        }}
+      />
+      
       {/* Header Section */}
       <div className="rasi-products-header">
         <div className="header-info">
@@ -107,7 +159,7 @@ const confirmDelete = async () => {
               <th>Preview</th>
               <th>Category Name</th>
               <th className="hide-on-mobile">Internal ID</th>
-              <th>Status</th>
+              {/* <th>Status</th> */}
               <th className="hide-on-mobile">Added Date</th>
               <th>Actions</th>
             </tr>
@@ -141,21 +193,53 @@ const confirmDelete = async () => {
                     {/* <code className="id-code">#CAT-{cat._id.slice(-5).toUpperCase()}</code> */}
                     <span className='cat-id'>{cat._id}</span>
                   </td>
-                  <td data-label="Status">
+                  {/* <td data-label="Status">
                     <span className={`status-badge ${cat.status?.toLowerCase() === 'active' ? 'active' : 'inactive'}`}>
                       {cat.status || 'Active'}
                     </span>
-                  </td>
+                  </td> */}
                   <td data-label="Added Date" className="hide-on-mobile">
                     {new Date(cat.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                   </td>
-                  <td data-label="Actions">
+                  {/* <td data-label="Actions">
                     <button 
                     onClick={() => setDeleteTarget({ id: cat._id, name: cat.name })}
                     className="rasi-btn-delete" title="Delete Category">
                       <Trash2 size={18} />
                     </button>
-                  </td>
+                  </td> */}
+
+                  <td data-label="Actions">
+  <div className="action-buttons">
+    
+    <button
+      className="rasi-btn-edit"
+      title="Edit Category"
+      onClick={() => {
+        setEditCategory(cat);
+        setEditName(cat.name);
+        setEditStatus(cat.status || "Active");
+        setShowEditModal(true);
+      }}
+    >
+      <Pencil size={18} />
+    </button>
+
+    <button
+      onClick={() =>
+        setDeleteTarget({
+          id: cat._id,
+          name: cat.name
+        })
+      }
+      className="rasi-btn-delete"
+      title="Delete Category"
+    >
+      <Trash2 size={18} />
+    </button>
+
+  </div>
+</td>
                 </tr>
               ))
             ) : (
@@ -169,7 +253,7 @@ const confirmDelete = async () => {
       {/* --- DELETE CONFIRMATION MODAL --- */}
 <AnimatePresence>
   {deleteTarget && (
-    <div className="modal-overlay">
+    <div className="category-modal-overlay">
       <motion.div 
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -194,6 +278,59 @@ const confirmDelete = async () => {
     </div>
   )}
 </AnimatePresence>
+
+
+<AnimatePresence>
+  {showEditModal && (
+    <div className="category-modal-overlay">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        className="rasi-delete-modal"
+      >
+        <h3>Edit Category</h3>
+
+        <div className="form-group">
+          <label>Category Name</label>
+          <input
+            type="text"
+            value={editName}
+            onChange={(e) => setEditName(e.target.value)}
+          />
+        </div>
+
+        {/* <div className="form-group">
+          <label>Status</label>
+          <select
+            value={editStatus}
+            onChange={(e) => setEditStatus(e.target.value)}
+          >
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div> */}
+
+        <div className="modal-actions">
+          <button
+            className="btn-cancel"
+            onClick={() => setShowEditModal(false)}
+          >
+            Cancel
+          </button>
+
+          <button
+            className="btn-confirm"
+            onClick={handleUpdateCategory}
+          >
+            Update
+          </button>
+        </div>
+      </motion.div>
+    </div>
+  )}
+</AnimatePresence>
+
     </div>
   );
 };

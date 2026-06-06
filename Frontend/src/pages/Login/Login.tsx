@@ -98,8 +98,14 @@ const Login: React.FC = () => {
       password: formData.password
     });
 
+     console.log(response)
 
     if (response.data.success) {
+
+      login(response.data.user, response.data.token);
+
+       window.dispatchEvent(new Event('triggerPwaInstall'));
+
       // ✅ FIX: Safely read user data whether it is nested under .user or .data
       const userData = response.data.user || response.data.data;
       const token = response.data.token;
@@ -116,6 +122,17 @@ const Login: React.FC = () => {
       localStorage.setItem('userPhone', userData.phoneno);
       localStorage.setItem('userName', userData.name);
       localStorage.setItem('userRole', targetRole);
+      localStorage.setItem(
+  'user',
+  JSON.stringify({
+    _id: userData._id,
+    name: userData.name,
+    phoneno: userData.phoneno,
+    role: targetRole,
+    addresses: userData.addresses || [],
+    pwaInstalled: userData.pwaInstalled || false
+  })
+);
 
       // Extra flags checks for your admin layout router state tracking
       if (targetRole === 'admin') {

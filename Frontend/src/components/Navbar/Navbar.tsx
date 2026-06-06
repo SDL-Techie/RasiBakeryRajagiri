@@ -34,7 +34,10 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount }) => {
   const dropdownRef = useRef<HTMLDivElement>(null); // Reference for detecting external clicks
 
   // Admin and Role Logic
-  const isAdmin = isLoggedIn && customer?.mobile === "9444292269"; 
+  // const isAdmin = isLoggedIn && customer?.mobile === "9444292269"; 
+  const isAdmin =
+  isLoggedIn &&
+  customer?.role?.toLowerCase() === "admin";
   const isRetailer = isLoggedIn && customer?.role?.toLowerCase() === 'retailer';
   const [cocopoint, setcocopoint] = useState("");
 

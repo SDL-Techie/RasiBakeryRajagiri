@@ -376,7 +376,9 @@ const Home: React.FC = () => {
                   <ProductCard key={product.id} product={product} />
                 ))
               ) : (
+              
                 <p>No products available in this category yet.</p>
+          
               )}
             </div>
           </div>

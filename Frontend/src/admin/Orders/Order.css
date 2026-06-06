@@ -405,6 +405,14 @@ body {
   text-align: center;
 }
 
+.edit-btn{
+  background-color: #4B2E2B;
+  color:white;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 10px;
+}
+
 /* ════════════════════════════════════════════════════════════════
    MODAL - MOBILE FIRST
 ════════════════════════════════════════════════════════════════ */
@@ -417,7 +425,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .order-modal-content {
@@ -468,7 +476,7 @@ body {
 }
 
 .print-btn {
-  background: var(--primary);
+  background: #4B2E2B;
   color: white;
   border: none;
   padding: 0.5rem 0.75rem;
@@ -884,7 +892,7 @@ body {
   }
 
   .modal-overlay {
-    padding: 20px;
+    /* padding: 20px; */
   }
 
   .order-modal-content {
@@ -1014,9 +1022,9 @@ body {
     font-size: 0.75rem;
   }
 
-  .modal-overlay {
+  /* .modal-overlay {
     padding: 0.75rem;
-  }
+  } */
 
   .modal-header {
     padding: 1rem;
@@ -1273,4 +1281,140 @@ body {
   font-size: 22px;
   font-weight: 800;
   color: #4B2E2B;
+}
+
+
+/* Edit Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  /* padding: 20px; */
+}
+
+/* Edit Modal Box */
+.order-modal-content {
+  background: #fff;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 25px;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.close-modal {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Body */
+.modal-body {
+  padding: 25px;
+}
+
+/* Section Heading */
+.modal-body h3 {
+  margin-top: 25px;
+  margin-bottom: 12px;
+  color: #333;
+  font-size: 18px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+
+/* Inputs */
+.modal-body input,
+.modal-body textarea,
+.modal-body select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.modal-body textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.modal-body input:focus,
+.modal-body textarea:focus,
+.modal-body select:focus {
+  border-color: #4caf50;
+}
+
+/* Product Card */
+.product-edit-card {
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #fafafa;
+}
+
+/* Save Button */
+.save-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #562f00;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.save-btn:hover {
+  background: #218838;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .order-modal-content {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .modal-body {
+    padding: 15px;
+  }
+
+  .modal-header h2 {
+    font-size: 18px;
+  }
 }
