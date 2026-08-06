@@ -190,6 +190,10 @@ const decreaseQuantity = (index: number) => {
       return showToast("⚠️ Please add a delivery address");
     }
 
+    if (pincodeError) {
+      return showToast("❌ Delivery is not available for this pincode. Please choose a different address.");
+    }
+
     const orderPayload = buildOrderPayload();
 
     try {
@@ -461,7 +465,7 @@ const decreaseQuantity = (index: number) => {
                     </button>
                   </div>
 
-                  {selectedAddress ? (
+                  {/* {selectedAddress ? (
                     <div className="rasi-default-address-display">
                       <div className="rasi-addr-icon-wrap"><Home size={16} /></div>
                       <div className="rasi-addr-text">
@@ -473,16 +477,41 @@ const decreaseQuantity = (index: number) => {
                         <span className="rasi-free-delivery-badge">Free Delivery</span>
                       )}
                     </div>
-                  ) : (
+                  )  */}
+                  {selectedAddress ? (
+  <div className="rasi-default-address-display">
+    <div className="rasi-addr-icon-wrap"><Home size={16} /></div>
+    <div className="rasi-addr-text">
+      <p className="rasi-addr-street">{selectedAddress.street}</p>
+      <p className="rasi-addr-sub">{selectedAddress.city}{selectedAddress.state ? `, ${selectedAddress.state}` : ''} — {selectedAddress.zipCode}</p>
+      {pincodeError && <p className="rasi-pincode-err-inline">{pincodeError}</p>}
+    </div>
+    {pincodeError ? (
+      <span className="rasi-delivery-unavailable-badge">Not Deliverable</span>
+    ) : dynamicDeliveryFee === 0 ? (
+      <span className="rasi-free-delivery-badge">Free Delivery</span>
+    ) : null}
+  </div>
+) 
+                  : (
                     <button className="rasi-add-address-dashed-btn" onClick={() => setShowAddrListModal(true)}>
                       <Plus size={16} /> Add Delivery Address
                     </button>
                   )}
                 </section>
 
-                <button className="rasi-btn-primary-large" onClick={() => setStep(2)}>
+                {/* <button className="rasi-btn-primary-large" onClick={() => setStep(2)}>
                   Continue to Payment <ChevronRight size={18} />
-                </button>
+                </button> */}
+
+                <button
+  className="rasi-btn-primary-large"
+  onClick={() => setStep(2)}
+  disabled={!!pincodeError || !selectedAddress}
+>
+  Continue to Payment <ChevronRight size={18} />
+</button>
+
               </motion.div>
 
             ) : (
@@ -756,9 +785,16 @@ const decreaseQuantity = (index: number) => {
             )}
             <div className="rasi-calc-line">
               <span>Delivery</span>
-              <span className={dynamicDeliveryFee === 0 ? 'rasi-free-text' : ''}>
+              {/* <span className={dynamicDeliveryFee === 0 ? 'rasi-free-text' : ''}>
                 {dynamicDeliveryFee === 0 ? 'FREE' : `₹${dynamicDeliveryFee}`}
-              </span>
+              </span> */}
+                {pincodeError ? (
+      <span className="rasi-delivery-unavailable-text">Not Available</span>
+    ) : (
+      <span className={dynamicDeliveryFee === 0 ? 'rasi-free-text' : ''}>
+        {dynamicDeliveryFee === 0 ? 'FREE' : `₹${dynamicDeliveryFee}`}
+      </span>
+    )}
             </div>
             <div className="rasi-calc-divider" />
             <div className="rasi-calc-line rasi-total-highlight">

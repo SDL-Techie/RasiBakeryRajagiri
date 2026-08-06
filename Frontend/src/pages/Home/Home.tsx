@@ -351,19 +351,19 @@ const Home: React.FC = () => {
 
       {/* Dynamic Sections per category */}
       {categories.map((cat) => (
-        <section key={cat.id} id={`section-${cat.name?.toLowerCase()}`} className="rasi-section rasi-category-products">
+        <section key={cat.id} id={`section-${cat.name?.toLowerCase().replace(/\s+/g, '-')}`} className="rasi-section rasi-category-products">
           <div className="rasi-container">
             <div className="rasi-section-header rasi-title-highlight">
               <h2>{cat.name}</h2>
               {/* <button 
                 className="rasi-view-all" 
-                onClick={() => navigate(`/categoryproduct/${cat.name?.toLowerCase()}`)}
+                onClick={() => navigate(`/categoryproduct/${cat.name?.toLowerCase().replace(/\s+/g, '-')}`)}
               > */}
 
                 <button 
                 className="rasi-view-all" 
               //  onClick={()=>navigate("/categoryproduct")}
-              onClick={() => navigate(`/categoryproduct/${cat.name?.toLowerCase()}`, { 
+              onClick={() => navigate(`/categoryproduct/${cat.name?.toLowerCase().replace(/\s+/g, '-')}`, { 
     state: { name: cat.name } 
   })}
               >

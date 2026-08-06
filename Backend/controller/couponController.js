@@ -8,7 +8,7 @@ export const claimCoupon = async (req, res) => {
         const { phone } = req.body;
         // console.log("Phone from body:", phone);
 
-        if (!phone) {
+        if (!phone) {a
             return res.status(400).json({ success: false, message: "Phone number is required." });
         }
 

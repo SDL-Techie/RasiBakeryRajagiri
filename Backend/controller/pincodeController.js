@@ -45,7 +45,7 @@ export const getChargeByPincode = async (req, res) => {
     if (!data) {
       return res.status(404).json({ 
         success: false, 
-        message: "Free Delivery" 
+        message: "Delivery is not available for this pincode." 
       });
     }
 
