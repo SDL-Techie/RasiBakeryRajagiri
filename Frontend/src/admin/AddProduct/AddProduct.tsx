@@ -18,7 +18,8 @@ interface Category { _id: string; name: string; }
 const AddProduct: React.FC = () => {
     const [formData, setFormData] = useState({
         name: '', category: '', price: '', wholesalePrice: '',
-        oldPrice: '', description: '', ingredients: '', status: 'Active', image: null as File | null
+        oldPrice: '', description: '', ingredients: '', status: 'Active',
+        weight: '', image: null as File | null
     });
 
     const [categories, setCategories] = useState<Category[]>([]);
@@ -82,6 +83,7 @@ const handleExcelImport = async (
       price: Number(row.price) || 0,
       wholesaleprice: Number(row.wholesaleprice) || 0,
       oldprice: Number(row.oldprice) || 0,
+      weight: Number(row.weight) || 0,
       description: row.description || "",
       ingredients: row.ingredients || "",
       status: row.status || "Active",
@@ -132,6 +134,7 @@ const handleExcelImport = async (
 
             const payload = {
                 ...formData,
+                weight: Number(formData.weight),
                 wholesaleprice: formData.wholesalePrice,
                 oldprice: formData.oldPrice,
                 productimage: cloudRes.data.secure_url
@@ -144,7 +147,7 @@ const handleExcelImport = async (
   });
             if (res.data.success) {
                 setMessage({ type: 'success', text: 'Product added to Rasi Bakery inventory!' });
-                setFormData({ name: '', category: '', price: '', wholesalePrice: '', oldPrice: '', description: '', ingredients: '', status: 'Active', image: null });
+                setFormData({ name: '', category: '', price: '', wholesalePrice: '', oldPrice: '', description: '', ingredients: '', status: 'Active', weight: '', image: null });
                 setPreview(null);
             }
         } catch (err: any) {
@@ -223,6 +226,18 @@ const handleExcelImport = async (
                                     <label>Old Price</label>
                                     <input type="number" name="oldPrice" value={formData.oldPrice} onChange={handleChange} placeholder="Optional" />
                                 </div>
+                                      <div className="ap-input-group">
+            <label>Weight (kg)</label>
+            <input 
+                type="number" 
+                step="0.01" 
+                name="weight" 
+                value={formData.weight} 
+                onChange={handleChange} 
+                required 
+                placeholder="e.g. 0.5" 
+            />
+        </div>
                             </div>
                         </section>
                     </div>

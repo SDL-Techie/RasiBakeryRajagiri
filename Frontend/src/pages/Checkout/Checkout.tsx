@@ -31,7 +31,14 @@ const role= localStorage.getItem("userRole");
   (total: number, item: any) =>
     total + item.productId.price * item.quantity,
   0
-);
+  );
+
+  const totalWeight = passedItems.reduce(
+  (total: number, item: any) =>
+    total + (Number(item.productId.weight) || 0) * item.quantity,
+  0
+  );
+
   const isBuyNow = location.state?.isBuyNow || false;
 
   const [loading, setLoading] = useState(true);
@@ -53,19 +60,41 @@ const role= localStorage.getItem("userRole");
 
   const showToast = (msg: string) => setToast({ show: true, msg });
 
-  const checkPincodeCharge = async (zipCode: string) => {
-    if (!zipCode || zipCode.length !== 6) return;
-    try {
-      const res = await axios.get(`http://localhost:4000/api/v1/pincode/${zipCode}`);
-      if (res.data.success) {
-        setDynamicDeliveryFee(res.data.deliveryCharge);
-        setPincodeError("");
-      }
-    } catch (err: any) {
-      setDynamicDeliveryFee(0);
-      setPincodeError(err.response?.data?.message || "Delivery unavailable.");
+  // const checkPincodeCharge = async (zipCode: string) => {
+  //   if (!zipCode || zipCode.length !== 6) return;
+  //   try {
+  //     const res = await axios.get(`http://localhost:4000/api/v1/pincode/${zipCode}`);
+  //     if (res.data.success) {
+  //       setDynamicDeliveryFee(res.data.deliveryCharge);
+  //       setPincodeError("");
+  //     }
+  //   } catch (err: any) {
+  //     setDynamicDeliveryFee(0);
+  //     setPincodeError(err.response?.data?.message || "Delivery unavailable.");
+  //   }
+  // };
+
+
+
+const [deliveryMethod, setDeliveryMethod] = useState<'pincode' | 'weight' | null>(null);
+
+const checkPincodeCharge = async (zipCode: string) => {
+  if (!zipCode || zipCode.length !== 6) return;
+  try {
+    const res = await axios.get(
+      `http://localhost:4000/api/v1/pincode/${zipCode}?weight=${totalWeight}`
+    );
+    if (res.data.success) {
+      setDynamicDeliveryFee(res.data.deliveryCharge);
+      setDeliveryMethod(res.data.method); // "pincode" or "weight"
+      setPincodeError("");
     }
-  };
+  } catch (err: any) {
+    setDynamicDeliveryFee(0);
+    setDeliveryMethod(null);
+    setPincodeError(err.response?.data?.message || "Delivery unavailable.");
+  }
+};
 
   useEffect(() => {
     if (passedItems.length === 0) {
@@ -335,6 +364,13 @@ const decreaseQuantity = (index: number) => {
     }
   };
 
+
+  useEffect(() => {
+  const defaultAddr = addresses.find((a) => a.isDefault) || addresses[0];
+  if (defaultAddr) checkPincodeCharge(defaultAddr.zipCode);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [totalWeight]);
+
   // ─────────────────────────────────────────────────────────
   // Called after order is confirmed (both COD and UPI)
   // ─────────────────────────────────────────────────────────
@@ -572,7 +608,7 @@ const decreaseQuantity = (index: number) => {
                       </div>
                     </div>
 
-                    <div
+                    {/* <div
                       className={`rasi-pay-tile ${paymentMethod === 'upi' ? 'rasi-active' : ''}`}
                       onClick={() => setPaymentMethod('upi')}
                     >
@@ -584,7 +620,7 @@ const decreaseQuantity = (index: number) => {
                       <div className={`rasi-pay-radio ${paymentMethod === 'upi' ? 'rasi-selected' : ''}`}>
                         {paymentMethod === 'upi' && <Check size={12} />}
                       </div>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="rasi-selected-payment-badge">
@@ -783,11 +819,9 @@ const decreaseQuantity = (index: number) => {
                 <span className="rasi-discount-val">− ₹{discountAmount}</span>
               </div>
             )}
-            <div className="rasi-calc-line">
+            {/* <div className="rasi-calc-line">
               <span>Delivery</span>
-              {/* <span className={dynamicDeliveryFee === 0 ? 'rasi-free-text' : ''}>
-                {dynamicDeliveryFee === 0 ? 'FREE' : `₹${dynamicDeliveryFee}`}
-              </span> */}
+          
                 {pincodeError ? (
       <span className="rasi-delivery-unavailable-text">Not Available</span>
     ) : (
@@ -795,7 +829,23 @@ const decreaseQuantity = (index: number) => {
         {dynamicDeliveryFee === 0 ? 'FREE' : `₹${dynamicDeliveryFee}`}
       </span>
     )}
-            </div>
+            </div> */}
+
+            <div className="rasi-calc-line">
+  <span>
+    Delivery
+    {deliveryMethod === 'weight' && (
+      <span className="rasi-weight-est-tag"> (by weight)</span>
+    )}
+  </span>
+  {pincodeError ? (
+    <span className="rasi-delivery-unavailable-text">Not Available</span>
+  ) : (
+    <span className={dynamicDeliveryFee === 0 ? 'rasi-free-text' : ''}>
+      {dynamicDeliveryFee === 0 ? 'FREE' : `₹${dynamicDeliveryFee}`}
+    </span>
+  )}
+</div>
             <div className="rasi-calc-divider" />
             <div className="rasi-calc-line rasi-total-highlight">
               <span>Total</span>

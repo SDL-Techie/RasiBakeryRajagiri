@@ -14,6 +14,7 @@ import userpoint from "./route/userpointRoute.js"
 import backuproute from "./route/backupRoute.js"
 import coupon from "./route/couponRoute.js"
 import cookieParser from "cookie-parser";
+import weightChargeRoute from "./route/weightChargeRoute.js";
 const app=express();
 app.use(cookieParser());
 app.use(cors())
@@ -31,6 +32,7 @@ app.use("/api/v1/",retailerorder)
 app.use("/api/v1/",pointsetting)
 app.use("/api/v1/",userpoint)
 app.use("/api/v1/",coupon)
+app.use("/api/v1/",weightChargeRoute)
 app.use("/api/v1/",backuproute)
 export default app;
 

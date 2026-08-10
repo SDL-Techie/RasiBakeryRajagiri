@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCustomerAuth } from '../../context/CustomerAuthContext';
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Weight } from "lucide-react";
 import axios from 'axios';
 // import toast from 'react-hot-toast';
 import toast, { Toaster } from 'react-hot-toast';
@@ -24,6 +24,7 @@ interface ProductData {
   oldPrice?: number;
   description: string;
   ingredients: string[];
+  weight?: number;
   image: string;
   images: string[];
   rating?: number;
@@ -98,7 +99,8 @@ const isRetailer = isLoggedIn && customer?.role?.toLowerCase() === 'retailer';
           ingredients: ingredientList,
           image: data.productimage,
           images: gallery,
-          categoryName: data.category?.name
+          categoryName: data.category?.name,
+          weight: data.weight
         });
       } catch (error) {
         toast.error("Failed to load product");
@@ -191,6 +193,7 @@ const handleBuyNow = () => {
       name: product?.name,
       price: finalPrice,
       productimage: product?.image,
+      weight: product?.weight,
     },
     quantity: 1,
   };
@@ -307,6 +310,7 @@ const handleBuyNow = () => {
               <span>5.0</span> <Star size={14} fill="currentColor" />
             </div>
             <span className="review-count">({product.reviews || 12} reviews)</span>
+          
           </div>
 
           <div className="rasi-pd-price-section">
@@ -319,6 +323,14 @@ const handleBuyNow = () => {
             )}
           </div>
 
+       
+
+             <div className="rasi-pd-info-block">
+            <h3><Weight size={18} /> Weight</h3>
+            <p>{product.weight != null && (
+              <span className="rasi-pd-weight-pill">{product.weight} kg</span>
+            )}</p>
+          </div>
           <div className="rasi-pd-info-block">
             <h3><Info size={18} /> Description</h3>
             <p>{product.description}</p>

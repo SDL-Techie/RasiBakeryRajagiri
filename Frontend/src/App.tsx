@@ -23,6 +23,7 @@ import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import Coupon from './pages/Coupon/Coupon';
 import NotFound from './components/NotFound';
 import BackupRestore from './admin/BackupRestore/BackupRestore';
+import WeightDeliveryCharge from './admin/Weightdeliverycharge/Weightdeliverycharge';
 
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home/Home'));
@@ -129,6 +130,7 @@ const AppContent: React.FC = () => {
                 <Route path="point" element={<Point />} />
                 <Route path="retailerorder" element={<Retailerorderadmin />} />
                 <Route path="fastorder" element={<Fastorder />} />
+                <Route path="weightdelivery" element={<WeightDeliveryCharge/>}/>
                 <Route path="backup" element={<BackupRestore/>}/>
               </Route>
             </Route>

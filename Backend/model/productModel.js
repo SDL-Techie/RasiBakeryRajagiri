@@ -16,6 +16,10 @@ status:{
 },
 ingredients:String,
 productimage:String,
+weight: {          // in kg, e.g. 0.5, 1, 2
+    type: Number,
+    default: 0
+  },
 })
 
 const Product=mongoose.model("Product",productSchema)

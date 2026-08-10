@@ -16,6 +16,7 @@ interface CartItem {
     price: string | number;
     productimage: string;
     description: string;
+    weight?: number;
     category?: { name: string };
   };
   quantity: number;
