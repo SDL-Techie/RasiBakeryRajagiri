@@ -20,6 +20,7 @@ interface Product {
   price: string;
   wholesaleprice: string;
   oldprice?: string;
+  weight?: number | string;
   description?: string;
   productimage: string;
   status: string;
@@ -51,9 +52,19 @@ const ProductDetails: React.FC = () => {
         axios.get(`${BASE_URL}/category`)
       ]);
 
+      // if (productsRes.data.success) {
+      //   setProducts(productsRes.data.data);
+      // }
+
       if (productsRes.data.success) {
-        setProducts(productsRes.data.data);
-      }
+  const fetchedProducts = productsRes.data.data.map((product: Product) => ({
+    ...product,
+    weight: product.weight ?? 0,
+  }));
+
+  setProducts(fetchedProducts);
+}
+
       if (categoriesRes.data.success) {
         // Filter out inactive categories if preferred, or keep all
         setCategories(categoriesRes.data.data);
@@ -82,6 +93,7 @@ const ProductDetails: React.FC = () => {
     "Retail Price": product.price,
     "Wholesale Price": product.wholesaleprice,
     "Old Price": product.oldprice || "",
+    "Weight (kg)": product.weight ?? "",
     "Description": product.description || "",
     "Status": product.status,
     "Image URL": product.productimage || ""
@@ -139,10 +151,16 @@ const ProductDetails: React.FC = () => {
     setUpdatingId(editingProduct._id);
     try {
       // Ensure we send down the category payload correctly structured (as an ID string string reference)
+      // const payload = {
+      //   ...editingProduct,
+      //   category: getCategoryId(editingProduct.category) || null
+      // };
+
       const payload = {
-        ...editingProduct,
-        category: getCategoryId(editingProduct.category) || null
-      };
+  ...editingProduct,
+  category: getCategoryId(editingProduct.category) || null,
+  weight: Number(editingProduct.weight) || 0,
+};
 
       const response = await axios.put(`${BASE_URL}/product/${editingProduct._id}`, payload , {
     headers: {
@@ -243,6 +261,7 @@ const ProductDetails: React.FC = () => {
                   <th className="hide-on-mobile">Category</th>
                   <th>Price</th>
                   <th className="hide-on-mobile">Wholesale</th>
+                  <th>Weight</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -264,6 +283,12 @@ const ProductDetails: React.FC = () => {
                     <td><span className="price-text">₹{p.price}</span></td>
                     <td className="hide-on-mobile price-text secondary">₹{p.wholesaleprice}</td>
                     <td>
+  <span className="weight-text">
+    {p.weight ?? 0} kg
+  </span>
+</td>
+                    <td>
+                      
                       <select 
                         value={p.status} 
                         onChange={(e) => handleStatusChange(p._id, e.target.value)}
@@ -373,6 +398,23 @@ const ProductDetails: React.FC = () => {
                     />
                   </div>
                 </div>
+
+                  <div className="form-group">
+    <label>Weight (kg)</label>
+    <input
+      type="number"
+      step="0.01"
+      min="0"
+      value={editingProduct.weight ?? ''}
+      onChange={(e) =>
+        setEditingProduct({
+          ...editingProduct,
+          weight: e.target.value
+        })
+      }
+      placeholder="e.g. 0.5"
+    />
+  </div>
 
                 <div className="form-group">
                   <label>Description</label>
