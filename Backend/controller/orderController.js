@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
 import Order from "../model/orderModel.js";
+import { validateMinimumOrder } from "../utils/validateMinimumOrder.js";
 import Razorpay from "razorpay";
 import crypto from "crypto";
 // Debug logs to verify your env vars are actually populated when this file runs
@@ -113,7 +114,33 @@ export const verifyRazorpayPaymentAndCreateOrder = async (req, res) => {
 
 export const createordercod = async (req, res) => {
   try {
+
+     const { items } = req.body;
+
+    const { valid, errors } = await validateMinimumOrder(items);
+    // if (!valid) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Minimum order requirement not met",
+    //     errors
+    //   });
+    // }
+    
     // Inject custom sub-property payment details to keep compliance with layout expectations
+    
+    
+      if (!valid) {
+      const summary = errors.length === 1
+        ? errors[0]
+        : `${errors.length} items don't meet their minimum order quantity`;
+
+      return res.status(400).json({
+        success: false,
+        message: summary,
+        errors
+      });
+    }
+    
     const finalCodPayload = {
       ...req.body,
       payment: {

@@ -214,3 +214,26 @@ export const bulkImportProducts = async (req, res) => {
     });
   }
 };
+
+
+export const validateMinimumOrder = async (items) => {
+  // items: [{ product: productId, quantity: Number }, ...]
+  const errors = [];
+
+  for (const item of items) {
+    const product = await Product.findById(item.product);
+
+    if (!product) {
+      errors.push(`Product ${item.product} not found`);
+      continue;
+    }
+
+    if (item.quantity < product.minimumOrder) {
+      errors.push(
+        `${product.name} requires a minimum order of ${product.minimumOrder}, but only ${item.quantity} was ordered`
+      );
+    }
+  }
+
+  return errors; // empty array = all good
+};

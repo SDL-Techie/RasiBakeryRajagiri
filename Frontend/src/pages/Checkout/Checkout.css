@@ -1551,3 +1551,22 @@ padding-top: 4px;
   font-weight: 600;
   font-size: 13px;
 }
+
+
+.rasi-min-order-note {
+  font-size: 11px;
+  color: #888;
+  margin-top: 2px;
+}
+.rasi-min-order-note-error {
+  color: #dc2626;
+  font-weight: 600;
+}
+.rasi-min-order-warning {
+  font-size: 13px;
+  color: #dc2626;
+  background: #fef2f2;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}

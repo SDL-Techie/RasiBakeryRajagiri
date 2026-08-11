@@ -17,8 +17,13 @@ status:{
 ingredients:String,
 productimage:String,
 weight: {          // in kg, e.g. 0.5, 1, 2
-    type: Number,
+    type: String,
     default: 0
+  },
+minimumOrder: {     // minimum order quantity/weight for this product
+    type: Number,
+    default: 1,
+    min: [0, "Minimum order cannot be negative"]
   },
 })
 
